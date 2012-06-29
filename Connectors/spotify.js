@@ -34,6 +34,7 @@ exports.lookup = function(q, cb){
     api_lookup(q,cb);
 }
 exports.artists = function(q, cb) {
+    console.log("artists ")
     api_search(q,"artist",cb);
 };
 

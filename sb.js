@@ -25,7 +25,6 @@ var app = express.createServer();
 });
 
 
-
 app.get('/artists', function(req, res){
 
     res.contentType('json');
@@ -37,11 +36,16 @@ app.get('/artists', function(req, res){
 
 });*/
 
-app.get('/merge/:query', function(req, res){
 
+app.get('/merge', function(req, res){
+    console.log("REQUEST RECEIVED");
+    console.log(req.url);
     res.contentType('json');
-    //res.writeHead(200, { 'Content-Type': 'application/jsons' })
-    spotify.artists(req.params.query, function(result){
+    //res.writeHead(200, { 'Content-Type': 'application/json' })
+    
+    
+    ///APPROACH ONE
+    /*spotify.artists(req.params.query, "artist", function(result){
         
         console.log("init baby");
         var returnObject = new Array();
@@ -83,8 +87,52 @@ app.get('/merge/:query', function(req, res){
           // if any of the saves produced an error, err would equal that error
         });
         //if(i > limit) return false;
-        
+    });*/
+    
+    
+    ///APPROACH TWO
+    async.waterfall([
+        function(callback){
+            spotify.artists(req.query.q, function(result){
+                console.log("artists lookup complete");
+                var returnObject = new Array();
+                var limit = 5;
+                var items = new Array();
+                $.each(JSON.parse(result)['artists'], function(i, val) {
+                    if(i > limit) return false;
+                    items.push(val['name']);
+                });
+                callback(null, items);
+            });
+        },
+        function(artists, callback){
+             r = new Array();
+             async.forEach(artists, function lookup(item, done) {
+
+                 lastfm.lookup(item, function(lastfmresult){
+                       console.log("lastfm lookup complete");
+                       var obj = new Array();
+                       var p = JSON.parse(lastfmresult)['events'];
+                       if(p['event']){
+                           $.each(p['event'], function(j, v) {
+                                obj.push(v);
+                           });
+                       }
+                       r.push({name: item, events: obj});
+                       done();
+                 });
+
+                }, function(err){
+                    console.log("sending result");
+                    callback(null, r);
+            });
+        }
+    ], function (err, result) {
+       // result now equals 'done'
+       console.log("END");
+       res.send(JSON.stringify({ results: result }));    
     });
+    
 
 });
 
