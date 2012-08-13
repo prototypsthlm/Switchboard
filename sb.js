@@ -36,7 +36,7 @@ app.get('/artists', function(req, res){
 
 });*/
 
-
+//http://localhost:4000/merge?q=abba
 app.get('/merge', function(req, res){
     console.log("REQUEST RECEIVED");
     console.log(req.url);
@@ -102,7 +102,7 @@ app.get('/merge', function(req, res){
                     if(i > limit) return false;
                     items.push(val['name']);
                 });
-                callback(null, items);
+                callback(null, items); //skickar vidare items till nästa funktion i waterfall
             });
         },
         function(artists, callback){
@@ -113,6 +113,7 @@ app.get('/merge', function(req, res){
                        console.log("lastfm lookup complete");
                        var obj = new Array();
                        var p = JSON.parse(lastfmresult)['events'];
+                       //console.log(p)
                        if(p['event']){
                            $.each(p['event'], function(j, v) {
                                 obj.push(v);
@@ -136,7 +137,7 @@ app.get('/merge', function(req, res){
 
 });
 
-app.listen(3000);
+app.listen(4000);
 
 /*app.get('', function(req, res) {
   console.log("GETTING CONTACTS");
