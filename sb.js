@@ -44,92 +44,34 @@ app.get('/merge', function(req, res){
     //res.writeHead(200, { 'Content-Type': 'application/json' })
     
     
-    ///APPROACH ONE
-    /*spotify.artists(req.params.query, "artist", function(result){
-        
-        console.log("init baby");
-        var returnObject = new Array();
-        var limit = 5;
-            
-        var a = new Array();
-        
-        $.each(JSON.parse(result)['artists'], function(i, val) {
-            if(i > limit) return false;
-            a.push(val['name']);
-        });
-        
-        var r = new Array();
-        async.forEach(a, function lookup(item, callback) {
-
-          lastfm.lookup(item, function(lastfmresult){
-              
-              console.log("lookup complete");
-              var obj = new Array();
-              var p = JSON.parse(lastfmresult)['events'];
-              if(p['event']){
-                  
-                  $.each(p['event'], function(j, v) {
-                       //console.log('event: ');
-                       //console.log(v['title']);
-                       //obj.push(JSON.stringify({ name: item, events: obj });
-                       obj.push(v);
-                     });
-              }
-              r.push({name: item, events: obj});
-              //res.write(JSON.stringify({ name: item, events: obj }));
-              callback();
-          });
-          console.log(item);
-          
-        }, function(err){
-            console.log("sending result");
-            res.send(JSON.stringify({ results: r }));
-          // if any of the saves produced an error, err would equal that error
-        });
-        //if(i > limit) return false;
-    });*/
+    var search_term = [req.query.q];
+    var config = [{ routine: spotify.artists, limit: 5, nyckla: "name"}, { routine: lastfm.lookup, limit: 5, nyckla: "name"}]
+    //var config = [{ routine: lastfm.lookup, limit: 5, nyckla: "name"}]
     
+    var routine = new Array();
     
-    ///APPROACH TWO
-    async.waterfall([
-        function(callback){
-            spotify.artists(req.query.q, function(result){
-                console.log("artists lookup complete");
-                var returnObject = new Array();
-                var limit = 5;
-                var items = new Array();
-                $.each(JSON.parse(result)['artists'], function(i, val) {
-                    if(i > limit) return false;
-                    items.push(val['name']);
+    $.each(config, function(i,a){
+        var r;
+        if(i < 1){
+            r = function(callback){
+                config[i].routine(search_term, function(results){
+                    console.log("routine" + i + " complete");
+                    callback(null, results); //skickar vidare items till nästa funktion i waterfall
                 });
-                callback(null, items); //skickar vidare items till nästa funktion i waterfall
-            });
-        },
-        function(artists, callback){
-             r = new Array();
-             async.forEach(artists, function lookup(item, done) {
-
-                 lastfm.lookup(item, function(lastfmresult){
-                       console.log("lastfm lookup complete");
-                       var obj = new Array();
-                       var p = JSON.parse(lastfmresult)['events'];
-                       //console.log(p)
-                       if(p['event']){
-                           $.each(p['event'], function(j, v) {
-                                obj.push(v);
-                           });
-                       }
-                       r.push({name: item, events: obj});
-                       done();
-                 });
-
-                }, function(err){
-                    console.log("sending result");
-                    callback(null, r);
-            });
+            };
         }
-    ], function (err, result) {
-       // result now equals 'done'
+        else {
+            r = function(received, callback){
+                config[i].routine(received[0][0].result, function(results){
+                    console.log("routine" + i + " complete");
+                    callback(null, results); //skickar vidare items till nästa funktion i waterfall
+                });
+            };
+        }
+        routine.push(r);
+    });
+
+    async.waterfall(routine, function (err, result) {
        console.log("END");
        res.send(JSON.stringify({ results: result }));    
     });
