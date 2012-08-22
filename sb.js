@@ -43,18 +43,18 @@ app.get('/merge', function(req, res){
     res.contentType('json');
     //res.writeHead(200, { 'Content-Type': 'application/json' })
     
-    
+    var file_config = [];
     var search_term = [req.query.q];
-    var config = [{ routine: spotify.artists, limit: 5, nyckla: "name"}, { routine: lastfm.lookup, limit: 5, nyckla: "name"}]
+    var translated_config = [{ routine: spotify.artists, limit: 5, nyckla: "name"}, { routine: lastfm.lookup, limit: 5, nyckla: "name"}]
     //var config = [{ routine: lastfm.lookup, limit: 5, nyckla: "name"}]
     
     var routine = new Array();
     
-    $.each(config, function(i,a){
+    $.each(translated_config, function(i,a){
         var r;
         if(i < 1){
             r = function(callback){
-                config[i].routine(search_term, function(results){
+                translated_config[i].routine(search_term, function(results){
                     console.log("routine" + i + " complete");
                     callback(null, results); //skickar vidare items till nästa funktion i waterfall
                 });
@@ -62,7 +62,7 @@ app.get('/merge', function(req, res){
         }
         else {
             r = function(received, callback){
-                config[i].routine(received[0][0].result, function(results){
+                translated_config[i].routine(received[0][0].result, function(results){
                     console.log("routine" + i + " complete");
                     callback(null, results); //skickar vidare items till nästa funktion i waterfall
                 });
