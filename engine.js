@@ -9,22 +9,71 @@ Engine.prototype = (function(){
     
     var searchArray = null;
     var routine = [];
-    var requestBody = new Object();
-    var requestBodyArray = new Array();
+    var requestBody = {};
+    var requestBodyArray = [];
     var req = null;
+    
+    var crawl = function(crawlPath, tree, queries){
+        var level;
+        if (!(tree instanceof Array) && crawlPath.length > 0){
+            level = crawlPath.shift();
+        }
+        
+        //console.log("LEVEL----------------------------------------------------------------------");
+        //console.log(level);
+        //console.log(crawlPath);
+        //console.log("----------------------------------------------------------------------");
+        
+        if(crawlPath.length > 0){
+            if (tree instanceof Array){                
+                $.each(tree, function(i){
+                    
+                    //console.log("----------------------------------------------------------------------");
+                    //console.log("branch " + i);
+                    //console.log(crawlPath);
+                    //console.log("----------------------------------------------------------------------");
+                    
+                    crawl(crawlPath.slice(0), tree[i], queries);
+                });
+            }
+            else{
+                crawl(crawlPath, tree[level], queries);
+            }
+        }
+        else {
+            console.log("----------------------------------------------------------------------");
+            console.log(tree[level]);
+            console.log("----------------------------------------------------------------------");
+            if(tree[level] instanceof Array){
+                $.each(tree[level], function(i){
+                    queries.push(tree[level][i]);
+                });
+            }
+            else {
+                queries.push(tree[level]);
+            }
+        }
+    }
+    
+    var crawlResults = function(querySource, tree){
+        var extractedQueries = [];
+        var crawlPath = querySource.split(".");
+        crawl(crawlPath, tree, extractedQueries);
+        return extractedQueries;
+    };
+    
     var getQueries = function(querySource, connectorResponse) {
         var queries = [];
         if ("request.get" == querySource) {
-            queries.push(req.query.q);    
+            queries.push(req.query.q);
         }
-        else { //TODO : MAKE INTO MAGIC RECURSION ENGINE FROM SPACEEEE
+        else {
             $.each(connectorResponse, function(i){
-               $.each(connectorResponse[i].result['artists'], function(j, val) {
-                    if(j >= 5) return false;
-                    queries.push(val['name']);
-                });
+                queries = crawlResults(querySource, connectorResponse[i]);
             });
         }
+        console.log("acquired queries: ");
+        console.log(queries);
         return queries;
     };
     
@@ -38,6 +87,7 @@ Engine.prototype = (function(){
         },
         
         buildRoutine: function(translatedConfig){
+            console.log("buildRoutine");
             routine = [];
             $.each(translatedConfig, function(i,a){
                 var r;
@@ -48,12 +98,16 @@ Engine.prototype = (function(){
                 if (i < 1) {
                     r = function(callback) {
                         var connector = config.connector;
-                        var queries = getQueries(config.query_source, received);
+                        var queries = getQueries(config.query_source, received).slice(0,translatedConfig[i].options.limit);
                         var category = config.api_domain;
+                        
+                        console.log("attempting to execute routine" + i);
+                        console.log("queries: ");
+                        console.log(queries);
                         
                         connector.execute(queries, category, function(results) {
                             console.log("routine" + i + " complete");
-                            console.log(results);
+                            console.log(results); //raw response from each http-request
                             requestBodyArray.push(results);
                             callback(null, results); //skickar vidare items till nästa funktion i waterfall
                         });
@@ -62,51 +116,32 @@ Engine.prototype = (function(){
                 else {
                     r = function(received, callback) {
                         var connector = config.connector;
-                        var queries = getQueries(config.query_source, received);
+                        var queries = getQueries(config.query_source, received).slice(0,translatedConfig[i].options.limit);
                         var category = config.api_domain;
 
+                        console.log("attempting to execute routine" + i);
+                        console.log("queries: ");
+                        console.log(queries);
+                                    
                         connector.execute(queries, category, function(results) {
                             console.log("routine" + i + " complete");
-                            console.log(results);
+                            console.log(results); //raw response from each http-request
                             requestBodyArray.push(results);
                             callback(null, results); //skickar vidare items till nästa funktion i waterfall
                         });
                     };
                 }
+                
                 routine.push(r);
-            
-                /*
-                if(i < 1){
-                    r = function(callback){
-                        translatedConfig[i].routine(searchArray, function(results){
-                            console.log("routine" + i + " complete");
-                            console.log(results);
-                            requestBody.firstResult = results;
-                            var parsedResult = spotify.handle_results(translatedConfig[i].api_domain, translatedConfig[i].key, results); //breaks out keys.
-                            console.log("PARSiNG");
-                            console.log(parsedResult);                            
-                            callback(null, parsedResult); //skickar vidare items till nästa funktion i waterfall
-                        });
-                    };
-                }
-                else {
-                    r = function(received, callback){
-                        translatedConfig[i].routine(received, function(results){ //fixxxa..
-                            console.log("routine" + i + " complete");
-                            console.log(results);
-                            requestBody.secondResult = results;
-                            callback(null, results); //skickar vidare items till nästa funktion i waterfall
-                        });
-                    };
-                }*/
                 
             });
         },
         runEngine: function(cb){
+            console.log("runEngine");
+            requestBodyArray = [];
             async.waterfall(routine, function (err, result) {
                console.log("END");
-               //console.log(JSON.stringify(requestBody));
-               cb(requestBody); //res.send(JSON.stringify({ results: result }));    
+               cb(requestBodyArray); 
             });
         }
     }

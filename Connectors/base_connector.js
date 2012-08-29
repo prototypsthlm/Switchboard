@@ -1,25 +1,22 @@
+var request = require('request');
+
 function BaseConnector(param) {
 	this.host = param.host;
-	this.responseObject = [];
+	this.responseObject;
 }
 
-// Inherit from EventEmitter
-//BaseConnector.prototype = new process.EventEmitter;
-
-//BaseConnector.prototype.search = function(query, collector) {
-BaseConnector.prototype.get = function(url, done) {
-
+BaseConnector.prototype.get = function(url, query, domain, done) {
+    var self = this;
     request(url, function (error, response, result) {
       if (!error && response.statusCode == 200) {
-        console.log("returned result");
-        this.responseObject.push({key: cat, value: query, result: JSON.parse(result)});
+        console.log("successful HTTP-request");
+        self.responseObject.push({query: query, key: domain, result: JSON.parse(result)});
       }
       done();
     });
-    
 }
 
-BaseConnector.prototype.execute = function() {
+BaseConnector.prototype.execute = function(queries, domain, cb) {
     console.log("NOT IMPLEMENTED!");
 }
 
