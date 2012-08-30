@@ -41,9 +41,9 @@ Engine.prototype = (function(){
             }
         }
         else {
-            console.log("----------------------------------------------------------------------");
-            console.log(tree[level]);
-            console.log("----------------------------------------------------------------------");
+            //console.log("----------------------------------------------------------------------");
+            //console.log(tree[level]);
+            //console.log("----------------------------------------------------------------------");
             if(tree[level] instanceof Array){
                 $.each(tree[level], function(i){
                     queries.push(tree[level][i]);
@@ -69,7 +69,7 @@ Engine.prototype = (function(){
         }
         else {
             $.each(connectorResponse, function(i){
-                queries = crawlResults(querySource, connectorResponse[i]);
+                queries = crawlResults(querySource, connectorResponse[i]); //SHOULD BE SPLIT INTO SEPARATE QUERY-ARRAYS AND THEN SLICE/LIMIT THESE AND COMBINE
             });
         }
         console.log("acquired queries: ");
@@ -108,7 +108,7 @@ Engine.prototype = (function(){
                         connector.execute(queries, category, function(results) {
                             console.log("routine" + i + " complete");
                             console.log(results); //raw response from each http-request
-                            requestBodyArray.push(results);
+                            requestBodyArray.push({api: connector.name, info: results});
                             callback(null, results); //skickar vidare items till nästa funktion i waterfall
                         });
                     };
@@ -126,7 +126,7 @@ Engine.prototype = (function(){
                         connector.execute(queries, category, function(results) {
                             console.log("routine" + i + " complete");
                             console.log(results); //raw response from each http-request
-                            requestBodyArray.push(results);
+                            requestBodyArray.push({api: connector.name, info: results});
                             callback(null, results); //skickar vidare items till nästa funktion i waterfall
                         });
                     };
