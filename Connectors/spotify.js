@@ -6,45 +6,43 @@ var querystring = require('querystring');
 	host: "http://ws.spotify.com"
 });*/
 
+var apiActions = {
+    "artistSearch" : { action: ['search','artist'], in: ['q'], out: ['artists.href','artists.name'], optionals: ['page'] },
+    "albumSearch" : { action: ['search','album'], in: ['q'], out: ['albums.href','albums.name','albums.artists.href','albums.artists.name'], optionals: ['page']},
+    "trackSearch" : { action: ['search','track'], in: ['q'], out: ['tracks.href','tracks.name','tracks.album.name','tracks.album.href','tracks.artists.href','tracks.artists.name'], optionals: ['page'] },
+    "artistLookup" : { action: ['lookup','artist'], in: ['uri'], out: ['artist.albums.album.name','artist.albums.album.href'], statics: [ { paramName : "extras", paramValue: 'albumdetail'} ] },
+    "albumLookup" : { action: ['lookup','album'], in: ['uri'], out: ['album.name','album.tracks.href','album.tracks.name'], statics: [ { paramName : "extras", paramValue: 'trackdetail'} ] },
+    "trackLookup" : { action: ['lookup','track'], in: ['uri'], out: ['track.href','track.name','track.album.name','track.album.href'] }
+};
+
 function Spotify(param) {
     this.name = "Spotify";
 	this.host = param.host;
 	this.responseObject = [];
+	this.apiActions = apiActions;
 }
-
-var apiActions = { 
-    'search.album' : ['q','page'],
-    'search.artist' : ['q','page'],
-    'search.track' : ['q', 'page'],
-    'lookup.album' : ['uri','extras'],// extras => track, trackdetail
-    'lookup.artist' : ['uri','extras'],// extras => album, albumdetail
-    'lookup.track' : ['uri','extras']
-}
-
 util.inherits(Spotify, BaseConnector);
 
-Spotify.prototype.getActionUrl = function(query, api_domain){
-    var actionBreakdown = api_domain.split(".");
-    var baseAction = actionBreakdown.shift();
-    var search_domain = actionBreakdown.shift();
+Spotify.prototype.getActionUrl = function(query, apiConfig){
+    
+    var apiAction = apiActions[apiConfig.action];
+    var baseAction = apiAction.action[0];
+    var searchDomain = apiAction.action[1];
     var actionPath;
+    var parameterObject = {};
+    parameterObject[apiAction.in[apiConfig.in]] = query;        
+    
     switch(baseAction)
     {
     case 'search':
-      actionPath = '/search/1/'+search_domain+'.json?'+querystring.stringify({q: query})
-      break;
+        actionPath = '/search/1/'+searchDomain+'.json?'
+        break;
     case 'lookup':
-      var extra;
-      if(search_domain == 'album'){
-          extra = 'trackdetail'
-      }
-      else if(search_domain == 'artist'){
-          extra = 'albumdetail'
-      }
-      actionPath = '/lookup/1/.json?'+querystring.stringify({uri: query, extras: extra }) //extras: search_domain
-      break;
+        parameterObject[apiAction.statics.paramName] = apiAction.statics[apiAction.statics.paramValue];        
+        actionPath = '/lookup/1/.json?'
+        break;
     }      
-    return this.host + actionPath
+    return this.host + actionPath + querystring.stringify(parameterObject);
 }
 
 var spotify = new Spotify({

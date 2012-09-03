@@ -1,15 +1,8 @@
 var util = require('util');
 var BaseConnector = require('./base_connector.js');
 var querystring = require('querystring');
+var keys = require('../keys');
 
-function Lastfm(param) {
-    this.name = "last.fm";
-	this.host = param.host;
-	this.responseObject = [];
-	this.apiKey = param.apiKey;
-}
-
-util.inherits(Lastfm, BaseConnector);
 
 /*    
     /// auth
@@ -22,9 +15,12 @@ util.inherits(Lastfm, BaseConnector);
     //album.getInfo
     //album.getShouts
     //album.getTags
-    //album.getTopTags
+    album.getTopTags
     //album.removeTag
     album.search : album
+    
+    { in: ['album','search', ['album','name']], out: ['images.url'] }
+    
     ///album.share
     
     //artist.addTags
@@ -106,18 +102,41 @@ util.inherits(Lastfm, BaseConnector);
     venue.search : venue (name) and country (ISO 3166-2)
     
     //ignored: User, Group, Tasteometer, Radio, Library, Playlist
+    
+    
 */
 
-Lastfm.prototype.getActionUrl = function(query, api_domain){
-    var actionBreakdown = api_domain.split(".");
-    var domain = actionBreakdown.shift(); //t ex "artist"
-    var action = actionBreakdown.shift();   
+var apiActions = {
+    "albumSearch" : { action: ['album','search'], in: ['album'], out: ['albummatches.album.name','albummatches.album.artist','albummatches.album.id','albummatches.album.mbid'], optionals: ['limit','page'] },
+    "albumGetTopTags" : { action: ['album','getTopTags'], in: ['mbid'], out: ['toptags.tag.name', 'toptags.tag.count'] },
+    "artistGetCorrection" : { action: ['artist','getCorrection'], in: ['artist'], out: ['corrections.correction.artist.name', 'corrections.correction.artist.mbid'] },
+    "artistGetEvents" : { action: ['artist','getEvents'], in: ['artist','mbid'], 
+        out: ['events.event.id', 'events.event.name', 'events.event.artists.artist', 'events.event.artists.headliner', 'events.event.venue.id', 
+        'events.event.venue.id','events.event.venue.name.location.city','events.event.venue.name.location.country', 'events.event.venue.startDate'],
+        optionals: ['limit','page'] }
+};
+
+function Lastfm(param) {
+    this.name = "last.fm";
+	this.host = param.host;
+	this.responseObject = [];
+	this.apiKey = keys[this.name]['key'];
+	this.apiActions = apiActions;
+}
+
+util.inherits(Lastfm, BaseConnector);
+
+Lastfm.prototype.getActionUrl = function(query, apiConfig){
+    var apiAction = apiActions[apiConfig.action];
+    var domain = apiAction.action[0]; //t ex "artist"
+    var action = apiAction.action[1];  
      
     var parameterObject = {};
-    parameterObject['method'] = api_domain;
+    parameterObject['method'] = domain + "." + action;
     parameterObject['format'] = 'json';
     if(domain != 'chart')
-        parameterObject[domain] = query;
+        parameterObject[apiAction.in[apiConfig.in]] = query;        
+    
     parameterObject['api_key'] = this.apiKey;
     
     var actionPath = querystring.stringify(parameterObject);
@@ -125,8 +144,7 @@ Lastfm.prototype.getActionUrl = function(query, api_domain){
 }
 
 var lastfm = new Lastfm({
-	host: "http://ws.audioscrobbler.com",
-	apiKey: "570d0b659de5f43d6053e0abdb80c643"
+	host: "http://ws.audioscrobbler.com"
 });
 
 module.exports = lastfm;

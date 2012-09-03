@@ -1,6 +1,7 @@
 var util = require('util');
 var BaseConnector = require('./base_connector.js');
 var querystring = require('querystring');
+var keys = require('../keys');
 
 /* INS AND OUTS
 
@@ -41,24 +42,28 @@ http://developer.echonest.com/api/v4/artist/blogs?format=json&id=spotify-WW%3Aar
 Leftout: Track, Playlist, Taste Profile
 */
 
+var apiActions = {
+    "artistBiographies" : { action: ['artist','biographies'], in: ['id','name'], out: ['blogs.name', 'blogs.url'], optionals: ['results','start'] }
+};
+
 function Echonest(param) {
     this.name = "Echonest";
 	this.host = param.host;
 	this.responseObject = [];
-	this.apiKey = param.apiKey;
+	this.apiKey = keys[this.name]['key'];
+	this.apiActions = apiActions;
 }
 
 util.inherits(Echonest, BaseConnector);
 
-Echonest.prototype.getActionUrl = function(query, api_domain){
-    var actionBreakdown = api_domain.split(".");
-    var domain = actionBreakdown.shift(); //t ex "artist"
-    var action = actionBreakdown.shift();   
-    var parameter = actionBreakdown.shift();
+Echonest.prototype.getActionUrl = function(query, apiConfig){
+    var apiAction = apiActions[apiConfig.action];    
+    var domain = apiAction.action[0]; //t ex "artist"
+    var action = apiAction.action[1];  
     
     var parameterObject = {};
     parameterObject['format'] = 'json';
-    parameterObject[parameter] = query;
+    parameterObject[apiAction.in[apiConfig.in]] = query;
     parameterObject['api_key'] = this.apiKey;
     
     var actionPath = domain + "/" + action + "?" + querystring.stringify(parameterObject);
@@ -66,8 +71,7 @@ Echonest.prototype.getActionUrl = function(query, api_domain){
 }
 
 var echonest = new Echonest({
-	host: "http://developer.echonest.com/api/v4/",
-	apiKey: "DI6KQHZO8BXXRWKGJ"
+	host: "http://developer.echonest.com/api/v4/"
 });
 
 module.exports = echonest;

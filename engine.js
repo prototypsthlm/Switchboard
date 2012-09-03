@@ -58,6 +58,7 @@ Engine.prototype = (function(){
     var crawlResults = function(querySource, tree){
         var extractedQueries = [];
         var crawlPath = querySource.split(".");
+        crawlPath.unshift('result'); //hack
         crawl(crawlPath, tree, extractedQueries);
         return extractedQueries;
     };
@@ -66,10 +67,11 @@ Engine.prototype = (function(){
         var queries = [];
         if ("request.get" == querySource) {
             queries.push(req.query.q);
+            queries.push("skrillex");
         }
         else {
-            $.each(connectorResponse, function(i){
-                queries = crawlResults(querySource, connectorResponse[i]); //SHOULD BE SPLIT INTO SEPARATE QUERY-ARRAYS AND THEN SLICE/LIMIT THESE AND COMBINE
+            $.each(connectorResponse, function(i){ //extract queries from previous result
+                queries = queries.concat(crawlResults(querySource, connectorResponse[i]));  //how do we mix these? x from each?
             });
         }
         console.log("acquired queries: ");
@@ -99,16 +101,15 @@ Engine.prototype = (function(){
                     r = function(callback) {
                         var connector = config.connector;
                         var queries = getQueries(config.query_source, received).slice(0,translatedConfig[i].options.limit);
-                        var category = config.api_domain;
                         
                         console.log("attempting to execute routine" + i);
                         console.log("queries: ");
                         console.log(queries);
                         
-                        connector.execute(queries, category, function(results) {
+                        connector.execute(queries, config.api_config, function(results) {
                             console.log("routine" + i + " complete");
                             console.log(results); //raw response from each http-request
-                            requestBodyArray.push({api: connector.name, info: results});
+                            requestBodyArray.push({api: connector.name, calls: results});
                             callback(null, results); //skickar vidare items till nästa funktion i waterfall
                         });
                     };
@@ -123,10 +124,10 @@ Engine.prototype = (function(){
                         console.log("queries: ");
                         console.log(queries);
                                     
-                        connector.execute(queries, category, function(results) {
+                        connector.execute(queries, config.api_config, function(results) {
                             console.log("routine" + i + " complete");
                             console.log(results); //raw response from each http-request
-                            requestBodyArray.push({api: connector.name, info: results});
+                            requestBodyArray.push({api: connector.name, calls: results});
                             callback(null, results); //skickar vidare items till nästa funktion i waterfall
                         });
                     };
