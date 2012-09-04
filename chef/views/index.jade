@@ -1,0 +1,43 @@
+extends layout
+
+block content
+	div.header
+		h1= title
+		img.splash(src="http://3.bp.blogspot.com/-n1KXjGmAj-0/Tjv9dQmS0LI/AAAAAAAAEww/_laj0WX2phc/s1600/swedish%2Bchef.jpg",width=300)
+	
+		each api in apis
+			button(ingredient=api.name).btn.ingredient Add some #{api.name}
+			
+		button.btn#cook Cook
+		div.results
+	each api in apis
+		div.api.dummy(name=api.name)
+			h2 #{api.name}
+			p
+				label order index: 
+				select(name="index")
+					option(value='') Inactive
+					each i in order
+						option(value=i)= i
+			
+			p
+				label methods: 
+				select(class="methods")
+					each val,key in api.apiActions
+						option(value=key)= key
+			hr
+			
+			each val,key in api.apiActions
+				div(id=key,class="api_action")
+					h3 #{key}
+					div
+						label in_param: 
+						select(name="in_param")
+							each in_param, i in val.in_param
+								option(value=i)= in_param
+					
+					div
+						label output: 
+								select(name="out")
+									each out_value, i in val.out
+										option(value=i)= out_value

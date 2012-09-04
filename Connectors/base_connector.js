@@ -30,7 +30,7 @@ BaseConnector.prototype.get = function(url, query, domain, done) {
         self.responseObject.push({query: query, apiConfig: domain, result: JSON.parse(result)});
       }
       else {
-          console.log(response.body);
+          console.log("HTTP-request FAILED " + response.statusCode + " : " + response.body);
       }
       done();
     });
