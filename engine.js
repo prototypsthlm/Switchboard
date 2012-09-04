@@ -2,6 +2,7 @@ var $ = require('jquery');
 var async = require("async");
 var spotify = require('./Connectors/spotify.js');
 var lastfm = require('./Connectors/lastfm.js');
+var _ = require('underscore');
 
 var Engine = function() {};
 
@@ -63,15 +64,15 @@ Engine.prototype = (function(){
         return extractedQueries;
     };
     
-    var getQueries = function(querySource, connectorResponse) {
+    var getQueries = function(config, connectorResponse) {
         var queries = [];
+        var querySource = config.apiConfig.in_source
         if ("request.get" == querySource) {
             queries.push(req.query.q);
-            queries.push("skrillex");
         }
         else {
             $.each(connectorResponse, function(i){ //extract queries from previous result
-                queries = queries.concat(crawlResults(querySource, connectorResponse[i]));  //how do we mix these? x from each?
+                queries = queries.concat(crawlResults(querySource, connectorResponse[i]).slice(0,config.options.limit));  //limit from EACH query
             });
         }
         console.log("acquired queries: ");
@@ -100,16 +101,21 @@ Engine.prototype = (function(){
                 if (i < 1) {
                     r = function(callback) {
                         var connector = config.connector;
-                        var queries = getQueries(config.query_source, received).slice(0,translatedConfig[i].options.limit);
+                        var queries = getQueries(config, received);
                         
                         console.log("attempting to execute routine" + i);
                         console.log("queries: ");
                         console.log(queries);
+                        console.log("cleaned: ");
+                        console.log(_.uniq(queries));
                         
-                        connector.execute(queries, config.api_config, function(results) {
+                        connector.execute(_.uniq(queries), config.apiConfig, function(results) {
                             console.log("routine" + i + " complete");
                             console.log(results); //raw response from each http-request
-                            requestBodyArray.push({api: connector.name, calls: results});
+                            
+                            //how do we keep order of results? each call should have some sort of index since they get pushed when they finish not in relevance order or whatever #!!!
+                            requestBodyArray.push({api: connector.name, calls: results}); 
+                            
                             callback(null, results); //skickar vidare items till nästa funktion i waterfall
                         });
                     };
@@ -117,14 +123,15 @@ Engine.prototype = (function(){
                 else {
                     r = function(received, callback) {
                         var connector = config.connector;
-                        var queries = getQueries(config.query_source, received).slice(0,translatedConfig[i].options.limit);
-                        var category = config.api_domain;
+                        var queries = getQueries(config, received);
 
                         console.log("attempting to execute routine" + i);
                         console.log("queries: ");
                         console.log(queries);
-                                    
-                        connector.execute(queries, config.api_config, function(results) {
+                        console.log("cleaned: ");
+                        console.log(_.uniq(queries));
+                                                            
+                        connector.execute(_.uniq(queries), config.apiConfig, function(results) {
                             console.log("routine" + i + " complete");
                             console.log(results); //raw response from each http-request
                             requestBodyArray.push({api: connector.name, calls: results});

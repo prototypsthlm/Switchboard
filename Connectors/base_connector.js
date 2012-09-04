@@ -27,7 +27,7 @@ BaseConnector.prototype.get = function(url, query, domain, done) {
     request({url: url, headers: { "Accept" : "application/json" }}, function (error, response, result) {
       if (!error && response.statusCode == 200) {
         console.log("successful HTTP-request");
-        self.responseObject.push({query: query, api_config: domain, result: JSON.parse(result)});
+        self.responseObject.push({query: query, apiConfig: domain, result: JSON.parse(result)});
       }
       else {
           console.log(response.body);

@@ -107,10 +107,10 @@ var keys = require('../keys');
 */
 
 var apiActions = {
-    "albumSearch" : { action: ['album','search'], in: ['album'], out: ['albummatches.album.name','albummatches.album.artist','albummatches.album.id','albummatches.album.mbid'], optionals: ['limit','page'] },
-    "albumGetTopTags" : { action: ['album','getTopTags'], in: ['mbid'], out: ['toptags.tag.name', 'toptags.tag.count'] },
-    "artistGetCorrection" : { action: ['artist','getCorrection'], in: ['artist'], out: ['corrections.correction.artist.name', 'corrections.correction.artist.mbid'] },
-    "artistGetEvents" : { action: ['artist','getEvents'], in: ['artist','mbid'], 
+    "albumSearch" : { action: ['album','search'], in_param: ['album'], out: ['albummatches.album.name','albummatches.album.artist','albummatches.album.id','albummatches.album.mbid'], optionals: ['limit','page'] },
+    "albumGetTopTags" : { action: ['album','getTopTags'], in_param: ['mbid'], out: ['toptags.tag.name', 'toptags.tag.count'] },
+    "artistGetCorrection" : { action: ['artist','getCorrection'], in_param: ['artist'], out: ['corrections.correction.artist.name', 'corrections.correction.artist.mbid'] },
+    "artistGetEvents" : { action: ['artist','getEvents'], in_param: ['artist','mbid'], 
         out: ['events.event.id', 'events.event.name', 'events.event.artists.artist', 'events.event.artists.headliner', 'events.event.venue.id', 
         'events.event.venue.id','events.event.venue.name.location.city','events.event.venue.name.location.country', 'events.event.venue.startDate'],
         optionals: ['limit','page'] }
@@ -135,7 +135,7 @@ Lastfm.prototype.getActionUrl = function(query, apiConfig){
     parameterObject['method'] = domain + "." + action;
     parameterObject['format'] = 'json';
     if(domain != 'chart')
-        parameterObject[apiAction.in[apiConfig.in]] = query;        
+        parameterObject[apiAction.in_param[apiConfig.in_param]] = query;        
     
     parameterObject['api_key'] = this.apiKey;
     

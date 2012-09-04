@@ -6,9 +6,9 @@ var keys = require('../keys');
 var volumeOuts = ['items.id','items.volumeinfo.publisher','items.volumeinfo.title','items.volumeinfo.authors'];
 var apiActions = {
     //https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:herpderp&key=yourAPIKey
-    "volumesSearch" : { action: ['volumes','search'], in: ['q'], out: volumeOuts, special: ['intitle','inauthor','inpublisher','subject','isbn'], optionals: ['download','filtering','pagination','sorting'] },
+    "volumesSearch" : { action: ['volumes','search'], in_param: ['q'], out: volumeOuts, special: ['intitle','inauthor','inpublisher','subject','isbn'], optionals: ['download','filtering','pagination','sorting'] },
       //https://www.googleapis.com/books/v1/volumes/volumeId
-    "volumesLookup" : { action: ['volumes','lookup'], in: ['volumeID'], out: volumeOuts }
+    "volumesLookup" : { action: ['volumes','lookup'], in_param: ['volumeID'], out: volumeOuts }
 };
 //inga bookshelves...
 
@@ -30,7 +30,7 @@ GoogleBooks.prototype.getActionUrl = function(query, apiConfig){
     parameterObject['key'] = this.apiKey;
     var actionPath;
     if(action == 'search'){
-        parameterObject[apiAction.in[apiConfig.in]] = query;        
+        parameterObject[apiAction.in_param[apiConfig.in_param]] = query;        
         actionPath = domain + "?" + querystring.stringify(parameterObject);
     }
     else {

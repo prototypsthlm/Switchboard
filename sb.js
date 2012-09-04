@@ -16,28 +16,24 @@ app.get('/switchboard', function(req, res){
     res.contentType('json');
     //res.writeHead(200, { 'Content-Type': 'application/json' })
 
-    //translation.spotify['artist'] = "artists-url-bit"
-    //var translatedConfig = [{ connector: spotify, options: { limit: 5 }, api_domain: "search.artist", query_source: "request.get" }, { connector: lastfm, options: { limit: 5 }, api_domain: "artist.getEvents", query_source: "result.artists.name" }]
-    //var translatedConfig = [{ connector: lastfm, options: { limit: 5 }, api_domain: "artist.getEvents", query_source: "request.get" }, { connector: spotify, options: { limit: 2 }, api_domain: "artist", query_source: "result.events.event.venue.name" }]
-    //var translatedConfig = [{ connector: lastfm, options: { limit: 5 }, api_domain: "artist.getEvents", query_source: "request.get" }, { connector: spotify, options: { limit: 2 }, api_domain: "search.artist", query_source: "result.events.event.artists.artist" }]
-    //var translatedConfig = [{ connector: spotify, options: { limit: 5 }, api_domain: "search.artist", query_source: "request.get" }, { connector: spotify, options: { limit: 2 }, api_domain: "lookup.artist", query_source: "result.artists.href" }]
-    //var translatedConfig = [{ connector: lastfm, options: { limit: 5 }, api_domain: "artist.getEvents", query_source: "request.get" }, { connector: spotify, options: { limit: 2 }, api_domain: "search.artist", query_source: "result.events.event.artists.artist" }, { connector: spotify, options: { limit: 2 }, api_domain: "lookup.artist", query_source: "result.artists.href" }]
-    //var translatedConfig = [{ connector: lastfm, options: { limit: 5 }, api_domain: "chart.gethypedartists", query_source: "request.get" }, { connector: spotify, options: { limit: 2 }, api_domain: "search.artist", query_source: "result.artists.artist.name" }, { connector: spotify, options: { limit: 2 }, api_domain: "lookup.artist", query_source: "result.artists.href" }]
+     //{ connector: echonest, options: { limit: 10 }, apiConfig: { action: "songSearch", in_source: "request.get", in_param: 18 } },
+     //{ connector: spotify, options: { limit: 5 }, apiConfig: { action: "artistSearch", in_source: "request.get", in_param: 0 } },
+     //{ connector: echonest, options: { limit: 5 }, apiConfig: { action: "artistBiographies", in_source: spotify.apiActions['artistSearch'].out[1], in_param: 1 } },
+     //{ connector: googlebooks, options: { limit: 5 }, apiConfig: { action: "volumesSearch", in_source: spotify.apiActions['artistSearch'].out[1], in_param: 0 } },
+     //{ connector: tmdb, options: { limit: 5 }, apiConfig: { action: "movieSearch", in_source: spotify.apiActions['artistSearch'].out[1], in_param: 0 } },
     
-    //var translatedConfig = [{ connector: spotify, options: { limit: 5 }, api_domain: "search.artist", query_source: "request.get" }, { connector: lastfm, options: { limit: 5 }, api_domain: "artist.getsimilar", query_source: "result.artists.name" }]   
-    //var translatedConfig = [{ connector: spotify, options: { limit: 5 }, api_domain: "search.artist", query_source: "request.get" }, { connector: echonest, options: { limit: 5 }, api_domain: "artist.blogs.name", query_source: "result.artists.name" }]   
-    //var translatedConfig = [{ connector: spotify, options: { limit: 5 }, api_domain: "search.artist", query_source: "request.get" }, { connector: echonest, options: { limit: 5 }, api_domain: "artist.blogs.name", query_source: "result.artists.name" }]   
+    var keys =  [
+                 { connector: echonest, options: { limit: 10 }, apiConfig: { action: "songSearch", in_source: "request.get", in_param: 18 } },
+                 { connector: lastfm, options: { limit: 5 }, apiConfig: { action: "artistGetEvents", in_source: echonest.apiActions['songSearch'].out[2], in_param: 0 } }
+                ];
     
-    var spotifyRoutineObject = { api: "Spotify", action: "artistSearch", in: 0, out: 1 };
-    var lastfmRoutineObject = { api: "last.fm", action: "artistGetEvents", in: 0, out: 1 };
+    var starWarsArtists = [
+                             { connector: tmdb, options: { limit: 2 }, apiConfig: { action: "movieSearch", in_source: "request.get", in_param: 0 } },
+                             { connector: tmdb, options: { limit: 5 }, apiConfig: { action: "movieCast", in_source: tmdb.apiActions['movieSearch'].out[0], in_param: 18 } },
+                             { connector: spotify, options: { limit: 5 }, apiConfig: { action: "artistSearch", in_source: tmdb.apiActions['movieCast'].out[2], in_param: 0 } }
+                            ];
     
-    var routineConfig = [{ connector: spotify, options: { limit: 5 }, api_config: { action: "artistSearch", in: 0, out: 1 }, query_source: "request.get" },
-                         //{ connector: lastfm, options: { limit: 5 }, api_config: { action: "artistGetEvents", in: 0, out: null }, query_source: spotify.apiActions['artistSearch'].out[1] }
-                         //{ connector: echonest, options: { limit: 5 }, api_config: { action: "artistBiographies", in: 1, out: null }, query_source: spotify.apiActions['artistSearch'].out[1] },
-                         //{ connector: googlebooks, options: { limit: 5 }, api_config: { action: "volumesSearch", in: 0, out: null }, query_source: spotify.apiActions['artistSearch'].out[1] },
-                         { connector: tmdb, options: { limit: 5 }, api_config: { action: "movieSearch", in: 0, out: null }, query_source: spotify.apiActions['artistSearch'].out[1] },
-                         
-                        ]; //out not used...
+    var routineConfig = starWarsArtists;
     
     var searchTerm = [req.query.q];
 

@@ -5,17 +5,17 @@ var keys = require('../keys');
 
 var apiActions = {
     //GET http://api.themoviedb.org/3/search/movie
-    "movieSearch" : { action: ['movie','search'], in: ['query'], out: ['results.id', 'results.original_title'], optionals: ['year','language','include_adult','page'] },
+    "movieSearch" : { action: ['movie','search'], in_param: ['query'], out: ['results.id', 'results.original_title'], optionals: ['year','language','include_adult','page'] },
     //GET http://api.themoviedb.org/3/movie/11
-    "movieLookup" : { action: ['movie','lookup'], in: ['id'], out: ['id', 'imdb_id'], optionals: ['language'] },
+    "movieLookup" : { action: ['movie','lookup'], in_param: ['id'], out: ['id', 'imdb_id'], optionals: ['language'] },
     //http://api.themoviedb.org/3/movie/11/casts
-    "movieCast" : { action: ['movie','casts'], in: ['id'], out: ['id', 'imdb_id'], optionals: ['language'] },
+    "movieCast" : { action: ['movie','casts'], in_param: ['id'], out: ['cast.id', 'cast.name','cast.character'], optionals: ['language'] },
     
     //"movieSearch" : { action: ['movie','now_playing'], in: [], out: ['results.id', 'results.original_title'], optionals: ['language','page'] }, //how handle?
-    
-    "personSearch" : { action: ['person','search'], in: ['query'], out: ['results.id', 'results.name'], optionals: ['include_adult','page'] },
-    "personLookup" : { action: ['person','lookup'], in: ['id'], out: ['id', 'name', 'birthday', 'place_of_birth'], optionals: ['language'] },
-    "personCredits" : { action: ['person','credits'], in: ['id'], out: ['cast.character', 'cast.id', 'cast.original_title'], optionals: ['language'] }
+
+    "personSearch" : { action: ['person','search'], in_param: ['query'], out: ['results.id', 'results.name'], optionals: ['include_adult','page'] },
+    "personLookup" : { action: ['person','lookup'], in_param: ['id'], out: ['id', 'name', 'birthday', 'place_of_birth'], optionals: ['language'] },
+    "personCredits" : { action: ['person','credits'], in_param: ['id'], out: ['cast.character', 'cast.id', 'cast.original_title'], optionals: ['language'] }
 };
 
 
@@ -37,7 +37,7 @@ TMDB.prototype.getActionUrl = function(query, apiConfig){
     var parameterObject = {};
     parameterObject['api_key'] = this.apiKey;
     if(action == "search"){
-        parameterObject[apiAction.in[apiConfig.in]] = query
+        parameterObject[apiAction.in_param[apiConfig.in_param]] = query
         actionPath = action + "/" + domain + "?" + querystring.stringify(parameterObject)
     }
     else if(action == 'lookup') {
