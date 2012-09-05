@@ -8,10 +8,13 @@ block content
 		each api in apis
 			button(ingredient=api.name).btn.ingredient Add some #{api.name}
 			
-		button.btn#cook Cook
+		button.btn#cook Write it down
 		div.results
+		
 	each api in apis
 		div.api.dummy(name=api.name)
+			a.close(href="#") toss it out
+		
 			h2 #{api.name}
 			p
 				label order index: 
@@ -41,3 +44,13 @@ block content
 								select(name="out")
 									each out_value, i in val.out
 										option(value=i)= out_value
+										
+			hr
+			
+			input(name="taste_q")
+			button.taste(href="#") taste
+			
+			div.taste_box
+				a.hide(href="#") hide
+				pre
+			
