@@ -8,26 +8,33 @@ function BaseConnector(param) {
 }
 
 
-BaseConnector.prototype.execute = function(queries, api_domain, cb) {
+BaseConnector.prototype.execute = function(queryData, api_domain, cb) {
     console.log(this.name + " EXECUTE");
     var self = this;
     self.responseObject = [];
     
-    async.forEach(queries, function getResults(query, done) {
-        var url = self.getActionUrl(query, api_domain);
-        console.log('preparing request to ' + url);
-        self.get(url, query, api_domain, done); 
-    },
-    function(err){
+    async.forEach(queryData, function fetchData(queryDataItem, seriesDone){ //so that callIndex gets set properly
+        var index = 0;
+        async.forEach(queryDataItem.queries, function getResults(query, done) {
+            var url = self.getActionUrl(query, api_domain);
+            console.log('preparing request to ' + url);
+            self.get(url, query, api_domain, index, queryDataItem.callIndex, done);
+            index += 1;
+        },
+        function(err){
+            seriesDone();
+        });
+        
+    },function(err){
         cb(self.responseObject);
     });
 }
-BaseConnector.prototype.get = function(url, query, domain, done) {
+BaseConnector.prototype.get = function(url, query, domain, index, callIndex, done) {
     var self = this;
     request({url: url, headers: { "Accept" : "application/json" }}, function (error, response, result) {
       if (!error && response.statusCode == 200) {
-        console.log("successful HTTP-request");
-        self.responseObject.push({query: query, apiConfig: domain, result: JSON.parse(result)});
+        console.log("successful HTTP-request : " + query);
+        self.responseObject.push({query: query, index: index, callIndex: callIndex, apiConfig: domain, result: JSON.parse(result)});
       }
       else {
           console.log("HTTP-request FAILED " + response.statusCode + " : " + response.body);
@@ -35,4 +42,5 @@ BaseConnector.prototype.get = function(url, query, domain, done) {
       done();
     });
 }
+
 module.exports = BaseConnector;

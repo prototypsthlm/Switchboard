@@ -28,7 +28,7 @@ function transformChefRecipe(config){
     var transformedConfig = [];
     
     config.sort(function(a,b){
-      return a.order.toLowerCase().localeCompare(b.order.toLowerCase());
+        return a.order.toLowerCase().localeCompare(b.order.toLowerCase());
     });
     
     $.each(config, function(i,item){
@@ -53,11 +53,13 @@ function transformChefRecipe(config){
 function getChefRecipe(callback){
 
     request({url: "http://localhost:3000/recipe", headers: { "Accept" : "application/json" }}, function (error, response, result) {
-         if (!error && response.statusCode == 200) {                           
+         if (!error && response.statusCode == 200) {
+              console.log("REMOTE RECIPE LOADED");                          
               callback(transformChefRecipe(JSON.parse(result)));
          }
          else {
-             console.log(response.body);
+             console.log("REMOTE RECIPE NOT AVAILABLE");
+             callback(null);
          }
     });    
 }
@@ -65,7 +67,6 @@ function getChefRecipe(callback){
 
 getChefRecipe(function(config){
     remoteRecipe = config;
-    console.log("REMOTE RECIPE LOADED");
 });
 
 //http://localhost:4000/merge?q=abba
@@ -87,22 +88,31 @@ app.get('/switchboard', function(req, res){
                  { connector: lastfm, options: { limit: 5 }, apiConfig: { action: "artistGetEvents", in_source: echonest.apiActions['songSearch'].out[2], in_param: 0 } }
                 ];
     
-    var starWarsArtists = [
-                             { connector: tmdb, options: { limit: 2 }, apiConfig: { action: "movieSearch", in_source: "request.get", in_param: 0 } },
-                             { connector: tmdb, options: { limit: 5 }, apiConfig: { action: "movieCast", in_source: tmdb.apiActions['movieSearch'].out[0], in_param: 18 } },
-                             { connector: spotify, options: { limit: 5 }, apiConfig: { action: "artistSearch", in_source: tmdb.apiActions['movieCast'].out[2], in_param: 0 } }
-                            ];
-    
+    var sw = [
+                 { connector: tmdb, options: { limit: null }, apiConfig: { action: "movieSearch", in_source: "request.get", in_param: 0 } },
+                 { connector: tmdb, options: { limit: 2 }, apiConfig: { action: "movieCast", in_source: tmdb.apiActions['movieSearch'].out[0], in_param: 18 } },
+                 { connector: spotify, options: { limit: 5 }, apiConfig: { action: "artistSearch", in_source: tmdb.apiActions['movieCast'].out[2], in_param: 0 } }
+              ];
+                          
+    var events = [
+                    { connector: spotify, options: { limit: null }, apiConfig: { action: "artistSearch", in_source: "request.get", in_param: 0 } },
+                    { connector: lastfm, options: { limit: 3 }, apiConfig: { action: "artistGetEvents", in_source: spotify.apiActions['artistSearch'].out[1], in_param: 0 } },
+                    { connector: echonest, options: { limit: 5 }, apiConfig: { action: "artistBiographies", in_source: lastfm.apiActions['artistGetEvents'].out[3], in_param: 1 } },
+                 ];
+                 
     var routineConfig = remoteRecipe;
     
     var searchTerm = [req.query.q];
-
+    if(routineConfig == null){
+        routineConfig = sw;
+    }
     if(searchTerm != null){  
         engine.setRequest(req);
         //engine.setSearch(searchTerm);
         engine.buildRoutine(routineConfig);
-        engine.runEngine(function(r){
-            res.send(JSON.stringify({ results: r }));
+        engine.runEngine(function(r,p){
+            var c = p;
+            res.send(JSON.stringify({ clean: c, raw: r }));
         });
     }
 
