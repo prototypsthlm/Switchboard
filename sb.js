@@ -1,3 +1,4 @@
+//should be a file called connectors that requires all connectors based on whether u have config keys set for them or not, so you dont have to include all of these..
 var spotify = require('./Connectors/spotify.js');
 var lastfm = require('./Connectors/lastfm.js');
 var echonest = require('./Connectors/echonest.js');
@@ -10,12 +11,11 @@ var engine = require('./engine.js');
 var request = require('request');
 var $ = require('jquery');
 
-var remoteRecipe = "WUT";
-
+var remoteRecipe = null;
 
 function transformChefRecipe(config){
     
-    var apiMap = {
+    var apiMap = { //should be in connectors require file?
         "Spotify" : spotify,
         "Echonest" : echonest,
         "last.fm" : lastfm,
@@ -28,7 +28,9 @@ function transformChefRecipe(config){
     var transformedConfig = [];
     
     config.sort(function(a,b){
-        return a.order.toLowerCase().localeCompare(b.order.toLowerCase());
+        if(a.order < b.order) return -1;
+        if(a.order > b.order) return 1;
+        return 0;
     });
     
     $.each(config, function(i,item){
@@ -69,28 +71,17 @@ getChefRecipe(function(config){
     remoteRecipe = config;
 });
 
-//http://localhost:4000/merge?q=abba
+//http://localhost:4000/switchboard?q=abba
 app.get('/switchboard', function(req, res){
     
     console.log("REQUEST RECEIVED");
     console.log(req.url);
     res.contentType('json');
     //res.writeHead(200, { 'Content-Type': 'application/json' })
-
-     //{ connector: echonest, options: { limit: 10 }, apiConfig: { action: "songSearch", in_source: "request.get", in_param: 18 } },
-     //{ connector: spotify, options: { limit: 5 }, apiConfig: { action: "artistSearch", in_source: "request.get", in_param: 0 } },
-     //{ connector: echonest, options: { limit: 5 }, apiConfig: { action: "artistBiographies", in_source: spotify.apiActions['artistSearch'].out[1], in_param: 1 } },
-     //{ connector: googlebooks, options: { limit: 5 }, apiConfig: { action: "volumesSearch", in_source: spotify.apiActions['artistSearch'].out[1], in_param: 0 } },
-     //{ connector: tmdb, options: { limit: 5 }, apiConfig: { action: "movieSearch", in_source: spotify.apiActions['artistSearch'].out[1], in_param: 0 } },
-    
-    var keys =  [
-                 { connector: echonest, options: { limit: 10 }, apiConfig: { action: "songSearch", in_source: "request.get", in_param: 18 } },
-                 { connector: lastfm, options: { limit: 5 }, apiConfig: { action: "artistGetEvents", in_source: echonest.apiActions['songSearch'].out[2], in_param: 0 } }
-                ];
     
     var sw = [
                  { connector: tmdb, options: { limit: null }, apiConfig: { action: "movieSearch", in_source: "request.get", in_param: 0 } },
-                 { connector: tmdb, options: { limit: 2 }, apiConfig: { action: "movieCast", in_source: tmdb.apiActions['movieSearch'].out[0], in_param: 18 } },
+                 { connector: tmdb, options: { limit: 2 }, apiConfig: { action: "movieCast", in_source: tmdb.apiActions['movieSearch'].out[0], in_param: 0 } },
                  { connector: spotify, options: { limit: 5 }, apiConfig: { action: "artistSearch", in_source: tmdb.apiActions['movieCast'].out[2], in_param: 0 } }
               ];
                           
@@ -100,11 +91,18 @@ app.get('/switchboard', function(req, res){
                     { connector: echonest, options: { limit: 5 }, apiConfig: { action: "artistBiographies", in_source: lastfm.apiActions['artistGetEvents'].out[3], in_param: 1 } },
                  ];
                  
+                 
+     var bradpitt = [
+                  { connector: tmdb, options: { limit: null }, apiConfig: { action: "personSearch", in_source: "request.get", in_param: 0 } }, ////cool if you could split query here and just feed apis "brad pitt"
+                  { connector: tmdb, options: { limit: 1 }, apiConfig: { action: "personCredits", in_source: tmdb.apiActions['personSearch'].out[0], in_param: 0 } },
+                  { connector: googlebooks, options: { limit: 10 }, apiConfig: { action: "volumesSearch", in_source: tmdb.apiActions['personCredits'].out[2], in_param: 0 } } 
+               ];
+                 
     var routineConfig = remoteRecipe;
     
     var searchTerm = [req.query.q];
     if(routineConfig == null){
-        routineConfig = sw;
+        routineConfig = bradpitt;
     }
     if(searchTerm != null){  
         engine.setRequest(req);
@@ -117,12 +115,5 @@ app.get('/switchboard', function(req, res){
     }
 
 });
-
-app.get('/interface', function(req, res){
-    //TO:DO
-    //LÄSER IN CONNECTORS, TRANSLATION, OCH MÖJLIGA IN/UT
-    //BYGGER SEDAN CONFIG SOM PIPAS IN I MERGE
-});
-
 
 app.listen(4000);

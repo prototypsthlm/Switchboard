@@ -3,7 +3,7 @@ var BaseConnector = require('./base_connector.js');
 var querystring = require('querystring');
 var keys = require('../keys');
 
-var volumeOuts = ['items.id','items.volumeinfo.publisher','items.volumeinfo.title','items.volumeinfo.authors'];
+var volumeOuts = ['items.id','items.volumeInfo.publisher','items.volumeInfo.title','items.volumeInfo.authors'];
 var apiActions = {
     //https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:herpderp&key=yourAPIKey
     "volumesSearch" : { action: ['volumes','search'], in_param: ['q'], out: volumeOuts, special: ['intitle','inauthor','inpublisher','subject','isbn'], optionals: ['download','filtering','pagination','sorting'] },

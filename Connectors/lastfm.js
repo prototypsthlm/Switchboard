@@ -5,104 +5,11 @@ var keys = require('../keys');
 
 
 /*    
-    /// auth
-    // 2 params if not mbid
-    
-    /page and limit on some of these!
-    
-    ///album.addTags
-    //album.getBuylinks
-    //album.getInfo
-    //album.getShouts
-    //album.getTags
-    album.getTopTags
-    //album.removeTag
-    album.search : album
-    
-    { in: ['album','search', ['album','name']], out: ['images.url'] }
-    
-    ///album.share
-    
-    //artist.addTags
-    artist.getCorrection : artist or mbid
-    artist.getEvents : artist or mbid
-    artist.getInfo : artist or mbid
-    artist.getPastEvents : artist or mbid
-    artist.getPodcast : artist or mbid
-    artist.getShouts : artist or mbid
-    artist.getSimilar : artist or mbid
-    artist.getTags : artist or mbid
-    artist.getTopAlbums : artist or mbid
-    artist.getTopFans : artist or mbid
-    artist.getTopTags : artist or mbid
-    artist.getTopTracks : artist or mbid
-    //artist.removeTag
-    artist.search
-    //artist.share
-    //artist.shout
-    
-    chart.getHypedArtists : page and limit
-    chart.getHypedTracks : page and limit
-    chart.getLovedTracks : page and limit
-    chart.getTopArtists : page and limit
-    chart.getTopTags : page and limit
-    chart.getTopTracks : page and limit
-     
-    //event.attend
-    event.getAttendees : event (id)
-    event.getInfo : event (id)
-    event.getShouts : event (id)
-    //event.share
-    //event.shout
-    
-    ?geo.getEvents
-    /geo.getMetroArtistChart
-    /geo.getMetroHypeArtistChart
-    /geo.getMetroHypeTrackChart
-    /geo.getMetroTrackChart
-    /geo.getMetroUniqueArtistChart
-    /geo.getMetroUniqueTrackChart
-    /geo.getMetroWeeklyChartlist
-    /geo.getMetros
-    /geo.getTopArtists
-    /geo.getTopTracks
-    
-    tag.getInfo : tag
-    tag.getSimilar : tag
-    tag.getTopAlbums : tag
-    tag.getTopArtists : tag
-    tag.getTopTags : tag
-    tag.getTopTracks : tag
-    tag.getWeeklyArtistChart : tag
-    tag.getWeeklyChartList : tag
-    tag.search : tag
-    
-    ///track.addTags
-    ///track.ban
-    //track.getBuylinks
-    //track.getCorrection
-    //track.getFingerprintMetadata
-    //track.getInfo
-    //track.getShouts
-    //track.getSimilar
-    //track.getTags
-    //track.getTopFans
-    //track.getTopTags
-    ///track.love
-    ///track.removeTag
-    ///track.scrobble
-    track.search : track
-    ///track.share
-    ///track.unban
-    ///track.unlove
-    ///track.updateNowPlaying
-    
+
     venue.getEvents : venue (id)
     venue.getPastEvents : venue (id)
     venue.search : venue (name) and country (ISO 3166-2)
-    
-    //ignored: User, Group, Tasteometer, Radio, Library, Playlist
-    
+        
     
 */
 
@@ -111,13 +18,11 @@ var apiActions = {
     "albumGetTopTags" : { action: ['album','getTopTags'], in_param: ['mbid'], out: ['toptags.tag.name', 'toptags.tag.count'] },
     
     "artistGetCorrection" : { action: ['artist','getCorrection'], in_param: ['artist'], out: ['corrections.correction.artist.name', 'corrections.correction.artist.mbid'] },
-    "artistGetEvents" : { action: ['artist','getEvents'], in_param: ['artist','mbid'], 
-        out: ['events.event.id', 'events.event.name', 'events.event.artists.artist', 'events.event.artists.headliner', 'events.event.venue.id', 
-        'events.event.venue.id','events.event.venue.name.location.city','events.event.venue.name.location.country', 'events.event.venue.startDate'],
-        optionals: ['limit','page'] },
+    "artistGetEvents" : { action: ['artist','getEvents'], in_param: ['artist','mbid'], out: ['events.event.id', 'events.event.title', 'events.event.artists.artist', 'events.event.artists.headliner', 'events.event.venue.id', 
+        'events.event.venue.name','events.event.venue.location.city','events.event.venue.location.country', 'events.event.venue.location.street', 'events.event.startDate'],optionals: ['limit','page'] },
     "artistGetInfo" : { action: ['artist','getInfo'], in_param: ['artist','mbid'], out: ['artist.name', 'artist.mbid', 'artist.similar.artist.name'], optionals: ['lang'] },
-    "artistGetPastEvents" : { action: ['artist','getPastEvents'], in_param: ['artist','mbid'], out: ['events.event.id', 'events.event.name', 'events.event.artists.artist', 'events.event.artists.headliner', 'events.event.venue.id', 
-    'events.event.venue.id','events.event.venue.name.location.city','events.event.venue.name.location.country', 'events.event.venue.startDate'], optionals: ['page','limit'] },
+    "artistGetPastEvents" : { action: ['artist','getPastEvents'], in_param: ['artist','mbid'], out: ['events.event.id', 'events.event.title', 'events.event.artists.artist', 'events.event.artists.headliner', 'events.event.venue.id', 
+        'events.event.venue.name','events.event.venue.location.city','events.event.venue.location.country', 'events.event.venue.location.street', 'events.event.startDate'], optionals: ['page','limit'] },
     "artistGetPodcast" : { action: ['artist','getPodcast'], in_param: ['artist','mbid'], out: ['rss.channel.title', 'rss.channel.link'] },
     "artistGetShouts" : { action: ['artist','getShouts'], in_param: ['artist','mbid'], out: ['shouts.shout.body', 'shouts.shout.author'], optionals: ['page','limit'] },
     "artistGetSimilar" : { action: ['artist','getSimilar'], in_param: ['artist','mbid'], out: ['similarartists.artist.name', 'similarartists.artist.mbid'], optionals: ['limit'] },
@@ -131,8 +36,32 @@ var apiActions = {
     "getHypedArtists" : { action: ['chart','getHypedArtists'], in_param: [], out: ['artists.artist.name', 'artists.artist.mbid', 'artists.artist.percentagechange'], optionals: ['page','limit'] },
     "getHypedTracks" : { action: ['chart','getHypedTracks'], in_param: [], out: ['tracks.track.name', 'tracks.track.mbid', 'tracks.track.percentagechange', 'tracks.track.artist.name', 'tracks.track.artist.mbid'], optionals: ['page','limit'] },
     "getLovedTracks" : { action: ['chart','getLovedTracks'], in_param: [], out: ['tracks.track.name', 'tracks.track.mbid', 'tracks.track.loves', 'tracks.track.artist.name', 'tracks.track.artist.mbid'], optionals: ['page','limit'] },
-    "getTopArtists" : { action: ['chart','getTopArtists'], in_param: [], out: ['artists.artist.name', 'artists.artist.mbid','artists.artist.listeners','artists.artist.playcount'], optionals: ['page','limit'] }
+    "getTopArtists" : { action: ['chart','getTopArtists'], in_param: [], out: ['artists.artist.name', 'artists.artist.mbid','artists.artist.listeners','artists.artist.playcount'], optionals: ['page','limit'] },
+    "getTopTags" : { action: ['chart','getTopTags'], in_param: [], out: ['tags.tag.name', 'tags.tag.reach','tags.tag.taggings'], optionals: ['page','limit'] },
+    "getTopTracks" : { action: ['chart','getTopTracks'], in_param: [], out: ['tracks.track.name', 'tracks.track.mbid', 'tracks.track.duration', 'tracks.track.playcount', 'tracks.track.artist.name', 'tracks.track.artist.mbid'], optionals: ['page','limit'] },
     
+    "eventGetAttendees" : { action: ['event','getAttendees'], in_param: ['event'], out: ['attendees.user.name','attendees.user.realname'], optionals: ['page','limit'] },
+    "eventGetInfo" : { action: ['event','getInfo'], in_param: ['event'], out: ['event.id','event.title','event.artists.headliner', 'event.venue.id', 'event.venue.name','event.venue.location.city','event.venue.location.country', 'event.venue.location.street', 'event.venue.startDate'], optionals: ['page','limit'] },
+    "eventGetShouts" : { action: ['event','getShouts'], in_param: ['event'], out: ['shouts.shout.body','shouts.shout.author'], optionals: ['page','limit'] },
+    
+    "geoGetEvents" : { action: ['geo','getEvents'], in_param: ['location'], out: ['tracks.track.name', 'tracks.track.mbid', 'tracks.track.duration', 'tracks.track.playcount', 'tracks.track.artist.name', 'tracks.track.artist.mbid'], optionals: ['page','limit','distance','long','lat'] },
+    
+    "tagGetInfo" : { action: ['tag','getInfo'], in_param: ['tag'], out: ['tag.name','tag.reach','tag.taggings'], optionals: [] },
+    "tagGetSimilar" : { action: ['tag','getSimilar'], in_param: ['tag'], out: ['similartags.tag.name'], optionals: [] },
+    "tagGetTopAlbums" : { action: ['tag','getTopAlbums'], in_param: ['tag'], out: ['topalbums.album.name','topalbums.album.mbid','topalbums.album.artist.name','topalbums.album.artist.mbid'], optionals: ['page','limit'] },
+    "tagGetTopArtists" : { action: ['tag','getTopArtists'], in_param: ['tag'], out: ['topartists.artist.name','topartists.artist.mbid'], optionals: ['page','limit'] },
+    "tagGetTopTags" : { action: ['tag','getTopTags'], in_param: [], out: ['toptags.tag.name','toptags.tag.count'], optionals: [] },
+    "tagGetTopTracks" : { action: ['tag','getTopTracks'], in_param: ['tag'], out: ['toptracks.track.name','toptracks.track.mbid','toptracks.track.artist.name','toptracks.track.artist.mbid'], optionals:  ['page','limit'] },
+    "tagSearch" : { action: ['tag','search'], in_param: ['tag'], out: ['results.tagmatches.tag.name','results.tagmatches.tag.count'], optionals: ['page','limit'] },
+    
+    "trackSearch" : { action: ['track','search'], in_param: ['tag'], out: ['results.trackmatches.track.name', 'results.trackmatches.track.mbid', 'results.trackmatches.track.listeners', 'results.trackmatches.track.artist.name'], optionals: ['page','limit','artist'] },
+    
+    "venueGetEvents" : { action: ['venue','getEvents'], in_param: ['venue'], out: ['events.event.id', 'events.event.title', 'events.event.artists.artist', 'events.event.artists.headliner', 'events.event.venue.id', 
+        'events.event.venue.name','events.event.venue.location.city','events.event.venue.location.country', 'events.event.venue.location.street', 'events.event.startDate'], optionals: [] },
+    "venueGetPastEvents" : { action: ['venue','getPastEvents'], in_param: ['venue'], out: ['events.event.id', 'events.event.title', 'events.event.artists.artist', 'events.event.artists.headliner', 'events.event.venue.id', 
+        'events.event.venue.name','events.event.venue.location.city','events.event.venue.location.country', 'events.event.venue.location.street', 'events.event.startDate'], optionals: ['page','limit'] },
+    "venueSearch" : { action: ['venue','search'], in_param: ['venue'], out: ['results.venuematches.venue.name', 'results.venuematches.venue.id', 
+        'results.venuematches.venue.location.country', 'results.venuematches.venue.location.city', 'results.venuematches.venue.location.street'], optionals: ['page','limit','country'] }
 };
 
 function Lastfm(param) {
