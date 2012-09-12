@@ -14,7 +14,7 @@ Setting it up
 Node package
 -------------
 
-optionally install as node package and:
+Optionally install as node package and:
 
 1. var sb = require('switchboard');
 
@@ -31,7 +31,7 @@ optionally install as node package and:
 			//c => a formatted response
 		});
 
-a userConfig is structured as:
+A userConfig is structured as:
 
 	[
 	    {
