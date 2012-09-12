@@ -24,15 +24,15 @@ Optionally install as a node package and:
 
 		sb.setRoutine(userConfig); //for userConfig see below or folder example_routines 
 
-	A userConfig is structured as:
+	a userConfig is structured as:
 
 		[
 		    {
-		        "order": "0", //execution order, if first the value api action param is set to the entry query value 
+		        "order": "0", //execution order, if first the value api of action param is set to the entry query value 
 		        "api": "TMDB", //api name
 		        "action": "movieSearch", //api action
-		        "in_param": "0", //api action param name
-		        "out": "0" //value for api action param name in next block. irrelevant if last block.
+		        "in_param": "0", //index for api action param name
+		        "out": "0" //the index for the value for the api action param name in the next block. irrelevant if last block.
 		    },
 		    {
 		        "order": "1",
@@ -49,7 +49,9 @@ Optionally install as a node package and:
 		        "out": "0"
 		    }
 		]
-
+		
+	look at the source for a connector or use the switchboard chef for a better understanding of how the indices for in_param and out work.
+ 
 4. insert query and run routine:
 
 		sb.execute(entryquery, function(r,c){
