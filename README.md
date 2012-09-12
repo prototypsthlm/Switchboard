@@ -16,14 +16,27 @@ What does it do?
 
 Switchboard is a mashup-helper and it's basic functionality is enabling simple data flows between APIs: in essence taking a result from one API, feeding it to another and presenting the joined result for display in your app or whatever it might be. 
 
-An example might
+An example might be 
 
-A flow like this is described as a JSON config file that is fed to switchboard and describes which API-actions to call and what data goes where. To help with the concoction of these config files, or "routines", switchboard is bundled with the utility application "chef".
+1. doing an artist search on Spotify
+2. taking the first five artist names from the Spotify-result and searching last.fm for upcoming events for these artists
 
-Setting it up
+A flow like this is described as a JSON config file that is then inputted to switchboard and specifies which API-actions to call and what data goes where. To help with the concoction of these config files, or "routines", switchboard is bundled with the utility application "chef" which provides a UI for creating routines. 
+
+At the moment supported APIs include
+
+* Echonest
+* Google Books
+* last.fm
+* Spotify
+* The Movie Database
+
+although not all API-actions are supported.
+
+Setting it up as a service
 -------------
 
-1. npm install in folder to setup dependencies
+1. npm install in switchboard folder to setup dependencies
 2. copy connectors/keys_template.json to connectors/keys.json and fill in your API-keys
 3. create routine with chef or use an example routine from example_routines
 4. node server.js
