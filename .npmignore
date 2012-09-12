@@ -1,0 +1,7 @@
+test/
+.DS_Store
+.git*
+lib/connectors/keys.json
+recipe.json
+chef/
+example_routines/

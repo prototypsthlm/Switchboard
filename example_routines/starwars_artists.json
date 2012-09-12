@@ -2,22 +2,22 @@
     {
         "order": "0",
         "api": "TMDB",
-        "action": "personSearch",
+        "action": "movieSearch",
         "in_param": "0",
         "out": "0"
     },
     {
         "order": "1",
         "api": "TMDB",
-        "action": "personCredits",
+        "action": "movieCast",
         "in_param": "0",
         "out": "2"
     },
     {
         "order": "2",
-        "api": "Google Books",
-        "action": "volumesSearch",
+        "api": "Spotify",
+        "action": "artistSearch",
         "in_param": "0",
-        "out": "2"
+        "out": "0"
     }
 ]

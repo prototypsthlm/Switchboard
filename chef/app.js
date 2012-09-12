@@ -1,8 +1,3 @@
-
-/**
- * Module dependencies.
- */
-
 var express = require('express')
   , routes = require('./routes')
   , http = require('http');
@@ -10,20 +5,7 @@ var express = require('express')
 var app = express();
 var fs = require('fs');
 
-var spotify = require('../Connectors/spotify.js'); //fixa så include switchboard ist...? //require folder?
-var lastfm = require('../Connectors/lastfm.js');
-var echonest = require('../Connectors/echonest.js');
-var googlebooks = require('../Connectors/googlebooks.js');
-var tmdb = require('../Connectors/themoviedb.js');
-
-var apiMap = {
-    "Spotify" : spotify,
-    "Echonest" : echonest,
-    "last.fm" : lastfm,
-    "Google Books" : googlebooks,
-    "TMDB" : tmdb
-}
-
+var switchboard = require('../index');
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
@@ -62,8 +44,7 @@ app.get('/recipe', function(req,res){
 app.post('/taste',function(req,res){
     var setup = req.param('data', null);
     console.log(setup);
-    
-    var connector = apiMap[setup.api];
+    var connector = switchboard.connectors().apiMap[setup.api];
     connector.responseObject = [];
     var url = connector.getActionUrl(setup.query,setup.config)
     console.log(url);

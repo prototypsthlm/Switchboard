@@ -1,0 +1,17 @@
+{
+    "Echonest": {
+        "key": ""
+    },
+    "TMDB": {
+        "key": ""
+    },
+    "last.fm": {
+        "key": ""
+    },
+    "Google Books": {
+        "key": ""
+    },
+    "Spotify": {
+        "key": "none required"
+    }
+}

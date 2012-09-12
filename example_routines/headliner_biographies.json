@@ -1,0 +1,23 @@
+[
+    {
+        "order": "0",
+        "api": "Spotify",
+        "action": "artistSearch",
+        "in_param": "0",
+        "out": "1"
+    },
+    {
+        "order": "1",
+        "api": "last.fm",
+        "action": "artistGetEvents",
+        "in_param": "0",
+        "out": "3"
+    },
+    {
+        "order": "2",
+        "api": "Echonest",
+        "action": "artistBiographies",
+        "in_param": "0",
+        "out": "0"
+    }
+]
