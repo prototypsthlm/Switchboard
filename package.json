@@ -1,23 +1,20 @@
 {
   "name": "switchboard",
   "preferGlobal": "true",
-  "version": "0.3.0",
+  "version": "0.5.0",
   "author": "Prototyp <jacob@prototyp.se>",
   "description": "API Mashup helper",
   "contributors": [ 
     {
       "name": "Jacob Broms Engblom",
       "email": "jacob@prototyp.se"
-    } 
+    }
   ],
-  "bin": {
-    "http-server": "./bin/http-server"
-  },
   "scripts": {
-    "start": "node sb.js",
+    "start": "node server.js",
     "test": ""
   },
-  "main": "./lib/http-server",
+  "main": "./lib/switchboard",
   "repository": {
     "type": "git",
     "url": "https://github.com/sanocore/Switchboard.git"
@@ -26,16 +23,22 @@
     "API",
     "mashup"
   ],
+  "homepage": "http://switchboardproject.com/",
   "dependencies" : {
     "express"   :  "3.0.x",
     "async" :  "0.1.x",
     "jquery" :  "1.7.x",
-    "request"    :  "2.9.x"
+    "request"    :  "2.9.x",
+	"querystring" : ""
   },
-  "noAnalyze": true,
+  "analyze": true,
   "devDependencies": {
   },
   "bundleDependencies": [
+    "express",
+	"async",
+	"jquery",
+	"request"
   ],
   "license": "MIT",
   "engine": {
