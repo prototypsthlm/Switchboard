@@ -36,7 +36,9 @@
         "querystring": ""
     },
     "analyze": true,
-    "devDependencies": {},
+    "devDependencies": {
+        "vows": "*"
+    },
     "license": "MIT",
     "engine": {
         "node": ">=0.6"

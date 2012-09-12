@@ -1,15 +1,42 @@
-Switchboard
-===========
+<pre>
+
+	 _______          __________________ _______           ______   _______  _______  _______  ______  
+	(  ____ \|\     /|\__   __/\__   __/(  ____ \|\     /|(  ___ \ (  ___  )(  ___  )(  ____ )(  __  \ 
+	| (    \/| )   ( |   ) (      ) (   | (    \/| )   ( || (   ) )| (   ) || (   ) || (    )|| (  \  )
+	| (_____ | | _ | |   | |      | |   | |      | (___) || (__/ / | |   | || (___) || (____)|| |   ) |
+	(_____  )| |( )| |   | |      | |   | |      |  ___  ||  __ (  | |   | ||  ___  ||     __)| |   | |
+	      ) || || || |   | |      | |   | |      | (   ) || (  \ \ | |   | || (   ) || (\ (   | |   ) |
+	/\____) || () () |___) (___   | |   | (____/\| )   ( || )___) )| (___) || )   ( || ) \ \__| (__/  )
+	\_______)(_______)\_______/   )_(   (_______/|/     \||/ \___/ (_______)|/     \||/   \__/(______/
+	
+</pre>
+
+What does it do?
+-------------
+
+Switchboard is a mashup-helper and it's basic functionality is enabling simple data flows between APIs: in essence taking a result from one API, feeding it to another and presenting the joined result for display in your app or whatever it might be. 
+
+An example might
+
+A flow like this is described as a JSON config file that is fed to switchboard and describes which API-actions to call and what data goes where. To help with the concoction of these config files, or "routines", switchboard is bundled with the utility application "chef".
 
 Setting it up
 -------------
 
-1. npm install in folder to setup dependencies.
-2. copy connectors/keys_template.json to connectors/keys.json and fill in your API-keys.
-3. create routine with chef or use an example routine from example_routines.
+1. npm install in folder to setup dependencies
+2. copy connectors/keys_template.json to connectors/keys.json and fill in your API-keys
+3. create routine with chef or use an example routine from example_routines
 4. node server.js
 5. http://localhost:4000/switchboard?q=entryquery
 
+Running chef
+-------------
+
+1. npm install in chef folder
+2. http://localhost:3000
+3. make your recipe and write it down
+4. the config is now at http://localhost:3000/recipe as well as in a recipe.json file
+5. feed your config to switchboard
 
 Node package
 -------------

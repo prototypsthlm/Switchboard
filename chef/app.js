@@ -46,7 +46,7 @@ app.post('/taste',function(req,res){
     console.log(setup);
     var connector = switchboard.connectors().apiMap[setup.api];
     connector.responseObject = [];
-    var url = connector.getActionUrl(setup.query,setup.config)
+    var url = connector.getActionUrl(setup.query,setup.config);
     console.log(url);
     connector.get(url, setup.query, setup.config, null, null, function(){
         res.send(connector.responseObject);
