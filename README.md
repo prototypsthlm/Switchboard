@@ -14,7 +14,7 @@ Setting it up
 Node package
 -------------
 
-Optionally install as node package and:
+Optionally install as a node package and:
 
 1. var sb = require('switchboard');
 
@@ -24,6 +24,32 @@ Optionally install as node package and:
 
 		sb.setRoutine(userConfig); //for userConfig see below or folder example_routines 
 
+	A userConfig is structured as:
+
+		[
+		    {
+		        "order": "0", //execution order, if first the value api action param is set to the entry query value 
+		        "api": "TMDB", //api name
+		        "action": "movieSearch", //api action
+		        "in_param": "0", //api action param name
+		        "out": "0" //value for api action param name in next block. irrelevant if last block.
+		    },
+		    {
+		        "order": "1",
+		        "api": "TMDB",
+		        "action": "movieCast",
+		        "in_param": "0",
+		        "out": "2"
+		    },
+		    {
+		        "order": "2",
+		        "api": "Spotify",
+		        "action": "artistSearch",
+		        "in_param": "0",
+		        "out": "0"
+		    }
+		]
+
 4. insert query and run routine:
 
 		sb.execute(entryquery, function(r,c){
@@ -31,28 +57,3 @@ Optionally install as node package and:
 			//c => a formatted response
 		});
 
-A userConfig is structured as:
-
-	[
-	    {
-	        "order": "0", //execution order, if first the value api action param is set to the entry query value 
-	        "api": "TMDB", //api name
-	        "action": "movieSearch", //api action
-	        "in_param": "0", //api action param name
-	        "out": "0" //value for api action param name in next block. irrelevant if last block.
-	    },
-	    {
-	        "order": "1",
-	        "api": "TMDB",
-	        "action": "movieCast",
-	        "in_param": "0",
-	        "out": "2"
-	    },
-	    {
-	        "order": "2",
-	        "api": "Spotify",
-	        "action": "artistSearch",
-	        "in_param": "0",
-	        "out": "0"
-	    }
-	]
