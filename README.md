@@ -26,26 +26,26 @@ optionally install as node package and:
 
 a userConfig is structured as:
 
-[
-    {
-        "order": "0", //execution order, if first the value api action param is set to the entry query value 
-        "api": "TMDB", //api name
-        "action": "movieSearch", //api action
-        "in_param": "0", //api action param name
-        "out": "0" //value for api action param name in next block. irrelevant if last block.
-    },
-    {
-        "order": "1",
-        "api": "TMDB",
-        "action": "movieCast",
-        "in_param": "0",
-        "out": "2"
-    },
-    {
-        "order": "2",
-        "api": "Spotify",
-        "action": "artistSearch",
-        "in_param": "0",
-        "out": "0"
-    }
-]
+	[
+	    {
+	        "order": "0", //execution order, if first the value api action param is set to the entry query value 
+	        "api": "TMDB", //api name
+	        "action": "movieSearch", //api action
+	        "in_param": "0", //api action param name
+	        "out": "0" //value for api action param name in next block. irrelevant if last block.
+	    },
+	    {
+	        "order": "1",
+	        "api": "TMDB",
+	        "action": "movieCast",
+	        "in_param": "0",
+	        "out": "2"
+	    },
+	    {
+	        "order": "2",
+	        "api": "Spotify",
+	        "action": "artistSearch",
+	        "in_param": "0",
+	        "out": "0"
+	    }
+	]
