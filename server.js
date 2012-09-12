@@ -8,6 +8,7 @@ var switchboard = require('./index');
 var localRecipe = require('./example_routines/actor_movies_books');
 var remoteRecipe = null;
 
+/* loads a JSON-routine from chef */
 function loadRemoteRecipe(callback){
     request({url: "http://localhost:3000/recipe", headers: { "Accept" : "application/json" }}, function (error, response, result) {
          if (!error && response.statusCode == 200) {
@@ -21,6 +22,10 @@ function loadRemoteRecipe(callback){
     });    
 }
 
+/* 
+attempts to load remote recipe
+if it fails, a local recipe is used instead and is inserted into switchboard
+*/
 loadRemoteRecipe(function(config){
     var userRecipe = config;
     if(userRecipe == null){
@@ -29,7 +34,10 @@ loadRemoteRecipe(function(config){
     switchboard.setRoutine(userRecipe);
 });
 
-//http://localhost:4000/switchboard?q=abba
+/* 
+http://localhost:4000/switchboard?q=yourquery 
+runs the set switchboard routine with the entry query and outputs the formatted results
+*/
 app.get('/switchboard', function(req, res){
     
     console.log("REQUEST RECEIVED");
