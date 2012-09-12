@@ -19,9 +19,11 @@ optionally install as node package and:
 1. var sb = require('switchboard');
 2. configure keys as above in node_modules/switchboard/connectors
 3. sb.setRoutine(userConfig); //for userConfig see below or folder example_routines 
-4. sb.execute(entryquery, function(r,c){
-	//r => raw call blocks 
-	//c => a formatted response
+4. run switchboard:
+
+	sb.execute(entryquery, function(r,c){
+		//r => raw call blocks 
+		//c => a formatted response
 	});
 
 a userConfig is structured as:
