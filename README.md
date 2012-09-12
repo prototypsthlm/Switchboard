@@ -20,9 +20,11 @@ optionally install as node package and:
 
 2. configure keys as above in node_modules/switchboard/connectors
 
-3. sb.setRoutine(userConfig); //for userConfig see below or folder example_routines 
+3. configure and set the switchboard routine:
 
-4. run switchboard:
+		sb.setRoutine(userConfig); //for userConfig see below or folder example_routines 
+
+4. insert query and run routine:
 
 		sb.execute(entryquery, function(r,c){
 			//r => raw call blocks 
