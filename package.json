@@ -33,7 +33,7 @@
         "async": "0.1.x",
         "jquery": "1.7.x",
         "request": "2.9.x",
-        "querystring": ""
+        "node-jpath": "2.0.0"
     },
     "analyze": true,
     "devDependencies": {

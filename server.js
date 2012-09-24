@@ -5,7 +5,7 @@ var $ = require('jquery');
 
 var switchboard = require('./index');
 
-var localRecipe = require('./example_routines/actor_movies_books');
+var localRecipe = require('./example_routines/actor_movies_books.json');
 var remoteRecipe = null;
 
 /* loads a JSON-routine from chef */
@@ -19,7 +19,7 @@ function loadRemoteRecipe(callback){
              console.log("REMOTE RECIPE NOT AVAILABLE");
              callback(null);
          }
-    });    
+    }); 
 }
 
 /* 
