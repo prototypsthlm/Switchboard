@@ -17,7 +17,7 @@
         "order": "2",
         "api": "Echonest",
         "action": "artistBiographies",
-        "in_param": "0",
+        "in_param": "1",
         "out": "0"
     }
 ]

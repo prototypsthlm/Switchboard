@@ -6,7 +6,7 @@ var ResultFormatter = require('../lib/results_formatter.js');
 var TestResult = require('./resources/results.js');
 
 
-function resultAfterMergeValidation(mergeMethod) {
+function resultAfterMergeValidation(routineToTest, mergeMethod) {
 	var context = {
 		topic: function(topic) {
 			var cleanResult;
@@ -23,13 +23,47 @@ function resultAfterMergeValidation(mergeMethod) {
 	context['should return a valid clean result'] = function(topic) {
 		var cleanResult = topic.cleanResult;
 		assert.isArray(cleanResult);
-		assert.deepEqual(cleanResult, new TestResult("clean", mergeMethod), "Not valid clean result");
-	},
-
+		assert.deepEqual(cleanResult, new TestResult(routineToTest, "clean", mergeMethod));
+	};
+	
 	context['should not affect the raw result'] = function(topic) {
 		var formatter = topic.formatter;
-		assert.deepEqual(formatter.raw(), new TestResult("raw"), "Raw result affected!");
-	}
+		assert.deepEqual(formatter.raw(), new TestResult(routineToTest, "raw", mergeMethod), "Raw result affected!");
+	};
+	
+	return context;
+}
+
+
+function populatedDataValidation(routineToTest) {
+	var context = { // Context
+		topic: function (formatter) {				
+			var rawResult = new TestResult(routineToTest, "raw");
+			var formatter = new ResultFormatter(rawResult);				
+			return {formatter: formatter, rawResult: rawResult};
+		}
+	};
+
+	context['could not affect the raw result after it has been set'] = function (topic) {
+		topic.rawResult.push({api:"Dummy", calls:[]});
+		assert.notDeepEqual(topic.formatter.raw(), topic.rawResult, "Raw result affected after it has been set");
+	};
+
+	context['could not affect the raw result after it has retrieved'] = function (topic) {
+		var rawResult = topic.formatter.raw();
+		rawResult.push({api:"Dummy", calls:[]});
+
+		assert.notDeepEqual(topic.formatter.raw(), rawResult, "Raw result affected after it has been retrieved");
+	};
+
+	context['should have a valid raw array'] = function(topic) {
+		assert.isArray(topic.formatter.raw());
+		assert.isNotEmpty(topic.formatter.raw());
+	};
+
+	context['using extractMerge'] = resultAfterMergeValidation(routineToTest, "extractMerge");
+
+	context['using injectMerge'] = resultAfterMergeValidation(routineToTest, "injectMerge");
 
 	return context;
 }
@@ -49,6 +83,9 @@ suite.addBatch({ // Batch
 	    	},
 	    },
 
+	    'with populated data from starwars_artists':  populatedDataValidation("starwars_artists"),
+	    'with populated data from headliner_biographies':  populatedDataValidation("headliner_biographies")
+	    /*
 		'with populated data': { // Context
 			topic: function (formatter) {				
 				var rawResult = new TestResult("raw");
@@ -76,54 +113,9 @@ suite.addBatch({ // Batch
 			'using extractMerge': resultAfterMergeValidation("extractMerge"),
 
 			'using injectMerge': resultAfterMergeValidation("injectMerge")
-/*
-			{
-
-				topic: function(formatter) {
-					return {cleanResult: formatter.extractMerge(), formatter: formatter};
-				},
-
-				'should return a valid clean result': function(topic) {
-					var cleanResult = topic.cleanResult;
-					assert.isArray(cleanResult);
-					//console.log(new TestResult("clean", "extractMerge"));
-					assert.deepEqual(cleanResult, new TestResult("clean", "extractMerge"));
-				},
-
-				'should not affect the raw result': function(topic) {
-					var formatter = topic.formatter;
-					assert.deepEqual(formatter.raw, new TestResult("raw"), "Using extractMerge affected the raw result");
-				}
-			},
-			*/
-			/*
-			'using injectMerge': {
-
-				topic: function(formatter) {
-					return formatter.injectMerge();
-				},
-
-				'should return a raw result': function(result) {
-					assert.isArray(result.raw);
-				},
-
-				'should return a clean result': function(result) {
-					assert.isArray(result.clean);
-				},
-
-				'should not affect the raw result': function(result) {
-					assert.equal(result.raw, testResults.raw);
-				}
-
-			}
-			*/
 	    },
-
-	    
-
+	    */
 	}
-
-    
 });
 
 suite.export(module);

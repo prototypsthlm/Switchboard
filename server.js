@@ -6,6 +6,7 @@ var $ = require('jquery');
 var switchboard = require('./index');
 
 var localRecipe = require('./example_routines/starwars_artists.json');
+//var localRecipe = require('./example_routines/headliner_biographies.json');
 var remoteRecipe = null;
 
 /* loads a JSON-routine from chef */
