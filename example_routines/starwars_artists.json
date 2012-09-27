@@ -4,20 +4,23 @@
         "api": "TMDB",
         "action": "movieSearch",
         "in_param": "0",
-        "out": "0"
+        "out": "0",
+        "limit": 5
     },
     {
         "order": "1",
         "api": "TMDB",
         "action": "movieCast",
         "in_param": "0",
-        "out": "2"
+        "out": "2",
+        "limit": 5
     },
     {
         "order": "2",
         "api": "Spotify",
         "action": "artistSearch",
         "in_param": "0",
-        "out": "0"
+        "out": "0",
+        "limit": 5
     }
 ]
