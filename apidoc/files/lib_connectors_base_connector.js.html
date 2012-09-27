@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>lib&#x2F;connectors&#x2F;base_connector.js - Switchboard</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.7.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="..&#x2F;assets/css/logo.png" title="Switchboard"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.1</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="..&#x2F;classes/ResultFormatter.html">ResultFormatter</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: lib&#x2F;connectors&#x2F;base_connector.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+var request = require(&#x27;request&#x27;);
+var async = require(&quot;async&quot;);
+var ConnectorResponse = require(&#x27;.&#x2F;connector_response.js&#x27;);
+&#x2F;**
+    inherited by all connectors.
+    implements methods for doiing async HTTP-requests to APIs and sending the results back to the switchboard engine
+    the url to send GETs to is built in the subclass.
+**&#x2F;
+
+function BaseConnector(param) {
+    &#x2F;&#x2F;this.name;
+	this.host = param.host;
+	this.responseObject;
+}
+
+BaseConnector.prototype.connectorResult = function(resultObj) {
+    return new ConnectorResponse(resultObj, resultObj.result);
+}
+
+BaseConnector.prototype.execute = function(queryData, api_domain, cb) {
+    console.log(this.name + &quot; EXECUTE&quot;);
+    var self = this;
+    self.responseObject = [];
+    
+    async.forEach(queryData, function fetchData(queryDataItem, seriesDone){ &#x2F;&#x2F;so that callIndex gets set properly
+        var index = 0;
+        async.forEach(queryDataItem.queries, function getResults(query, done) {
+            var url = self.getActionUrl(query, api_domain);
+            console.log(&#x27;preparing request to &#x27; + url);
+            self.get(url, query, api_domain, index, queryDataItem.callIndex, done);
+            index += 1;
+        },
+        function(err){
+            seriesDone();
+        });
+        
+    },function(err){
+        cb(self.responseObject);
+    });
+}
+
+BaseConnector.prototype.get = function(url, query, domain, index, callIndex, done) {
+    var self = this;
+    request({url: url, headers: { &quot;Accept&quot; : &quot;application&#x2F;json&quot; }}, function (error, response, result) {
+      if (!error &amp;&amp; response.statusCode == 200) {
+        console.log(&quot;successful HTTP-request : &quot; + query);
+        self.responseObject.push(self.connectorResult({query: query, index: index, callIndex: callIndex, apiConfig: domain, result: JSON.parse(result)}));
+        &#x2F;&#x2F;self.responseObject.push({query: query, index: index, callIndex: callIndex, apiConfig: domain, result: JSON.parse(result)});
+      }
+      else {
+          console.log(&quot;HTTP-request FAILED &quot; + response.statusCode + &quot; : &quot; + response.body);
+      }
+      done();
+    });
+}
+
+module.exports = BaseConnector;
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="..&#x2F;assets/js/yui-prettify.js"></script>
+<script src="..&#x2F;assets/../api.js"></script>
+<script src="..&#x2F;assets/js/api-filter.js"></script>
+<script src="..&#x2F;assets/js/api-list.js"></script>
+<script src="..&#x2F;assets/js/api-search.js"></script>
+<script src="..&#x2F;assets/js/apidocs.js"></script>
+</body>
+</html>

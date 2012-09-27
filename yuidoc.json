@@ -1,0 +1,13 @@
+{
+    "name": "Switchboard",
+    "description": "Switchboard is a mashup-helper and it's basic functionality is enabling simple data flows between APIs: in essence taking a result from one API, feeding it to another and presenting the joined result for parsing and display in your app or whatever it might be.",
+    "version": "0.1",
+    "url": "https://github.com/sanocore/Switchboard",
+    "options": {
+        "linkNatives": "true",        
+        "attributesEmit": "true",
+        "selleck": "true",
+        "paths": ["./lib"],
+        "outdir": "./apidoc"
+    }
+}

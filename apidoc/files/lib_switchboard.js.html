@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>lib&#x2F;switchboard.js - Switchboard</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.7.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="..&#x2F;assets/css/logo.png" title="Switchboard"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.1</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="..&#x2F;classes/ResultFormatter.html">ResultFormatter</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: lib&#x2F;switchboard.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+var $ = require(&#x27;jquery&#x27;);
+var async = require(&quot;async&quot;);
+&#x2F;&#x2F;var _ = require(&#x27;underscore&#x27;);
+
+var Engine = function() {};
+
+Engine.prototype = (function(){
+    
+    
+    &#x2F;&#x2F;get the resultFormatter class and all connectors
+    var Formatter = require(&#x27;.&#x2F;results_formatter.js&#x27;);
+    var resultFormatter = new Formatter();
+    var connectors = require(&#x27;.&#x2F;connectors&#x2F;connectors&#x27;);
+    
+    var searchArray = null; &#x2F;&#x2F;deprecated?
+    
+    var config = null;
+    var requestBody = {};
+    var requestBodyArray = [];
+    var req = null;
+    var routine;
+    
+    &#x2F;****
+        PRIVATE METHODS
+    ***&#x2F;
+    &#x2F;*
+    recursive function that parses a JSON-tree and extracts a value from a node
+    crawlPath = an array of &quot;levels&quot; in the tree
+    tree = the JSON-tree to crawl
+    queries = array of queries to be populated
+    *&#x2F;
+    var crawl = function(crawlPath, tree, queries){
+        var level;
+        &#x2F;&#x2F;console.log(&quot;crawl(crawlPath, tree, queries)&quot;, crawlPath, tree, queries);
+        &#x2F;&#x2F;tree = tree.dataResult;
+        &#x2F;&#x2F;check if we should move further down in the tree
+        if (!(tree instanceof Array) &amp;&amp; crawlPath.length &gt; 0){
+            level = crawlPath.shift();
+        }
+        
+        &#x2F;&#x2F;console.log(&quot;LEVEL-----------------------------------------------------------------&quot;);
+        &#x2F;&#x2F;console.log(level);
+        &#x2F;&#x2F;console.log(crawlPath);
+        &#x2F;&#x2F;console.log(&quot;----------------------------------------------------------------------&quot;);
+        
+        &#x2F;&#x2F;not there yet!
+        if(crawlPath.length &gt; 0){
+            &#x2F;&#x2F;the tree branches, clone the path and crawl each branch
+            if (tree instanceof Array){                
+                $.each(tree, function(i){
+                    
+                    &#x2F;&#x2F;console.log(&quot;----------------------------------------------------------------------&quot;);
+                    &#x2F;&#x2F;console.log(&quot;branch &quot; + i);
+                    &#x2F;&#x2F;console.log(crawlPath);
+                    &#x2F;&#x2F;console.log(&quot;----------------------------------------------------------------------&quot;);
+                    
+                    crawl(crawlPath.slice(0), tree[i], queries); &#x2F;&#x2F;slice(0) =&gt; clone array
+                });
+            }
+            &#x2F;&#x2F;move one level down
+            else{
+                if(typeof tree[level] !== &#x27;undefined&#x27;)
+                    crawl(crawlPath, tree[level], queries);
+            }
+        }
+        &#x2F;&#x2F;we found our end-node and the value(s) are extracted to queries
+        else { 
+            
+            &#x2F;&#x2F;console.log(&quot;----------------------------------------------------------------------&quot;);
+            &#x2F;&#x2F;console.log(tree[level]);
+            &#x2F;&#x2F;console.log(&quot;----------------------------------------------------------------------&quot;);
+            
+            if(tree[level] instanceof Array){
+                $.each(tree[level], function(i){
+                    queries.push(tree[level][i]);
+                });
+            }
+            else {
+                queries.push(tree[level]);
+            }
+        }
+    };
+    
+    &#x2F;*
+        sets up the JSON-tree extraction
+    *&#x2F;
+    var crawlResults = function(querySource, tree){
+        var extractedQueries = [];
+        var crawlPath = querySource.split(&quot;.&quot;);
+        crawlPath.unshift(&#x27;result&#x27;); &#x2F;&#x2F;hack
+        crawl(crawlPath, tree, extractedQueries);
+        return extractedQueries;
+    };
+    
+    &#x2F;*
+        gets data to be sent to an API
+    *&#x2F;
+    var getQueries = function(config, connectorResponse) {
+        var callSessions = [];
+        var queries = [];
+        
+        &#x2F;&#x2F;where should the data points come from?
+        var querySource = config.apiConfig.in_source
+        if (&quot;request.get&quot; == querySource) { &#x2F;&#x2F;data point is the entry query
+            queries.push(req.query.q);
+            callSessions.push({queries: queries, callIndex: null});
+        }
+        else { &#x2F;&#x2F;extract data points from previous result
+            $.each(connectorResponse, function(i){ &#x2F;&#x2F;extract queries from previous result
+                var queryData = {};
+
+                queryData.queries = crawlResults(querySource, connectorResponse[i]).slice(0,config.options.limit); &#x2F;&#x2F;the actual extracted data points
+                
+                &#x2F;&#x2F; Before ConnectorResponse object
+                &#x2F;&#x2F;queryData.callIndex = connectorResponse[i].meta.index; &#x2F;&#x2F;basically the &quot;call id&quot;, used in the results transformation for mapping an API-result to an earlier API-result 
+                queryData.callIndex = connectorResponse[i].meta.index;
+                callSessions.push(queryData);
+            });
+        }
+        console.log(&quot;acquired queries: &quot;);
+        console.log(queries);
+          
+        return callSessions;
+    };
+    
+    &#x2F;****
+        PUBLIC METHODS
+    ***&#x2F;
+    return {
+        
+        setRequest: function(request) { &#x2F;&#x2F;entry query
+            req = request;
+        },
+        setSearchArray: function(searchArrayIn) { &#x2F;&#x2F;deprecated?
+            searchArray = searchArrayIn;
+        },
+        getConnectors: function() {
+            return connectors;
+        },
+        
+        &#x2F;* transforms a user config to a switchboard config with references to connector objects *&#x2F;
+        translateUserConfig: function(config){
+
+            var translatedConfig = [];
+
+            config.sort(function(a,b){
+                if(a.order &lt; b.order) return -1;
+                if(a.order &gt; b.order) return 1;
+                return 0;
+            });
+            var limits = [1,2,3,4];
+            var index = 0;
+            $.each(config, function(i,item){
+               var routineObject = {};
+               routineObject[&#x27;connector&#x27;] = connectors.apiMap[item.api];
+               routineObject.options = { limit: 5 };
+               var in_source;
+               if (item.order == 0){
+                   in_source = &quot;request.get&quot;;
+               }
+               else {
+                   var prevConnect = translatedConfig[i-1].connector;
+                   in_source = prevConnect.apiActions[config[i-1].action].out[config[i-1].out]
+               }
+               routineObject.apiConfig = { action: item.action, in_source: in_source, in_param: item.in_param };
+               translatedConfig.push(routineObject);
+            });
+            console.log(&quot;service config built:&quot;);
+            console.log(translatedConfig);
+            return translatedConfig;
+        },
+        &#x2F;*
+            builds an array of functions, with calls to different APIs, to be inputted into runEngine
+        *&#x2F;
+        buildRoutine: function(translatedConfig){
+            console.log(&quot;buildRoutine&quot;);
+            config = translatedConfig;
+            routine = [];
+            $.each(translatedConfig, function(i,a){ &#x2F;&#x2F;for each API-step in the routine config...
+                var r;
+                var received = null;
+                var config = translatedConfig[i];
+                console.log(&quot;routine&quot; + i);
+                console.log(config);
+                
+                if (i &lt; 1) { &#x2F;&#x2F;needed to comply with async syntax
+                    r = function(callback) {
+                        var connector = config.connector;
+                        var queryData = getQueries(config, received); &#x2F;&#x2F;acquire queries from earlier API calls or from the entry query
+                        
+                        console.log(&quot;attempting to execute routine&quot; + i);
+                        console.log(&quot;queryData: &quot;);
+                        console.log(queryData);
+                        &#x2F;&#x2F;console.log(&quot;cleaned: &quot;);
+                        &#x2F;&#x2F;console.log(_.uniq(queryData[0].queries));
+                        
+                        connector.execute(queryData, config.apiConfig, function(results) {
+                            &#x2F;&#x2F;console.log(&quot;routine&quot; + i + &quot; complete&quot;);
+                            &#x2F;&#x2F;console.log(results); &#x2F;&#x2F;raw response from each http-request
+                            
+                            requestBodyArray.push({api: connector.name, calls: results}); &#x2F;&#x2F;an API-call block is completed, append results to global routine result array
+                            
+                            callback(null, results); &#x2F;&#x2F;send results onward to the next function in the waterfall
+                        });
+                    };
+                }
+                else { &#x2F;&#x2F;needed to comply with async syntax
+                    r = function(received, callback) {
+                        var connector = config.connector;
+                        var queryData = getQueries(config, received);
+
+                        console.log(&quot;attempting to execute routine&quot; + i);
+                        console.log(&quot;queryData: &quot;);
+                        console.log(queryData);
+                        &#x2F;&#x2F;console.log(&quot;cleaned: &quot;);
+                        &#x2F;&#x2F;console.log(_.uniq(queryData[0].queries)); &#x2F;&#x2F;this fucks up merge?
+                                                            
+                        connector.execute(queryData, config.apiConfig, function(results) {
+                            console.log(&quot;routine&quot; + i + &quot; complete&quot;);
+                            console.log(results); &#x2F;&#x2F;raw response from each http-request
+                            requestBodyArray.push({api: connector.name, calls: results});
+                            callback(null, results); &#x2F;&#x2F;send results onward to the next function in the waterfal
+                        });
+                    };
+                }
+                
+                routine.push(r);
+                
+            });
+        },
+        
+        &#x2F;* 
+            executes the routine via async waterfall and returns the result once the whole routine is completed.
+        *&#x2F;
+        runEngine: function(cb){
+            console.log(&quot;runEngine&quot;);
+            requestBodyArray = [];
+            async.waterfall(routine, function (err, result) {
+               console.log(&quot;END&quot;);
+               resultFormatter.setRaw(requestBodyArray); &#x2F;&#x2F;make a deep copy, copy objects not just references to objects
+               cb(requestBodyArray, resultFormatter.extractMerge()); 
+            });
+        }
+    }
+})();
+
+var engine = new Engine();
+
+module.exports = {
+    
+    &#x2F;* main *&#x2F;
+    setRoutine: function(userRecipe){
+        engine.buildRoutine(engine.translateUserConfig(userRecipe));
+    },
+    execute: function(request,cb){
+        engine.setRequest(request); &#x2F;&#x2F;entry query
+        engine.runEngine(cb);
+    },
+    
+    &#x2F;* utility *&#x2F;
+    setRequest: function(request){
+        engine.setRequest(request);  
+    },
+    setSearch: function(query){
+        engine.setSearchArray(query);
+    },
+    connectors: function(){
+        return engine.getConnectors();
+    },
+    translateUserConfig: function(userConfig){
+        return engine.translateUserConfig(userConfig);
+    },
+    buildRoutine: function(translatedConfig){
+        engine.buildRoutine(translatedConfig);
+    },
+    runEngine: function(cb){
+        engine.runEngine(cb);
+    }
+}
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="..&#x2F;assets/js/yui-prettify.js"></script>
+<script src="..&#x2F;assets/../api.js"></script>
+<script src="..&#x2F;assets/js/api-filter.js"></script>
+<script src="..&#x2F;assets/js/api-list.js"></script>
+<script src="..&#x2F;assets/js/api-search.js"></script>
+<script src="..&#x2F;assets/js/apidocs.js"></script>
+</body>
+</html>
