@@ -8,8 +8,12 @@
     "files": {
         "lib/connectors/base_connector.js": {
             "name": "lib/connectors/base_connector.js",
-            "modules": {},
-            "classes": {},
+            "modules": {
+                "Connectors": 1
+            },
+            "classes": {
+                "BaseConnector": 1
+            },
             "fors": {},
             "namespaces": {}
         },
@@ -20,40 +24,146 @@
             "fors": {},
             "namespaces": {}
         },
+        "lib/results_formatter.js": {
+            "name": "lib/results_formatter.js",
+            "modules": {},
+            "classes": {
+                "ResultFormatter": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "lib/switchboard.js": {
             "name": "lib/switchboard.js",
-            "modules": {},
+            "modules": {
+                "Engine": 1
+            },
             "classes": {},
             "fors": {},
             "namespaces": {}
         }
     },
-    "modules": {},
-    "classes": {},
+    "modules": {
+        "Engine": {
+            "name": "Engine",
+            "submodules": {
+                "Connectors": 1
+            },
+            "classes": {
+                "BaseConnector": 1,
+                "ResultFormatter": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "lib/results_formatter.js",
+            "line": 1,
+            "description": "Engine takes a json configuration and executes all connectors defined in the config\nin correct order, gathering the result and at the end returning a merged object with\nall results."
+        },
+        "Connectors": {
+            "name": "Connectors",
+            "submodules": {},
+            "classes": {
+                "BaseConnector": 1
+            },
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "Engine",
+            "namespace": "",
+            "file": "lib/connectors/base_connector.js",
+            "line": 20,
+            "description": "A Connector works like an interface to third party API's, such as Spotify, Last.fm, Google and more.\nEvery connector exposes methods which can be used to make calls to those API's.\nWhen ready a Connector should always return a ConnectorResponse object containing meta information\nabout the request and response and the result."
+        }
+    },
+    "classes": {
+        "BaseConnector": {
+            "name": "BaseConnector",
+            "shortname": "BaseConnector",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Engine",
+            "submodule": "Connectors",
+            "namespace": "",
+            "file": "lib/connectors/base_connector.js",
+            "line": 20,
+            "description": "The BaseConnector should be inherited by all other Connectors.\nIt can be seen as a Abstract Class containing some functions\nthat are used by all other Connectors.\nThe BaseConnector executes all requests and collects all data but\nevery Connector is responsible for given the right URL and param data and to\nhandle the response",
+            "is_constructor": 1
+        },
+        "ResultFormatter": {
+            "name": "ResultFormatter",
+            "shortname": "ResultFormatter",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Engine",
+            "namespace": "",
+            "file": "lib/results_formatter.js",
+            "line": 1,
+            "description": "The ResultFormatter takes the response gathered by all connectors \nand merges them to one clean result.",
+            "todo": [
+                "NODEPATHS MED NESTED ARRAYS ?! KOMMER SMÄLLA... ???"
+            ],
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "result",
+                    "description": "Array holding the result gathered from all connectors",
+                    "type": "Array"
+                }
+            ]
+        }
+    },
     "classitems": [
         {
             "file": "lib/connectors/base_connector.js",
-            "line": 4,
+            "line": 14,
             "description": "inherited by all connectors.\nimplements methods for doiing async HTTP-requests to APIs and sending the results back to the switchboard engine\nthe url to send GETs to is built in the subclass.",
-            "class": ""
+            "class": "BaseConnector",
+            "module": "Engine",
+            "submodule": "Connectors"
         },
         {
             "file": "lib/connectors/connector_response.js",
             "line": 2,
             "description": "All connectors must return an object of this instance. By doing so we can make sure that we now\nsome things for every result, i.e. how many results we retrieved",
-            "class": ""
+            "class": "ResultFormatter",
+            "module": "Engine"
+        },
+        {
+            "file": "lib/results_formatter.js",
+            "line": 14,
+            "description": "The constructor. The result given to the constructor is always cloned\nto ensure that the raw result isn't altered in any way",
+            "itemtype": "method",
+            "name": "",
+            "params": [
+                {
+                    "name": "result",
+                    "description": "Array holding the result gathered from all connectors. Example: [{api: \"Name of Connector A\", calls: []}, {api: \"Name of Connector B\", calls: []}]",
+                    "type": "Array"
+                }
+            ],
+            "class": "ResultFormatter",
+            "module": "Engine"
         },
         {
             "file": "lib/switchboard.js",
-            "line": 23,
+            "line": 31,
             "description": "PRIVATE METHODS",
-            "class": ""
+            "class": "",
+            "module": "Engine"
         },
         {
             "file": "lib/switchboard.js",
-            "line": 126,
+            "line": 134,
             "description": "PUBLIC METHODS",
-            "class": ""
+            "class": "",
+            "module": "Engine"
         }
     ]
 }

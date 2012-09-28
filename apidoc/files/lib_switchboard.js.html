@@ -41,9 +41,17 @@
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
             
+                <li><a href="..&#x2F;classes/BaseConnector.html">BaseConnector</a></li>
+            
+                <li><a href="..&#x2F;classes/ResultFormatter.html">ResultFormatter</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
+            
+                <li><a href="..&#x2F;modules/Connectors.html">Connectors</a></li>
+            
+                <li><a href="..&#x2F;modules/Engine.html">Engine</a></li>
             
             </ul>
         </div>
@@ -84,6 +92,14 @@
 
 <div class="file">
     <pre class="code prettyprint linenums">
+&#x2F;**
+Engine takes a json configuration and executes all connectors defined in the config
+in correct order, gathering the result and at the end returning a merged object with
+all results.
+
+@module Engine
+**&#x2F;
+
 var $ = require(&#x27;jquery&#x27;);
 var async = require(&quot;async&quot;);
 &#x2F;&#x2F;var _ = require(&#x27;underscore&#x27;);
@@ -234,12 +250,11 @@ Engine.prototype = (function(){
                 if(a.order &gt; b.order) return 1;
                 return 0;
             });
-            var limits = [1,2,3,4];
-            var index = 0;
+            
             $.each(config, function(i,item){
                var routineObject = {};
                routineObject[&#x27;connector&#x27;] = connectors.apiMap[item.api];
-               routineObject.options = { limit: 5 };
+               routineObject.options = { limit: item.limit == undefined ? 5 : item.limit };
                var in_source;
                if (item.order == 0){
                    in_source = &quot;request.get&quot;;

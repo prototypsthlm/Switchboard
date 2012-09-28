@@ -41,9 +41,17 @@
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
             
+                <li><a href="..&#x2F;classes/BaseConnector.html">BaseConnector</a></li>
+            
+                <li><a href="..&#x2F;classes/ResultFormatter.html">ResultFormatter</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
+            
+                <li><a href="..&#x2F;modules/Connectors.html">Connectors</a></li>
+            
+                <li><a href="..&#x2F;modules/Engine.html">Engine</a></li>
             
             </ul>
         </div>
@@ -84,6 +92,16 @@
 
 <div class="file">
     <pre class="code prettyprint linenums">
+&#x2F;**
+A Connector works like an interface to third party API&#x27;s, such as Spotify, Last.fm, Google and more.
+Every connector exposes methods which can be used to make calls to those API&#x27;s.
+When ready a Connector should always return a ConnectorResponse object containing meta information
+about the request and response and the result.
+
+@module Engine
+@submodule Connectors
+**&#x2F;
+
 var request = require(&#x27;request&#x27;);
 var async = require(&quot;async&quot;);
 var ConnectorResponse = require(&#x27;.&#x2F;connector_response.js&#x27;);
@@ -93,6 +111,17 @@ var ConnectorResponse = require(&#x27;.&#x2F;connector_response.js&#x27;);
     the url to send GETs to is built in the subclass.
 **&#x2F;
 
+&#x2F;**
+The BaseConnector should be inherited by all other Connectors.
+It can be seen as a Abstract Class containing some functions
+that are used by all other Connectors.
+The BaseConnector executes all requests and collects all data but
+every Connector is responsible for given the right URL and param data and to
+handle the response
+
+@class BaseConnector 
+@constructor
+**&#x2F;
 function BaseConnector(param) {
     &#x2F;&#x2F;this.name;
 	this.host = param.host;
