@@ -50,7 +50,13 @@ app.get('/switchboard', function(req, res){
 
     if(searchTerm != null){  
         switchboard.execute(req, function(r,c){
-            res.send(JSON.stringify({ clean: c, raw: r }));
+            //console.log("req ", req);
+            var callback = req.query.callback;
+            var jsonString = JSON.stringify({ clean: c, raw: r });
+            if(callback) {
+                jsonString = callback + "(" + jsonString + ")";
+            }
+            res.send(jsonString);
         });
     }
 

@@ -49,6 +49,8 @@
 
             <ul id="api-modules" class="apis modules">
             
+                <li><a href="..&#x2F;modules/: Test.html">: Test</a></li>
+            
                 <li><a href="..&#x2F;modules/Connectors.html">Connectors</a></li>
             
                 <li><a href="..&#x2F;modules/Engine.html">Engine</a></li>
@@ -98,8 +100,7 @@ Every connector exposes methods which can be used to make calls to those API&#x2
 When ready a Connector should always return a ConnectorResponse object containing meta information
 about the request and response and the result.
 
-@module Engine
-@submodule Connectors
+@module Connectors
 **&#x2F;
 
 var request = require(&#x27;request&#x27;);
@@ -126,6 +127,11 @@ function BaseConnector(param) {
     &#x2F;&#x2F;this.name;
 	this.host = param.host;
 	this.responseObject;
+}
+
+
+BaseConnector.prototype.getActionUrl = function(query, api_domain) {
+    throw NotImplementedError(&quot;getActionUrl&quot;);
 }
 
 BaseConnector.prototype.connectorResult = function(resultObj) {

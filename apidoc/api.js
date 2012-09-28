@@ -5,10 +5,16 @@ YUI.add("yuidoc-meta", function(Y) {
         "ResultFormatter"
     ],
     "modules": [
+        ": Test",
         "Connectors",
         "Engine"
     ],
     "allModules": [
+        {
+            "displayName": ": Test",
+            "name": ": Test",
+            "description": "Test for the server.js\n\nTests made:\nChecks that a jsonp call is wrapped with the callback param if exists"
+        },
         {
             "displayName": "Connectors",
             "name": "Connectors",
