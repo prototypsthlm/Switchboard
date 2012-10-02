@@ -7,6 +7,7 @@ var switchboard = require('./index');
 
 var localRecipe = require('./example_routines/starwars_artists.json');
 //var localRecipe = require('./example_routines/headliner_biographies.json');
+//var localRecipe = require('./example_routines/actor_movies_books.json');
 var remoteRecipe = null;
 
 /* loads a JSON-routine from chef */
@@ -30,6 +31,7 @@ if it fails, a local recipe is used instead and is inserted into switchboard
 loadRemoteRecipe(function(config){
     var userRecipe = config;
     if(userRecipe == null){
+        console.log("LOCAL RECIPE LOADED");
         userRecipe = localRecipe;
     }
     switchboard.setRoutine(userRecipe);

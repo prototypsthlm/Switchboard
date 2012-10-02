@@ -1,23 +1,23 @@
 [
     {
-        "order": "0",
         "api": "Spotify",
         "action": "artistSearch",
-        "in_param": "0",
-        "out": "1"
+        "in_param_name": "q",
+        "value_source": "request.get",
+        "limit": "1"
     },
     {
-        "order": "1",
         "api": "last.fm",
         "action": "artistGetEvents",
-        "in_param": "0",
-        "out": "3"
+        "in_param_name": "artist",
+        "value_source": "artists.name",
+        "limit": "3"
     },
     {
-        "order": "2",
         "api": "Echonest",
         "action": "artistBiographies",
-        "in_param": "1",
-        "out": "0"
+        "in_param_name": "name",
+        "value_source": "events.event.artists.headliner",
+        "limit": "3"
     }
 ]

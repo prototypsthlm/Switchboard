@@ -18,7 +18,7 @@ An example might be
 1. doing an artist search on Spotify
 2. taking the first five artist names from the Spotify-result and searching last.fm for upcoming events for these artists
 
-A flow like this is described as a JSON config file that is then inputted to switchboard and specifies which API-actions to call and what data goes where. To help with the concoction of these config files, or "routines", switchboard is bundled with the utility application "chef" which provides a UI for creating routines. 
+A flow like this is described as a JSON config file that is then inputted to switchboard and specifies which API-actions to call and what data goes where. To help with the concoction of these config files, or "routines", switchboard is bundled with the utility application "chef" which provides a UI for creating routines. Chef also helps in providing an oversight of existing API-methods as well as possible in-parameters and output-values for these. 
 
 At the moment supported APIs include
 
@@ -47,7 +47,7 @@ Running chef
 1. npm install in chef folder
 2. node app.js
 3. http://localhost:3000
-5. make your recipe and write it down
+5. make your recipe and write it down (execution order is top -> bottom)
 6. the config is now at http://localhost:3000/recipe as well as in a recipe.json file
 7. input your config to switchboard (automatically read from http://localhost:3000/recipe by switchboard server instance or manually require it in as JSON)
 

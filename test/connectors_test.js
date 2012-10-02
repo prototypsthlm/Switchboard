@@ -14,7 +14,11 @@ function connectorValid() {
 			return connectors.apiMap[contextName];
 		}
 	};
-
+	
+    /* todo getActionURL */
+    /* move google books */
+    /* test for userconfig/exampleroutines, somewhere else?) */
+    
 	context['should exist'] = function(con){
 		assert.isObject(con);
 	};
@@ -28,7 +32,7 @@ function connectorValid() {
 		assert.include(con.host, 'http');
 	};
 
-	context['has responceObject'] = function(con){
+	context['has responseObject'] = function(con){
 		assert.isArray(con.responseObject);
 	};
 
@@ -45,7 +49,7 @@ function connectorValid() {
 			assert.isNotEmpty(apiActions);
 		},
 
-		'contains action, in_param and out arrays': function(apiActions){
+		'contains action, in_param_names and output_nodes arrays': function(apiActions){
 			assert.isObject(apiActions);
 			assert.isNotEmpty(apiActions);
 
@@ -56,11 +60,11 @@ function connectorValid() {
 				assert.include(row, "action", "action must be defined");
 				assert.isArray(row.action);
 
-				assert.include(row, "in_param");
-				assert.isArray(row.in_param);
+				assert.include(row, "in_param_names");
+				assert.isArray(row.in_param_names);
 
-				assert.include(row, "out");
-				assert.isArray(row.out);
+				assert.include(row, "output_nodes");
+				assert.isArray(row.output_nodes);
 			}
 			
 		}

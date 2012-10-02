@@ -17,7 +17,27 @@ function syntaxHighlight(json) {
     });
 }
 
-
+function setValueSources(){
+    
+    var activeRoutineElements = $("div.api.live");
+    activeRoutineElements.each(function(i, obj){
+         var action = $(this).find("select.methods").val();
+         $selectEl = $(this).find("#"+action).find("select[name=output_node]");
+         $selectEl.html("");
+        if(i == 0){
+            $selectEl.html("<option value='request.get'>request.get</option>");
+        }
+        else {
+            $prevRoutineElement = $(activeRoutineElements[i-1]);
+            var prevName = $prevRoutineElement.attr('name').replace(".","\\.");
+            $referenceElement = $("div[name=" + prevName + "].dummy");
+            var prevAction = $prevRoutineElement.find("select.methods").val();
+            $prevSelectEl = $referenceElement.find("#"+prevAction).find("select[name=output_node]");
+            $selectEl.html($prevSelectEl.html());     
+        }
+        
+    });
+}
 $(document).ready(function(){
     
     var actionConfig;
@@ -32,6 +52,7 @@ $(document).ready(function(){
         $("select.methods option:selected").each(function(){
             $(this).parents("div.api").find('#'+$(this).val()).show();
         });
+        setValueSources();
     });
     
     $(window).delegate("a.close", "click", function(){
@@ -44,7 +65,6 @@ $(document).ready(function(){
         var $api = $(this).parents("div.api");
         var $codebox = $api.find("div.taste_box pre");
         
-  
         $api.find('')
         $codebox.html("");
         var action = $api.find("select.methods").val();
@@ -65,16 +85,12 @@ $(document).ready(function(){
     
     $('button#cook').click(function(){
         actionConfig = [];
-        $("div.api").each(function(){
-        
-           var order = $(this).find('select[name=index]').val();
-           console.log(order);
-           if(order != ""){
-               var action = $(this).find("select.methods").val();
-               var in_param = $(this).find("#"+action).find("select[name=in_param]").val();
-               var out = $(this).find("#"+action).find("select[name=out]").val();
-               actionConfig.push({order: order, api: $(this).attr('name'), action: action, in_param: in_param, out: out });
-           }
+        $("div.api.live").each(function(){
+            var action = $(this).find("select.methods").val();
+            var limit = $(this).find("select[name=limit]").val();
+            var in_param = $(this).find("#"+action).find("select[name=in_param_name]").val();
+            var out = $(this).find("#"+action).find("select[name=output_node]").val();        
+            actionConfig.push({api: $(this).attr('name'), action: action, in_param_name: in_param, value_source: out, limit: parseInt(limit) });
         });
         console.log(actionConfig);
         $.post('/cook', { data: actionConfig }, function(data) {
@@ -90,6 +106,7 @@ $(document).ready(function(){
     
     $('.ingredient').click(function(){
         var add = $(this).attr('ingredient');
-        $('div.api.dummy[name="'+add+'"]').clone().removeClass('dummy').appendTo('body');
+        $('div.api.dummy[name="'+add+'"]').clone().removeClass('dummy').addClass('live').appendTo('body');
+        setValueSources();
     });
 });

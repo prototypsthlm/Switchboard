@@ -1,26 +1,23 @@
 [
     {
-        "order": "0",
         "api": "TMDB",
         "action": "movieSearch",
-        "in_param": "0",
-        "out": "0",
+        "in_param_name": "query",
+        "value_source": "request.get",
         "limit": 5
     },
     {
-        "order": "1",
         "api": "TMDB",
         "action": "movieCast",
-        "in_param": "0",
-        "out": "2",
+        "in_param_name": "id",
+        "value_source": "results.id",
         "limit": 5
     },
     {
-        "order": "2",
         "api": "Spotify",
         "action": "artistSearch",
-        "in_param": "0",
-        "out": "0",
+        "in_param_name": "q",
+        "value_source": "cast.character",
         "limit": 5
     }
 ]

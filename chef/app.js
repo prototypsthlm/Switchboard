@@ -57,7 +57,7 @@ app.post('/taste',function(req,res){
 app.post('/cook',function(req,res){
     var config = req.param('data', null);
     
-    fs.writeFile("recipe.json", JSON.stringify(config), function(err) {
+    fs.writeFile("recipe.json", JSON.stringify(config, null, 4), function(err) {
         if(err) {
             console.log(err);
             res.send("BAD JOB!");
