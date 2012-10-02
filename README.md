@@ -49,7 +49,10 @@ Running chef
 3. http://localhost:3000
 5. make your recipe and write it down (execution order is top -> bottom)
 6. the config is now at http://localhost:3000/recipe as well as in a recipe.json file
-7. input your config to switchboard (automatically read from http://localhost:3000/recipe by switchboard server instance or manually require it in as JSON)
+7. input your config to switchboard by
+	* automatically reading it from http://localhost:3000/recipe by switchboard server instance (requires service restart to recognize recipe changes)
+	* manually requiring it in from file as a JSON-variable (requires service restart)
+	* POSTing the config as a parameter "config" along with a entry query to http://localhost:3000/switchboard and executing it on the fly
 
 Node package
 -------------
@@ -68,29 +71,29 @@ Optionally install as a node package and:
 
 		[
 		    {
-		        "order": "0", //execution order, if first the value api of action param is set to the entry query value 
-		        "api": "TMDB", //api name
+		        "api": "TMDB", //execution order, if first the value api of action param is set to the entry query value 
 		        "action": "movieSearch", //api action
-		        "in_param": "0", //index for api action param name
-		        "out": "0" //the index for the value for the api action param name in the next block. irrelevant if last block.
+		        "in_param_name": "query", //param name for the api action .ie ?in_param_name
+		        "value_source": "request.get", //where to get value for the in_param, if first in routine always from initial request param, otherwise a path to previous API-call JSON-results
+		        "limit": 5 //the maximum amount of queries to take from value_source and execute
 		    },
 		    {
-		        "order": "1",
 		        "api": "TMDB",
 		        "action": "movieCast",
-		        "in_param": "0",
-		        "out": "2"
+		        "in_param_name": "id",
+		        "value_source": "results.id",
+		        "limit": 5
 		    },
 		    {
-		        "order": "2",
 		        "api": "Spotify",
 		        "action": "artistSearch",
-		        "in_param": "0",
-		        "out": "0"
+		        "in_param_name": "q",
+		        "value_source": "cast.character",
+		        "limit": 5
 		    }
 		]
 		
-	look at the source for a connector or use the switchboard chef for a better understanding of how the indices for in_param and out work.
+	look at the source for a connector or use the switchboard chef for an overview of possible in_param_names and value_sources_.
  
 4. insert query and run routine:
 
