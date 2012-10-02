@@ -101,11 +101,7 @@ app.post('/switchboard', function(req, res){
 
     if(req.body.q != undefined){  
         switchboard.execute([req.body.q], function(r,c){
-            var callback = req.body.callback;
             var jsonString = JSON.stringify({ clean: c, raw: r });
-            if(callback) {
-                jsonString = callback + "(" + jsonString + ")";
-            }
             res.send(jsonString);
         });
     }
