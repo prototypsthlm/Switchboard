@@ -43,10 +43,10 @@ Running switchboard:
 4. node server.js
 5. http://localhost:4000/switchboard?q=entryquery
 
-You can also POST configs to http://localhost:4000/switchboard as mentioned below. POST data should be structured as
+You can also POST configs to the switchboard service as mentioned below. POST data should be structured as:
 
 		{
-		    "q": "your qúery",
+		    "q": "your query",
 		    "routine": [
 		        {
 		            "api": "Spotify",
@@ -83,8 +83,8 @@ Running chef
 6. the config is now at http://localhost:3000/recipe as well as in a recipe.json file
 7. input your config to switchboard by
 	* automatically reading it from http://localhost:3000/recipe on switchboard server instance startup (requires service restart to recognize recipe changes)
-	* manually requiring it in from file as a JSON-variable (requires service restart)
-	* POSTing the config as a parameter "config" along with a entry query to http://localhost:3000/switchboard and executing it on the fly
+	* manually requiring from file as a JSON-variable (requires service restart)
+	* POSTing the config as a parameter "routine" along with a entry query "q" to the service and executing it on the fly
 
 Node package
 -------------
