@@ -4,7 +4,7 @@ var vows = require('vows'),
 var suite = vows.describe('Class resonsible for formatting all results to a mega object');
 var ResultFormatter = require('../lib/results_formatter.js');
 var TestResult = require('./resources/results.js');
-
+var TestHelper = require('../lib/test_helper.js');
 
 function resultAfterMergeValidation(routineToTest, mergeMethod) {
 	var context = {
@@ -22,13 +22,16 @@ function resultAfterMergeValidation(routineToTest, mergeMethod) {
 
 	context['should return a valid clean result'] = function(topic) {
 		var cleanResult = topic.cleanResult;
-		assert.isArray(cleanResult);
-		assert.deepEqual(cleanResult, new TestResult(routineToTest, "clean", mergeMethod));
+		var expectedCleanResult = new TestResult(routineToTest, "clean", mergeMethod);
+		var isEqual = TestHelper.compareObjects(cleanResult, expectedCleanResult, false);
+		assert.isTrue(isEqual, "Clean result differs");
 	};
 	
 	context['should not affect the raw result'] = function(topic) {
 		var formatter = topic.formatter;
-		assert.deepEqual(formatter.raw(), new TestResult(routineToTest, "raw", mergeMethod), "Raw result affected!");
+		var expectedRawResult = new TestResult(routineToTest, "raw", mergeMethod);
+		var isEqual = TestHelper.compareObjects(formatter.raw(), expectedRawResult, false);
+		assert.isTrue(isEqual, "Raw result differs");
 	};
 	
 	return context;
@@ -84,37 +87,7 @@ suite.addBatch({ // Batch
 	    },
 
 	    'with populated data from starwars_artists':  populatedDataValidation("starwars_artists"),
-	    'with populated data from headliner_biographies':  populatedDataValidation("headliner_biographies")
-	    /*
-		'with populated data': { // Context
-			topic: function (formatter) {				
-				var rawResult = new TestResult("raw");
-				var formatter = new ResultFormatter(rawResult);				
-				return {formatter: formatter, rawResult: rawResult};
-			},
-
-			'could not affect the raw result after it has been set': function (topic) {
-	    		topic.rawResult.push({api:"Dummy", calls:[]});
-				assert.notDeepEqual(topic.formatter.raw(), topic.rawResult, "Raw result affected after it has been set");
-			},
-
-			'could not affect the raw result after it has retrieved': function (topic) {
-				var rawResult = topic.formatter.raw();
-				rawResult.push({api:"Dummy", calls:[]});
-
-				assert.notDeepEqual(topic.formatter.raw(), rawResult, "Raw result affected after it has been retrieved");
-			},
-
-			'should have a valid raw array': function(topic) {
-				assert.isArray(topic.formatter.raw());
-				assert.isNotEmpty(topic.formatter.raw());
-			},
-
-			'using extractMerge': resultAfterMergeValidation("extractMerge"),
-
-			'using injectMerge': resultAfterMergeValidation("injectMerge")
-	    },
-	    */
+	    'with populated data from headliner_biographies':  populatedDataValidation("headliner_biographies")	    
 	}
 });
 
