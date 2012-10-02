@@ -1,16 +1,16 @@
 [
     {
-        "order": "0",
         "api": "Spotify",
         "action": "artistSearch",
-        "in_param": "0",
-        "out": "1"
+        "in_param_name": "q",
+        "value_source": "entry query",
+        "limit": "1"
     },
     {
-        "order": "1",
         "api": "Echonest",
         "action": "artistURLs",
-        "in_param": "1",
-        "out": "0"
+        "in_param_name": "name",
+        "value_source": "artists.href",
+        "limit": "1"
     }
 ]

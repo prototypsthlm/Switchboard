@@ -17,33 +17,32 @@ block content
 		
 			h2 #{api.name}
 			p
-				label order index: 
-				select(name="index")
-					option(value='') Inactive
-					each i in order
-						option(value=i)= i
-			
-			p
 				label methods: 
 				select(class="methods")
 					each val,key in api.apiActions
 						option(value=key)= key
+			
+			p
+				label limit (maximum amount of queries to execute):
+					select(name="limit")
+						each limit, i in limits
+							option(value=limit)= limit
 			hr
 			
 			each val,key in api.apiActions
 				div(id=key,class="api_action")
 					h3 #{key}
 					div
-						label in_param: 
-						select(name="in_param")
-							each in_param, i in val.in_param
-								option(value=i)= in_param
+						label parameter name: 
+						select(name="in_param_name")
+							each in_param_name, i in val.in_param_names
+								option(value=in_param_name)= in_param_name
 					
 					div
-						label output: 
-								select(name="out")
-									each out_value, i in val.out
-										option(value=i)= out_value
+						label parameter value source (from previous API if existing) 
+								select(name="output_node")
+									each output_node, i in val.output_nodes
+										option(value=output_node)= output_node
 										
 			hr
 			

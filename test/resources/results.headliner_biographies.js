@@ -563,251 +563,6 @@ this.cleanExtractResult = [
 ]
 }
 }
-},
-{
-"artist": [
-"Skrillex",
-"Kill the Noise",
-"Knife Party",
-"Tommy Trash",
-"Baauer",
-"Zane Lowe"
-],
-"headliner": "Skrillex",
-"artistBiographies": {
-"response": {
-"status": {
-"version": "4.2",
-"code": 0,
-"message": "Success"
-},
-"start": 0,
-"total": 7,
-"biographies": [
-{
-"text": "Skrillex is the pseudonym used by Los Angeles, California, USA musician Sonny Moore to differentiate his electronic solo work from his work with From First To Last and his other solo projects.   As Skrillex, Moore is an electronic DJ and producer boasting a musical style that incorporates electro house, fidget house, and dubstep.  Moore began producing and performing under the alias Skrillex at clubs in the Los Angeles area in 2008.    Throughout 2010, Skrillex became a bigger and bigger part of Moore's life.  On June 7, 2010 he released his debut EP as Skrillex, My Name Is Skrillex, as a free download.  Soon after, he was signed to mau5trap and began a nationwide tour with deadmau5.  On October 22, 2010 he released his second EP, Scary Monsters and Nice Sprites, as a co-release through mau5trap and Big Beat.  On June 2, 2011, Moore announced the release of a \"Scary Monsters and Nice Sprites\" remix EP titled More Monsters And Sprites, which was released on June 7, 2011 on Beatport and June 21, 2011 on iTunes. It contained 3 new tracks, as well as 4 remixes of \"Scary Monsters and Nice Sprites\".  Skrillex announced his label OWSLA on August 17, 2011.  On December 23, 2011, Moore released the Bangarang EP. The EP features Ellie Goulding on the track \"Summit\", as well as collaborations with Wolfgang Gartner, Kill the Noise, The Doors and 12th Planet  Skrillex has been nominated for five awards at the 54th Annual Grammys to be held in February 2012. Among his nominations are Best New Artist, Best Dance Recording (for \"Scary Monsters & Nice Sprites\") and Best Short Form Music Video (for \"First of the Year (Equinox)\")",
-"site": "last.fm",
-"url": "http://www.last.fm/music/Skrillex/+wiki",
-"license": {
-"type": "cc-by-sa",
-"attribution": "Last.fm",
-"attribution-url": "http://www.last.fm/music/Skrillex/+wiki",
-"url": "http://creativecommons.org/licenses/by-sa/3.0/",
-"version": "3.0"
-}
-},
-{
-"text": "Sonny Moore put his gig as post-hardcore frontman behind him ...",
-"site": "mog",
-"url": "http://mog.com/artists/bio/mn1391518/skrillex",
-"license": {
-"type": "all-rights-reserved",
-"attribution": "mog",
-"attribution-url": "http://mog.com/artists/bio/mn1391518/skrillex",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-},
-{
-"text": "Sonny John Moore (born January 15, 1988), better known by his stage name Skrillex, is an American electronic music producer and singer-songwriter. Raised in Northeast Los Angeles and in Northern California, Moore joined the American post-hardcore band From First to Last as the lead singer in 2004, and recorded two studio albums with the band (Dear Diary, My Teen Angst Has a Body Count, 2004, and Heroine, 2006) before leaving to pursue a solo career in 2007. He began his first tour as a solo artist in late 2007. After recruiting a new band lineup, Moore joined the Alternative Press Tour to support bands such as All Time Low and The Rocket Summer, and appeared on the cover of Alternative Press' annual \"100 Bands You Need to Know\" issue. After releasing the Gypsyhook EP in 2009, Moore was scheduled to record his debut studio album, Bells, with producer Noah Shain. However, he ceased production of the album and began performing under the name Skrillex. After releasing the My Name is Skrillex EP for free download on his official MySpace page, he released the Scary Monsters and Nice Sprites EP in late-2010 and More Monsters and Sprites EP in mid-2011. Both have since become moderate commercial successes. On November 30, 2011, he was nominated for a total of five Grammy Awards at the 54th Grammy Awards, including Best New Artist and won three: \"Best Dance/Electronica Album,\" \"Best Dance Recording,\" and \"Best Remixed Recording, Non-Classical\". On December 5, 2011, the BBC announced that he had been nominated for their Sound of 2012 poll. On December 12, 2011, he was also named MTV's Electronic Dance Music Artist of the Year. \n\nBiography:\n\nBackground:\nMoore was born in the Highland Park neighborhood of Northeast Los Angeles, but moved to the Forest Hill neighborhood of San Francisco at the age of two, where he attended elementary school. At the ages of nine and ten, Moore attended a local boarding school located in the Mojave Desert LV, but eventually moved back to Northern California. By the age of twelve, his family moved him back to his birthplace of Northeast L.A., where he enrolled in a private academy school specializing in arts, and was then later home schooled at the age of fourteen due to bullying. In 2004, he learned he was adopted and dropped out of the program when he was sixteen years old. While a young teenager in Los Angeles, Moore would attend punk gigs in Mexican American neighborhoods in East and South Los Angeles, and later on electro club raves in the downtown's Silver Lake and Echo Park neighborhoods. \n\nFrom First to Last (2004-07):\nIn 2004, Moore contacted Matt Good of From First to Last about playing guitar for the band on their debut album. After flying out to Georgia, Moore was heard singing by three studio producers, Derrick Thomas, Eric Dale, and McHale Butler, and was then made lead singer, with Good playing guitar. In June 2004, Epitaph Records released the band's first full-length record with their new bandmate, Dear Diary, My Teen Angst Has a Body Count. After performing on several successful tours, two being the Vans Warped Tour and Dead by Dawn tour, they began recording their second album, Heroine with producer Ross Robinson. The album was released in March 2006 on Epitaph. With high record sales once again, the band found themselves part of many successful tours, until Moore started suffering vocal problems, causing the band to resign from several tours. After going through a successful vocal surgical procedure, Moore informed the band he would be permanently resigning to work on a solo career. FFTL's last show performed with Moore was in their hometown of Orlando at The House of Blues while touring with Atreyu. \n\nSolo career (2007-present):\n\nMoore announced he had left From First to Last to pursue a solo career. He then launched a Myspace page displaying three demos (\"Signal\", \"Equinox\", and \"Glow Worm\"). This led to Moore's first performance since his leaving From First to Last. On April 7, 2007, alongside harpist Carol Robbins, Moore played several original songs at a local art building. After months of releasing demos via Myspace, Moore played on the Team Sleep Tour with a full band. The tour also featured supporting acts Monster in the Machine and Strata. Moore made several demo CDs available on this tour, limited to about 30 per show. These CDs were tour exclusive, and were packaged in \"baby blue envelopes\", each with a unique drawing by Moore or bandmate. In February 2008, Alternative Press Magazine announced the second annual AP Tour, with All Time Low, The Rocket Summer, The Matches, and Forever the Sickest Kids, as well as Sonny Moore. The tour started in Houston, Texas on March 14 and went through North America, ending in Cleveland, Ohio on May 2, with the majority of the shows being sold out. All bands playing the tour would be featured on the cover of Alternative Press Magazine's annual 100 Bands You Need to Know special, and would be interviewed on the Alternative Press Podcast. During this tour Moore's line-up consisted of Sean Friday on drums, Christopher Null on guitar, and Aaron Rothe on keyboards. On April 7, 2009, he released Gypsyhook EP, a digital EP, which featured three songs and four remixes. Also included was a Japanese version of \"Mora\" entitled \"海水\" (\"Kaisui\"). Physical copies of the EP were available at his shows. After going on tour with Innerpartysystem and Paper Route and opening for Chiodos on their European tour, Moore performed at Bamboozle on May 2. He performed on Bamboozle Left's Saints and Sinners stage on April 4. He toured with Hollywood Undead in April 2009 performing under the band name Sonny and the Blood Monkeys, with Chris Null (electric guitar), Sean Friday (drums, percussion & beats) and Aaron Rothe (keyboards, synthesizers, programming & turntables) Although no official statement has been given regarding the album, Moore has stated that Bells will no longer be released. \n\nProduction career:\n\nIn 2008, Moore began producing and performing under the alias Skrillex at clubs in the Los Angeles area. Previously, he had been known on the Internet as Twipz. On June 7, 2010, Moore released his official Skrillex debut EP, My Name is Skrillex as a free download. Moore provided programming and vocals for UK metalcore band Bring Me the Horizon on their third studio album, There Is a Hell, Believe Me I've Seen It. There Is a Heaven, Let's Keep It a Secret. Later in the year, Sonny began a nationwide tour with Deadmau5 after being signed to mau5trap recordings and released his second EP, Scary Monsters and Nice Sprites. Moore kicked off the \"Project Blue Book Tour\" in 2011 with support from Porter Robinson, Tommy Lee and DJ Aero as well as appearances from Sofia Toufa for a new song titled \"Bring out the Devil.\" Skrillex unveiled several new songs on this tour including \"First Of The Year\" (formerly known as \"Equinox\"), \"Reptile\", and \"Cinema\" (remix of a Benny Benassi track). \"Reptile\" was featured in the TV commercial for Mortal Kombat 9, and \"First of the Year (Equinox)\" is featured on his follow up EP and remix companion to Scary Monsters and Nice Sprites, titled More Monsters and Sprites. In April 2011, Spin magazine premiered \"Get Up\", an exclusive new track from Korn that was produced by Skrillex. Korn made \"Get Up\" available for free download via their Facebook page. On April 15, 2011 KoRn joined Skrillex on stage for his set at Coachella 2011. On April 18, 2011, Sony Computer Entertainment (SCEA) development studio Naughty Dog released a trailer for the multiplayer component of their PlayStation 3 game Uncharted 3: Drake's Deception, featuring \"Kill EVERYBODY\" from Scary Monsters and Nice Sprites. In June 2011, \"More Monsters and Sprites\" was released on Beatport, an EP consisting of three original tracks, including \"First of the Year (Equinox)\" and two versions of his original track \"Ruffneck\". A leaked track entitled \"Ruffneck Bass\" had been leaked on the internet months prior which used the same sample as in the new \"Ruffneck\" tracks on the EP. Skrillex released a music video for \"Rock n' Roll (Will Take You to the Mountain)\" on his official YouTube page on June 20, 2011. \n\nOn August 17, 2011 Skrillex announced his label, OWSLA. \"The label's first releases will come from Bristol-based dubstep producer Koan Sound, electro-house newcomer Porter Robinson from North Carolina, singer/songwriter Alvin Risk, and San Francisco-based M Machine (formally Metropolis).\" Skrillex released a music video for \"First of the Year (Equinox)\" via Spin.com on August 19, 2011. In late August 2011 it was released that he would be appearing Knife Party's first release, collaborating on a Moombahton style track entitled \"Zoology\". A preview was released on YouTube. In late September 2011 he created the track \"Syndicate\" as promotion for the video game of the same name. Kaskade's 2011 album Fire & Ice features a collaboration between Kaskade and Skrillex entitled \"Lick It\". The video for Skrillex's song \"First of the Year (Equinox)\" appears on the first episode of the Beavis and Butt-head revival. On November 8, Skrillex stated that he intended to release an album entitled Voltage. Skrillex gave fans more info about Voltage in RockSound Magazine after a photoshoot for the cover and doing an extensive interview on his tour. For unknown reasons, however, the album was never released. On December 21, 2011, Skrillex unveiled the Bangarang EP for a Beatport release on December 23. On March 13, 2012, Beatport released OWSLA's second Free Treats sampler, Free Treats Vol. 2. The 19-track compilation features \"Ruffneck (FULL Flex) Munchi Anonymous Revolution Remix\", a remixed track by Skrillex. This new take on the track deviates from the original (released on the More Monsters and Sprites EP), with the remix being more characteristic of Electro House, though with a much slower tempo of 108 BPM, versus the original version's classic Dubstep tempo of 140 BPM, also straying from the typical Electro House tempo of 128 BPM. On August 12, 2012, his new side-project formed with Boys Noize called Dog Blood released an EP called Next Order/Middle Finger. \n\nInfluences:\nMoore has stated in an online interview that he has been a longtime fan of Warp, an electronic music label that has released recordings from artists such as Aphex Twin and Squarepusher. \n\nPersonal life:\nAs of February 2012, Skrillex has been dating fellow artist and singer, Ellie Goulding, who provided vocals for the Skrillex track, \"Summit\", featured on the EP, Bangarang.",
-"site": "wikipedia",
-"url": "http://en.wikipedia.org/wiki/Skrillex",
-"license": {
-"type": "cc-by-sa",
-"attribution": "wikipedia",
-"attribution-url": "http://en.wikipedia.org/wiki/Skrillex",
-"url": "http://creativecommons.org/licenses/by-sa/3.0/",
-"version": "3.0"
-}
-},
-{
-"text": "Sonny Moore put his gig as post-hardcore frontman behind him ...",
-"site": "aol",
-"url": "http://music.aol.com/artist/skrillex/biography",
-"license": {
-"type": "unknown",
-"attribution": "aol",
-"attribution-url": "http://music.aol.com/artist/skrillex/biography",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-},
-{
-"text": "Childhood and early bands (1988–2004) Born on January 15, 1988, ...",
-"site": "ilike",
-"url": "http://www.ilike.com/artist/Skrillex",
-"license": {
-"type": "unknown",
-"attribution": "ilike",
-"attribution-url": "http://www.ilike.com/artist/Skrillex",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-},
-{
-"text": "“I’ve been deep into electronic music my entire life. The ...",
-"site": "amazon",
-"url": "http://www.amazon.com/Skrillex/e/B004HK3B5U/",
-"license": {
-"type": "unknown",
-"attribution": "amazon",
-"attribution-url": "http://www.amazon.com/Skrillex/e/B004HK3B5U/",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-},
-{
-"text": "Sonny Moore put his gig as post-hardcore frontman behind him ...",
-"site": "itunes",
-"url": "http://itunes.apple.com/us/artist/skrillex/id356545647",
-"license": {
-"type": "unknown",
-"attribution": "itunes",
-"attribution-url": "http://itunes.apple.com/us/artist/skrillex/id356545647",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-},
-{
-"text": "Sonny Moore put his gig as post-hardcore frontman behind him ...",
-"site": "rdio",
-"url": "http://www.rdio.com/artist/Skrillex/",
-"license": {
-"type": "all-rights-reserved",
-"attribution": "",
-"attribution-url": "",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-}
-]
-}
-}
-},
-{
-"artist": "Skrillex",
-"headliner": "Skrillex",
-"artistBiographies": {
-"response": {
-"status": {
-"version": "4.2",
-"code": 0,
-"message": "Success"
-},
-"start": 0,
-"total": 7,
-"biographies": [
-{
-"text": "Skrillex is the pseudonym used by Los Angeles, California, USA musician Sonny Moore to differentiate his electronic solo work from his work with From First To Last and his other solo projects.   As Skrillex, Moore is an electronic DJ and producer boasting a musical style that incorporates electro house, fidget house, and dubstep.  Moore began producing and performing under the alias Skrillex at clubs in the Los Angeles area in 2008.    Throughout 2010, Skrillex became a bigger and bigger part of Moore's life.  On June 7, 2010 he released his debut EP as Skrillex, My Name Is Skrillex, as a free download.  Soon after, he was signed to mau5trap and began a nationwide tour with deadmau5.  On October 22, 2010 he released his second EP, Scary Monsters and Nice Sprites, as a co-release through mau5trap and Big Beat.  On June 2, 2011, Moore announced the release of a \"Scary Monsters and Nice Sprites\" remix EP titled More Monsters And Sprites, which was released on June 7, 2011 on Beatport and June 21, 2011 on iTunes. It contained 3 new tracks, as well as 4 remixes of \"Scary Monsters and Nice Sprites\".  Skrillex announced his label OWSLA on August 17, 2011.  On December 23, 2011, Moore released the Bangarang EP. The EP features Ellie Goulding on the track \"Summit\", as well as collaborations with Wolfgang Gartner, Kill the Noise, The Doors and 12th Planet  Skrillex has been nominated for five awards at the 54th Annual Grammys to be held in February 2012. Among his nominations are Best New Artist, Best Dance Recording (for \"Scary Monsters & Nice Sprites\") and Best Short Form Music Video (for \"First of the Year (Equinox)\")",
-"site": "last.fm",
-"url": "http://www.last.fm/music/Skrillex/+wiki",
-"license": {
-"type": "cc-by-sa",
-"attribution": "Last.fm",
-"attribution-url": "http://www.last.fm/music/Skrillex/+wiki",
-"url": "http://creativecommons.org/licenses/by-sa/3.0/",
-"version": "3.0"
-}
-},
-{
-"text": "Sonny Moore put his gig as post-hardcore frontman behind him ...",
-"site": "mog",
-"url": "http://mog.com/artists/bio/mn1391518/skrillex",
-"license": {
-"type": "all-rights-reserved",
-"attribution": "mog",
-"attribution-url": "http://mog.com/artists/bio/mn1391518/skrillex",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-},
-{
-"text": "Sonny John Moore (born January 15, 1988), better known by his stage name Skrillex, is an American electronic music producer and singer-songwriter. Raised in Northeast Los Angeles and in Northern California, Moore joined the American post-hardcore band From First to Last as the lead singer in 2004, and recorded two studio albums with the band (Dear Diary, My Teen Angst Has a Body Count, 2004, and Heroine, 2006) before leaving to pursue a solo career in 2007. He began his first tour as a solo artist in late 2007. After recruiting a new band lineup, Moore joined the Alternative Press Tour to support bands such as All Time Low and The Rocket Summer, and appeared on the cover of Alternative Press' annual \"100 Bands You Need to Know\" issue. After releasing the Gypsyhook EP in 2009, Moore was scheduled to record his debut studio album, Bells, with producer Noah Shain. However, he ceased production of the album and began performing under the name Skrillex. After releasing the My Name is Skrillex EP for free download on his official MySpace page, he released the Scary Monsters and Nice Sprites EP in late-2010 and More Monsters and Sprites EP in mid-2011. Both have since become moderate commercial successes. On November 30, 2011, he was nominated for a total of five Grammy Awards at the 54th Grammy Awards, including Best New Artist and won three: \"Best Dance/Electronica Album,\" \"Best Dance Recording,\" and \"Best Remixed Recording, Non-Classical\". On December 5, 2011, the BBC announced that he had been nominated for their Sound of 2012 poll. On December 12, 2011, he was also named MTV's Electronic Dance Music Artist of the Year. \n\nBiography:\n\nBackground:\nMoore was born in the Highland Park neighborhood of Northeast Los Angeles, but moved to the Forest Hill neighborhood of San Francisco at the age of two, where he attended elementary school. At the ages of nine and ten, Moore attended a local boarding school located in the Mojave Desert LV, but eventually moved back to Northern California. By the age of twelve, his family moved him back to his birthplace of Northeast L.A., where he enrolled in a private academy school specializing in arts, and was then later home schooled at the age of fourteen due to bullying. In 2004, he learned he was adopted and dropped out of the program when he was sixteen years old. While a young teenager in Los Angeles, Moore would attend punk gigs in Mexican American neighborhoods in East and South Los Angeles, and later on electro club raves in the downtown's Silver Lake and Echo Park neighborhoods. \n\nFrom First to Last (2004-07):\nIn 2004, Moore contacted Matt Good of From First to Last about playing guitar for the band on their debut album. After flying out to Georgia, Moore was heard singing by three studio producers, Derrick Thomas, Eric Dale, and McHale Butler, and was then made lead singer, with Good playing guitar. In June 2004, Epitaph Records released the band's first full-length record with their new bandmate, Dear Diary, My Teen Angst Has a Body Count. After performing on several successful tours, two being the Vans Warped Tour and Dead by Dawn tour, they began recording their second album, Heroine with producer Ross Robinson. The album was released in March 2006 on Epitaph. With high record sales once again, the band found themselves part of many successful tours, until Moore started suffering vocal problems, causing the band to resign from several tours. After going through a successful vocal surgical procedure, Moore informed the band he would be permanently resigning to work on a solo career. FFTL's last show performed with Moore was in their hometown of Orlando at The House of Blues while touring with Atreyu. \n\nSolo career (2007-present):\n\nMoore announced he had left From First to Last to pursue a solo career. He then launched a Myspace page displaying three demos (\"Signal\", \"Equinox\", and \"Glow Worm\"). This led to Moore's first performance since his leaving From First to Last. On April 7, 2007, alongside harpist Carol Robbins, Moore played several original songs at a local art building. After months of releasing demos via Myspace, Moore played on the Team Sleep Tour with a full band. The tour also featured supporting acts Monster in the Machine and Strata. Moore made several demo CDs available on this tour, limited to about 30 per show. These CDs were tour exclusive, and were packaged in \"baby blue envelopes\", each with a unique drawing by Moore or bandmate. In February 2008, Alternative Press Magazine announced the second annual AP Tour, with All Time Low, The Rocket Summer, The Matches, and Forever the Sickest Kids, as well as Sonny Moore. The tour started in Houston, Texas on March 14 and went through North America, ending in Cleveland, Ohio on May 2, with the majority of the shows being sold out. All bands playing the tour would be featured on the cover of Alternative Press Magazine's annual 100 Bands You Need to Know special, and would be interviewed on the Alternative Press Podcast. During this tour Moore's line-up consisted of Sean Friday on drums, Christopher Null on guitar, and Aaron Rothe on keyboards. On April 7, 2009, he released Gypsyhook EP, a digital EP, which featured three songs and four remixes. Also included was a Japanese version of \"Mora\" entitled \"海水\" (\"Kaisui\"). Physical copies of the EP were available at his shows. After going on tour with Innerpartysystem and Paper Route and opening for Chiodos on their European tour, Moore performed at Bamboozle on May 2. He performed on Bamboozle Left's Saints and Sinners stage on April 4. He toured with Hollywood Undead in April 2009 performing under the band name Sonny and the Blood Monkeys, with Chris Null (electric guitar), Sean Friday (drums, percussion & beats) and Aaron Rothe (keyboards, synthesizers, programming & turntables) Although no official statement has been given regarding the album, Moore has stated that Bells will no longer be released. \n\nProduction career:\n\nIn 2008, Moore began producing and performing under the alias Skrillex at clubs in the Los Angeles area. Previously, he had been known on the Internet as Twipz. On June 7, 2010, Moore released his official Skrillex debut EP, My Name is Skrillex as a free download. Moore provided programming and vocals for UK metalcore band Bring Me the Horizon on their third studio album, There Is a Hell, Believe Me I've Seen It. There Is a Heaven, Let's Keep It a Secret. Later in the year, Sonny began a nationwide tour with Deadmau5 after being signed to mau5trap recordings and released his second EP, Scary Monsters and Nice Sprites. Moore kicked off the \"Project Blue Book Tour\" in 2011 with support from Porter Robinson, Tommy Lee and DJ Aero as well as appearances from Sofia Toufa for a new song titled \"Bring out the Devil.\" Skrillex unveiled several new songs on this tour including \"First Of The Year\" (formerly known as \"Equinox\"), \"Reptile\", and \"Cinema\" (remix of a Benny Benassi track). \"Reptile\" was featured in the TV commercial for Mortal Kombat 9, and \"First of the Year (Equinox)\" is featured on his follow up EP and remix companion to Scary Monsters and Nice Sprites, titled More Monsters and Sprites. In April 2011, Spin magazine premiered \"Get Up\", an exclusive new track from Korn that was produced by Skrillex. Korn made \"Get Up\" available for free download via their Facebook page. On April 15, 2011 KoRn joined Skrillex on stage for his set at Coachella 2011. On April 18, 2011, Sony Computer Entertainment (SCEA) development studio Naughty Dog released a trailer for the multiplayer component of their PlayStation 3 game Uncharted 3: Drake's Deception, featuring \"Kill EVERYBODY\" from Scary Monsters and Nice Sprites. In June 2011, \"More Monsters and Sprites\" was released on Beatport, an EP consisting of three original tracks, including \"First of the Year (Equinox)\" and two versions of his original track \"Ruffneck\". A leaked track entitled \"Ruffneck Bass\" had been leaked on the internet months prior which used the same sample as in the new \"Ruffneck\" tracks on the EP. Skrillex released a music video for \"Rock n' Roll (Will Take You to the Mountain)\" on his official YouTube page on June 20, 2011. \n\nOn August 17, 2011 Skrillex announced his label, OWSLA. \"The label's first releases will come from Bristol-based dubstep producer Koan Sound, electro-house newcomer Porter Robinson from North Carolina, singer/songwriter Alvin Risk, and San Francisco-based M Machine (formally Metropolis).\" Skrillex released a music video for \"First of the Year (Equinox)\" via Spin.com on August 19, 2011. In late August 2011 it was released that he would be appearing Knife Party's first release, collaborating on a Moombahton style track entitled \"Zoology\". A preview was released on YouTube. In late September 2011 he created the track \"Syndicate\" as promotion for the video game of the same name. Kaskade's 2011 album Fire & Ice features a collaboration between Kaskade and Skrillex entitled \"Lick It\". The video for Skrillex's song \"First of the Year (Equinox)\" appears on the first episode of the Beavis and Butt-head revival. On November 8, Skrillex stated that he intended to release an album entitled Voltage. Skrillex gave fans more info about Voltage in RockSound Magazine after a photoshoot for the cover and doing an extensive interview on his tour. For unknown reasons, however, the album was never released. On December 21, 2011, Skrillex unveiled the Bangarang EP for a Beatport release on December 23. On March 13, 2012, Beatport released OWSLA's second Free Treats sampler, Free Treats Vol. 2. The 19-track compilation features \"Ruffneck (FULL Flex) Munchi Anonymous Revolution Remix\", a remixed track by Skrillex. This new take on the track deviates from the original (released on the More Monsters and Sprites EP), with the remix being more characteristic of Electro House, though with a much slower tempo of 108 BPM, versus the original version's classic Dubstep tempo of 140 BPM, also straying from the typical Electro House tempo of 128 BPM. On August 12, 2012, his new side-project formed with Boys Noize called Dog Blood released an EP called Next Order/Middle Finger. \n\nInfluences:\nMoore has stated in an online interview that he has been a longtime fan of Warp, an electronic music label that has released recordings from artists such as Aphex Twin and Squarepusher. \n\nPersonal life:\nAs of February 2012, Skrillex has been dating fellow artist and singer, Ellie Goulding, who provided vocals for the Skrillex track, \"Summit\", featured on the EP, Bangarang.",
-"site": "wikipedia",
-"url": "http://en.wikipedia.org/wiki/Skrillex",
-"license": {
-"type": "cc-by-sa",
-"attribution": "wikipedia",
-"attribution-url": "http://en.wikipedia.org/wiki/Skrillex",
-"url": "http://creativecommons.org/licenses/by-sa/3.0/",
-"version": "3.0"
-}
-},
-{
-"text": "Sonny Moore put his gig as post-hardcore frontman behind him ...",
-"site": "aol",
-"url": "http://music.aol.com/artist/skrillex/biography",
-"license": {
-"type": "unknown",
-"attribution": "aol",
-"attribution-url": "http://music.aol.com/artist/skrillex/biography",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-},
-{
-"text": "Childhood and early bands (1988–2004) Born on January 15, 1988, ...",
-"site": "ilike",
-"url": "http://www.ilike.com/artist/Skrillex",
-"license": {
-"type": "unknown",
-"attribution": "ilike",
-"attribution-url": "http://www.ilike.com/artist/Skrillex",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-},
-{
-"text": "“I’ve been deep into electronic music my entire life. The ...",
-"site": "amazon",
-"url": "http://www.amazon.com/Skrillex/e/B004HK3B5U/",
-"license": {
-"type": "unknown",
-"attribution": "amazon",
-"attribution-url": "http://www.amazon.com/Skrillex/e/B004HK3B5U/",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-},
-{
-"text": "Sonny Moore put his gig as post-hardcore frontman behind him ...",
-"site": "itunes",
-"url": "http://itunes.apple.com/us/artist/skrillex/id356545647",
-"license": {
-"type": "unknown",
-"attribution": "itunes",
-"attribution-url": "http://itunes.apple.com/us/artist/skrillex/id356545647",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-},
-{
-"text": "Sonny Moore put his gig as post-hardcore frontman behind him ...",
-"site": "rdio",
-"url": "http://www.rdio.com/artist/Skrillex/",
-"license": {
-"type": "all-rights-reserved",
-"attribution": "",
-"attribution-url": "",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-}
-]
-}
-}
 }
 ],
 "venue": {
@@ -1422,122 +1177,7 @@ this.cleanExtractResult = [
 "Baauer",
 "Zane Lowe"
 ],
-"headliner": "Skrillex",
-"artistBiographies": {
-"response": {
-"status": {
-"version": "4.2",
-"code": 0,
-"message": "Success"
-},
-"start": 0,
-"total": 7,
-"biographies": [
-{
-"text": "Skrillex is the pseudonym used by Los Angeles, California, USA musician Sonny Moore to differentiate his electronic solo work from his work with From First To Last and his other solo projects.   As Skrillex, Moore is an electronic DJ and producer boasting a musical style that incorporates electro house, fidget house, and dubstep.  Moore began producing and performing under the alias Skrillex at clubs in the Los Angeles area in 2008.    Throughout 2010, Skrillex became a bigger and bigger part of Moore's life.  On June 7, 2010 he released his debut EP as Skrillex, My Name Is Skrillex, as a free download.  Soon after, he was signed to mau5trap and began a nationwide tour with deadmau5.  On October 22, 2010 he released his second EP, Scary Monsters and Nice Sprites, as a co-release through mau5trap and Big Beat.  On June 2, 2011, Moore announced the release of a \"Scary Monsters and Nice Sprites\" remix EP titled More Monsters And Sprites, which was released on June 7, 2011 on Beatport and June 21, 2011 on iTunes. It contained 3 new tracks, as well as 4 remixes of \"Scary Monsters and Nice Sprites\".  Skrillex announced his label OWSLA on August 17, 2011.  On December 23, 2011, Moore released the Bangarang EP. The EP features Ellie Goulding on the track \"Summit\", as well as collaborations with Wolfgang Gartner, Kill the Noise, The Doors and 12th Planet  Skrillex has been nominated for five awards at the 54th Annual Grammys to be held in February 2012. Among his nominations are Best New Artist, Best Dance Recording (for \"Scary Monsters & Nice Sprites\") and Best Short Form Music Video (for \"First of the Year (Equinox)\")",
-"site": "last.fm",
-"url": "http://www.last.fm/music/Skrillex/+wiki",
-"license": {
-"type": "cc-by-sa",
-"attribution": "Last.fm",
-"attribution-url": "http://www.last.fm/music/Skrillex/+wiki",
-"url": "http://creativecommons.org/licenses/by-sa/3.0/",
-"version": "3.0"
-}
-},
-{
-"text": "Sonny Moore put his gig as post-hardcore frontman behind him ...",
-"site": "mog",
-"url": "http://mog.com/artists/bio/mn1391518/skrillex",
-"license": {
-"type": "all-rights-reserved",
-"attribution": "mog",
-"attribution-url": "http://mog.com/artists/bio/mn1391518/skrillex",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-},
-{
-"text": "Sonny John Moore (born January 15, 1988), better known by his stage name Skrillex, is an American electronic music producer and singer-songwriter. Raised in Northeast Los Angeles and in Northern California, Moore joined the American post-hardcore band From First to Last as the lead singer in 2004, and recorded two studio albums with the band (Dear Diary, My Teen Angst Has a Body Count, 2004, and Heroine, 2006) before leaving to pursue a solo career in 2007. He began his first tour as a solo artist in late 2007. After recruiting a new band lineup, Moore joined the Alternative Press Tour to support bands such as All Time Low and The Rocket Summer, and appeared on the cover of Alternative Press' annual \"100 Bands You Need to Know\" issue. After releasing the Gypsyhook EP in 2009, Moore was scheduled to record his debut studio album, Bells, with producer Noah Shain. However, he ceased production of the album and began performing under the name Skrillex. After releasing the My Name is Skrillex EP for free download on his official MySpace page, he released the Scary Monsters and Nice Sprites EP in late-2010 and More Monsters and Sprites EP in mid-2011. Both have since become moderate commercial successes. On November 30, 2011, he was nominated for a total of five Grammy Awards at the 54th Grammy Awards, including Best New Artist and won three: \"Best Dance/Electronica Album,\" \"Best Dance Recording,\" and \"Best Remixed Recording, Non-Classical\". On December 5, 2011, the BBC announced that he had been nominated for their Sound of 2012 poll. On December 12, 2011, he was also named MTV's Electronic Dance Music Artist of the Year. \n\nBiography:\n\nBackground:\nMoore was born in the Highland Park neighborhood of Northeast Los Angeles, but moved to the Forest Hill neighborhood of San Francisco at the age of two, where he attended elementary school. At the ages of nine and ten, Moore attended a local boarding school located in the Mojave Desert LV, but eventually moved back to Northern California. By the age of twelve, his family moved him back to his birthplace of Northeast L.A., where he enrolled in a private academy school specializing in arts, and was then later home schooled at the age of fourteen due to bullying. In 2004, he learned he was adopted and dropped out of the program when he was sixteen years old. While a young teenager in Los Angeles, Moore would attend punk gigs in Mexican American neighborhoods in East and South Los Angeles, and later on electro club raves in the downtown's Silver Lake and Echo Park neighborhoods. \n\nFrom First to Last (2004-07):\nIn 2004, Moore contacted Matt Good of From First to Last about playing guitar for the band on their debut album. After flying out to Georgia, Moore was heard singing by three studio producers, Derrick Thomas, Eric Dale, and McHale Butler, and was then made lead singer, with Good playing guitar. In June 2004, Epitaph Records released the band's first full-length record with their new bandmate, Dear Diary, My Teen Angst Has a Body Count. After performing on several successful tours, two being the Vans Warped Tour and Dead by Dawn tour, they began recording their second album, Heroine with producer Ross Robinson. The album was released in March 2006 on Epitaph. With high record sales once again, the band found themselves part of many successful tours, until Moore started suffering vocal problems, causing the band to resign from several tours. After going through a successful vocal surgical procedure, Moore informed the band he would be permanently resigning to work on a solo career. FFTL's last show performed with Moore was in their hometown of Orlando at The House of Blues while touring with Atreyu. \n\nSolo career (2007-present):\n\nMoore announced he had left From First to Last to pursue a solo career. He then launched a Myspace page displaying three demos (\"Signal\", \"Equinox\", and \"Glow Worm\"). This led to Moore's first performance since his leaving From First to Last. On April 7, 2007, alongside harpist Carol Robbins, Moore played several original songs at a local art building. After months of releasing demos via Myspace, Moore played on the Team Sleep Tour with a full band. The tour also featured supporting acts Monster in the Machine and Strata. Moore made several demo CDs available on this tour, limited to about 30 per show. These CDs were tour exclusive, and were packaged in \"baby blue envelopes\", each with a unique drawing by Moore or bandmate. In February 2008, Alternative Press Magazine announced the second annual AP Tour, with All Time Low, The Rocket Summer, The Matches, and Forever the Sickest Kids, as well as Sonny Moore. The tour started in Houston, Texas on March 14 and went through North America, ending in Cleveland, Ohio on May 2, with the majority of the shows being sold out. All bands playing the tour would be featured on the cover of Alternative Press Magazine's annual 100 Bands You Need to Know special, and would be interviewed on the Alternative Press Podcast. During this tour Moore's line-up consisted of Sean Friday on drums, Christopher Null on guitar, and Aaron Rothe on keyboards. On April 7, 2009, he released Gypsyhook EP, a digital EP, which featured three songs and four remixes. Also included was a Japanese version of \"Mora\" entitled \"海水\" (\"Kaisui\"). Physical copies of the EP were available at his shows. After going on tour with Innerpartysystem and Paper Route and opening for Chiodos on their European tour, Moore performed at Bamboozle on May 2. He performed on Bamboozle Left's Saints and Sinners stage on April 4. He toured with Hollywood Undead in April 2009 performing under the band name Sonny and the Blood Monkeys, with Chris Null (electric guitar), Sean Friday (drums, percussion & beats) and Aaron Rothe (keyboards, synthesizers, programming & turntables) Although no official statement has been given regarding the album, Moore has stated that Bells will no longer be released. \n\nProduction career:\n\nIn 2008, Moore began producing and performing under the alias Skrillex at clubs in the Los Angeles area. Previously, he had been known on the Internet as Twipz. On June 7, 2010, Moore released his official Skrillex debut EP, My Name is Skrillex as a free download. Moore provided programming and vocals for UK metalcore band Bring Me the Horizon on their third studio album, There Is a Hell, Believe Me I've Seen It. There Is a Heaven, Let's Keep It a Secret. Later in the year, Sonny began a nationwide tour with Deadmau5 after being signed to mau5trap recordings and released his second EP, Scary Monsters and Nice Sprites. Moore kicked off the \"Project Blue Book Tour\" in 2011 with support from Porter Robinson, Tommy Lee and DJ Aero as well as appearances from Sofia Toufa for a new song titled \"Bring out the Devil.\" Skrillex unveiled several new songs on this tour including \"First Of The Year\" (formerly known as \"Equinox\"), \"Reptile\", and \"Cinema\" (remix of a Benny Benassi track). \"Reptile\" was featured in the TV commercial for Mortal Kombat 9, and \"First of the Year (Equinox)\" is featured on his follow up EP and remix companion to Scary Monsters and Nice Sprites, titled More Monsters and Sprites. In April 2011, Spin magazine premiered \"Get Up\", an exclusive new track from Korn that was produced by Skrillex. Korn made \"Get Up\" available for free download via their Facebook page. On April 15, 2011 KoRn joined Skrillex on stage for his set at Coachella 2011. On April 18, 2011, Sony Computer Entertainment (SCEA) development studio Naughty Dog released a trailer for the multiplayer component of their PlayStation 3 game Uncharted 3: Drake's Deception, featuring \"Kill EVERYBODY\" from Scary Monsters and Nice Sprites. In June 2011, \"More Monsters and Sprites\" was released on Beatport, an EP consisting of three original tracks, including \"First of the Year (Equinox)\" and two versions of his original track \"Ruffneck\". A leaked track entitled \"Ruffneck Bass\" had been leaked on the internet months prior which used the same sample as in the new \"Ruffneck\" tracks on the EP. Skrillex released a music video for \"Rock n' Roll (Will Take You to the Mountain)\" on his official YouTube page on June 20, 2011. \n\nOn August 17, 2011 Skrillex announced his label, OWSLA. \"The label's first releases will come from Bristol-based dubstep producer Koan Sound, electro-house newcomer Porter Robinson from North Carolina, singer/songwriter Alvin Risk, and San Francisco-based M Machine (formally Metropolis).\" Skrillex released a music video for \"First of the Year (Equinox)\" via Spin.com on August 19, 2011. In late August 2011 it was released that he would be appearing Knife Party's first release, collaborating on a Moombahton style track entitled \"Zoology\". A preview was released on YouTube. In late September 2011 he created the track \"Syndicate\" as promotion for the video game of the same name. Kaskade's 2011 album Fire & Ice features a collaboration between Kaskade and Skrillex entitled \"Lick It\". The video for Skrillex's song \"First of the Year (Equinox)\" appears on the first episode of the Beavis and Butt-head revival. On November 8, Skrillex stated that he intended to release an album entitled Voltage. Skrillex gave fans more info about Voltage in RockSound Magazine after a photoshoot for the cover and doing an extensive interview on his tour. For unknown reasons, however, the album was never released. On December 21, 2011, Skrillex unveiled the Bangarang EP for a Beatport release on December 23. On March 13, 2012, Beatport released OWSLA's second Free Treats sampler, Free Treats Vol. 2. The 19-track compilation features \"Ruffneck (FULL Flex) Munchi Anonymous Revolution Remix\", a remixed track by Skrillex. This new take on the track deviates from the original (released on the More Monsters and Sprites EP), with the remix being more characteristic of Electro House, though with a much slower tempo of 108 BPM, versus the original version's classic Dubstep tempo of 140 BPM, also straying from the typical Electro House tempo of 128 BPM. On August 12, 2012, his new side-project formed with Boys Noize called Dog Blood released an EP called Next Order/Middle Finger. \n\nInfluences:\nMoore has stated in an online interview that he has been a longtime fan of Warp, an electronic music label that has released recordings from artists such as Aphex Twin and Squarepusher. \n\nPersonal life:\nAs of February 2012, Skrillex has been dating fellow artist and singer, Ellie Goulding, who provided vocals for the Skrillex track, \"Summit\", featured on the EP, Bangarang.",
-"site": "wikipedia",
-"url": "http://en.wikipedia.org/wiki/Skrillex",
-"license": {
-"type": "cc-by-sa",
-"attribution": "wikipedia",
-"attribution-url": "http://en.wikipedia.org/wiki/Skrillex",
-"url": "http://creativecommons.org/licenses/by-sa/3.0/",
-"version": "3.0"
-}
-},
-{
-"text": "Sonny Moore put his gig as post-hardcore frontman behind him ...",
-"site": "aol",
-"url": "http://music.aol.com/artist/skrillex/biography",
-"license": {
-"type": "unknown",
-"attribution": "aol",
-"attribution-url": "http://music.aol.com/artist/skrillex/biography",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-},
-{
-"text": "Childhood and early bands (1988–2004) Born on January 15, 1988, ...",
-"site": "ilike",
-"url": "http://www.ilike.com/artist/Skrillex",
-"license": {
-"type": "unknown",
-"attribution": "ilike",
-"attribution-url": "http://www.ilike.com/artist/Skrillex",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-},
-{
-"text": "“I’ve been deep into electronic music my entire life. The ...",
-"site": "amazon",
-"url": "http://www.amazon.com/Skrillex/e/B004HK3B5U/",
-"license": {
-"type": "unknown",
-"attribution": "amazon",
-"attribution-url": "http://www.amazon.com/Skrillex/e/B004HK3B5U/",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-},
-{
-"text": "Sonny Moore put his gig as post-hardcore frontman behind him ...",
-"site": "itunes",
-"url": "http://itunes.apple.com/us/artist/skrillex/id356545647",
-"license": {
-"type": "unknown",
-"attribution": "itunes",
-"attribution-url": "http://itunes.apple.com/us/artist/skrillex/id356545647",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-},
-{
-"text": "Sonny Moore put his gig as post-hardcore frontman behind him ...",
-"site": "rdio",
-"url": "http://www.rdio.com/artist/Skrillex/",
-"license": {
-"type": "all-rights-reserved",
-"attribution": "",
-"attribution-url": "",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-}
-]
-}
-}
+"headliner": "Skrillex"
 },
 "venue": {
 "id": "9114112",
@@ -1618,122 +1258,7 @@ this.cleanExtractResult = [
 "title": "Skrillex",
 "artists": {
 "artist": "Skrillex",
-"headliner": "Skrillex",
-"artistBiographies": {
-"response": {
-"status": {
-"version": "4.2",
-"code": 0,
-"message": "Success"
-},
-"start": 0,
-"total": 7,
-"biographies": [
-{
-"text": "Skrillex is the pseudonym used by Los Angeles, California, USA musician Sonny Moore to differentiate his electronic solo work from his work with From First To Last and his other solo projects.   As Skrillex, Moore is an electronic DJ and producer boasting a musical style that incorporates electro house, fidget house, and dubstep.  Moore began producing and performing under the alias Skrillex at clubs in the Los Angeles area in 2008.    Throughout 2010, Skrillex became a bigger and bigger part of Moore's life.  On June 7, 2010 he released his debut EP as Skrillex, My Name Is Skrillex, as a free download.  Soon after, he was signed to mau5trap and began a nationwide tour with deadmau5.  On October 22, 2010 he released his second EP, Scary Monsters and Nice Sprites, as a co-release through mau5trap and Big Beat.  On June 2, 2011, Moore announced the release of a \"Scary Monsters and Nice Sprites\" remix EP titled More Monsters And Sprites, which was released on June 7, 2011 on Beatport and June 21, 2011 on iTunes. It contained 3 new tracks, as well as 4 remixes of \"Scary Monsters and Nice Sprites\".  Skrillex announced his label OWSLA on August 17, 2011.  On December 23, 2011, Moore released the Bangarang EP. The EP features Ellie Goulding on the track \"Summit\", as well as collaborations with Wolfgang Gartner, Kill the Noise, The Doors and 12th Planet  Skrillex has been nominated for five awards at the 54th Annual Grammys to be held in February 2012. Among his nominations are Best New Artist, Best Dance Recording (for \"Scary Monsters & Nice Sprites\") and Best Short Form Music Video (for \"First of the Year (Equinox)\")",
-"site": "last.fm",
-"url": "http://www.last.fm/music/Skrillex/+wiki",
-"license": {
-"type": "cc-by-sa",
-"attribution": "Last.fm",
-"attribution-url": "http://www.last.fm/music/Skrillex/+wiki",
-"url": "http://creativecommons.org/licenses/by-sa/3.0/",
-"version": "3.0"
-}
-},
-{
-"text": "Sonny Moore put his gig as post-hardcore frontman behind him ...",
-"site": "mog",
-"url": "http://mog.com/artists/bio/mn1391518/skrillex",
-"license": {
-"type": "all-rights-reserved",
-"attribution": "mog",
-"attribution-url": "http://mog.com/artists/bio/mn1391518/skrillex",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-},
-{
-"text": "Sonny John Moore (born January 15, 1988), better known by his stage name Skrillex, is an American electronic music producer and singer-songwriter. Raised in Northeast Los Angeles and in Northern California, Moore joined the American post-hardcore band From First to Last as the lead singer in 2004, and recorded two studio albums with the band (Dear Diary, My Teen Angst Has a Body Count, 2004, and Heroine, 2006) before leaving to pursue a solo career in 2007. He began his first tour as a solo artist in late 2007. After recruiting a new band lineup, Moore joined the Alternative Press Tour to support bands such as All Time Low and The Rocket Summer, and appeared on the cover of Alternative Press' annual \"100 Bands You Need to Know\" issue. After releasing the Gypsyhook EP in 2009, Moore was scheduled to record his debut studio album, Bells, with producer Noah Shain. However, he ceased production of the album and began performing under the name Skrillex. After releasing the My Name is Skrillex EP for free download on his official MySpace page, he released the Scary Monsters and Nice Sprites EP in late-2010 and More Monsters and Sprites EP in mid-2011. Both have since become moderate commercial successes. On November 30, 2011, he was nominated for a total of five Grammy Awards at the 54th Grammy Awards, including Best New Artist and won three: \"Best Dance/Electronica Album,\" \"Best Dance Recording,\" and \"Best Remixed Recording, Non-Classical\". On December 5, 2011, the BBC announced that he had been nominated for their Sound of 2012 poll. On December 12, 2011, he was also named MTV's Electronic Dance Music Artist of the Year. \n\nBiography:\n\nBackground:\nMoore was born in the Highland Park neighborhood of Northeast Los Angeles, but moved to the Forest Hill neighborhood of San Francisco at the age of two, where he attended elementary school. At the ages of nine and ten, Moore attended a local boarding school located in the Mojave Desert LV, but eventually moved back to Northern California. By the age of twelve, his family moved him back to his birthplace of Northeast L.A., where he enrolled in a private academy school specializing in arts, and was then later home schooled at the age of fourteen due to bullying. In 2004, he learned he was adopted and dropped out of the program when he was sixteen years old. While a young teenager in Los Angeles, Moore would attend punk gigs in Mexican American neighborhoods in East and South Los Angeles, and later on electro club raves in the downtown's Silver Lake and Echo Park neighborhoods. \n\nFrom First to Last (2004-07):\nIn 2004, Moore contacted Matt Good of From First to Last about playing guitar for the band on their debut album. After flying out to Georgia, Moore was heard singing by three studio producers, Derrick Thomas, Eric Dale, and McHale Butler, and was then made lead singer, with Good playing guitar. In June 2004, Epitaph Records released the band's first full-length record with their new bandmate, Dear Diary, My Teen Angst Has a Body Count. After performing on several successful tours, two being the Vans Warped Tour and Dead by Dawn tour, they began recording their second album, Heroine with producer Ross Robinson. The album was released in March 2006 on Epitaph. With high record sales once again, the band found themselves part of many successful tours, until Moore started suffering vocal problems, causing the band to resign from several tours. After going through a successful vocal surgical procedure, Moore informed the band he would be permanently resigning to work on a solo career. FFTL's last show performed with Moore was in their hometown of Orlando at The House of Blues while touring with Atreyu. \n\nSolo career (2007-present):\n\nMoore announced he had left From First to Last to pursue a solo career. He then launched a Myspace page displaying three demos (\"Signal\", \"Equinox\", and \"Glow Worm\"). This led to Moore's first performance since his leaving From First to Last. On April 7, 2007, alongside harpist Carol Robbins, Moore played several original songs at a local art building. After months of releasing demos via Myspace, Moore played on the Team Sleep Tour with a full band. The tour also featured supporting acts Monster in the Machine and Strata. Moore made several demo CDs available on this tour, limited to about 30 per show. These CDs were tour exclusive, and were packaged in \"baby blue envelopes\", each with a unique drawing by Moore or bandmate. In February 2008, Alternative Press Magazine announced the second annual AP Tour, with All Time Low, The Rocket Summer, The Matches, and Forever the Sickest Kids, as well as Sonny Moore. The tour started in Houston, Texas on March 14 and went through North America, ending in Cleveland, Ohio on May 2, with the majority of the shows being sold out. All bands playing the tour would be featured on the cover of Alternative Press Magazine's annual 100 Bands You Need to Know special, and would be interviewed on the Alternative Press Podcast. During this tour Moore's line-up consisted of Sean Friday on drums, Christopher Null on guitar, and Aaron Rothe on keyboards. On April 7, 2009, he released Gypsyhook EP, a digital EP, which featured three songs and four remixes. Also included was a Japanese version of \"Mora\" entitled \"海水\" (\"Kaisui\"). Physical copies of the EP were available at his shows. After going on tour with Innerpartysystem and Paper Route and opening for Chiodos on their European tour, Moore performed at Bamboozle on May 2. He performed on Bamboozle Left's Saints and Sinners stage on April 4. He toured with Hollywood Undead in April 2009 performing under the band name Sonny and the Blood Monkeys, with Chris Null (electric guitar), Sean Friday (drums, percussion & beats) and Aaron Rothe (keyboards, synthesizers, programming & turntables) Although no official statement has been given regarding the album, Moore has stated that Bells will no longer be released. \n\nProduction career:\n\nIn 2008, Moore began producing and performing under the alias Skrillex at clubs in the Los Angeles area. Previously, he had been known on the Internet as Twipz. On June 7, 2010, Moore released his official Skrillex debut EP, My Name is Skrillex as a free download. Moore provided programming and vocals for UK metalcore band Bring Me the Horizon on their third studio album, There Is a Hell, Believe Me I've Seen It. There Is a Heaven, Let's Keep It a Secret. Later in the year, Sonny began a nationwide tour with Deadmau5 after being signed to mau5trap recordings and released his second EP, Scary Monsters and Nice Sprites. Moore kicked off the \"Project Blue Book Tour\" in 2011 with support from Porter Robinson, Tommy Lee and DJ Aero as well as appearances from Sofia Toufa for a new song titled \"Bring out the Devil.\" Skrillex unveiled several new songs on this tour including \"First Of The Year\" (formerly known as \"Equinox\"), \"Reptile\", and \"Cinema\" (remix of a Benny Benassi track). \"Reptile\" was featured in the TV commercial for Mortal Kombat 9, and \"First of the Year (Equinox)\" is featured on his follow up EP and remix companion to Scary Monsters and Nice Sprites, titled More Monsters and Sprites. In April 2011, Spin magazine premiered \"Get Up\", an exclusive new track from Korn that was produced by Skrillex. Korn made \"Get Up\" available for free download via their Facebook page. On April 15, 2011 KoRn joined Skrillex on stage for his set at Coachella 2011. On April 18, 2011, Sony Computer Entertainment (SCEA) development studio Naughty Dog released a trailer for the multiplayer component of their PlayStation 3 game Uncharted 3: Drake's Deception, featuring \"Kill EVERYBODY\" from Scary Monsters and Nice Sprites. In June 2011, \"More Monsters and Sprites\" was released on Beatport, an EP consisting of three original tracks, including \"First of the Year (Equinox)\" and two versions of his original track \"Ruffneck\". A leaked track entitled \"Ruffneck Bass\" had been leaked on the internet months prior which used the same sample as in the new \"Ruffneck\" tracks on the EP. Skrillex released a music video for \"Rock n' Roll (Will Take You to the Mountain)\" on his official YouTube page on June 20, 2011. \n\nOn August 17, 2011 Skrillex announced his label, OWSLA. \"The label's first releases will come from Bristol-based dubstep producer Koan Sound, electro-house newcomer Porter Robinson from North Carolina, singer/songwriter Alvin Risk, and San Francisco-based M Machine (formally Metropolis).\" Skrillex released a music video for \"First of the Year (Equinox)\" via Spin.com on August 19, 2011. In late August 2011 it was released that he would be appearing Knife Party's first release, collaborating on a Moombahton style track entitled \"Zoology\". A preview was released on YouTube. In late September 2011 he created the track \"Syndicate\" as promotion for the video game of the same name. Kaskade's 2011 album Fire & Ice features a collaboration between Kaskade and Skrillex entitled \"Lick It\". The video for Skrillex's song \"First of the Year (Equinox)\" appears on the first episode of the Beavis and Butt-head revival. On November 8, Skrillex stated that he intended to release an album entitled Voltage. Skrillex gave fans more info about Voltage in RockSound Magazine after a photoshoot for the cover and doing an extensive interview on his tour. For unknown reasons, however, the album was never released. On December 21, 2011, Skrillex unveiled the Bangarang EP for a Beatport release on December 23. On March 13, 2012, Beatport released OWSLA's second Free Treats sampler, Free Treats Vol. 2. The 19-track compilation features \"Ruffneck (FULL Flex) Munchi Anonymous Revolution Remix\", a remixed track by Skrillex. This new take on the track deviates from the original (released on the More Monsters and Sprites EP), with the remix being more characteristic of Electro House, though with a much slower tempo of 108 BPM, versus the original version's classic Dubstep tempo of 140 BPM, also straying from the typical Electro House tempo of 128 BPM. On August 12, 2012, his new side-project formed with Boys Noize called Dog Blood released an EP called Next Order/Middle Finger. \n\nInfluences:\nMoore has stated in an online interview that he has been a longtime fan of Warp, an electronic music label that has released recordings from artists such as Aphex Twin and Squarepusher. \n\nPersonal life:\nAs of February 2012, Skrillex has been dating fellow artist and singer, Ellie Goulding, who provided vocals for the Skrillex track, \"Summit\", featured on the EP, Bangarang.",
-"site": "wikipedia",
-"url": "http://en.wikipedia.org/wiki/Skrillex",
-"license": {
-"type": "cc-by-sa",
-"attribution": "wikipedia",
-"attribution-url": "http://en.wikipedia.org/wiki/Skrillex",
-"url": "http://creativecommons.org/licenses/by-sa/3.0/",
-"version": "3.0"
-}
-},
-{
-"text": "Sonny Moore put his gig as post-hardcore frontman behind him ...",
-"site": "aol",
-"url": "http://music.aol.com/artist/skrillex/biography",
-"license": {
-"type": "unknown",
-"attribution": "aol",
-"attribution-url": "http://music.aol.com/artist/skrillex/biography",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-},
-{
-"text": "Childhood and early bands (1988–2004) Born on January 15, 1988, ...",
-"site": "ilike",
-"url": "http://www.ilike.com/artist/Skrillex",
-"license": {
-"type": "unknown",
-"attribution": "ilike",
-"attribution-url": "http://www.ilike.com/artist/Skrillex",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-},
-{
-"text": "“I’ve been deep into electronic music my entire life. The ...",
-"site": "amazon",
-"url": "http://www.amazon.com/Skrillex/e/B004HK3B5U/",
-"license": {
-"type": "unknown",
-"attribution": "amazon",
-"attribution-url": "http://www.amazon.com/Skrillex/e/B004HK3B5U/",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-},
-{
-"text": "Sonny Moore put his gig as post-hardcore frontman behind him ...",
-"site": "itunes",
-"url": "http://itunes.apple.com/us/artist/skrillex/id356545647",
-"license": {
-"type": "unknown",
-"attribution": "itunes",
-"attribution-url": "http://itunes.apple.com/us/artist/skrillex/id356545647",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-},
-{
-"text": "Sonny Moore put his gig as post-hardcore frontman behind him ...",
-"site": "rdio",
-"url": "http://www.rdio.com/artist/Skrillex/",
-"license": {
-"type": "all-rights-reserved",
-"attribution": "",
-"attribution-url": "",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-}
-]
-}
-}
+"headliner": "Skrillex"
 },
 "venue": {
 "id": "10275455",
@@ -2040,7 +1565,7 @@ this.cleanExtractResult = [
 "size": "extralarge"
 }
 ],
-"attendance": "15",
+"attendance": "17",
 "reviews": "0",
 "tag": "lastfm:event=3400719",
 "url": "http://www.last.fm/event/3400719+Skrillex+at+%D0%902+on+7+December+2012",
@@ -2092,38 +1617,6 @@ this.cleanExtractResult = [
 "events": {
 "#text": "\n",
 "artist": "Skrillex & Wolfgang Gartner",
-"festivalsonly": "0",
-"page": "0",
-"perPage": "50",
-"totalPages": "0",
-"total": "0"
-}
-}
-},
-{
-"href": "spotify:artist:3Jfvbc1yPVJAiYEI21udn4",
-"name": "Foreign Beggars feat. Skrillex",
-"popularity": "0.06003",
-"artistGetEvents": {
-"events": {
-"#text": "\n",
-"artist": "Foreign Beggars feat. Skrillex",
-"festivalsonly": "0",
-"page": "0",
-"perPage": "50",
-"totalPages": "0",
-"total": "0"
-}
-}
-},
-{
-"href": "spotify:artist:31xN5sM31Xp9FtOLiIntFA",
-"name": "Skrillex & The Doors",
-"popularity": "0.09665",
-"artistGetEvents": {
-"events": {
-"#text": "\n",
-"artist": "Skrillex & The Doors",
 "festivalsonly": "0",
 "page": "0",
 "perPage": "50",
@@ -7468,8 +6961,8 @@ this.rawResult = [
 "callIndex": null,
 "apiConfig": {
 "action": "artistSearch",
-"in_source": "request.get",
-"in_param": "0"
+"in_param_name": "q",
+"in_source": "entry query"
 }
 },
 "result": {
@@ -7578,19 +7071,19 @@ this.rawResult = [
 "calls": [
 {
 "meta": {
-"query": "Skrillex & The Doors",
-"index": 4,
+"query": "Skrillex & Wolfgang Gartner",
+"index": 2,
 "callIndex": 0,
 "apiConfig": {
 "action": "artistGetEvents",
-"in_source": "artists.name",
-"in_param": "0"
+"in_param_name": "artist",
+"in_source": "artists.name"
 }
 },
 "result": {
 "events": {
 "#text": "\n",
-"artist": "Skrillex & The Doors",
+"artist": "Skrillex & Wolfgang Gartner",
 "festivalsonly": "0",
 "page": "0",
 "perPage": "50",
@@ -7601,41 +7094,7 @@ this.rawResult = [
 "raw": {
 "events": {
 "#text": "\n",
-"artist": "Skrillex & The Doors",
-"festivalsonly": "0",
-"page": "0",
-"perPage": "50",
-"totalPages": "0",
-"total": "0"
-}
-}
-},
-{
-"meta": {
-"query": "Foreign Beggars feat. Skrillex",
-"index": 3,
-"callIndex": 0,
-"apiConfig": {
-"action": "artistGetEvents",
-"in_source": "artists.name",
-"in_param": "0"
-}
-},
-"result": {
-"events": {
-"#text": "\n",
-"artist": "Foreign Beggars feat. Skrillex",
-"festivalsonly": "0",
-"page": "0",
-"perPage": "50",
-"totalPages": "0",
-"total": "0"
-}
-},
-"raw": {
-"events": {
-"#text": "\n",
-"artist": "Foreign Beggars feat. Skrillex",
+"artist": "Skrillex & Wolfgang Gartner",
 "festivalsonly": "0",
 "page": "0",
 "perPage": "50",
@@ -7651,8 +7110,8 @@ this.rawResult = [
 "callIndex": 0,
 "apiConfig": {
 "action": "artistGetEvents",
-"in_source": "artists.name",
-"in_param": "0"
+"in_param_name": "artist",
+"in_source": "artists.name"
 }
 },
 "result": {
@@ -7670,40 +7129,6 @@ this.rawResult = [
 "events": {
 "#text": "\n",
 "artist": "Kaskade & Skrillex",
-"festivalsonly": "0",
-"page": "0",
-"perPage": "50",
-"totalPages": "0",
-"total": "0"
-}
-}
-},
-{
-"meta": {
-"query": "Skrillex & Wolfgang Gartner",
-"index": 2,
-"callIndex": 0,
-"apiConfig": {
-"action": "artistGetEvents",
-"in_source": "artists.name",
-"in_param": "0"
-}
-},
-"result": {
-"events": {
-"#text": "\n",
-"artist": "Skrillex & Wolfgang Gartner",
-"festivalsonly": "0",
-"page": "0",
-"perPage": "50",
-"totalPages": "0",
-"total": "0"
-}
-},
-"raw": {
-"events": {
-"#text": "\n",
-"artist": "Skrillex & Wolfgang Gartner",
 "festivalsonly": "0",
 "page": "0",
 "perPage": "50",
@@ -7719,8 +7144,8 @@ this.rawResult = [
 "callIndex": 0,
 "apiConfig": {
 "action": "artistGetEvents",
-"in_source": "artists.name",
-"in_param": "0"
+"in_param_name": "artist",
+"in_source": "artists.name"
 }
 },
 "result": {
@@ -8475,7 +7900,7 @@ this.rawResult = [
 "size": "extralarge"
 }
 ],
-"attendance": "15",
+"attendance": "17",
 "reviews": "0",
 "tag": "lastfm:event=3400719",
 "url": "http://www.last.fm/event/3400719+Skrillex+at+%D0%902+on+7+December+2012",
@@ -9254,7 +8679,7 @@ this.rawResult = [
 "size": "extralarge"
 }
 ],
-"attendance": "15",
+"attendance": "17",
 "reviews": "0",
 "tag": "lastfm:event=3400719",
 "url": "http://www.last.fm/event/3400719+Skrillex+at+%D0%902+on+7+December+2012",
@@ -9290,254 +8715,12 @@ this.rawResult = [
 {
 "meta": {
 "query": "Skrillex",
-"index": 3,
+"index": 1,
 "callIndex": 0,
 "apiConfig": {
 "action": "artistBiographies",
-"in_source": "events.event.artists.headliner",
-"in_param": "1"
-}
-},
-"result": {
-"response": {
-"status": {
-"version": "4.2",
-"code": 0,
-"message": "Success"
-},
-"start": 0,
-"total": 7,
-"biographies": [
-{
-"text": "Skrillex is the pseudonym used by Los Angeles, California, USA musician Sonny Moore to differentiate his electronic solo work from his work with From First To Last and his other solo projects.   As Skrillex, Moore is an electronic DJ and producer boasting a musical style that incorporates electro house, fidget house, and dubstep.  Moore began producing and performing under the alias Skrillex at clubs in the Los Angeles area in 2008.    Throughout 2010, Skrillex became a bigger and bigger part of Moore's life.  On June 7, 2010 he released his debut EP as Skrillex, My Name Is Skrillex, as a free download.  Soon after, he was signed to mau5trap and began a nationwide tour with deadmau5.  On October 22, 2010 he released his second EP, Scary Monsters and Nice Sprites, as a co-release through mau5trap and Big Beat.  On June 2, 2011, Moore announced the release of a \"Scary Monsters and Nice Sprites\" remix EP titled More Monsters And Sprites, which was released on June 7, 2011 on Beatport and June 21, 2011 on iTunes. It contained 3 new tracks, as well as 4 remixes of \"Scary Monsters and Nice Sprites\".  Skrillex announced his label OWSLA on August 17, 2011.  On December 23, 2011, Moore released the Bangarang EP. The EP features Ellie Goulding on the track \"Summit\", as well as collaborations with Wolfgang Gartner, Kill the Noise, The Doors and 12th Planet  Skrillex has been nominated for five awards at the 54th Annual Grammys to be held in February 2012. Among his nominations are Best New Artist, Best Dance Recording (for \"Scary Monsters & Nice Sprites\") and Best Short Form Music Video (for \"First of the Year (Equinox)\")",
-"site": "last.fm",
-"url": "http://www.last.fm/music/Skrillex/+wiki",
-"license": {
-"type": "cc-by-sa",
-"attribution": "Last.fm",
-"attribution-url": "http://www.last.fm/music/Skrillex/+wiki",
-"url": "http://creativecommons.org/licenses/by-sa/3.0/",
-"version": "3.0"
-}
-},
-{
-"text": "Sonny Moore put his gig as post-hardcore frontman behind him ...",
-"site": "mog",
-"url": "http://mog.com/artists/bio/mn1391518/skrillex",
-"license": {
-"type": "all-rights-reserved",
-"attribution": "mog",
-"attribution-url": "http://mog.com/artists/bio/mn1391518/skrillex",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-},
-{
-"text": "Sonny John Moore (born January 15, 1988), better known by his stage name Skrillex, is an American electronic music producer and singer-songwriter. Raised in Northeast Los Angeles and in Northern California, Moore joined the American post-hardcore band From First to Last as the lead singer in 2004, and recorded two studio albums with the band (Dear Diary, My Teen Angst Has a Body Count, 2004, and Heroine, 2006) before leaving to pursue a solo career in 2007. He began his first tour as a solo artist in late 2007. After recruiting a new band lineup, Moore joined the Alternative Press Tour to support bands such as All Time Low and The Rocket Summer, and appeared on the cover of Alternative Press' annual \"100 Bands You Need to Know\" issue. After releasing the Gypsyhook EP in 2009, Moore was scheduled to record his debut studio album, Bells, with producer Noah Shain. However, he ceased production of the album and began performing under the name Skrillex. After releasing the My Name is Skrillex EP for free download on his official MySpace page, he released the Scary Monsters and Nice Sprites EP in late-2010 and More Monsters and Sprites EP in mid-2011. Both have since become moderate commercial successes. On November 30, 2011, he was nominated for a total of five Grammy Awards at the 54th Grammy Awards, including Best New Artist and won three: \"Best Dance/Electronica Album,\" \"Best Dance Recording,\" and \"Best Remixed Recording, Non-Classical\". On December 5, 2011, the BBC announced that he had been nominated for their Sound of 2012 poll. On December 12, 2011, he was also named MTV's Electronic Dance Music Artist of the Year. \n\nBiography:\n\nBackground:\nMoore was born in the Highland Park neighborhood of Northeast Los Angeles, but moved to the Forest Hill neighborhood of San Francisco at the age of two, where he attended elementary school. At the ages of nine and ten, Moore attended a local boarding school located in the Mojave Desert LV, but eventually moved back to Northern California. By the age of twelve, his family moved him back to his birthplace of Northeast L.A., where he enrolled in a private academy school specializing in arts, and was then later home schooled at the age of fourteen due to bullying. In 2004, he learned he was adopted and dropped out of the program when he was sixteen years old. While a young teenager in Los Angeles, Moore would attend punk gigs in Mexican American neighborhoods in East and South Los Angeles, and later on electro club raves in the downtown's Silver Lake and Echo Park neighborhoods. \n\nFrom First to Last (2004-07):\nIn 2004, Moore contacted Matt Good of From First to Last about playing guitar for the band on their debut album. After flying out to Georgia, Moore was heard singing by three studio producers, Derrick Thomas, Eric Dale, and McHale Butler, and was then made lead singer, with Good playing guitar. In June 2004, Epitaph Records released the band's first full-length record with their new bandmate, Dear Diary, My Teen Angst Has a Body Count. After performing on several successful tours, two being the Vans Warped Tour and Dead by Dawn tour, they began recording their second album, Heroine with producer Ross Robinson. The album was released in March 2006 on Epitaph. With high record sales once again, the band found themselves part of many successful tours, until Moore started suffering vocal problems, causing the band to resign from several tours. After going through a successful vocal surgical procedure, Moore informed the band he would be permanently resigning to work on a solo career. FFTL's last show performed with Moore was in their hometown of Orlando at The House of Blues while touring with Atreyu. \n\nSolo career (2007-present):\n\nMoore announced he had left From First to Last to pursue a solo career. He then launched a Myspace page displaying three demos (\"Signal\", \"Equinox\", and \"Glow Worm\"). This led to Moore's first performance since his leaving From First to Last. On April 7, 2007, alongside harpist Carol Robbins, Moore played several original songs at a local art building. After months of releasing demos via Myspace, Moore played on the Team Sleep Tour with a full band. The tour also featured supporting acts Monster in the Machine and Strata. Moore made several demo CDs available on this tour, limited to about 30 per show. These CDs were tour exclusive, and were packaged in \"baby blue envelopes\", each with a unique drawing by Moore or bandmate. In February 2008, Alternative Press Magazine announced the second annual AP Tour, with All Time Low, The Rocket Summer, The Matches, and Forever the Sickest Kids, as well as Sonny Moore. The tour started in Houston, Texas on March 14 and went through North America, ending in Cleveland, Ohio on May 2, with the majority of the shows being sold out. All bands playing the tour would be featured on the cover of Alternative Press Magazine's annual 100 Bands You Need to Know special, and would be interviewed on the Alternative Press Podcast. During this tour Moore's line-up consisted of Sean Friday on drums, Christopher Null on guitar, and Aaron Rothe on keyboards. On April 7, 2009, he released Gypsyhook EP, a digital EP, which featured three songs and four remixes. Also included was a Japanese version of \"Mora\" entitled \"海水\" (\"Kaisui\"). Physical copies of the EP were available at his shows. After going on tour with Innerpartysystem and Paper Route and opening for Chiodos on their European tour, Moore performed at Bamboozle on May 2. He performed on Bamboozle Left's Saints and Sinners stage on April 4. He toured with Hollywood Undead in April 2009 performing under the band name Sonny and the Blood Monkeys, with Chris Null (electric guitar), Sean Friday (drums, percussion & beats) and Aaron Rothe (keyboards, synthesizers, programming & turntables) Although no official statement has been given regarding the album, Moore has stated that Bells will no longer be released. \n\nProduction career:\n\nIn 2008, Moore began producing and performing under the alias Skrillex at clubs in the Los Angeles area. Previously, he had been known on the Internet as Twipz. On June 7, 2010, Moore released his official Skrillex debut EP, My Name is Skrillex as a free download. Moore provided programming and vocals for UK metalcore band Bring Me the Horizon on their third studio album, There Is a Hell, Believe Me I've Seen It. There Is a Heaven, Let's Keep It a Secret. Later in the year, Sonny began a nationwide tour with Deadmau5 after being signed to mau5trap recordings and released his second EP, Scary Monsters and Nice Sprites. Moore kicked off the \"Project Blue Book Tour\" in 2011 with support from Porter Robinson, Tommy Lee and DJ Aero as well as appearances from Sofia Toufa for a new song titled \"Bring out the Devil.\" Skrillex unveiled several new songs on this tour including \"First Of The Year\" (formerly known as \"Equinox\"), \"Reptile\", and \"Cinema\" (remix of a Benny Benassi track). \"Reptile\" was featured in the TV commercial for Mortal Kombat 9, and \"First of the Year (Equinox)\" is featured on his follow up EP and remix companion to Scary Monsters and Nice Sprites, titled More Monsters and Sprites. In April 2011, Spin magazine premiered \"Get Up\", an exclusive new track from Korn that was produced by Skrillex. Korn made \"Get Up\" available for free download via their Facebook page. On April 15, 2011 KoRn joined Skrillex on stage for his set at Coachella 2011. On April 18, 2011, Sony Computer Entertainment (SCEA) development studio Naughty Dog released a trailer for the multiplayer component of their PlayStation 3 game Uncharted 3: Drake's Deception, featuring \"Kill EVERYBODY\" from Scary Monsters and Nice Sprites. In June 2011, \"More Monsters and Sprites\" was released on Beatport, an EP consisting of three original tracks, including \"First of the Year (Equinox)\" and two versions of his original track \"Ruffneck\". A leaked track entitled \"Ruffneck Bass\" had been leaked on the internet months prior which used the same sample as in the new \"Ruffneck\" tracks on the EP. Skrillex released a music video for \"Rock n' Roll (Will Take You to the Mountain)\" on his official YouTube page on June 20, 2011. \n\nOn August 17, 2011 Skrillex announced his label, OWSLA. \"The label's first releases will come from Bristol-based dubstep producer Koan Sound, electro-house newcomer Porter Robinson from North Carolina, singer/songwriter Alvin Risk, and San Francisco-based M Machine (formally Metropolis).\" Skrillex released a music video for \"First of the Year (Equinox)\" via Spin.com on August 19, 2011. In late August 2011 it was released that he would be appearing Knife Party's first release, collaborating on a Moombahton style track entitled \"Zoology\". A preview was released on YouTube. In late September 2011 he created the track \"Syndicate\" as promotion for the video game of the same name. Kaskade's 2011 album Fire & Ice features a collaboration between Kaskade and Skrillex entitled \"Lick It\". The video for Skrillex's song \"First of the Year (Equinox)\" appears on the first episode of the Beavis and Butt-head revival. On November 8, Skrillex stated that he intended to release an album entitled Voltage. Skrillex gave fans more info about Voltage in RockSound Magazine after a photoshoot for the cover and doing an extensive interview on his tour. For unknown reasons, however, the album was never released. On December 21, 2011, Skrillex unveiled the Bangarang EP for a Beatport release on December 23. On March 13, 2012, Beatport released OWSLA's second Free Treats sampler, Free Treats Vol. 2. The 19-track compilation features \"Ruffneck (FULL Flex) Munchi Anonymous Revolution Remix\", a remixed track by Skrillex. This new take on the track deviates from the original (released on the More Monsters and Sprites EP), with the remix being more characteristic of Electro House, though with a much slower tempo of 108 BPM, versus the original version's classic Dubstep tempo of 140 BPM, also straying from the typical Electro House tempo of 128 BPM. On August 12, 2012, his new side-project formed with Boys Noize called Dog Blood released an EP called Next Order/Middle Finger. \n\nInfluences:\nMoore has stated in an online interview that he has been a longtime fan of Warp, an electronic music label that has released recordings from artists such as Aphex Twin and Squarepusher. \n\nPersonal life:\nAs of February 2012, Skrillex has been dating fellow artist and singer, Ellie Goulding, who provided vocals for the Skrillex track, \"Summit\", featured on the EP, Bangarang.",
-"site": "wikipedia",
-"url": "http://en.wikipedia.org/wiki/Skrillex",
-"license": {
-"type": "cc-by-sa",
-"attribution": "wikipedia",
-"attribution-url": "http://en.wikipedia.org/wiki/Skrillex",
-"url": "http://creativecommons.org/licenses/by-sa/3.0/",
-"version": "3.0"
-}
-},
-{
-"text": "Sonny Moore put his gig as post-hardcore frontman behind him ...",
-"site": "aol",
-"url": "http://music.aol.com/artist/skrillex/biography",
-"license": {
-"type": "unknown",
-"attribution": "aol",
-"attribution-url": "http://music.aol.com/artist/skrillex/biography",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-},
-{
-"text": "Childhood and early bands (1988–2004) Born on January 15, 1988, ...",
-"site": "ilike",
-"url": "http://www.ilike.com/artist/Skrillex",
-"license": {
-"type": "unknown",
-"attribution": "ilike",
-"attribution-url": "http://www.ilike.com/artist/Skrillex",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-},
-{
-"text": "“I’ve been deep into electronic music my entire life. The ...",
-"site": "amazon",
-"url": "http://www.amazon.com/Skrillex/e/B004HK3B5U/",
-"license": {
-"type": "unknown",
-"attribution": "amazon",
-"attribution-url": "http://www.amazon.com/Skrillex/e/B004HK3B5U/",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-},
-{
-"text": "Sonny Moore put his gig as post-hardcore frontman behind him ...",
-"site": "itunes",
-"url": "http://itunes.apple.com/us/artist/skrillex/id356545647",
-"license": {
-"type": "unknown",
-"attribution": "itunes",
-"attribution-url": "http://itunes.apple.com/us/artist/skrillex/id356545647",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-},
-{
-"text": "Sonny Moore put his gig as post-hardcore frontman behind him ...",
-"site": "rdio",
-"url": "http://www.rdio.com/artist/Skrillex/",
-"license": {
-"type": "all-rights-reserved",
-"attribution": "",
-"attribution-url": "",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-}
-]
-}
-},
-"raw": {
-"response": {
-"status": {
-"version": "4.2",
-"code": 0,
-"message": "Success"
-},
-"start": 0,
-"total": 7,
-"biographies": [
-{
-"text": "Skrillex is the pseudonym used by Los Angeles, California, USA musician Sonny Moore to differentiate his electronic solo work from his work with From First To Last and his other solo projects.   As Skrillex, Moore is an electronic DJ and producer boasting a musical style that incorporates electro house, fidget house, and dubstep.  Moore began producing and performing under the alias Skrillex at clubs in the Los Angeles area in 2008.    Throughout 2010, Skrillex became a bigger and bigger part of Moore's life.  On June 7, 2010 he released his debut EP as Skrillex, My Name Is Skrillex, as a free download.  Soon after, he was signed to mau5trap and began a nationwide tour with deadmau5.  On October 22, 2010 he released his second EP, Scary Monsters and Nice Sprites, as a co-release through mau5trap and Big Beat.  On June 2, 2011, Moore announced the release of a \"Scary Monsters and Nice Sprites\" remix EP titled More Monsters And Sprites, which was released on June 7, 2011 on Beatport and June 21, 2011 on iTunes. It contained 3 new tracks, as well as 4 remixes of \"Scary Monsters and Nice Sprites\".  Skrillex announced his label OWSLA on August 17, 2011.  On December 23, 2011, Moore released the Bangarang EP. The EP features Ellie Goulding on the track \"Summit\", as well as collaborations with Wolfgang Gartner, Kill the Noise, The Doors and 12th Planet  Skrillex has been nominated for five awards at the 54th Annual Grammys to be held in February 2012. Among his nominations are Best New Artist, Best Dance Recording (for \"Scary Monsters & Nice Sprites\") and Best Short Form Music Video (for \"First of the Year (Equinox)\")",
-"site": "last.fm",
-"url": "http://www.last.fm/music/Skrillex/+wiki",
-"license": {
-"type": "cc-by-sa",
-"attribution": "Last.fm",
-"attribution-url": "http://www.last.fm/music/Skrillex/+wiki",
-"url": "http://creativecommons.org/licenses/by-sa/3.0/",
-"version": "3.0"
-}
-},
-{
-"text": "Sonny Moore put his gig as post-hardcore frontman behind him ...",
-"site": "mog",
-"url": "http://mog.com/artists/bio/mn1391518/skrillex",
-"license": {
-"type": "all-rights-reserved",
-"attribution": "mog",
-"attribution-url": "http://mog.com/artists/bio/mn1391518/skrillex",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-},
-{
-"text": "Sonny John Moore (born January 15, 1988), better known by his stage name Skrillex, is an American electronic music producer and singer-songwriter. Raised in Northeast Los Angeles and in Northern California, Moore joined the American post-hardcore band From First to Last as the lead singer in 2004, and recorded two studio albums with the band (Dear Diary, My Teen Angst Has a Body Count, 2004, and Heroine, 2006) before leaving to pursue a solo career in 2007. He began his first tour as a solo artist in late 2007. After recruiting a new band lineup, Moore joined the Alternative Press Tour to support bands such as All Time Low and The Rocket Summer, and appeared on the cover of Alternative Press' annual \"100 Bands You Need to Know\" issue. After releasing the Gypsyhook EP in 2009, Moore was scheduled to record his debut studio album, Bells, with producer Noah Shain. However, he ceased production of the album and began performing under the name Skrillex. After releasing the My Name is Skrillex EP for free download on his official MySpace page, he released the Scary Monsters and Nice Sprites EP in late-2010 and More Monsters and Sprites EP in mid-2011. Both have since become moderate commercial successes. On November 30, 2011, he was nominated for a total of five Grammy Awards at the 54th Grammy Awards, including Best New Artist and won three: \"Best Dance/Electronica Album,\" \"Best Dance Recording,\" and \"Best Remixed Recording, Non-Classical\". On December 5, 2011, the BBC announced that he had been nominated for their Sound of 2012 poll. On December 12, 2011, he was also named MTV's Electronic Dance Music Artist of the Year. \n\nBiography:\n\nBackground:\nMoore was born in the Highland Park neighborhood of Northeast Los Angeles, but moved to the Forest Hill neighborhood of San Francisco at the age of two, where he attended elementary school. At the ages of nine and ten, Moore attended a local boarding school located in the Mojave Desert LV, but eventually moved back to Northern California. By the age of twelve, his family moved him back to his birthplace of Northeast L.A., where he enrolled in a private academy school specializing in arts, and was then later home schooled at the age of fourteen due to bullying. In 2004, he learned he was adopted and dropped out of the program when he was sixteen years old. While a young teenager in Los Angeles, Moore would attend punk gigs in Mexican American neighborhoods in East and South Los Angeles, and later on electro club raves in the downtown's Silver Lake and Echo Park neighborhoods. \n\nFrom First to Last (2004-07):\nIn 2004, Moore contacted Matt Good of From First to Last about playing guitar for the band on their debut album. After flying out to Georgia, Moore was heard singing by three studio producers, Derrick Thomas, Eric Dale, and McHale Butler, and was then made lead singer, with Good playing guitar. In June 2004, Epitaph Records released the band's first full-length record with their new bandmate, Dear Diary, My Teen Angst Has a Body Count. After performing on several successful tours, two being the Vans Warped Tour and Dead by Dawn tour, they began recording their second album, Heroine with producer Ross Robinson. The album was released in March 2006 on Epitaph. With high record sales once again, the band found themselves part of many successful tours, until Moore started suffering vocal problems, causing the band to resign from several tours. After going through a successful vocal surgical procedure, Moore informed the band he would be permanently resigning to work on a solo career. FFTL's last show performed with Moore was in their hometown of Orlando at The House of Blues while touring with Atreyu. \n\nSolo career (2007-present):\n\nMoore announced he had left From First to Last to pursue a solo career. He then launched a Myspace page displaying three demos (\"Signal\", \"Equinox\", and \"Glow Worm\"). This led to Moore's first performance since his leaving From First to Last. On April 7, 2007, alongside harpist Carol Robbins, Moore played several original songs at a local art building. After months of releasing demos via Myspace, Moore played on the Team Sleep Tour with a full band. The tour also featured supporting acts Monster in the Machine and Strata. Moore made several demo CDs available on this tour, limited to about 30 per show. These CDs were tour exclusive, and were packaged in \"baby blue envelopes\", each with a unique drawing by Moore or bandmate. In February 2008, Alternative Press Magazine announced the second annual AP Tour, with All Time Low, The Rocket Summer, The Matches, and Forever the Sickest Kids, as well as Sonny Moore. The tour started in Houston, Texas on March 14 and went through North America, ending in Cleveland, Ohio on May 2, with the majority of the shows being sold out. All bands playing the tour would be featured on the cover of Alternative Press Magazine's annual 100 Bands You Need to Know special, and would be interviewed on the Alternative Press Podcast. During this tour Moore's line-up consisted of Sean Friday on drums, Christopher Null on guitar, and Aaron Rothe on keyboards. On April 7, 2009, he released Gypsyhook EP, a digital EP, which featured three songs and four remixes. Also included was a Japanese version of \"Mora\" entitled \"海水\" (\"Kaisui\"). Physical copies of the EP were available at his shows. After going on tour with Innerpartysystem and Paper Route and opening for Chiodos on their European tour, Moore performed at Bamboozle on May 2. He performed on Bamboozle Left's Saints and Sinners stage on April 4. He toured with Hollywood Undead in April 2009 performing under the band name Sonny and the Blood Monkeys, with Chris Null (electric guitar), Sean Friday (drums, percussion & beats) and Aaron Rothe (keyboards, synthesizers, programming & turntables) Although no official statement has been given regarding the album, Moore has stated that Bells will no longer be released. \n\nProduction career:\n\nIn 2008, Moore began producing and performing under the alias Skrillex at clubs in the Los Angeles area. Previously, he had been known on the Internet as Twipz. On June 7, 2010, Moore released his official Skrillex debut EP, My Name is Skrillex as a free download. Moore provided programming and vocals for UK metalcore band Bring Me the Horizon on their third studio album, There Is a Hell, Believe Me I've Seen It. There Is a Heaven, Let's Keep It a Secret. Later in the year, Sonny began a nationwide tour with Deadmau5 after being signed to mau5trap recordings and released his second EP, Scary Monsters and Nice Sprites. Moore kicked off the \"Project Blue Book Tour\" in 2011 with support from Porter Robinson, Tommy Lee and DJ Aero as well as appearances from Sofia Toufa for a new song titled \"Bring out the Devil.\" Skrillex unveiled several new songs on this tour including \"First Of The Year\" (formerly known as \"Equinox\"), \"Reptile\", and \"Cinema\" (remix of a Benny Benassi track). \"Reptile\" was featured in the TV commercial for Mortal Kombat 9, and \"First of the Year (Equinox)\" is featured on his follow up EP and remix companion to Scary Monsters and Nice Sprites, titled More Monsters and Sprites. In April 2011, Spin magazine premiered \"Get Up\", an exclusive new track from Korn that was produced by Skrillex. Korn made \"Get Up\" available for free download via their Facebook page. On April 15, 2011 KoRn joined Skrillex on stage for his set at Coachella 2011. On April 18, 2011, Sony Computer Entertainment (SCEA) development studio Naughty Dog released a trailer for the multiplayer component of their PlayStation 3 game Uncharted 3: Drake's Deception, featuring \"Kill EVERYBODY\" from Scary Monsters and Nice Sprites. In June 2011, \"More Monsters and Sprites\" was released on Beatport, an EP consisting of three original tracks, including \"First of the Year (Equinox)\" and two versions of his original track \"Ruffneck\". A leaked track entitled \"Ruffneck Bass\" had been leaked on the internet months prior which used the same sample as in the new \"Ruffneck\" tracks on the EP. Skrillex released a music video for \"Rock n' Roll (Will Take You to the Mountain)\" on his official YouTube page on June 20, 2011. \n\nOn August 17, 2011 Skrillex announced his label, OWSLA. \"The label's first releases will come from Bristol-based dubstep producer Koan Sound, electro-house newcomer Porter Robinson from North Carolina, singer/songwriter Alvin Risk, and San Francisco-based M Machine (formally Metropolis).\" Skrillex released a music video for \"First of the Year (Equinox)\" via Spin.com on August 19, 2011. In late August 2011 it was released that he would be appearing Knife Party's first release, collaborating on a Moombahton style track entitled \"Zoology\". A preview was released on YouTube. In late September 2011 he created the track \"Syndicate\" as promotion for the video game of the same name. Kaskade's 2011 album Fire & Ice features a collaboration between Kaskade and Skrillex entitled \"Lick It\". The video for Skrillex's song \"First of the Year (Equinox)\" appears on the first episode of the Beavis and Butt-head revival. On November 8, Skrillex stated that he intended to release an album entitled Voltage. Skrillex gave fans more info about Voltage in RockSound Magazine after a photoshoot for the cover and doing an extensive interview on his tour. For unknown reasons, however, the album was never released. On December 21, 2011, Skrillex unveiled the Bangarang EP for a Beatport release on December 23. On March 13, 2012, Beatport released OWSLA's second Free Treats sampler, Free Treats Vol. 2. The 19-track compilation features \"Ruffneck (FULL Flex) Munchi Anonymous Revolution Remix\", a remixed track by Skrillex. This new take on the track deviates from the original (released on the More Monsters and Sprites EP), with the remix being more characteristic of Electro House, though with a much slower tempo of 108 BPM, versus the original version's classic Dubstep tempo of 140 BPM, also straying from the typical Electro House tempo of 128 BPM. On August 12, 2012, his new side-project formed with Boys Noize called Dog Blood released an EP called Next Order/Middle Finger. \n\nInfluences:\nMoore has stated in an online interview that he has been a longtime fan of Warp, an electronic music label that has released recordings from artists such as Aphex Twin and Squarepusher. \n\nPersonal life:\nAs of February 2012, Skrillex has been dating fellow artist and singer, Ellie Goulding, who provided vocals for the Skrillex track, \"Summit\", featured on the EP, Bangarang.",
-"site": "wikipedia",
-"url": "http://en.wikipedia.org/wiki/Skrillex",
-"license": {
-"type": "cc-by-sa",
-"attribution": "wikipedia",
-"attribution-url": "http://en.wikipedia.org/wiki/Skrillex",
-"url": "http://creativecommons.org/licenses/by-sa/3.0/",
-"version": "3.0"
-}
-},
-{
-"text": "Sonny Moore put his gig as post-hardcore frontman behind him ...",
-"site": "aol",
-"url": "http://music.aol.com/artist/skrillex/biography",
-"license": {
-"type": "unknown",
-"attribution": "aol",
-"attribution-url": "http://music.aol.com/artist/skrillex/biography",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-},
-{
-"text": "Childhood and early bands (1988–2004) Born on January 15, 1988, ...",
-"site": "ilike",
-"url": "http://www.ilike.com/artist/Skrillex",
-"license": {
-"type": "unknown",
-"attribution": "ilike",
-"attribution-url": "http://www.ilike.com/artist/Skrillex",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-},
-{
-"text": "“I’ve been deep into electronic music my entire life. The ...",
-"site": "amazon",
-"url": "http://www.amazon.com/Skrillex/e/B004HK3B5U/",
-"license": {
-"type": "unknown",
-"attribution": "amazon",
-"attribution-url": "http://www.amazon.com/Skrillex/e/B004HK3B5U/",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-},
-{
-"text": "Sonny Moore put his gig as post-hardcore frontman behind him ...",
-"site": "itunes",
-"url": "http://itunes.apple.com/us/artist/skrillex/id356545647",
-"license": {
-"type": "unknown",
-"attribution": "itunes",
-"attribution-url": "http://itunes.apple.com/us/artist/skrillex/id356545647",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-},
-{
-"text": "Sonny Moore put his gig as post-hardcore frontman behind him ...",
-"site": "rdio",
-"url": "http://www.rdio.com/artist/Skrillex/",
-"license": {
-"type": "all-rights-reserved",
-"attribution": "",
-"attribution-url": "",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-}
-]
-}
-}
-},
-{
-"meta": {
-"query": "Skrillex",
-"index": 4,
-"callIndex": 0,
-"apiConfig": {
-"action": "artistBiographies",
-"in_source": "events.event.artists.headliner",
-"in_param": "1"
+"in_param_name": "name",
+"in_source": "events.event.artists.headliner"
 }
 },
 "result": {
@@ -9778,8 +8961,8 @@ this.rawResult = [
 "callIndex": 0,
 "apiConfig": {
 "action": "artistBiographies",
-"in_source": "events.event.artists.headliner",
-"in_param": "1"
+"in_param_name": "name",
+"in_source": "events.event.artists.headliner"
 }
 },
 "result": {
@@ -10026,248 +9209,6 @@ this.rawResult = [
 "text": "One of the most admired guitarists of the early 21st ...",
 "site": "rdio",
 "url": "http://www.rdio.com/artist/Jack_White/",
-"license": {
-"type": "all-rights-reserved",
-"attribution": "",
-"attribution-url": "",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-}
-]
-}
-}
-},
-{
-"meta": {
-"query": "Skrillex",
-"index": 1,
-"callIndex": 0,
-"apiConfig": {
-"action": "artistBiographies",
-"in_source": "events.event.artists.headliner",
-"in_param": "1"
-}
-},
-"result": {
-"response": {
-"status": {
-"version": "4.2",
-"code": 0,
-"message": "Success"
-},
-"start": 0,
-"total": 7,
-"biographies": [
-{
-"text": "Skrillex is the pseudonym used by Los Angeles, California, USA musician Sonny Moore to differentiate his electronic solo work from his work with From First To Last and his other solo projects.   As Skrillex, Moore is an electronic DJ and producer boasting a musical style that incorporates electro house, fidget house, and dubstep.  Moore began producing and performing under the alias Skrillex at clubs in the Los Angeles area in 2008.    Throughout 2010, Skrillex became a bigger and bigger part of Moore's life.  On June 7, 2010 he released his debut EP as Skrillex, My Name Is Skrillex, as a free download.  Soon after, he was signed to mau5trap and began a nationwide tour with deadmau5.  On October 22, 2010 he released his second EP, Scary Monsters and Nice Sprites, as a co-release through mau5trap and Big Beat.  On June 2, 2011, Moore announced the release of a \"Scary Monsters and Nice Sprites\" remix EP titled More Monsters And Sprites, which was released on June 7, 2011 on Beatport and June 21, 2011 on iTunes. It contained 3 new tracks, as well as 4 remixes of \"Scary Monsters and Nice Sprites\".  Skrillex announced his label OWSLA on August 17, 2011.  On December 23, 2011, Moore released the Bangarang EP. The EP features Ellie Goulding on the track \"Summit\", as well as collaborations with Wolfgang Gartner, Kill the Noise, The Doors and 12th Planet  Skrillex has been nominated for five awards at the 54th Annual Grammys to be held in February 2012. Among his nominations are Best New Artist, Best Dance Recording (for \"Scary Monsters & Nice Sprites\") and Best Short Form Music Video (for \"First of the Year (Equinox)\")",
-"site": "last.fm",
-"url": "http://www.last.fm/music/Skrillex/+wiki",
-"license": {
-"type": "cc-by-sa",
-"attribution": "Last.fm",
-"attribution-url": "http://www.last.fm/music/Skrillex/+wiki",
-"url": "http://creativecommons.org/licenses/by-sa/3.0/",
-"version": "3.0"
-}
-},
-{
-"text": "Sonny Moore put his gig as post-hardcore frontman behind him ...",
-"site": "mog",
-"url": "http://mog.com/artists/bio/mn1391518/skrillex",
-"license": {
-"type": "all-rights-reserved",
-"attribution": "mog",
-"attribution-url": "http://mog.com/artists/bio/mn1391518/skrillex",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-},
-{
-"text": "Sonny John Moore (born January 15, 1988), better known by his stage name Skrillex, is an American electronic music producer and singer-songwriter. Raised in Northeast Los Angeles and in Northern California, Moore joined the American post-hardcore band From First to Last as the lead singer in 2004, and recorded two studio albums with the band (Dear Diary, My Teen Angst Has a Body Count, 2004, and Heroine, 2006) before leaving to pursue a solo career in 2007. He began his first tour as a solo artist in late 2007. After recruiting a new band lineup, Moore joined the Alternative Press Tour to support bands such as All Time Low and The Rocket Summer, and appeared on the cover of Alternative Press' annual \"100 Bands You Need to Know\" issue. After releasing the Gypsyhook EP in 2009, Moore was scheduled to record his debut studio album, Bells, with producer Noah Shain. However, he ceased production of the album and began performing under the name Skrillex. After releasing the My Name is Skrillex EP for free download on his official MySpace page, he released the Scary Monsters and Nice Sprites EP in late-2010 and More Monsters and Sprites EP in mid-2011. Both have since become moderate commercial successes. On November 30, 2011, he was nominated for a total of five Grammy Awards at the 54th Grammy Awards, including Best New Artist and won three: \"Best Dance/Electronica Album,\" \"Best Dance Recording,\" and \"Best Remixed Recording, Non-Classical\". On December 5, 2011, the BBC announced that he had been nominated for their Sound of 2012 poll. On December 12, 2011, he was also named MTV's Electronic Dance Music Artist of the Year. \n\nBiography:\n\nBackground:\nMoore was born in the Highland Park neighborhood of Northeast Los Angeles, but moved to the Forest Hill neighborhood of San Francisco at the age of two, where he attended elementary school. At the ages of nine and ten, Moore attended a local boarding school located in the Mojave Desert LV, but eventually moved back to Northern California. By the age of twelve, his family moved him back to his birthplace of Northeast L.A., where he enrolled in a private academy school specializing in arts, and was then later home schooled at the age of fourteen due to bullying. In 2004, he learned he was adopted and dropped out of the program when he was sixteen years old. While a young teenager in Los Angeles, Moore would attend punk gigs in Mexican American neighborhoods in East and South Los Angeles, and later on electro club raves in the downtown's Silver Lake and Echo Park neighborhoods. \n\nFrom First to Last (2004-07):\nIn 2004, Moore contacted Matt Good of From First to Last about playing guitar for the band on their debut album. After flying out to Georgia, Moore was heard singing by three studio producers, Derrick Thomas, Eric Dale, and McHale Butler, and was then made lead singer, with Good playing guitar. In June 2004, Epitaph Records released the band's first full-length record with their new bandmate, Dear Diary, My Teen Angst Has a Body Count. After performing on several successful tours, two being the Vans Warped Tour and Dead by Dawn tour, they began recording their second album, Heroine with producer Ross Robinson. The album was released in March 2006 on Epitaph. With high record sales once again, the band found themselves part of many successful tours, until Moore started suffering vocal problems, causing the band to resign from several tours. After going through a successful vocal surgical procedure, Moore informed the band he would be permanently resigning to work on a solo career. FFTL's last show performed with Moore was in their hometown of Orlando at The House of Blues while touring with Atreyu. \n\nSolo career (2007-present):\n\nMoore announced he had left From First to Last to pursue a solo career. He then launched a Myspace page displaying three demos (\"Signal\", \"Equinox\", and \"Glow Worm\"). This led to Moore's first performance since his leaving From First to Last. On April 7, 2007, alongside harpist Carol Robbins, Moore played several original songs at a local art building. After months of releasing demos via Myspace, Moore played on the Team Sleep Tour with a full band. The tour also featured supporting acts Monster in the Machine and Strata. Moore made several demo CDs available on this tour, limited to about 30 per show. These CDs were tour exclusive, and were packaged in \"baby blue envelopes\", each with a unique drawing by Moore or bandmate. In February 2008, Alternative Press Magazine announced the second annual AP Tour, with All Time Low, The Rocket Summer, The Matches, and Forever the Sickest Kids, as well as Sonny Moore. The tour started in Houston, Texas on March 14 and went through North America, ending in Cleveland, Ohio on May 2, with the majority of the shows being sold out. All bands playing the tour would be featured on the cover of Alternative Press Magazine's annual 100 Bands You Need to Know special, and would be interviewed on the Alternative Press Podcast. During this tour Moore's line-up consisted of Sean Friday on drums, Christopher Null on guitar, and Aaron Rothe on keyboards. On April 7, 2009, he released Gypsyhook EP, a digital EP, which featured three songs and four remixes. Also included was a Japanese version of \"Mora\" entitled \"海水\" (\"Kaisui\"). Physical copies of the EP were available at his shows. After going on tour with Innerpartysystem and Paper Route and opening for Chiodos on their European tour, Moore performed at Bamboozle on May 2. He performed on Bamboozle Left's Saints and Sinners stage on April 4. He toured with Hollywood Undead in April 2009 performing under the band name Sonny and the Blood Monkeys, with Chris Null (electric guitar), Sean Friday (drums, percussion & beats) and Aaron Rothe (keyboards, synthesizers, programming & turntables) Although no official statement has been given regarding the album, Moore has stated that Bells will no longer be released. \n\nProduction career:\n\nIn 2008, Moore began producing and performing under the alias Skrillex at clubs in the Los Angeles area. Previously, he had been known on the Internet as Twipz. On June 7, 2010, Moore released his official Skrillex debut EP, My Name is Skrillex as a free download. Moore provided programming and vocals for UK metalcore band Bring Me the Horizon on their third studio album, There Is a Hell, Believe Me I've Seen It. There Is a Heaven, Let's Keep It a Secret. Later in the year, Sonny began a nationwide tour with Deadmau5 after being signed to mau5trap recordings and released his second EP, Scary Monsters and Nice Sprites. Moore kicked off the \"Project Blue Book Tour\" in 2011 with support from Porter Robinson, Tommy Lee and DJ Aero as well as appearances from Sofia Toufa for a new song titled \"Bring out the Devil.\" Skrillex unveiled several new songs on this tour including \"First Of The Year\" (formerly known as \"Equinox\"), \"Reptile\", and \"Cinema\" (remix of a Benny Benassi track). \"Reptile\" was featured in the TV commercial for Mortal Kombat 9, and \"First of the Year (Equinox)\" is featured on his follow up EP and remix companion to Scary Monsters and Nice Sprites, titled More Monsters and Sprites. In April 2011, Spin magazine premiered \"Get Up\", an exclusive new track from Korn that was produced by Skrillex. Korn made \"Get Up\" available for free download via their Facebook page. On April 15, 2011 KoRn joined Skrillex on stage for his set at Coachella 2011. On April 18, 2011, Sony Computer Entertainment (SCEA) development studio Naughty Dog released a trailer for the multiplayer component of their PlayStation 3 game Uncharted 3: Drake's Deception, featuring \"Kill EVERYBODY\" from Scary Monsters and Nice Sprites. In June 2011, \"More Monsters and Sprites\" was released on Beatport, an EP consisting of three original tracks, including \"First of the Year (Equinox)\" and two versions of his original track \"Ruffneck\". A leaked track entitled \"Ruffneck Bass\" had been leaked on the internet months prior which used the same sample as in the new \"Ruffneck\" tracks on the EP. Skrillex released a music video for \"Rock n' Roll (Will Take You to the Mountain)\" on his official YouTube page on June 20, 2011. \n\nOn August 17, 2011 Skrillex announced his label, OWSLA. \"The label's first releases will come from Bristol-based dubstep producer Koan Sound, electro-house newcomer Porter Robinson from North Carolina, singer/songwriter Alvin Risk, and San Francisco-based M Machine (formally Metropolis).\" Skrillex released a music video for \"First of the Year (Equinox)\" via Spin.com on August 19, 2011. In late August 2011 it was released that he would be appearing Knife Party's first release, collaborating on a Moombahton style track entitled \"Zoology\". A preview was released on YouTube. In late September 2011 he created the track \"Syndicate\" as promotion for the video game of the same name. Kaskade's 2011 album Fire & Ice features a collaboration between Kaskade and Skrillex entitled \"Lick It\". The video for Skrillex's song \"First of the Year (Equinox)\" appears on the first episode of the Beavis and Butt-head revival. On November 8, Skrillex stated that he intended to release an album entitled Voltage. Skrillex gave fans more info about Voltage in RockSound Magazine after a photoshoot for the cover and doing an extensive interview on his tour. For unknown reasons, however, the album was never released. On December 21, 2011, Skrillex unveiled the Bangarang EP for a Beatport release on December 23. On March 13, 2012, Beatport released OWSLA's second Free Treats sampler, Free Treats Vol. 2. The 19-track compilation features \"Ruffneck (FULL Flex) Munchi Anonymous Revolution Remix\", a remixed track by Skrillex. This new take on the track deviates from the original (released on the More Monsters and Sprites EP), with the remix being more characteristic of Electro House, though with a much slower tempo of 108 BPM, versus the original version's classic Dubstep tempo of 140 BPM, also straying from the typical Electro House tempo of 128 BPM. On August 12, 2012, his new side-project formed with Boys Noize called Dog Blood released an EP called Next Order/Middle Finger. \n\nInfluences:\nMoore has stated in an online interview that he has been a longtime fan of Warp, an electronic music label that has released recordings from artists such as Aphex Twin and Squarepusher. \n\nPersonal life:\nAs of February 2012, Skrillex has been dating fellow artist and singer, Ellie Goulding, who provided vocals for the Skrillex track, \"Summit\", featured on the EP, Bangarang.",
-"site": "wikipedia",
-"url": "http://en.wikipedia.org/wiki/Skrillex",
-"license": {
-"type": "cc-by-sa",
-"attribution": "wikipedia",
-"attribution-url": "http://en.wikipedia.org/wiki/Skrillex",
-"url": "http://creativecommons.org/licenses/by-sa/3.0/",
-"version": "3.0"
-}
-},
-{
-"text": "Sonny Moore put his gig as post-hardcore frontman behind him ...",
-"site": "aol",
-"url": "http://music.aol.com/artist/skrillex/biography",
-"license": {
-"type": "unknown",
-"attribution": "aol",
-"attribution-url": "http://music.aol.com/artist/skrillex/biography",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-},
-{
-"text": "Childhood and early bands (1988–2004) Born on January 15, 1988, ...",
-"site": "ilike",
-"url": "http://www.ilike.com/artist/Skrillex",
-"license": {
-"type": "unknown",
-"attribution": "ilike",
-"attribution-url": "http://www.ilike.com/artist/Skrillex",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-},
-{
-"text": "“I’ve been deep into electronic music my entire life. The ...",
-"site": "amazon",
-"url": "http://www.amazon.com/Skrillex/e/B004HK3B5U/",
-"license": {
-"type": "unknown",
-"attribution": "amazon",
-"attribution-url": "http://www.amazon.com/Skrillex/e/B004HK3B5U/",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-},
-{
-"text": "Sonny Moore put his gig as post-hardcore frontman behind him ...",
-"site": "itunes",
-"url": "http://itunes.apple.com/us/artist/skrillex/id356545647",
-"license": {
-"type": "unknown",
-"attribution": "itunes",
-"attribution-url": "http://itunes.apple.com/us/artist/skrillex/id356545647",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-},
-{
-"text": "Sonny Moore put his gig as post-hardcore frontman behind him ...",
-"site": "rdio",
-"url": "http://www.rdio.com/artist/Skrillex/",
-"license": {
-"type": "all-rights-reserved",
-"attribution": "",
-"attribution-url": "",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-}
-]
-}
-},
-"raw": {
-"response": {
-"status": {
-"version": "4.2",
-"code": 0,
-"message": "Success"
-},
-"start": 0,
-"total": 7,
-"biographies": [
-{
-"text": "Skrillex is the pseudonym used by Los Angeles, California, USA musician Sonny Moore to differentiate his electronic solo work from his work with From First To Last and his other solo projects.   As Skrillex, Moore is an electronic DJ and producer boasting a musical style that incorporates electro house, fidget house, and dubstep.  Moore began producing and performing under the alias Skrillex at clubs in the Los Angeles area in 2008.    Throughout 2010, Skrillex became a bigger and bigger part of Moore's life.  On June 7, 2010 he released his debut EP as Skrillex, My Name Is Skrillex, as a free download.  Soon after, he was signed to mau5trap and began a nationwide tour with deadmau5.  On October 22, 2010 he released his second EP, Scary Monsters and Nice Sprites, as a co-release through mau5trap and Big Beat.  On June 2, 2011, Moore announced the release of a \"Scary Monsters and Nice Sprites\" remix EP titled More Monsters And Sprites, which was released on June 7, 2011 on Beatport and June 21, 2011 on iTunes. It contained 3 new tracks, as well as 4 remixes of \"Scary Monsters and Nice Sprites\".  Skrillex announced his label OWSLA on August 17, 2011.  On December 23, 2011, Moore released the Bangarang EP. The EP features Ellie Goulding on the track \"Summit\", as well as collaborations with Wolfgang Gartner, Kill the Noise, The Doors and 12th Planet  Skrillex has been nominated for five awards at the 54th Annual Grammys to be held in February 2012. Among his nominations are Best New Artist, Best Dance Recording (for \"Scary Monsters & Nice Sprites\") and Best Short Form Music Video (for \"First of the Year (Equinox)\")",
-"site": "last.fm",
-"url": "http://www.last.fm/music/Skrillex/+wiki",
-"license": {
-"type": "cc-by-sa",
-"attribution": "Last.fm",
-"attribution-url": "http://www.last.fm/music/Skrillex/+wiki",
-"url": "http://creativecommons.org/licenses/by-sa/3.0/",
-"version": "3.0"
-}
-},
-{
-"text": "Sonny Moore put his gig as post-hardcore frontman behind him ...",
-"site": "mog",
-"url": "http://mog.com/artists/bio/mn1391518/skrillex",
-"license": {
-"type": "all-rights-reserved",
-"attribution": "mog",
-"attribution-url": "http://mog.com/artists/bio/mn1391518/skrillex",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-},
-{
-"text": "Sonny John Moore (born January 15, 1988), better known by his stage name Skrillex, is an American electronic music producer and singer-songwriter. Raised in Northeast Los Angeles and in Northern California, Moore joined the American post-hardcore band From First to Last as the lead singer in 2004, and recorded two studio albums with the band (Dear Diary, My Teen Angst Has a Body Count, 2004, and Heroine, 2006) before leaving to pursue a solo career in 2007. He began his first tour as a solo artist in late 2007. After recruiting a new band lineup, Moore joined the Alternative Press Tour to support bands such as All Time Low and The Rocket Summer, and appeared on the cover of Alternative Press' annual \"100 Bands You Need to Know\" issue. After releasing the Gypsyhook EP in 2009, Moore was scheduled to record his debut studio album, Bells, with producer Noah Shain. However, he ceased production of the album and began performing under the name Skrillex. After releasing the My Name is Skrillex EP for free download on his official MySpace page, he released the Scary Monsters and Nice Sprites EP in late-2010 and More Monsters and Sprites EP in mid-2011. Both have since become moderate commercial successes. On November 30, 2011, he was nominated for a total of five Grammy Awards at the 54th Grammy Awards, including Best New Artist and won three: \"Best Dance/Electronica Album,\" \"Best Dance Recording,\" and \"Best Remixed Recording, Non-Classical\". On December 5, 2011, the BBC announced that he had been nominated for their Sound of 2012 poll. On December 12, 2011, he was also named MTV's Electronic Dance Music Artist of the Year. \n\nBiography:\n\nBackground:\nMoore was born in the Highland Park neighborhood of Northeast Los Angeles, but moved to the Forest Hill neighborhood of San Francisco at the age of two, where he attended elementary school. At the ages of nine and ten, Moore attended a local boarding school located in the Mojave Desert LV, but eventually moved back to Northern California. By the age of twelve, his family moved him back to his birthplace of Northeast L.A., where he enrolled in a private academy school specializing in arts, and was then later home schooled at the age of fourteen due to bullying. In 2004, he learned he was adopted and dropped out of the program when he was sixteen years old. While a young teenager in Los Angeles, Moore would attend punk gigs in Mexican American neighborhoods in East and South Los Angeles, and later on electro club raves in the downtown's Silver Lake and Echo Park neighborhoods. \n\nFrom First to Last (2004-07):\nIn 2004, Moore contacted Matt Good of From First to Last about playing guitar for the band on their debut album. After flying out to Georgia, Moore was heard singing by three studio producers, Derrick Thomas, Eric Dale, and McHale Butler, and was then made lead singer, with Good playing guitar. In June 2004, Epitaph Records released the band's first full-length record with their new bandmate, Dear Diary, My Teen Angst Has a Body Count. After performing on several successful tours, two being the Vans Warped Tour and Dead by Dawn tour, they began recording their second album, Heroine with producer Ross Robinson. The album was released in March 2006 on Epitaph. With high record sales once again, the band found themselves part of many successful tours, until Moore started suffering vocal problems, causing the band to resign from several tours. After going through a successful vocal surgical procedure, Moore informed the band he would be permanently resigning to work on a solo career. FFTL's last show performed with Moore was in their hometown of Orlando at The House of Blues while touring with Atreyu. \n\nSolo career (2007-present):\n\nMoore announced he had left From First to Last to pursue a solo career. He then launched a Myspace page displaying three demos (\"Signal\", \"Equinox\", and \"Glow Worm\"). This led to Moore's first performance since his leaving From First to Last. On April 7, 2007, alongside harpist Carol Robbins, Moore played several original songs at a local art building. After months of releasing demos via Myspace, Moore played on the Team Sleep Tour with a full band. The tour also featured supporting acts Monster in the Machine and Strata. Moore made several demo CDs available on this tour, limited to about 30 per show. These CDs were tour exclusive, and were packaged in \"baby blue envelopes\", each with a unique drawing by Moore or bandmate. In February 2008, Alternative Press Magazine announced the second annual AP Tour, with All Time Low, The Rocket Summer, The Matches, and Forever the Sickest Kids, as well as Sonny Moore. The tour started in Houston, Texas on March 14 and went through North America, ending in Cleveland, Ohio on May 2, with the majority of the shows being sold out. All bands playing the tour would be featured on the cover of Alternative Press Magazine's annual 100 Bands You Need to Know special, and would be interviewed on the Alternative Press Podcast. During this tour Moore's line-up consisted of Sean Friday on drums, Christopher Null on guitar, and Aaron Rothe on keyboards. On April 7, 2009, he released Gypsyhook EP, a digital EP, which featured three songs and four remixes. Also included was a Japanese version of \"Mora\" entitled \"海水\" (\"Kaisui\"). Physical copies of the EP were available at his shows. After going on tour with Innerpartysystem and Paper Route and opening for Chiodos on their European tour, Moore performed at Bamboozle on May 2. He performed on Bamboozle Left's Saints and Sinners stage on April 4. He toured with Hollywood Undead in April 2009 performing under the band name Sonny and the Blood Monkeys, with Chris Null (electric guitar), Sean Friday (drums, percussion & beats) and Aaron Rothe (keyboards, synthesizers, programming & turntables) Although no official statement has been given regarding the album, Moore has stated that Bells will no longer be released. \n\nProduction career:\n\nIn 2008, Moore began producing and performing under the alias Skrillex at clubs in the Los Angeles area. Previously, he had been known on the Internet as Twipz. On June 7, 2010, Moore released his official Skrillex debut EP, My Name is Skrillex as a free download. Moore provided programming and vocals for UK metalcore band Bring Me the Horizon on their third studio album, There Is a Hell, Believe Me I've Seen It. There Is a Heaven, Let's Keep It a Secret. Later in the year, Sonny began a nationwide tour with Deadmau5 after being signed to mau5trap recordings and released his second EP, Scary Monsters and Nice Sprites. Moore kicked off the \"Project Blue Book Tour\" in 2011 with support from Porter Robinson, Tommy Lee and DJ Aero as well as appearances from Sofia Toufa for a new song titled \"Bring out the Devil.\" Skrillex unveiled several new songs on this tour including \"First Of The Year\" (formerly known as \"Equinox\"), \"Reptile\", and \"Cinema\" (remix of a Benny Benassi track). \"Reptile\" was featured in the TV commercial for Mortal Kombat 9, and \"First of the Year (Equinox)\" is featured on his follow up EP and remix companion to Scary Monsters and Nice Sprites, titled More Monsters and Sprites. In April 2011, Spin magazine premiered \"Get Up\", an exclusive new track from Korn that was produced by Skrillex. Korn made \"Get Up\" available for free download via their Facebook page. On April 15, 2011 KoRn joined Skrillex on stage for his set at Coachella 2011. On April 18, 2011, Sony Computer Entertainment (SCEA) development studio Naughty Dog released a trailer for the multiplayer component of their PlayStation 3 game Uncharted 3: Drake's Deception, featuring \"Kill EVERYBODY\" from Scary Monsters and Nice Sprites. In June 2011, \"More Monsters and Sprites\" was released on Beatport, an EP consisting of three original tracks, including \"First of the Year (Equinox)\" and two versions of his original track \"Ruffneck\". A leaked track entitled \"Ruffneck Bass\" had been leaked on the internet months prior which used the same sample as in the new \"Ruffneck\" tracks on the EP. Skrillex released a music video for \"Rock n' Roll (Will Take You to the Mountain)\" on his official YouTube page on June 20, 2011. \n\nOn August 17, 2011 Skrillex announced his label, OWSLA. \"The label's first releases will come from Bristol-based dubstep producer Koan Sound, electro-house newcomer Porter Robinson from North Carolina, singer/songwriter Alvin Risk, and San Francisco-based M Machine (formally Metropolis).\" Skrillex released a music video for \"First of the Year (Equinox)\" via Spin.com on August 19, 2011. In late August 2011 it was released that he would be appearing Knife Party's first release, collaborating on a Moombahton style track entitled \"Zoology\". A preview was released on YouTube. In late September 2011 he created the track \"Syndicate\" as promotion for the video game of the same name. Kaskade's 2011 album Fire & Ice features a collaboration between Kaskade and Skrillex entitled \"Lick It\". The video for Skrillex's song \"First of the Year (Equinox)\" appears on the first episode of the Beavis and Butt-head revival. On November 8, Skrillex stated that he intended to release an album entitled Voltage. Skrillex gave fans more info about Voltage in RockSound Magazine after a photoshoot for the cover and doing an extensive interview on his tour. For unknown reasons, however, the album was never released. On December 21, 2011, Skrillex unveiled the Bangarang EP for a Beatport release on December 23. On March 13, 2012, Beatport released OWSLA's second Free Treats sampler, Free Treats Vol. 2. The 19-track compilation features \"Ruffneck (FULL Flex) Munchi Anonymous Revolution Remix\", a remixed track by Skrillex. This new take on the track deviates from the original (released on the More Monsters and Sprites EP), with the remix being more characteristic of Electro House, though with a much slower tempo of 108 BPM, versus the original version's classic Dubstep tempo of 140 BPM, also straying from the typical Electro House tempo of 128 BPM. On August 12, 2012, his new side-project formed with Boys Noize called Dog Blood released an EP called Next Order/Middle Finger. \n\nInfluences:\nMoore has stated in an online interview that he has been a longtime fan of Warp, an electronic music label that has released recordings from artists such as Aphex Twin and Squarepusher. \n\nPersonal life:\nAs of February 2012, Skrillex has been dating fellow artist and singer, Ellie Goulding, who provided vocals for the Skrillex track, \"Summit\", featured on the EP, Bangarang.",
-"site": "wikipedia",
-"url": "http://en.wikipedia.org/wiki/Skrillex",
-"license": {
-"type": "cc-by-sa",
-"attribution": "wikipedia",
-"attribution-url": "http://en.wikipedia.org/wiki/Skrillex",
-"url": "http://creativecommons.org/licenses/by-sa/3.0/",
-"version": "3.0"
-}
-},
-{
-"text": "Sonny Moore put his gig as post-hardcore frontman behind him ...",
-"site": "aol",
-"url": "http://music.aol.com/artist/skrillex/biography",
-"license": {
-"type": "unknown",
-"attribution": "aol",
-"attribution-url": "http://music.aol.com/artist/skrillex/biography",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-},
-{
-"text": "Childhood and early bands (1988–2004) Born on January 15, 1988, ...",
-"site": "ilike",
-"url": "http://www.ilike.com/artist/Skrillex",
-"license": {
-"type": "unknown",
-"attribution": "ilike",
-"attribution-url": "http://www.ilike.com/artist/Skrillex",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-},
-{
-"text": "“I’ve been deep into electronic music my entire life. The ...",
-"site": "amazon",
-"url": "http://www.amazon.com/Skrillex/e/B004HK3B5U/",
-"license": {
-"type": "unknown",
-"attribution": "amazon",
-"attribution-url": "http://www.amazon.com/Skrillex/e/B004HK3B5U/",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-},
-{
-"text": "Sonny Moore put his gig as post-hardcore frontman behind him ...",
-"site": "itunes",
-"url": "http://itunes.apple.com/us/artist/skrillex/id356545647",
-"license": {
-"type": "unknown",
-"attribution": "itunes",
-"attribution-url": "http://itunes.apple.com/us/artist/skrillex/id356545647",
-"url": "n/a",
-"version": "n/a"
-},
-"truncated": true
-},
-{
-"text": "Sonny Moore put his gig as post-hardcore frontman behind him ...",
-"site": "rdio",
-"url": "http://www.rdio.com/artist/Skrillex/",
 "license": {
 "type": "all-rights-reserved",
 "attribution": "",
@@ -10288,8 +9229,8 @@ this.rawResult = [
 "callIndex": 0,
 "apiConfig": {
 "action": "artistBiographies",
-"in_source": "events.event.artists.headliner",
-"in_param": "1"
+"in_param_name": "name",
+"in_source": "events.event.artists.headliner"
 }
 },
 "result": {
