@@ -35,11 +35,43 @@ Setting it up as a service
 
 Installing node: http://nodejs.org/
 
+Running switchboard:
+
 1. npm install in switchboard folder to setup dependencies
 2. copy connectors/keys_template.json to connectors/keys.json and fill in your API-keys
 3. create routine with chef or use an example routine from example_routines
 4. node server.js
 5. http://localhost:4000/switchboard?q=entryquery
+
+You can also POST configs to http://localhost:4000/switchboard as mentioned below. POST data should be structured as
+
+		{
+		    "q": "your qúery",
+		    "routine": [
+		        {
+		            "api": "Spotify",
+		            "action": "artistSearch",
+		            "in_param_name": "q",
+		            "value_source": "entry query",
+		            "limit": "1"
+		        },
+		        {
+		            "api": "last.fm",
+		            "action": "artistGetEvents",
+		            "in_param_name": "artist",
+		            "value_source": "artists.name",
+		            "limit": "3"
+		        },
+		        {
+		            "api": "Echonest",
+		            "action": "artistBiographies",
+		            "in_param_name": "name",
+		            "value_source": "events.event.artists.headliner",
+		            "limit": "3"
+		        }
+		    ]
+		}
+
 
 Running chef
 -------------
