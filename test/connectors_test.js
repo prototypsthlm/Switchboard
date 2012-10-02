@@ -17,7 +17,7 @@ function connectorValid() {
 	
     /* todo getActionURL */
     /* move google books */
-    /* test for userconfig/exampleroutines, somewhere else?) */
+    /* test for userconfig/exampleroutines/translator, somewhere else?) */
     
 	context['should exist'] = function(con){
 		assert.isObject(con);
