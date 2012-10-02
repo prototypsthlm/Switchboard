@@ -50,7 +50,7 @@ Running chef
 5. make your recipe and write it down (execution order is top -> bottom)
 6. the config is now at http://localhost:3000/recipe as well as in a recipe.json file
 7. input your config to switchboard by
-	* automatically reading it from http://localhost:3000/recipe by switchboard server instance (requires service restart to recognize recipe changes)
+	* automatically reading it from http://localhost:3000/recipe on switchboard server instance startup (requires service restart to recognize recipe changes)
 	* manually requiring it in from file as a JSON-variable (requires service restart)
 	* POSTing the config as a parameter "config" along with a entry query to http://localhost:3000/switchboard and executing it on the fly
 
@@ -61,11 +61,11 @@ Optionally install as a node package and:
 
 1. var sb = require('switchboard');
 
-2. configure keys as above in node_modules/switchboard/connectors /* is this where they are in npm? */
+2. configure keys as above in node_modules/switchboard/lib/connectors
 
 3. configure and set the switchboard routine:
 
-		sb.setRoutine(userConfig); //for userConfig see below or folder example_routines 
+		sb.setRoutine(userConfig); //for userConfig see below or the folder /example_routines 
 
 	a userConfig is structured as:
 
@@ -73,8 +73,8 @@ Optionally install as a node package and:
 		    {
 		        "api": "TMDB", //execution order, if first the value api of action param is set to the entry query value 
 		        "action": "movieSearch", //api action
-		        "in_param_name": "query", //param name for the api action .ie ?in_param_name
-		        "value_source": "request.get", //where to get value for the in_param, if first in routine always from initial request param, otherwise a path to previous API-call JSON-results
+		        "in_param_name": "query", //param name for the api action .ie ?in_param_name=value
+		        "value_source": "request.get", //where to get value for the in_param, if first in routine always from initial request paramotherwise a path to previous API-call JSON-results (see below)
 		        "limit": 5 //the maximum amount of queries to take from value_source and execute
 		    },
 		    {
@@ -97,7 +97,7 @@ Optionally install as a node package and:
  
 4. insert query and run routine:
 
-		sb.execute(entryquery, function(r,c){
+		sb.execute("entryquery", function(r,c){
 			//r => raw call blocks 
 			//c => a formatted response
 		});
@@ -105,7 +105,7 @@ Optionally install as a node package and:
 JSONP
 ------
 
-put in as example files?
+Switchboard supports JSONP. jQuery example usage:
 
 		<html>
 			<head>
@@ -138,7 +138,7 @@ put in as example files?
 			</body>
 		</html>
 
-or
+or do it by script element injection:
 
 		<script type="text/javascript">
 			function myHandler(response){
