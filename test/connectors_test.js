@@ -4,9 +4,9 @@ var vows = require('vows'),
 var suite = vows.describe('Connectors');
 var connectors = require('../lib/connectors/connectors');
 var request = require('request');
-//var querystring = require('querystring');
+var querystring = require('querystring');
 
-function connectorValid() {
+function connectorValid(testLookup) {
 	
 	var context = {
 		topic: function(){
@@ -15,9 +15,7 @@ function connectorValid() {
 		}
 	};
 	
-    /* todo getActionURL */
-    /* move google books */
-    /* test for userconfig/exampleroutines/translator, somewhere else?) */
+    /* todo getActionURL, in each connector? */
     
 	context['should exist'] = function(con){
 		assert.isObject(con);
@@ -69,7 +67,14 @@ function connectorValid() {
 			
 		}
 
-	}
+	},
+	
+	context['has an api key'] = {
+        'that is not empty': function (topic) {// Vow
+            assert.notEqual(topic.apiKey, "", "no api key set");
+            assert.notEqual(topic.apiKey, null, "no api key set");
+        }
+    }
 
 	return context;
 };
@@ -83,26 +88,6 @@ suite.addBatch({// Batch
     	'last.fm' : connectorValid(),
     	'Google Books' : connectorValid(),
     	'TMDB' : connectorValid()
-
-        
-
-        /*'existing api actions': {// Sub-Context
-            topic: connector.googlebooks,// Topic
-
-            'all exist and return something *async': {  
-                topic: function (connector) {// async vow
-                    var dummyConfig = { action: 'volumesSearch', in_source: null, in_param: 0 };
-                    
-                    //iterera över ALLA apiActions, bygga url:er göra anrop till dessa och verifiera att out-noderna finns i resultatet?
-                    var url = connector.getActionUrl("snakes", dummyConfig);
-                    console.log(url);
-                    request({url: url, headers: { "Accept" : "application/json" }}, this.callback); //use connector.get instead?
-                },
-                'gets a response': function(error,response,result){//async vow callback
-                    assert.notEqual(response.statusCode, 400);
-                }
-            }
-        }*/
     }
 });
 

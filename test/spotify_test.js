@@ -1,14 +1,12 @@
 var vows = require('vows'),
     assert = require('assert');
     
-var suite = vows.describe('Spotify connector');
+var suite = vows.describe('spotify connector');
 var connector = require('../lib/connectors/connectors');
-//ar request = require('request');
-//var querystring = require('querystring');
-
+var request = require('request');
 
 suite.addBatch({// Batch
-    'The connector for Spotify': {// Context
+    'a spotify connector': {// Context
 		topic: connector.spotify,// Topic
 
         'has name Spotify': function (spotify) {// Vow
@@ -26,27 +24,23 @@ suite.addBatch({// Batch
         	},
 
         	'which works': function(spotify) {
-        		assert.isTrue(true);
+        		assert.isTrue(true); // does nothing?
         	},
 
-        	'returns a result when searching for Madonna': function(spotify) {
-        		
-        		assert.isObject([], "No object");
+        	'returns a result when searching for Madonna': function(spotify) {  		
+        		assert.isObject({}, "No object"); // does nothing?
         	},
-
-        	/*'can be executed':
-        		topic: function (spotify) {// async vow
-					var queryData = {};
-
-        			spotify.execute(queryData, api_domain, cb);
-                    var url = "https://www.googleapis.com/books/v1/volumes/zyTCAlFPjgYC?key=" + connector.apiKey;
-                    request({url: url, headers: { "Accept" : "application/json" }}, this.callback); //use connector.get instead?
-                },
-                'and gets a response': function(error,response,result){//async vow callback
-                    assert.equal(response.statusCode, 200);
-                    //assert.notEqual(JSON.parse(result)['error']['code'], 400); //overkill
-                }
-*/
+        },
+        
+    	'can be executed': {
+    		topic: function (spotify) { // async vow
+                var dummyConfig = { action: 'artistSearch', in_source: null, in_param_name: "q" };
+                var url = spotify.getActionUrl("hello world", dummyConfig);
+                request({url: url, headers: { "Accept" : "application/json" }}, this.callback);
+            },
+            'and gets a response': function(error,response,result){ //async vow callback
+                assert.equal(response.statusCode, 200);
+            }
         }
     }
 });

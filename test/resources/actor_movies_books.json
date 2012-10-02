@@ -1,0 +1,26 @@
+[
+    {
+        "order": "0",
+        "api": "TMDB",
+        "action": "personSearch",
+        "in_param_name": "query",
+        "value_source": "request.get",
+        "limit": 5
+    },
+    {
+        "order": "1",
+        "api": "TMDB",
+        "action": "personCredits",
+        "in_param_name": "id",
+        "value_source": "results.id",
+        "limit": 5
+    },
+    {
+        "order": "2",
+        "api": "Google Books",
+        "action": "volumesSearch",
+        "in_param_name": "q",
+        "value_source": "cast.original_title",
+        "limit": 5
+    }
+]
