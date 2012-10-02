@@ -33,6 +33,8 @@ although not 100% of all API-actions are supported.
 Setting it up as a service
 -------------
 
+Installing node: http://nodejs.org/
+
 1. npm install in switchboard folder to setup dependencies
 2. copy connectors/keys_template.json to connectors/keys.json and fill in your API-keys
 3. create routine with chef or use an example routine from example_routines
@@ -43,10 +45,11 @@ Running chef
 -------------
 
 1. npm install in chef folder
-2. http://localhost:3000
-3. make your recipe and write it down
-4. the config is now at http://localhost:3000/recipe as well as in a recipe.json file
-5. feed your config to switchboard
+2. node app.js
+3. http://localhost:3000
+5. make your recipe and write it down
+6. the config is now at http://localhost:3000/recipe as well as in a recipe.json file
+7. input your config to switchboard (automatically read from http://localhost:3000/recipe by switchboard server instance or manually require it in as JSON)
 
 Node package
 -------------
@@ -55,7 +58,7 @@ Optionally install as a node package and:
 
 1. var sb = require('switchboard');
 
-2. configure keys as above in node_modules/switchboard/connectors
+2. configure keys as above in node_modules/switchboard/connectors /* is this where they are in npm? */
 
 3. configure and set the switchboard routine:
 
@@ -96,3 +99,47 @@ Optionally install as a node package and:
 			//c => a formatted response
 		});
 
+JSONP
+------
+
+put in as example files?
+
+		<html>
+			<head>
+				<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+				<script type="text/javascript">
+					$(document).ready(function(){
+				       $("a").click(function(event) {
+				       		var dataType = $("#jsonpToggler").attr("checked") ? "jsonp" : "json";
+							$.ajax({
+							    url: 'http://localhost:4000/switchboard',
+							    dataType: dataType,
+							    type: 'get',
+							    data: { q: "Star Wars"},
+							    success: function(data) {
+							    	$("#result").html(JSON.stringify(data));
+							    },
+							    error: function(data) {
+							    	$("#result").html(JSON.stringify(data));
+							    }
+							});
+							event.preventDefault();
+						});
+				    });
+				</script>
+			</head>
+			<body>
+				<p>Jsonp: <input type="checkbox" id="jsonpToggler" checked="checked" /></a>
+				<p><a href="#" id="test">Do ajax request</a></p>
+				<div id="result" style="margin-top:10px"></div>
+			</body>
+		</html>
+
+or
+
+		<script type="text/javascript">
+			function myHandler(response){
+				console.log(response);
+			}
+		</script>
+		<script type="text/javascript" src="http://localhost:4000/switchboard?q=star%20wars&callback=myHandler"></script>
