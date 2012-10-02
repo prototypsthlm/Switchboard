@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express.createServer();
+app.use(express.bodyParser());
 var request = require('request');
 var $ = require('jquery');
 
@@ -38,34 +39,35 @@ loadRemoteRecipe(function(config){
     switchboard.setRoutine(userRecipe);
 });
 
+
+//req.query => get
+//req.body => post
+//req.param('param', null) => both
+
 /* 
 http://localhost:4000/switchboard?q=yourquery 
 runs the set switchboard routine with the entry query and outputs the formatted results
 */
 app.get('/switchboard', function(req, res){
+    res.contentType('json');
     
-    console.log("REQUEST RECEIVED");
+    console.log("GET REQUEST RECEIVED");
     console.log(req.url);
+    console.log(req.query);
     
-    if(req.routine != undefined) {
+    if(req.query.routine != undefined) { //take whole filepath instead?
       try {
-        var routineFromParam = require('./example_routine/' + req.exampleRoutine + ".json");
+        var routineFromParam = require('./example_routine/' + req.query.routine + ".json");
         switchboard.setRoutine(routineFromParam);
       }
       catch(e) {
+        res.status(500); 
         console.error(e);
       }
-      
     }
-
-
-    res.contentType('json');
-                 
-    var searchTerm = [req.query.q];
-
-    if(searchTerm != null){  
-        switchboard.execute(req, function(r,c){
-            //console.log("req ", req);
+    
+    if(req.query.q != undefined){  
+        switchboard.execute([req.query.q], function(r,c){
             var callback = req.query.callback;
             var jsonString = JSON.stringify({ clean: c, raw: r });
             if(callback) {
@@ -73,6 +75,42 @@ app.get('/switchboard', function(req, res){
             }
             res.send(jsonString);
         });
+    }
+    else {
+        res.send(JSON.stringify({}));
+    }
+
+});
+
+app.post('/switchboard', function(req, res){
+    res.contentType('json'); 
+    
+    console.log("POST REQUEST RECEIVED");
+    console.log(req.url);
+    console.log(req.body);
+    
+    if(req.body.routine != undefined) {
+      try {
+        switchboard.setRoutine(req.body.routine);
+      }
+      catch(e) {
+        res.status(500);
+        console.error(e);
+      }
+    }
+
+    if(req.body.q != undefined){  
+        switchboard.execute([req.body.q], function(r,c){
+            var callback = req.body.callback;
+            var jsonString = JSON.stringify({ clean: c, raw: r });
+            if(callback) {
+                jsonString = callback + "(" + jsonString + ")";
+            }
+            res.send(jsonString);
+        });
+    }
+    else {
+        res.send(JSON.stringify({}));
     }
 
 });

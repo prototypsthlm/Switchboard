@@ -25,7 +25,7 @@ function setValueSources(){
          $selectEl = $(this).find("#"+action).find("select[name=output_node]");
          $selectEl.html("");
         if(i == 0){
-            $selectEl.html("<option value='request.get'>request.get</option>");
+            $selectEl.html("<option value='entry query'>entry query</option>");
         }
         else {
             $prevRoutineElement = $(activeRoutineElements[i-1]);

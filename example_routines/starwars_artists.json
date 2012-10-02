@@ -3,7 +3,7 @@
         "api": "TMDB",
         "action": "movieSearch",
         "in_param_name": "query",
-        "value_source": "request.get",
+        "value_source": "entry query",
         "limit": 5
     },
     {

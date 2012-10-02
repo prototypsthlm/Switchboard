@@ -40,7 +40,7 @@ this.data[1] = [
             "callIndex": null,
             "apiConfig": {
                 "action": "movieSearch",
-                "in_source": "request.get",
+                "in_source": "entry query",
                 "in_param": "0"
             }
         },

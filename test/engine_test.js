@@ -4,16 +4,15 @@ var vows = require('vows'),
 var suite = vows.describe('Switchboard engine');
 var engine = require('../lib/switchboard.js');
 
-var userConfig = require('./resources/actor_movies_books.json');
+var userConfig = require('./resources/user_config_standard.json');
 
 suite.addBatch({// Batch
     'A routine': { // Context
         topic: userConfig,
-        'which is valid': { // Sub-Context
+        'is transformed correctly': { // Sub-Context
             topic: function(userConfig) {                
                 return engine.translateUserConfig(userConfig);
             },
-
             'is properly translated': function (translatedConfig) {// Vow
                 assert.isArray(userConfig);
                 assert.isArray(translatedConfig);

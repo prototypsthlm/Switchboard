@@ -4,7 +4,7 @@
         "api": "TMDB",
         "action": "personSearch",
         "in_param_name": "query",
-        "value_source": "request.get",
+        "value_source": "entry query",
         "limit": 5
     },
     {

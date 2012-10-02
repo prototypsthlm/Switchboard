@@ -3,7 +3,7 @@
         "api": "Spotify",
         "action": "artistSearch",
         "in_param_name": "q",
-        "value_source": "request.get",
+        "value_source": "entry query",
         "limit": "1"
     },
     {

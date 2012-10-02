@@ -54,7 +54,7 @@ function connectorValid(testLookup) {
 			for (var action in apiActions) {
 				var row = apiActions[action];
 				assert.isObject(row);
-				//assert.include(row, apiActionKey);			
+
 				assert.include(row, "action", "action must be defined");
 				assert.isArray(row.action);
 

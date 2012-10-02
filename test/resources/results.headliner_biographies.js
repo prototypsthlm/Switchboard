@@ -4027,7 +4027,7 @@ this.cleanInjectResult = [
                     "callIndex": null,
                     "apiConfig": {
                         "action": "artistSearch",
-                        "in_source": "request.get",
+                        "in_source": "entry query",
                         "in_param": "0"
                     }
                 }

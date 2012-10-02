@@ -2517,7 +2517,7 @@ this.data[0] = {
     },
     "apiConfig": {
         "action": "movieSearch",
-        "in_source": "request.get",
+        "in_source": "entry query",
         "in_param": "0"
     }
 };
