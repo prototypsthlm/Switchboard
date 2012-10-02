@@ -59,7 +59,7 @@ Node package
 
 Optionally install as a node package and:
 
-1. var sb = require('switchboard');
+1. 		var sb = require('switchboard');
 
 2. configure keys as above in node_modules/switchboard/lib/connectors
 
