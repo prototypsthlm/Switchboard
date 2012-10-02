@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>lib&#x2F;connectors&#x2F;base_connector.js - Switchboard</title>
+    <title>BaseConnector - Switchboard</title>
     <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
@@ -90,94 +90,128 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: lib&#x2F;connectors&#x2F;base_connector.js</h1>
+                        <h1>BaseConnector Class</h1>
+<div class="box meta">
+    
 
-<div class="file">
-    <pre class="code prettyprint linenums">
-&#x2F;**
-A Connector works like an interface to third party API&#x27;s, such as Spotify, Last.fm, Google and more.
-Every connector exposes methods which can be used to make calls to those API&#x27;s.
-When ready a Connector should always return a ConnectorResponse object containing meta information
-about the request and response and the result.
+    
 
-@module Connectors
-**&#x2F;
+    
+        <div class="foundat">
+            Defined in: <a href="..&#x2F;files&#x2F;lib_connectors_base_connector.js.html#l19"><code>lib&#x2F;connectors&#x2F;base_connector.js:19</code></a>
+        </div>
+    
 
-var request = require(&#x27;request&#x27;);
-var async = require(&quot;async&quot;);
-var ConnectorResponse = require(&#x27;.&#x2F;connector_response.js&#x27;);
-&#x2F;**
-    inherited by all connectors.
-    implements methods for doiing async HTTP-requests to APIs and sending the results back to the switchboard engine
-    the url to send GETs to is built in the subclass.
-**&#x2F;
+    
+        
+            Module: <a href="../modules/Connectors.html">Connectors</a>
+        
+    
 
-&#x2F;**
-The BaseConnector should be inherited by all other Connectors.
+    
+</div>
+
+
+
+<div class="box intro">
+    <p>The BaseConnector should be inherited by all other Connectors.
 It can be seen as a Abstract Class containing some functions
 that are used by all other Connectors.
 The BaseConnector executes all requests and collects all data but
 every Connector is responsible for given the right URL and param data and to
-handle the response
-
-@class BaseConnector 
-@constructor
-**&#x2F;
-function BaseConnector(param) {
-    &#x2F;&#x2F;this.name;
-	this.host = param.host;
-	this.responseObject;
-}
+handle the response</p>
+</div>
 
 
-BaseConnector.prototype.getActionUrl = function(query, api_domain) {
-    throw NotImplementedError(&quot;getActionUrl&quot;);
-}
+    <div class="constructor">
+        <h2>Constructor</h2>
+        <div id="method_BaseConnector" class="method item">
+    <h3 class="name"><code>BaseConnector</code></h3>
 
-BaseConnector.prototype.connectorResult = function(resultObj) {
-    return new ConnectorResponse(resultObj, resultObj.result);
-}
-
-BaseConnector.prototype.execute = function(queryData, api_domain, cb) {
-    console.log(this.name + &quot; EXECUTE&quot;);
-    var self = this;
-    self.responseObject = [];
     
-    async.forEach(queryData, function fetchData(queryDataItem, seriesDone){ &#x2F;&#x2F;so that callIndex gets set properly
-        var index = 0;
-        async.forEach(queryDataItem.queries, function getResults(query, done) {
-            var url = self.getActionUrl(query, api_domain);
-            console.log(&#x27;preparing request to &#x27; + url);
-            self.get(url, query, api_domain, index, queryDataItem.callIndex, done);
-            index += 1;
-        },
-        function(err){
-            seriesDone();
-        });
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
         
-    },function(err){
-        cb(self.responseObject);
-    });
-}
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;lib_connectors_base_connector.js.html#l19"><code>lib&#x2F;connectors&#x2F;base_connector.js:19</code></a>
+        
+        </p>
 
-BaseConnector.prototype.get = function(url, query, domain, index, callIndex, done) {
-    var self = this;
-    request({url: url, headers: { &quot;Accept&quot; : &quot;application&#x2F;json&quot; }}, function (error, response, result) {
-      if (!error &amp;&amp; response.statusCode == 200) {
-        console.log(&quot;successful HTTP-request : &quot; + query);
-        self.responseObject.push(self.connectorResult({query: query, index: index, callIndex: callIndex, apiConfig: domain, result: JSON.parse(result)}));
-        &#x2F;&#x2F;self.responseObject.push({query: query, index: index, callIndex: callIndex, apiConfig: domain, result: JSON.parse(result)});
-      }
-      else {
-          console.log(&quot;HTTP-request FAILED &quot; + response.statusCode + &quot; : &quot; + response.body);
-      }
-      done();
-    });
-}
 
-module.exports = BaseConnector;
+        
 
-    </pre>
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+    </div>
+
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+        
+        
+        
+        
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+            
+
+            
+
+            
+
+            
+        </div>
+
+        
+
+        
+
+        
+
+        
+    </div>
 </div>
 
                     </div>

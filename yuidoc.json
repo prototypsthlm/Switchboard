@@ -7,7 +7,7 @@
         "linkNatives": "true",        
         "attributesEmit": "true",
         "selleck": "true",
-        "paths": ["./lib"],
+        "paths": ["./lib/*.*"],
         "outdir": "./apidoc"
     }
 }

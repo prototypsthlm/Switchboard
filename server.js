@@ -44,13 +44,31 @@ app.get('/switchboard', function(req, res){
     console.log("REQUEST RECEIVED");
     console.log(req.url);
     
+    if(req.routine != undefined) {
+      try {
+        var routineFromParam = require('./example_routine/' + req.exampleRoutine + ".json");
+        switchboard.setRoutine(routineFromParam);
+      }
+      catch(e) {
+        console.error(e);
+      }
+      
+    }
+
+
     res.contentType('json');
                  
     var searchTerm = [req.query.q];
 
     if(searchTerm != null){  
         switchboard.execute(req, function(r,c){
-            res.send(JSON.stringify({ clean: c, raw: r }));
+            //console.log("req ", req);
+            var callback = req.query.callback;
+            var jsonString = JSON.stringify({ clean: c, raw: r });
+            if(callback) {
+                jsonString = callback + "(" + jsonString + ")";
+            }
+            res.send(jsonString);
         });
     }
 
