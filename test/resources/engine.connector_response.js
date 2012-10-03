@@ -41,7 +41,7 @@ this.data[1] = [
             "apiConfig": {
                 "action": "movieSearch",
                 "in_source": "entry query",
-                "in_param": "0"
+                "in_param_name": "query"
             }
         },
         "result": {
@@ -410,7 +410,7 @@ this.data[2] = [
             "apiConfig": {
                 "action": "movieCast",
                 "in_source": "results.id",
-                "in_param": "0"
+                "in_param_name": "id"
             }
         },
         "result": {
@@ -970,7 +970,7 @@ this.data[2] = [
             "apiConfig": {
                 "action": "movieCast",
                 "in_source": "results.id",
-                "in_param": "0"
+                "in_param_name": "id"
             }
         },
         "result": {
@@ -1474,7 +1474,7 @@ this.data[2] = [
             "apiConfig": {
                 "action": "movieCast",
                 "in_source": "results.id",
-                "in_param": "0"
+                "in_param_name": "id"
             }
         },
         "result": {
@@ -1994,7 +1994,7 @@ this.data[2] = [
             "apiConfig": {
                 "action": "movieCast",
                 "in_source": "results.id",
-                "in_param": "0"
+                "in_param_name": "id"
             }
         },
         "result": {
@@ -2274,7 +2274,7 @@ this.data[2] = [
             "apiConfig": {
                 "action": "movieCast",
                 "in_source": "results.id",
-                "in_param": "0"
+                "in_param_name": "id"
             }
         },
         "result": {

@@ -81,10 +81,10 @@ Running chef
 3. http://localhost:3000
 5. make your recipe and write it down (execution order is top -> bottom)
 6. the config is now at http://localhost:3000/recipe as well as in a recipe.json file
-7. input your config to switchboard by
-	* automatically reading it from http://localhost:3000/recipe on switchboard server instance startup (requires service restart to recognize recipe changes)
+7. input your config to switchboard by one of the below 
 	* manually requiring from file as a JSON-variable (requires service restart)
-	* POSTing the config as a parameter "routine" along with a entry query "q" to the service and executing it on the fly. the posted routine is now the "live" routine that will be executed for alls calls to the service
+	* automatically reading it from http://localhost:3000/recipe on switchboard server instance startup (requires service restart to recognize recipe changes)
+	* POSTing the config as a parameter "routine" along with a entry query "q" to the service and executing it on the fly. the posted routine is now the "live" routine that will be executed for all calls to the service until another one is POSTed in
 
 Node package
 -------------
