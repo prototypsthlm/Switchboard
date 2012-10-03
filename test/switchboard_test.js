@@ -34,50 +34,12 @@ function routine(routineName) {
 function request(routineName) {
 	return {query: {q: testData.queries[routineName]}};
 }
-/*
-suite.addBatch({
-
-	'Data (to be used by a connector) could be retrieved': {
-
-		'topic': function() {
-			Switchboard.setRequest(testData.request);
-			Switchboard.setRoutine(testRoutine);
-
-			return Switchboard;
-		},
-
-		'using a request query': {
-			topic: function(switchboard) {
-	    		var engineData = new EngineData(1);
-	    		return {callSessions: Switchboard.getQueries(engineData.config, null), engineData: engineData};
-	    	},
-
-	    	'it should be valid' : function (topic) {
-	    		assert.deepEqual(topic.callSessions, topic.engineData.callSessions);
-	    	},
-		},
-
-		'using a connector response': {
-			topic: function(switchboard) {
-	    		var engineData = new EngineData(2);
-	    		return {callSessions: Switchboard.getQueries(engineData.config, engineData.connectorResponse), engineData: engineData};
-	    	},
-
-	    	'it should be valid' : function (topic) {
-	    		assert.deepEqual(topic.callSessions, topic.engineData.callSessions);
-	    	},
-		}
-
-	}
-});
-*/
 
 var validateResponse = function(routineName, mergeMethod) {
 
 	var context = {
 		topic: function(switchboard) {
 			switchboard.addAndRunJob(routine(routineName), request(routineName), this.callback, mergeMethod);
-			//switchboard.execute(request(routineName), this.callback, mergeMethod);
 		}
 	};
 
@@ -91,16 +53,12 @@ var validateResponse = function(routineName, mergeMethod) {
 	context['clean result should be valid'] = function (rawResult, cleanResult) {		
 		
 		var expectedCleanResult = new TestResult(routineName, "clean", mergeMethod);		
-		var isEqual = TestHelper.compareObjects(cleanResult, expectedCleanResult, false);	
-		console.log("cleanResult\n", cleanResult);
-		console.log("expectedCleanResult\n", expectedCleanResult);	
+		var isEqual = TestHelper.compareObjects(cleanResult, expectedCleanResult, false);
 		assert.isTrue(isEqual);
 	};
 	
 	return context;
 }
-
-// @todo: Switchboard crashes in result formatter when running tests in parallel
 
 suite.addBatch({
 
@@ -110,26 +68,10 @@ suite.addBatch({
 			//Switchboard.setRequest(request);
 			return Switchboard;
 		},
-		'is retrieved using the "headliner_biographies" example routine': validateResponse("headliner_biographies", "extractMerge"),
-		//'is retrieved using the "starwars_artists" example routine': validateResponse("starwars_artists", "extractMerge"),
-		'is retrieved using the "headliner_biographies" example routine': validateResponse("headliner_biographies", "injectMerge"),
-		//'is retrieved using the "starwars_artists" example routine': validateResponse("starwars_artists", "injectMerge"),
+		
+		'is retrieved using the "starwars_artists" example routine': validateResponse("starwars_artists", "extractMerge"),
+		'is retrieved using the "starwars_artists" example routine': validateResponse("starwars_artists", "injectMerge"),
 	}
 });
-
-/*
-suite.addBatch({
-
-	'A valid response': {
-
-		'topic': function() {
-			Switchboard.setRequest(request);
-			return Switchboard;
-		},
-		//'is retrieved using the "headliner_biographies" example routine': validateResponse("headliner_biographies"),
-		'is retrieved using the "starwars_artists" example routine': validateResponse("starwars_artists", "extractMerge")
-	}
-});
-*/
 
 suite.export(module);
