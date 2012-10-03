@@ -19,19 +19,22 @@ var app = require('../server.js');
 console.log = function () {};
 
 // Data needed for tests
-var testUrl = "http://localhost:4000/switchboard/?q=Starwars";
+var testUrl = "http://localhost:4000/switchboard/?q=hello";
+var postTestUrl = "http://localhost:4000/switchboard";
 var callbackParam = "thisIsACallback";
+var routineToPost = require('./resources/user_config_standard.json');
 
+console.log(routineToPost);
 
 function serverShouldRespond(error,response,result){ //async vow callback
- 	var message = "No result. Have you started the server?";
+ 	var message = "No result. The server appears to be offline.";
 	assert.notEqual(result, undefined, message);
 }
 
 suite.addBatch({
     'When making a request to Switchboard server': {
 
-    	'with a "callback" query parameter': {
+    	'with a "callback" query for GET parameter': {
 			topic: function () {    
 				var url = testUrl + "&callback=" + callbackParam;	
 				request.get(url, this.callback);
@@ -53,7 +56,7 @@ suite.addBatch({
 });
 
 suite.addBatch({
-    'When making a request to Switchboard server': {
+    'When making a GET request to Switchboard server': {
 
     	'with no "callback" query parameter': {
 			topic: function () {    		
@@ -71,4 +74,28 @@ suite.addBatch({
     }
 });
 
+suite.addBatch({
+    'When making a POST request to Switchboard server': {
+
+        'with a posted routine and query': {
+        	topic: function () {
+        	    request({
+                  method: 'POST',
+                  uri: postTestUrl,
+                  body: { q:'hello', routine: routineToPost },
+                  json: true
+                },this.callback);
+        	},  		
+
+        	'server should respond': serverShouldRespond,
+
+        	'the engine routine should be the posted routine': function(error,response,result){ //async vow callback
+                assert.deepEqual(result.routine,routineToPost);
+            }
+        }
+    	
+    }
+});
+
 suite.export(module);
+

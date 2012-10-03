@@ -8,9 +8,9 @@ var switchboard = require('./index');
 
 //var localRecipe = require('./example_routines/starwars_artists.json');
 //var localRecipe = require('./example_routines/headliner_biographies.json');
-var localRecipe = require('./example_routines/actor_movies_books.json');
-
-var remoteRecipe = null;
+var localRoutine = require('./example_routines/actor_movies_books.json');
+var remoteRoutine = null;
+var liveRoutine = null;
 
 /* loads a JSON-routine from chef */
 function loadRemoteRecipe(callback){
@@ -31,12 +31,12 @@ attempts to load remote recipe
 if it fails, a local recipe is used instead and is inserted into switchboard
 */
 loadRemoteRecipe(function(config){
-    var userRecipe = config;
-    if(userRecipe == null){
+    liveRoutine = config;
+    if(config == null){
         console.log("LOCAL RECIPE LOADED");
-        userRecipe = localRecipe;
+        liveRoutine = localRoutine;
     }
-    switchboard.setRoutine(userRecipe);
+    switchboard.setRoutine(liveRoutine);
 });
 
 
@@ -58,7 +58,8 @@ app.get('/switchboard', function(req, res){
     if(req.query.routine != undefined) { //take whole filepath instead?
       try {
         var routineFromParam = require('./example_routine/' + req.query.routine + ".json");
-        switchboard.setRoutine(routineFromParam);
+        liveRoutine = routineFromParam;
+        switchboard.setRoutine(liveRoutine);
       }
       catch(e) {
         res.status(500); 
@@ -67,9 +68,9 @@ app.get('/switchboard', function(req, res){
     }
     
     if(req.query.q != undefined){  
-        switchboard.execute([req.query.q], function(r,c){
+        switchboard.execute([req.query.q], function(c, f, r){
             var callback = req.query.callback;
-            var jsonString = JSON.stringify({ clean: c, raw: r });
+            var jsonString = JSON.stringify({ routine: c, formatted: f, raw: r });
             if(callback) {
                 jsonString = callback + "(" + jsonString + ")";
             }
@@ -91,7 +92,8 @@ app.post('/switchboard', function(req, res){
     
     if(req.body.routine != undefined) {
       try {
-        switchboard.setRoutine(req.body.routine);
+        liveRoutine = req.body.routine;
+        switchboard.setRoutine(liveRoutine);
       }
       catch(e) {
         res.status(500);
@@ -100,8 +102,8 @@ app.post('/switchboard', function(req, res){
     }
 
     if(req.body.q != undefined){  
-        switchboard.execute([req.body.q], function(r,c){
-            var jsonString = JSON.stringify({ clean: c, raw: r });
+        switchboard.execute([req.body.q], function(c, f, r){
+            var jsonString = JSON.stringify({ routine: c, formatted: f, raw: r });
             res.send(jsonString);
         });
     }

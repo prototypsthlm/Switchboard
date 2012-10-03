@@ -1,6 +1,5 @@
 [
     {
-        "order": "0",
         "api": "TMDB",
         "action": "personSearch",
         "in_param_name": "query",
@@ -8,7 +7,6 @@
         "limit": 5
     },
     {
-        "order": "1",
         "api": "TMDB",
         "action": "personCredits",
         "in_param_name": "id",
@@ -16,7 +14,6 @@
         "limit": 5
     },
     {
-        "order": "2",
         "api": "Google Books",
         "action": "volumesSearch",
         "in_param_name": "q",
