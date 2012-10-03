@@ -84,7 +84,7 @@ Running chef
 7. input your config to switchboard by
 	* automatically reading it from http://localhost:3000/recipe on switchboard server instance startup (requires service restart to recognize recipe changes)
 	* manually requiring from file as a JSON-variable (requires service restart)
-	* POSTing the config as a parameter "routine" along with a entry query "q" to the service and executing it on the fly
+	* POSTing the config as a parameter "routine" along with a entry query "q" to the service and executing it on the fly. the posted routine is now the "live" routine that will be executed for alls calls to the service
 
 Node package
 -------------
