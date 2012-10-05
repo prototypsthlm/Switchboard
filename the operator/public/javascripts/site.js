@@ -68,10 +68,9 @@ $(document).ready(function(){
         $api.find('')
         $codebox.html("");
         var action = $api.find("select.methods").val();
-        var in_param = $api.find("#"+action).find("select[name=in_param]").val();
+        var in_param_name = $api.find("#"+action).find("select[name=in_param_name]").val();
         var query = $api.find("input[name=taste_q]").val();
-        //var out = $api.find("#"+action).find("select[name=out]").val();
-        var taste_config = { api: $api.attr('name'), query: query, config: { action: action, in_param: in_param } };
+        var taste_config = { api: $api.attr('name'), query: query, config: { action: action, in_param_name: in_param_name } };
         console.log(taste_config);
         $.post('/taste', { data: taste_config }, function(data) {
           console.log(data);

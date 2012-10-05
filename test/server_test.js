@@ -15,6 +15,7 @@ var connectors = require('../lib/connectors/connectors');
 var request = require('request');
 console.log("Server is started...")
 var app = require('../server.js');
+
 // Disable console.log, too much output in app
 console.log = function () {};
 
@@ -22,7 +23,7 @@ console.log = function () {};
 var testUrl = "http://localhost:4000/switchboard/?q=hello";
 var postTestUrl = "http://localhost:4000/switchboard";
 var callbackParam = "thisIsACallback";
-var routineToPost = require('./resources/user_config_standard.json');
+var routineToPost = require('../test_resources/user_config_standard.json');
 
 console.log(routineToPost);
 

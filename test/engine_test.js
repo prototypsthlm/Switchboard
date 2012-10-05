@@ -4,7 +4,7 @@ var vows = require('vows'),
 var suite = vows.describe('Switchboard engine');
 var engine = require('../lib/switchboard.js');
 
-var userConfig = require('./resources/user_config_standard.json');
+var userConfig = require('../test_resources/user_config_standard.json');
 
 suite.addBatch({// Batch
     'A routine': { // Context

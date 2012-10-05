@@ -7,10 +7,10 @@
         "limit": "1"
     },
     {
-        "api": "Echonest",
-        "action": "artistURLs",
-        "in_param_name": "name",
-        "value_source": "artists.name",
+        "api": "last.fm",
+        "action": "albumSearch",
+        "in_param_name": "album",
+        "value_source": "artists.href",
         "limit": "1"
     }
 ]

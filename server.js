@@ -10,7 +10,7 @@ var liveRoutine = require('./example_routines/starwars_artists.json');
 //var liveRoutine = require('./example_routines/headliner_biographies.json');
 //var liveRoutine = require('./example_routines/actor_movies_books.json');
 
-/* loads a JSON-routine from chef */
+/* loads a JSON-routine from the operator */
 function loadRemoteRecipe(callback){
     request({url: "http://localhost:3000/recipe", headers: { "Accept" : "application/json" }}, function (error, response, result) {
          if (!error && response.statusCode == 200) {

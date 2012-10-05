@@ -3,7 +3,7 @@ var vows = require('vows'),
     
 var suite = vows.describe('Class resonsible for formatting all results to a mega object');
 var ResultFormatter = require('../lib/results_formatter.js');
-var TestResult = require('./resources/results.js');
+var TestResult = require('../test_resources/results.js');
 var TestHelper = require('../lib/test_helper.js');
 
 function resultAfterMergeValidation(routineToTest, mergeMethod) {
@@ -22,7 +22,7 @@ function resultAfterMergeValidation(routineToTest, mergeMethod) {
 
 	context['should return a valid clean result'] = function(topic) {
 		var cleanResult = topic.cleanResult;
-		var expectedCleanResult = new TestResult(routineToTest, "clean", mergeMethod);
+		var expectedCleanResult = new TestResult(routineToTest, "clean", mergeMethod); //hämtar ut clean result
 		var isEqual = TestHelper.compareObjects(cleanResult, expectedCleanResult, false);
 		assert.isTrue(isEqual, "Clean result differs");
 	};

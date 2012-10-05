@@ -18,7 +18,7 @@ An example might be
 1. doing an artist search on Spotify
 2. taking the first five artist names from the Spotify-result and searching last.fm for upcoming events for these artists
 
-A flow like this is described as a JSON config file that is then inputted to switchboard and specifies which API-actions to call and what data goes where. To help with the concoction of these config files, or "routines", switchboard is bundled with the utility application "chef" which provides a UI for creating routines. Chef also helps in providing an oversight of existing API-methods as well as possible in-parameters and output-values for these. 
+A flow like this is described as a JSON config file that is then inputted to switchboard and specifies which API-actions to call and what data goes where. To help with the concoction of these config files, or "routines", switchboard is bundled with the utility application "the operator" which provides a UI for creating routines. Chef also helps in providing an oversight of existing API-methods as well as possible in-parameters and output-values for these. 
 
 At the moment supported APIs include
 
@@ -39,7 +39,7 @@ Running switchboard:
 
 1. npm install in switchboard folder to setup dependencies
 2. copy connectors/keys_template.json to connectors/keys.json and fill in your API-keys
-3. create routine with chef or use an example routine from example_routines
+3. create routine with the operator or use an example routine from example_routines
 4. node server.js
 5. http://localhost:4000/switchboard?q=entryquery
 
@@ -73,10 +73,10 @@ You can also POST configs to the switchboard service as mentioned below. POST da
 		}
 
 
-Running chef
+Running The Operator
 -------------
 
-1. npm install in chef folder
+1. npm install in the operator folder
 2. node app.js
 3. http://localhost:3000
 5. make your recipe and write it down (execution order is top -> bottom)
@@ -125,7 +125,7 @@ Optionally install as a node package and:
 		    }
 		]
 		
-	look at the source for a connector or use the switchboard chef for an overview of possible in_param_names and value_sources_.
+	look at the source for a connector or use the switchboard operator for an overview of possible in_param_names and value_sources_.
  
 4. insert query and run routine:
 
