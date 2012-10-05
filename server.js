@@ -12,13 +12,13 @@ var liveRoutine = require('./example_routines/starwars_artists.json');
 
 /* loads a JSON-routine from the operator */
 function loadRemoteRecipe(callback){
-    request({url: "http://localhost:3000/recipe", headers: { "Accept" : "application/json" }}, function (error, response, result) {
+    request({url: "http://localhost:3000/routine", headers: { "Accept" : "application/json" }}, function (error, response, result) {
          if (!error && response.statusCode == 200) {
-              console.log("REMOTE RECIPE LOADED");                          
+              console.log("REMOTE ROUTINE LOADED");                          
               callback(JSON.parse(result));
          }
          else {
-             console.log("REMOTE RECIPE NOT AVAILABLE");
+             console.log("REMOTE ROUTINE NOT AVAILABLE");
              callback(null);
          }
     }); 
@@ -51,14 +51,14 @@ function handleRequest(httpMethod, req, res) {
     return;
   }
 
-  // Use recipe if sent in the request
+  // Use routine if sent in the request
   if(req.param('routine') != undefined) {
       try {
         if(httpMethod == "get") {
           liveRoutine = require('./example_routines/' + req.param('routine') + ".json");         
         }
         else {
-          liveRoutine = req.param('routine'); // Whole recipe is posted as json
+          liveRoutine = req.param('routine'); // Whole routine is posted as json
         }
       }
       catch(e) {
@@ -67,7 +67,7 @@ function handleRequest(httpMethod, req, res) {
       }
     }
 
-    console.log("RECIPE ", liveRoutine);
+    console.log("ROUTINE: ", liveRoutine);
 
     if(req.param('q') != undefined){
         var jobId = switchboard.addJob(liveRoutine, [req.param('q')]); //switchboard.setRoutine(liveRoutine);
@@ -81,8 +81,8 @@ function handleRequest(httpMethod, req, res) {
 }
 
 /* 
-attempts to load remote recipe
-if it fails, a local recipe is used instead and is inserted into switchboard
+attempts to load remote routine
+if it fails, a local routine is used instead and is inserted into switchboard
 */
 loadRemoteRecipe(function(config){
     if(config != null){

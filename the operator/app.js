@@ -26,12 +26,12 @@ app.configure('development', function(){
 
 app.get('/', routes.index);
 
-app.get('/recipe', function(req,res){
+app.get('/routine', function(req,res){
     res.contentType('json');
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With"); 
     
-    fs.readFile('./recipe.json', 'utf8', function (err,data) {
+    fs.readFile('./routine.json', 'utf8', function (err,data) {
     if (err) {
         res.send(JSON.stringify({status: err}));
     }
@@ -57,7 +57,7 @@ app.post('/taste',function(req,res){
 app.post('/cook',function(req,res){
     var config = req.param('data', null);
     
-    fs.writeFile("recipe.json", JSON.stringify(config, null, 4), function(err) {
+    fs.writeFile("routine.json", JSON.stringify(config, null, 4), function(err) {
         if(err) {
             console.log(err);
             res.send("BAD JOB!");
