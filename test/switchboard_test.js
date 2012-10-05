@@ -10,9 +10,8 @@
 var vows = require('vows'),
     assert = require('assert');    
 var suite = vows.describe('The Engine');
-var testRoutine = require('../example_routines/starwars_artists.json');
+
 var Switchboard = require('../index');
-var EngineData = require('../test_resources/engine');
 var TestResult = require('../test_resources/results.js');
 var TestHelper = require('../lib/test_helper.js');
 
@@ -65,7 +64,6 @@ suite.addBatch({
 	'A valid response': {
 
 		'topic': function() {
-			//Switchboard.setRequest(request);
 			return Switchboard;
 		},
 		
