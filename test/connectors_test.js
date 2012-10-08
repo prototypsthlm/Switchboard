@@ -85,7 +85,7 @@ suite.addBatch({// Batch
 
     	'Spotify' : connectorValid(),
     	'Echonest' : connectorValid(),
-    	'last.fm' : connectorValid(),
+    	'Last.fm' : connectorValid(),
     	'Google Books' : connectorValid(),
     	'TMDB' : connectorValid()
     }

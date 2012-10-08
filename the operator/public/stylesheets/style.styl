@@ -1,62 +1,63 @@
 body
-  padding: 50px
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
-  background-color: #333
-a
-  color: #00B7FF
+  //padding: 50px
+  //font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
+  background-color: #222
 
-.api
+	
+#header
 	background: #fff
-	padding: 20px
-	width: 800px
-	//height: 250px
-	float: left
-	margin: 0 0 10px 10px
+	margin-bottom: 10px
+	padding-bottom: 10px
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;	
+#header .btn
+	margin-right: 5px
+
+#routine_results
+	
+#routine_results .span12
+	background: #fff
+	border-radius: 5px
+	margin-bottom: 10px
+	
+.api
+	padding: 20px 0
+	margin-bottom: 20px
+	background: #fff
 	border-radius: 5px
 	
 .dummy
 	display: none
-	
-.header
-	background: #fff
-	float: left
-	width: 300px
-	text-align: center
-	border-radius: 5px
-	padding: 10px
-	
+
 .api_action
 	display: none;
-
-.btn
-	font-size: 14px;
-	width: 250px
-	margin-top: 10px
-	padding: 10px 20px
-	border-radius: 5px
-	background: #eee
-	border: 1px solid #ccc
-	cursor: pointer
-	
-#cook.btn
-	color: #fff
-	background: #70e027
-	border: 1px solid #999
-	
+		
 .results
-	color: #0f0
-	padding: 10px
-	
-a.close, a.hide
-	float: right
+	display: none;
+	margin-top: 10px
 
-a.hide
+	
+a.remove, a.hide_json
+	float: right
+	padding-right: 20px
+
+a.hide_json
 	padding: 10px
+	padding-right: 40px
 	
 .taste_box
 	display: none
 	
-pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
+.taste, .run
+	margin-bottom: 9px
+	margin-left: 5px
+	
+.run-div
+	margin-top: 10px
+
+pre
+	margin-right: 20px
+//pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
 .string { color: green; }
 .number { color: blue; }
 .boolean { color: blue; }

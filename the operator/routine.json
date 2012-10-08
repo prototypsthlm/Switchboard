@@ -1,16 +1,12 @@
 [
     {
-        "api": "Echonest",
-        "action": "songSearch",
-        "in_param_name": "title",
+        "api": "last.fm",
+        "action": "albumSearch",
+        "in_param_name": "album",
         "optionals": [
             {
-                "paramName": "bucket",
-                "paramValue": "audio_summary"
-            },
-            {
-                "paramName": "min_tempo",
-                "paramValue": "140"
+                "paramName": "page",
+                "paramValue": "1"
             }
         ],
         "value_source": "entry query",
