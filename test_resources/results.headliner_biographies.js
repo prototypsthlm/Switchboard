@@ -1662,7 +1662,7 @@ this.cleanInjectResult = [
                     "apiConfig": {
                         "action": "artistSearch",
                         "in_source": "request.get",
-                        "in_param": "0"
+                        "in_param_name": "0"
                     }
                 },
                 "result": {
@@ -3240,7 +3240,7 @@ this.cleanInjectResult = [
                     "apiConfig": {
                         "action": "artistGetEvents",
                         "in_source": "artists.name",
-                        "in_param": "0"
+                        "in_param_name": "0"
                     }
                 },
                 "result": {
@@ -5450,7 +5450,7 @@ this.cleanInjectResult = [
                     "apiConfig": {
                         "action": "artistGetEvents",
                         "in_source": "artists.name",
-                        "in_param": "0"
+                        "in_param_name": "0"
                     }
                 },
                 "result": {
@@ -5484,7 +5484,7 @@ this.cleanInjectResult = [
                     "apiConfig": {
                         "action": "artistGetEvents",
                         "in_source": "artists.name",
-                        "in_param": "0"
+                        "in_param_name": "0"
                     }
                 },
                 "result": {
@@ -5518,7 +5518,7 @@ this.cleanInjectResult = [
                     "apiConfig": {
                         "action": "artistGetEvents",
                         "in_source": "artists.name",
-                        "in_param": "0"
+                        "in_param_name": "0"
                     }
                 },
                 "result": {
@@ -5552,7 +5552,7 @@ this.cleanInjectResult = [
                     "apiConfig": {
                         "action": "artistGetEvents",
                         "in_source": "artists.name",
-                        "in_param": "0"
+                        "in_param_name": "0"
                     }
                 },
                 "result": {
@@ -5591,7 +5591,7 @@ this.cleanInjectResult = [
                     "apiConfig": {
                         "action": "artistBiographies",
                         "in_source": "events.event.artists.headliner",
-                        "in_param": "1"
+                        "in_param_name": "1"
                     }
                 },
                 "result": {
@@ -5859,7 +5859,7 @@ this.cleanInjectResult = [
                     "apiConfig": {
                         "action": "artistBiographies",
                         "in_source": "events.event.artists.headliner",
-                        "in_param": "1"
+                        "in_param_name": "1"
                     }
                 },
                 "result": {
@@ -6101,7 +6101,7 @@ this.cleanInjectResult = [
                     "apiConfig": {
                         "action": "artistBiographies",
                         "in_source": "events.event.artists.headliner",
-                        "in_param": "1"
+                        "in_param_name": "1"
                     }
                 },
                 "result": {
@@ -6447,7 +6447,7 @@ this.cleanInjectResult = [
                     "apiConfig": {
                         "action": "artistBiographies",
                         "in_source": "events.event.artists.headliner",
-                        "in_param": "1"
+                        "in_param_name": "1"
                     }
                 },
                 "result": {
@@ -6689,7 +6689,7 @@ this.cleanInjectResult = [
                     "apiConfig": {
                         "action": "artistBiographies",
                         "in_source": "events.event.artists.headliner",
-                        "in_param": "1"
+                        "in_param_name": "1"
                     }
                 },
                 "result": {

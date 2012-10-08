@@ -1,0 +1,90 @@
+extends layout
+
+block content
+	div.container
+		div.row.results.alert.alert-success
+	
+		div.row#header
+			div.span12
+				h1= title
+				
+				each api in apis
+					button(ingredient=api.name).btn.ingredient #{api.name}
+			
+				button.btn.btn-primary#cook Set Routine
+				
+				div.run-div
+					input(type="text",name="run_q",value="test")
+					button.run.btn.btn-success#run Run Routine
+				
+				
+		div#routine
+		
+		div#routine_results.row
+			div.span12
+				h2 Routine Results
+				pre No routine has been executed.
+		
+	each api in apis
+		div.api.row.dummy(name=api.name)
+			div.span12
+				a.remove(href="#") remove
+
+				h3 #{api.name}
+				p
+					h4 API-methods: 
+					select(class="methods")
+						each val,key in api.apiActions
+							option(value=key)= key
+	
+				p
+					label limit (maximum amount of queries to execute):
+					select(name="limit")
+						each limit, i in limits
+							option(value=limit)= limit
+				hr
+	
+				each val,key in api.apiActions
+					div(id=key,class="api_action")
+						h4 #{key}
+						div
+							label parameter name: 
+							select(name="in_param_name")
+								each in_param_name, i in val.in_param_names
+									option(value=in_param_name)= in_param_name
+									
+			
+						div
+							label parameter value source (from previous API if existing): 
+							select(name="output_node")
+								each output_node, i in val.output_nodes
+									option(value=output_node)= output_node
+								
+						hr
+			
+						if val.optionals
+							div.optionals
+								h4 Optional Parameters
+								each optional_param, i in val.optionals
+										if optional_param.paramValues
+											div
+												label #{optional_param.paramName}:
+												select(name=optional_param.paramName)
+													option(value="")= "-"
+													each optional_param_value, i in optional_param.paramValues
+														option(value=optional_param_value)=optional_param_value
+										else
+											div
+												label #{optional_param}:
+												input(type="text",name=optional_param)
+								
+							hr
+	
+				input(type="text",name="taste_q",value="test")
+				button.taste.btn.btn-primary(href="#") preview
+	
+				div.taste_box
+					a.hide_json(href="#") hide
+					pre
+				hr
+	

@@ -1,0 +1,73 @@
+body {
+  background-color: #222;
+}
+#header {
+  background: #fff;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+#header .btn {
+  margin-right: 5px;
+}
+#routine_results,
+#routine_results .span12 {
+  background: #fff;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+.api {
+  padding: 20px 0;
+  margin-bottom: 20px;
+  background: #fff;
+  border-radius: 5px;
+}
+.dummy {
+  display: none;
+}
+.api_action {
+  display: none;
+}
+.results {
+  display: none;
+  margin-top: 10px;
+}
+a.remove,
+a.hide_json {
+  float: right;
+  padding-right: 20px;
+}
+a.hide_json {
+  padding: 10px;
+  padding-right: 40px;
+}
+.taste_box {
+  display: none;
+}
+.taste,
+.run {
+  margin-bottom: 9px;
+  margin-left: 5px;
+}
+.run-div {
+  margin-top: 10px;
+}
+pre {
+  margin-right: 20px;
+}
+.string {
+  color: #008000;
+}
+.number {
+  color: #00f;
+}
+.boolean {
+  color: #00f;
+}
+.null {
+  color: #f0f;
+}
+.key {
+  color: #000;
+}

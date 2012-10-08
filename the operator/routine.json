@@ -1,0 +1,15 @@
+[
+    {
+        "api": "last.fm",
+        "action": "albumSearch",
+        "in_param_name": "album",
+        "optionals": [
+            {
+                "paramName": "page",
+                "paramValue": "1"
+            }
+        ],
+        "value_source": "entry query",
+        "limit": "1"
+    }
+]

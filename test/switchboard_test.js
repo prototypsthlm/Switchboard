@@ -10,10 +10,9 @@
 var vows = require('vows'),
     assert = require('assert');    
 var suite = vows.describe('The Engine');
-var testRoutine = require('../example_routines/starwars_artists.json');
+
 var Switchboard = require('../index');
-var EngineData = require('./resources/engine');
-var TestResult = require('./resources/results.js');
+var TestResult = require('../test_resources/results.js');
 var TestHelper = require('../lib/test_helper.js');
 
 // Test data
@@ -32,7 +31,7 @@ function routine(routineName) {
 }
 
 function request(routineName) {
-	return {query: {q: testData.queries[routineName]}};
+	return { query: { q: testData.queries[routineName] } };
 }
 
 var validateResponse = function(routineName, mergeMethod) {
@@ -45,7 +44,7 @@ var validateResponse = function(routineName, mergeMethod) {
 
 	context['raw result should be valid'] = function (rawResult, cleanResult) {
 		var expectedRawResult = new TestResult(routineName, "raw", mergeMethod);
-		console.log(rawResult);			
+		//console.log(expectedRawResult);
 		var isEqual = TestHelper.compareObjects(rawResult, expectedRawResult, false);	
 		assert.isTrue(isEqual);
 	};
@@ -65,7 +64,6 @@ suite.addBatch({
 	'A valid response': {
 
 		'topic': function() {
-			//Switchboard.setRequest(request);
 			return Switchboard;
 		},
 		
