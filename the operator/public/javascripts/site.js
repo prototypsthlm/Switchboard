@@ -55,10 +55,12 @@ $(document).ready(function(){
         setValueSources();
     });
     
-    $(window).delegate("a.close", "click", function(){
+    $(window).delegate("a.remove", "click", function(){
         $(this).parents("div.api").remove();
+        setValueSources();
     });
-    $(window).delegate("a.hide", "click", function(){
+    
+    $(window).delegate("a.hide_json", "click", function(){
         $(this).parents("div.api").find('.taste_box').slideUp();
     });
     $(window).delegate("button.taste", "click", function(){
@@ -113,7 +115,7 @@ $(document).ready(function(){
           $('.results').html('Recipe updated');
           $('.results').fadeIn();
           setTimeout(function(){
-                $('.results').html('');
+                $('.results').fadeOut();
           }, 5000);
               
         });
@@ -121,7 +123,7 @@ $(document).ready(function(){
     
     $('.ingredient').click(function(){
         var add = $(this).attr('ingredient');
-        $('div.api.dummy[name="'+add+'"]').clone().removeClass('dummy').addClass('live').appendTo('body');
+        $('div.api.dummy[name="'+add+'"]').clone().removeClass('dummy').addClass('live').appendTo('#routine');
         setValueSources();
     });
 });

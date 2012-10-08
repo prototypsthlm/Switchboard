@@ -16,7 +16,7 @@ Switchboard is a mashup-helper and it's basic functionality is enabling simple d
 An example might be 
 
 1. doing an artist search on Spotify
-2. taking the first five artist names from the Spotify-result and searching last.fm for upcoming events for these artists
+2. taking the first five artist names from the Spotify-result and searching Last.fm for upcoming events for these artists
 
 A flow like this is described as a JSON config file that is then inputted to switchboard and specifies which API-actions to call and what data goes where. To help with the concoction of these config files, or "routines", switchboard is bundled with the utility application "the operator" which provides a UI for creating routines. Chef also helps in providing an oversight of existing API-methods as well as possible in-parameters and output-values for these. 
 
@@ -24,7 +24,7 @@ At the moment supported APIs include
 
 * Echonest
 * Google Books
-* last.fm
+* Last.fm
 * Spotify
 * The Movie Database
 
@@ -56,7 +56,7 @@ You can also POST configs to the switchboard service as mentioned below. POST da
 		            "limit": "1"
 		        },
 		        {
-		            "api": "last.fm",
+		            "api": "Last.fm",
 		            "action": "artistGetEvents",
 		            "in_param_name": "artist",
 		            "value_source": "artists.name",
