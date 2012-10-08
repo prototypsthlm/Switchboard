@@ -6,15 +6,31 @@ var connector = require('../lib/connectors/connectors');
 var request = require('request');
 
 suite.addBatch({// Batch
-    'a spotify connector': {// Context
-		topic: connector.spotify,// Topic
+    'Spotify connector': {// Context
+        topic: connector.spotify,// Topic
 
-        'has name Spotify': function (spotify) {// Vow
-            assert.equal(spotify.name, "Spotify", "Name is Spotify");
+        'should have name Spotify': function (spotify) {// Vow
+            assert.equal(spotify.name, "Spotify");
         },
 
-        'has action artistSearch': function(spotify) {
-        	assert.isTrue('artistSearch' in spotify.apiActions);
+        'should inherit from base_connector': function(spotify) {
+            assert.isFunction(spotify.execute, "but don't have base_connector function \"execute\"");
+        },
+
+        'uri generator': {
+            topic: function (spotify) {
+                // test data
+                return params = {
+                    query: 'Hej',
+                    apiConfig: { action: 'artistSearch', in_param: 0 }
+                };
+            },
+
+            'should return a string(not empty)': function(params) {
+                var url = connector.spotify.getActionUrl(params.query, params.apiConfig);
+                assert.isString(url);
+                assert.isNotEmpty(url);
+            }
         },
 
         'with an artistSearch action': {
@@ -23,13 +39,6 @@ suite.addBatch({// Batch
 				assert.isTrue("artistSearch" in spotify.apiActions);
         	},
 
-        	'which works': function(spotify) {
-        		assert.isTrue(true); // does nothing?
-        	},
-
-        	'returns a result when searching for Madonna': function(spotify) {  		
-        		assert.isObject({}, "No object"); // does nothing?
-        	},
         },
         
     	'can be executed': {
