@@ -58,7 +58,7 @@ function handleRequest(httpMethod, req, res) {
           liveRoutine = require('./example_routines/' + req.param('routine') + ".json");         
         }
         else {
-          liveRoutine = req.param('routine'); // Whole routine is posted as json
+          liveRoutine = JSON.parse(req.param('routine')); // Whole routine is posted as json
         }
       }
       catch(e) {
