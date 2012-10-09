@@ -23,6 +23,20 @@ body {
   background: #fff;
   border-radius: 5px;
 }
+.api h3 {
+  display: inline;
+}
+.url a {
+  font-size: 10px;
+}
+input.override {
+  margin-left: 10px;
+}
+span.info {
+  position: relative;
+  bottom: 5px;
+  left: 10px;
+}
 .dummy {
   display: none;
 }
