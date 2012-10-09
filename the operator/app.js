@@ -49,7 +49,7 @@ app.post('/taste',function(req,res){
     var url = connector.getActionUrl(setup.query,setup.config);
     console.log(url);
     connector.get(url, setup.query, setup.config, null, null, function(){
-        res.send(connector.responseObject);
+        res.send({ response: connector.responseObject, url: url });
     });
     
 });
