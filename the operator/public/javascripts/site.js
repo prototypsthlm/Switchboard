@@ -21,18 +21,20 @@ function setValueSources(){
     
     var activeRoutineElements = $("div.api.live");
     activeRoutineElements.each(function(i, obj){
-         var action = $(this).find("select.methods").val();
-         $selectEl = $(this).find("#"+action).find("select[name=output_node]");
-         $selectEl.html("");
+        var action = $(this).find("select.methods").val();
+        $selectEl = $(this).find("#"+action).find("select[name=output_node].mapped");
+        $selectEl.html("");
         if(i == 0){
             $selectEl.html("<option value='entry query'>entry query</option>");
+            $(this).find("#"+action).find("input[name=output_node].override").hide();
         }
         else {
             $prevRoutineElement = $(activeRoutineElements[i-1]);
             var prevName = $prevRoutineElement.attr('name').replace(".","\\.");
             $referenceElement = $("div[name=" + prevName + "].dummy");
             var prevAction = $prevRoutineElement.find("select.methods").val();
-            $prevSelectEl = $referenceElement.find("#"+prevAction).find("select[name=output_node]");
+            $prevSelectEl = $referenceElement.find("#"+prevAction).find("select[name=output_node].mapped");
+            
             $selectEl.html($prevSelectEl.html());     
         }
         
@@ -84,8 +86,9 @@ $(document).ready(function(){
         var taste_config = { api: $api.attr('name'), query: query, config: { action: action, in_param_name: in_param_name, optionals: selected_optionals } };
         $.post('/taste', { data: taste_config }, function(data) {
           console.log(data);
-          $codebox.html(syntaxHighlight(JSON.stringify(data, null, 4)));
-          
+          $codebox.html(syntaxHighlight(JSON.stringify(data.response, null, 4)));
+          $api.find("div.url a").html(data.url);
+          $api.find("div.url a").attr('href',data.url);
           if(!$codebox.is(":visible")){
                 $codebox.parents('.taste_box').slideDown();
             }              
@@ -98,7 +101,13 @@ $(document).ready(function(){
             var action = $(this).find("select.methods").val();
             var limit = $(this).find("select[name=limit]").val();
             var in_param = $(this).find("#"+action).find("select[name=in_param_name]").val();
-            var out = $(this).find("#"+action).find("select[name=output_node]").val();
+            
+            var out;
+            var override = $(this).find("#"+action).find("input[name=output_node].override").val();
+            if(override != "")
+                out = override;
+            else
+                out = $(this).find("#"+action).find("select[name=output_node]").val();
             
             var selected_optionals = [];
             var base_select = "#"+action+" .optionals ";

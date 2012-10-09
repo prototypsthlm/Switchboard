@@ -14,8 +14,9 @@ block content
 				button.btn.btn-primary#cook Set Routine
 				
 				div.run-div
-					input(type="text",name="run_q",value="test")
-					button.run.btn.btn-success#run Run Routine
+					a.btn.btn-success(href="/routine",target="_blank") /routine
+					input(type="text",name="run_q",value="entry query", style="display:none;")
+					button.run.btn.btn-success#run(style="display:none;") Run Routine
 				
 				
 		div#routine
@@ -31,6 +32,8 @@ block content
 				a.remove(href="#") remove
 
 				h3 #{api.name}
+				span 
+					a(href=api.docs,target="_blank") docs
 				p
 					h4 API-methods: 
 					select(class="methods")
@@ -55,10 +58,11 @@ block content
 									
 			
 						div
-							label parameter value source (from previous API if existing): 
-							select(name="output_node")
+							label parameter value source (from previous API-results if existing): 
+							select(name="output_node",class="mapped")
 								each output_node, i in val.output_nodes
 									option(value=output_node)= output_node
+							input(type="text",class="override",name="output_node",placeholder="override.value.source")
 								
 						hr
 			
@@ -73,15 +77,23 @@ block content
 													option(value="")= "-"
 													each optional_param_value, i in optional_param.paramValues
 														option(value=optional_param_value)=optional_param_value
+												if optional_param.info
+													span.info #{optional_param.info}
 										else
 											div
 												label #{optional_param}:
 												input(type="text",name=optional_param)
+												if optional_param.info
+													span #{optional_param.info}
+										
 								
 							hr
 	
-				input(type="text",name="taste_q",value="test")
+				input(type="text",name="taste_q",value="test query")
 				button.taste.btn.btn-primary(href="#") preview
+				
+				div.url 
+					a(href="#")
 	
 				div.taste_box
 					a.hide_json(href="#") hide
