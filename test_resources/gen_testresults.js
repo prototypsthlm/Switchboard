@@ -11,10 +11,9 @@ var config = {
 	folderTestResults: './test_resources/',
 
 	routineTestData: {
-		artist_urls: 'xx',
-		actor_movies_books: 'Will Smith',
-		starwars_artists: 'Titanic',
-		headliner_biographies: 'Coldplay'
+		artist_urls: 'Foo',
+		starwars_artists: 'Bilbo',
+		headliner_biographies: 'Moa Lignell'
 	}
 };
 
@@ -37,7 +36,6 @@ var GenTestResults = {
 		// Use value as input data
 		for( var routineName in config.routineTestData ){
 			var query = config.routineTestData[routineName];
-			console.log(query);
 			this.handleOne(routineName, query, config);
 		}
 	},
@@ -58,8 +56,6 @@ var GenTestResults = {
 
 	// Writes the data to file, used in handleOne 
 	writeResults: function(usedRoutine, clean, raw, routineName, folderTestResults, query){
-		console.log(routineName);
-		console.log(query);
 		var path = folderTestResults+"results.gen."+routineName+".json";
 		fs.writeFile(path, JSON.stringify(clean, null, 4), function(err) {
 	        if(err) {
