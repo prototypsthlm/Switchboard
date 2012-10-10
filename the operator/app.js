@@ -55,7 +55,7 @@ app.post('/taste',function(req,res){
     
 });
 
-app.post('/cook',function(req,res){
+app.post('/set',function(req,res){
     var config = req.param('data', null);
     
     fs.writeFile("routine.json", JSON.stringify(config, null, 4), function(err) {
@@ -67,6 +67,14 @@ app.post('/cook',function(req,res){
         }
     });
 });
+
+app.post('/run',function(req,res){
+    var data = req.param('data', null);
+    switchboard.addAndRunJob(data.routine, [data.q], function(usedRoutine, clean, raw){
+        res.send({ routine: usedRoutine, clean: clean, raw: raw });
+    });
+});
+
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
