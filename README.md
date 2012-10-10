@@ -79,12 +79,14 @@ Running The Operator
 1. npm install in the operator folder
 2. node app.js
 3. http://localhost:3000
-5. make your routine and write it down (execution order is top -> bottom)
+5. make your routine and "set it" (execution order is top -> bottom)
 6. the config is now at http://localhost:3000/routine as well as in a routine.json file
 7. input your config to switchboard by one of the below 
 	* manually requiring from file as a JSON-variable (requires service restart)
 	* automatically reading it from http://localhost:3000/routine on switchboard server instance startup (requires service restart to recognize routine changes)
 	* POSTing the config as a parameter "routine" along with a entry query "q" to the service and executing it on the fly. the posted routine is now the "live" routine that will be executed for all calls to the service until another one is POSTed in
+
+You can also run routines directly in the operator to get a view of the output.
 
 Node package
 -------------

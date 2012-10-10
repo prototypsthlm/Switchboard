@@ -11,12 +11,13 @@ block content
 				each api in apis
 					button(ingredient=api.name).btn.ingredient #{api.name}
 			
-				button.btn.btn-primary#cook Set Routine
+				button.btn.btn-primary#set Set Routine
 				
 				div.run-div
-					a.btn.btn-success(href="/routine",target="_blank") /routine
-					input(type="text",name="run_q",value="entry query", style="display:none;")
-					button.run.btn.btn-success#run(style="display:none;") Run Routine
+					input(type="text",name="run_q",value="entry query")
+					button.run.btn.btn-success#run() Run Routine
+				a.btn.btn-primary(href="/routine",target="_blank") /routine
+				
 				
 				
 		div#routine

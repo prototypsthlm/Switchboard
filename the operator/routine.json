@@ -1,15 +1,22 @@
 [
     {
-        "api": "TMDB",
-        "action": "movieSearch",
-        "in_param_name": "query",
+        "api": "Spotify",
+        "action": "artistSearch",
+        "in_param_name": "q",
+        "value_source": "entry query",
+        "limit": "1"
+    },
+    {
+        "api": "Last.fm",
+        "action": "albumSearch",
+        "in_param_name": "album",
         "optionals": [
             {
-                "paramName": "year",
-                "paramValue": "1977"
+                "paramName": "limit",
+                "paramValue": "1"
             }
         ],
-        "value_source": "entry query",
+        "value_source": "artists.name",
         "limit": "1"
     }
 ]
