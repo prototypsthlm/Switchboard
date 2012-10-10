@@ -5,18 +5,5 @@
         "in_param_name": "q",
         "value_source": "entry query",
         "limit": "1"
-    },
-    {
-        "api": "Last.fm",
-        "action": "albumSearch",
-        "in_param_name": "album",
-        "optionals": [
-            {
-                "paramName": "limit",
-                "paramValue": "1"
-            }
-        ],
-        "value_source": "artists.name",
-        "limit": "1"
     }
 ]
