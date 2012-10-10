@@ -37,7 +37,7 @@ Installing node: http://nodejs.org/
 
 Running switchboard:
 
-1. npm install in switchboard folder to setup dependencies
+1. npm install in switchboard folder to set up dependencies
 2. copy connectors/keys_template.json to connectors/keys.json and fill in your API-keys
 3. create routine with the operator or use an example routine from example_routines
 4. node server.js
@@ -46,7 +46,7 @@ Running switchboard:
 You can also POST configs to the switchboard service as mentioned below. POST data should be structured as:
 
 		{
-		    "q": "your query",
+		    "q": "your entry query",
 		    "routine": [
 		        {
 		            "api": "Spotify",
@@ -80,11 +80,11 @@ Running The Operator
 2. node app.js
 3. http://localhost:3000
 5. make your routine and "set it" (execution order is top -> bottom)
-6. the config is now at http://localhost:3000/routine as well as in a routine.json file
+6. the config is now live at http://localhost:3000/routine as well as stored in a routine.json file
 7. input your config to switchboard by one of the below 
 	* manually requiring from file as a JSON-variable (requires service restart)
 	* automatically reading it from http://localhost:3000/routine on switchboard server instance startup (requires service restart to recognize routine changes)
-	* POSTing the config as a parameter "routine" along with a entry query "q" to the service and executing it on the fly. the posted routine is now the "live" routine that will be executed for all calls to the service until another one is POSTed in
+	* POSTing the config as a parameter "routine" along with an entry query "q" to the service and executing it on the fly. the posted routine is now the "live" routine that will be executed for all calls to the service until another one is POSTed in
 
 You can also run routines directly in the operator to get a view of the output.
 
@@ -97,14 +97,14 @@ Optionally install as a node package and:
 
 2. configure keys as above in node_modules/switchboard/lib/connectors
 
-3. configure and setup the switchboard routine:
+3. configure and set up the switchboard routine:
 
 	a userConfig is structured as:
 
 		[
 		    {
-		        "api": "TMDB", //execution order, if first the value api of action param is set to the entry query value 
-		        "action": "movieSearch", //api action
+		        "api": "TMDB", //API-name
+		        "action": "movieSearch", //API-method
 		        "in_param_name": "query", //param name for the api action .ie ?in_param_name=value
 		        "value_source": "entry query", //where to get value for the in_param, if first in routine always from initial request param otherwise a path to previous API-call JSON-results (see below)
 		        "limit": 5, //the maximum amount of queries to take from value_source and execute
@@ -143,7 +143,7 @@ Optionally install as a node package and:
 			}
 		}
 		
-	one can look at the source for a connector, the API-method documentation or use the switchboard operator for a better overview of possible in_param_names and value_sources.
+	one can look at the source for a connector, the API-method documentation or use the switchboard operator for a better overview of API-methods as well as possible in_param_names and value_sources.
 		
  
 4. insert query and routine:

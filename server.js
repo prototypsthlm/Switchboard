@@ -6,19 +6,17 @@ var $ = require('jquery');
 
 var switchboard = require('./index');
 
-//var liveRoutine = require('./example_routines/starwars_artists.json');
-var liveRoutine = require('./example_routines/headliner_biographies.json');
+var liveRoutine = require('./example_routines/starwars_artists.json');
+//var liveRoutine = require('./example_routines/headliner_biographies.json');
 //var liveRoutine = require('./example_routines/actor_movies_books.json');
 
 /* loads a JSON-routine from the operator */
 function loadRemoteRecipe(callback){
     request({url: "http://localhost:3000/routine", headers: { "Accept" : "application/json" }}, function (error, response, result) {
          if (!error && response.statusCode == 200) {
-              console.log("REMOTE ROUTINE LOADED");                          
               callback(JSON.parse(result));
          }
          else {
-             console.log("REMOTE ROUTINE NOT AVAILABLE");
              callback(null);
          }
     }); 
@@ -84,10 +82,10 @@ function handleRequest(httpMethod, req, res) {
 attempts to load remote routine
 if it fails, a local routine is used instead and is inserted into switchboard
 */
-loadRemoteRecipe(function(config){
-    if(config != null){
-        console.log("REMOTE RECIPE LOADED");
-        liveRoutine = config;
+loadRemoteRecipe(function(routine){
+    if(routine != null){
+        console.log("REMOTE ROUTINE LOADED");                          
+        liveRoutine = routine;
     }
 });
 
