@@ -9,7 +9,7 @@ var vows = require('vows'),
 var suite = vows.describe('Engine job');
 var engine = require('../lib/switchboard.js');
 var EngineJob = require('../lib/engine_job.js');
-var userConfig = require('./resources/user_config_standard.json');
+var userConfig = require('../test_resources/user_config_standard.json');
 
 var testData = {
 	request: ["search query"],

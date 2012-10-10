@@ -25,12 +25,19 @@ var results = {
     raw: rawResult
 };
 */
+
+function getPath(routine, type, method){
+    var path = "./results/res."+routine+"."+type;
+    return type==='raw' ? path+".json" : path+"."+method.replace('Merge', '')+".json"; 
+}
+
+/*
 function getResults(routine) {
-    var routineFilename = "./results." + routine + ".js";
+    var routineFilename = "./results.gen." + routine + ".json";
     var routineResult = require(routineFilename);
     //console.log(routineFilename, routineResult);
 
-    var rawResult = routineResult.rawResult;
+    var rawResult = require("");
     var cleanInjectResult = routineResult.cleanInjectResult;
     var injectResult = {
         "clean": cleanInjectResult,
@@ -59,25 +66,26 @@ function getResults(routine) {
     
     return results; 
 }
-
+*/
 
 function Result(routine, typeOfResult, parseMethod) {
     //routine = routine == undefined ? 'starwars_artists' : routine;
-    var results = getResults(routine);
+    //var results = getResults(routine);
+    return require(getPath(routine, typeOfResult, parseMethod));
     
-    try {
-        if(parseMethod == undefined) {
-            if(typeOfResult == undefined) {
-                return $.extend(true, {}, results);    
-            }
-            return $.extend(true, [], results[typeOfResult]);
-        } else {
-            return $.extend(true, [], results[parseMethod][typeOfResult]);
-        }
-    }
-    catch(e) {
-    }
-    return undefined;
+    // try {
+    //     if(parseMethod == undefined) {
+    //         if(typeOfResult == undefined) {
+    //             return $.extend(true, {}, results);    
+    //         }
+    //         return $.extend(true, [], results[typeOfResult]);
+    //     } else {
+    //         return $.extend(true, [], results[parseMethod][typeOfResult]);
+    //     }
+    // }
+    // catch(e) {
+    // }
+    // return undefined;
 }
 
 module.exports = Result;
