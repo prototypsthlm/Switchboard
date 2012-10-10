@@ -1,23 +1,22 @@
 [
     {
-        "api": "TMDB",
-        "action": "movieSearch",
-        "in_param_name": "query",
+        "api": "Spotify",
+        "action": "artistSearch",
+        "in_param_name": "q",
         "value_source": "entry query",
         "limit": "1"
     },
     {
-        "api": "TMDB",
-        "action": "movieCast",
-        "in_param_name": "id",
-        "value_source": "results.id",
-        "limit": "1"
-    },
-    {
-        "api": "Spotify",
-        "action": "artistSearch",
-        "in_param_name": "q",
-        "value_source": "cast.character",
+        "api": "Last.fm",
+        "action": "albumSearch",
+        "in_param_name": "album",
+        "optionals": [
+            {
+                "paramName": "limit",
+                "paramValue": "1"
+            }
+        ],
+        "value_source": "artists.name",
         "limit": "1"
     }
 ]

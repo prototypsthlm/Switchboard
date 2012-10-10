@@ -40,7 +40,31 @@ function setValueSources(){
         
     });
 }
-
+function getRoutine(){
+    var routine = [];
+    $("div.api.live").each(function(){
+        var action = $(this).find("select.methods").val();
+        var limit = $(this).find("select[name=limit]").val();
+        var in_param = $(this).find("#"+action).find("select[name=in_param_name]").val();
+        
+        var out;
+        var override = $(this).find("#"+action).find("input[name=output_node].override").val();
+        if(override != "")
+            out = override;
+        else
+            out = $(this).find("#"+action).find("select[name=output_node]").val();
+        
+        var selected_optionals = [];
+        var base_select = "#"+action+" .optionals ";
+                
+        $(this).find(base_select+"input, " + base_select+"select").each(function(){
+            if($(this).val() != "")
+                selected_optionals.push({ paramName: $(this).attr('name'), paramValue: $(this).val() });
+        });
+        routine.push({api: $(this).attr('name'), action: action, in_param_name: in_param, optionals: selected_optionals, value_source: out, limit: parseInt(limit) });
+    });
+    return routine;
+}
 $(document).ready(function(){
     
     var actionConfig;
@@ -95,33 +119,21 @@ $(document).ready(function(){
         });
     });
     
-    $('button#cook').click(function(){
-        actionConfig = [];
-        $("div.api.live").each(function(){
-            var action = $(this).find("select.methods").val();
-            var limit = $(this).find("select[name=limit]").val();
-            var in_param = $(this).find("#"+action).find("select[name=in_param_name]").val();
-            
-            var out;
-            var override = $(this).find("#"+action).find("input[name=output_node].override").val();
-            if(override != "")
-                out = override;
-            else
-                out = $(this).find("#"+action).find("select[name=output_node]").val();
-            
-            var selected_optionals = [];
-            var base_select = "#"+action+" .optionals ";
-                    
-            $(this).find(base_select+"input, " + base_select+"select").each(function(){
-                if($(this).val() != "")
-                    selected_optionals.push({ paramName: $(this).attr('name'), paramValue: $(this).val() });
+    $('button.run').click(function(){
+        if($('input[name="run_q"]').val() != ""){
+            $.post('/run', { data: { q: $('input[name="run_q"]').val(), routine: getRoutine() } }, function(data) {
+              console.log(data);
+              $('#routine_results pre').html(syntaxHighlight(JSON.stringify(data, null, 4)));              
             });
-            actionConfig.push({api: $(this).attr('name'), action: action, in_param_name: in_param, optionals: selected_optionals, value_source: out, limit: parseInt(limit) });
-        });
-        console.log(actionConfig);
-        $.post('/cook', { data: actionConfig }, function(data) {
+        }
+    });
+    
+    $('button#set').click(function(){
+        var routine = getRoutine();
+        console.log(routine);
+        $.post('/set', { data: routine }, function(data) {
           console.log(data);
-          $('.results').html('Recipe updated');
+          $('.results').html('Routine updated');
           $('.results').fadeIn();
           setTimeout(function(){
                 $('.results').fadeOut();
