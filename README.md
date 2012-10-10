@@ -95,9 +95,7 @@ Optionally install as a node package and:
 
 2. configure keys as above in node_modules/switchboard/lib/connectors
 
-3. configure and set the switchboard routine:
-
-		sb.setRoutine(userConfig); //for userConfig see below or the folder /example_routines 
+3. configure and setup the switchboard routine:
 
 	a userConfig is structured as:
 
@@ -106,8 +104,14 @@ Optionally install as a node package and:
 		        "api": "TMDB", //execution order, if first the value api of action param is set to the entry query value 
 		        "action": "movieSearch", //api action
 		        "in_param_name": "query", //param name for the api action .ie ?in_param_name=value
-		        "value_source": "request.get", //where to get value for the in_param, if first in routine always from initial request paramotherwise a path to previous API-call JSON-results (see below)
-		        "limit": 5 //the maximum amount of queries to take from value_source and execute
+		        "value_source": "entry query", //where to get value for the in_param, if first in routine always from initial request param otherwise a path to previous API-call JSON-results (see below)
+		        "limit": 5, //the maximum amount of queries to take from value_source and execute
+				"optionals": [ //an array of static querystrings to be sent along
+		            {
+		                "paramName": "year",
+		                "paramValue": "1977" //&year=1977
+		            }
+		        ]
 		    },
 		    {
 		        "api": "TMDB",
@@ -125,14 +129,33 @@ Optionally install as a node package and:
 		    }
 		]
 		
-	look at the source for a connector or use the switchboard operator for an overview of possible in_param_names and value_sources_.
+	
+	the syntax of value_sources is dot separated key names hierarchically descending. "results.object.id" would for example mean that the value for the key "id" in the the following structure would be selected:
+	
+		{
+			"results": {
+				object: {
+					"id": "an id" //"an id" is selected
+					"a_key": "another value"
+				}
+			}
+		}
+		
+	one can look at the source for a connector, the API-method documentation or use the switchboard operator for a better overview of possible in_param_names and value_sources.
+		
  
-4. insert query and run routine:
+4. insert query and routine:
 
-		sb.execute("entryquery", function(r,c){
-			//r => raw call blocks 
-			//c => a formatted response
+		var jobId = sb.addJob(yourRoutine, ["entry query"]);
+		sb.runJob(jobId, function(usedRoutine, clean, raw) {
+			//usedRoutine => the inputted routine (for reference)
+			//clean => a formatted response
+			//raw => raw call blocks 
 		});
+		
+	alternatively
+	
+		sb.addAndRunJob(yourRoutine, ["entry query"], yourCallback(usedRoutine, clean, raw));
 
 JSONP
 ------

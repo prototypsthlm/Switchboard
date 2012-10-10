@@ -1,26 +1,15 @@
 [
     {
-        "api": "Echonest",
-        "action": "songSearch",
-        "in_param_name": "artist",
+        "api": "TMDB",
+        "action": "movieSearch",
+        "in_param_name": "query",
         "optionals": [
             {
-                "paramName": "bucket",
-                "paramValue": "id:spotify-WW"
-            },
-            {
-                "paramName": "bucket",
-                "paramValue": "tracks"
+                "paramName": "year",
+                "paramValue": "1977"
             }
         ],
         "value_source": "entry query",
         "limit": "1"
-    },
-    {
-        "api": "Spotify",
-        "action": "trackLookup",
-        "in_param_name": "uri",
-        "value_source": "response.songs.tracks.foreign_id",
-        "limit": "3"
     }
 ]

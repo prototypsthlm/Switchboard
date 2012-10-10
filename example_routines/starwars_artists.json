@@ -4,7 +4,13 @@
         "action": "movieSearch",
         "in_param_name": "query",
         "value_source": "entry query",
-        "limit": 5
+        "limit": 5,
+        "optionals": [
+            {
+                "paramName": "year",
+                "paramValue": "1977"
+            }
+        ]
     },
     {
         "api": "TMDB",
