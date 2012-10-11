@@ -203,3 +203,25 @@ or do it by script element injection:
 			}
 		</script>
 		<script type="text/javascript" src="http://localhost:4000/switchboard?q=star%20wars&callback=myHandler"></script>
+
+
+Logging
+-------
+
+Switchboard use the logging solution 'tracer' by [baryon](https://npmjs.org/~baryon).
+
+The default environment and all the settings are found and specified in /lib/sb_tracer.js. If you wish to change the environment for a specific module, pass the environment as a param. var logger = require('./lib/sb_tracer.js')('prod');
+
+levels:
+
+0. log - datadumps, ex: Lots and lots of json.
+1. trace - low-level information, ex: Entered small method setConfig.
+2. debug - general steps of flow, what happens? ex: Request recieved.
+3. info - good to know in production environment, ex: Server listening to port 1234.
+4. warn - might be a bad thing, ex: Default case in switch statement used, though a value should be used.
+5. error - houston we got a problem, ex: Could not load connector Abc. Often in catch().
+
+When chosing level 4 in setup the logger will only output warns and errors.
+Likewise logger.debug('Response sent.') will be seen only if level <= 2.
+
+

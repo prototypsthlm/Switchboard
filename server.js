@@ -3,6 +3,7 @@ var app = express();
 app.use(express.bodyParser());
 var request = require('request');
 var $ = require('jquery');
+var logger = require('./lib/sb_tracer.js')();
 
 var switchboard = require('./index');
 
@@ -45,6 +46,8 @@ function handleRequest(httpMethod, req, res) {
 
   // Only POST and GET requests are allowed
   if(!(httpMethod == "post" || httpMethod == "get")) {
+    logger.warn('httpMethod not post or get. Method: ' + httpMethod);
+    
     res.send(JSON.stringify({}));
     return;
   }
@@ -61,11 +64,11 @@ function handleRequest(httpMethod, req, res) {
       }
       catch(e) {
         res.status(500);
-        console.error(e);
+        logger.error(e);
       }
     }
 
-    console.log("ROUTINE: ", liveRoutine);
+    logger.trace("ROUTINE: ", liveRoutine);
 
     if(req.param('q') != undefined){
         var jobId = switchboard.addJob(liveRoutine, [req.param('q')]); //switchboard.setRoutine(liveRoutine);
@@ -84,7 +87,7 @@ if it fails, a local routine is used instead and is inserted into switchboard
 */
 loadRemoteRecipe(function(routine){
     if(routine != null){
-        console.log("REMOTE ROUTINE LOADED");                          
+        logger.debug("REMOTE ROUTINE LOADED");                          
         liveRoutine = routine;
     }
 });
@@ -96,9 +99,9 @@ runs the set switchboard routine with the entry query and outputs the formatted 
 app.get('/switchboard', function(req, res){
     res.contentType('json');
     
-    console.log("GET REQUEST RECEIVED");
-    console.log(req.url);
-    console.log(req.query);
+    logger.debug("GET REQUEST RECEIVED");
+    logger.trace(req.url);
+    logger.trace(req.query);
     
     handleRequest("get", req, res);
  
@@ -107,12 +110,14 @@ app.get('/switchboard', function(req, res){
 app.post('/switchboard', function(req, res){
     res.contentType('json'); 
     
-    console.log("POST REQUEST RECEIVED");
-    console.log(req.url);
-    console.log(req.body);
+    logger.debug("POST REQUEST RECEIVED");
+    logger.trace(req.url);
+    logger.trace(req.body);
     
     handleRequest("post", req, res);
     
 });
 
-app.listen(4000);
+var port = 4000;
+app.listen(port);
+logger.info('Switchboard listening on port', port);

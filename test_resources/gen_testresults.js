@@ -26,10 +26,9 @@ var GenTestResults = {
 	// Initialize the test data generation
 	// keys=routineName, value=query
 	init: function(config){
-		for( var routineName in config.routineTestData ){							// Loop through routines
-			for ( var i=0, len=config.mergeMethods.length; i<len; i++ ){							// Using both mergeMethods
-				console.log(config.mergeMethods[i] + "mergeMethods");
-				var query = config.routineTestData[routineName];					// Value of the key routineName is query string
+		for( var routineName in config.routineTestData ){									// Loop through routines
+			for ( var i=0, len=config.mergeMethods.length; i<len; i++ ){					// Using both mergeMethods
+				var query = config.routineTestData[routineName];							// Value of the key routineName is query string
 				this.handleOne(routineName, query, config.mergeMethods[i], config);			// Send of to handleOne method
 			}
 		}
@@ -62,9 +61,9 @@ var GenTestResults = {
 	writeItDown: function(path, json) {
 		fs.writeFile(path, JSON.stringify(json, null, 4), function(err) {
 			if(err) {
-				console.log(err);
+				logger.error(err);
 			} else {
-				console.log("Testresults written to " + path);
+				logger.debug("Testresults written to " + path);
 			}
 		});
 	}
