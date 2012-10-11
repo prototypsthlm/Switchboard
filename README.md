@@ -214,12 +214,12 @@ The default environment and all the settings are found and specified in /lib/sb_
 
 levels:
 
-0. log - datadumps, ex: Lots and lots of json.
-1. trace - low-level information, ex: Entered small method setConfig.
-2. debug - general steps of flow, what happens? ex: Request recieved.
-3. info - good to know in production environment, ex: Server listening to port 1234.
-4. warn - might be a bad thing, ex: Default case in switch statement used, though a value should be used.
-5. error - houston we got a problem, ex: Could not load connector Abc. Often in catch().
+0\. log - datadumps, ex: Lots and lots of json.
+1\. trace - low-level information, ex: Entered small method setConfig.
+2\. debug - general steps of flow, what happens? ex: Request recieved.
+3\. info - good to know in production environment, ex: Server listening to port 1234.
+4\. warn - might be a bad thing, ex: Default case in switch statement used, though a value should be used.
+5\. error - houston we got a problem, ex: Could not load connector Abc. Often in catch().
 
 When chosing level 4 in setup the logger will only output warns and errors.
 Likewise logger.debug('Response sent.') will be seen only if level <= 2.
