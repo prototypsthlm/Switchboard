@@ -49,7 +49,8 @@ var validateResponse = function(routineName, mergeMethod) {
 		// Putting the arrays in objects.
 		rawResObj = $.extend(true, {}, rawResult);
 		expResObj = $.extend(true, {}, expectedRawResult);
-		
+		logger.debug(rawResObj);
+		logger.debug("exp", expResObj);
 		// Comparing the objects with our own method.
 		var isEqual = TestHelper.compareObjects(rawResObj, expResObj, false);
 
