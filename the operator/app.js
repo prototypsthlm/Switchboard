@@ -43,12 +43,10 @@ app.get('/routine', function(req,res){
 
 app.post('/taste',function(req,res){
     var setup = req.param('data', null);
-    console.log(setup);
     var connectors = switchboard.connectors();
     var connector = new connectors.apiMap[setup.api];
     connector.responseObject = [];
     var url = connector.getActionUrl(setup.query,setup.config);
-    console.log(url);
     connector.get(url, setup.query, setup.config, null, null, function(){
         res.send({ response: connector.responseObject, url: url });
     });
