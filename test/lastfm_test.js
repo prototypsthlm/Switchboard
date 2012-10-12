@@ -7,7 +7,7 @@ var request = require('request');
 
 suite.addBatch({// Batch
     'a last.fm connector': {// Context
-        topic: connector.lastfm, // Topic
+        topic: new connector.lastfm, // Topic
         'has an api key that is valid *async': {// Sub-Context  
                 topic: function (connector) {// async vow
                     var dummyConfig = { action: 'albumSearch', in_source: null, in_param_name: "album" };

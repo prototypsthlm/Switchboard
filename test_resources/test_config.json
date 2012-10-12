@@ -1,0 +1,11 @@
+{
+	"folderRoutines": "../example_routines/",
+	"folderTestResults": "./test_resources/results/",
+	"mergeMethods": ["extractMerge", "injectMerge"],
+
+	"routineTestData": {
+		"artist_urls": "Foo",
+		"starwars_artists": "Bilbo",
+		"headliner_biographies": "Moa Lignell"
+	}
+}

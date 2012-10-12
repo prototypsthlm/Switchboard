@@ -110,7 +110,13 @@ $(document).ready(function(){
         var taste_config = { api: $api.attr('name'), query: query, config: { action: action, in_param_name: in_param_name, optionals: selected_optionals } };
         $.post('/taste', { data: taste_config }, function(data) {
           console.log(data);
-          $codebox.html(syntaxHighlight(JSON.stringify(data.response, null, 4)));
+          var output;
+          if(data.response.length > 0)
+            output = data.response[0].raw
+          else
+            output = data.response
+        
+          $codebox.html(syntaxHighlight(JSON.stringify(output, null, 4)));
           $api.find("div.url a").html(data.url);
           $api.find("div.url a").attr('href',data.url);
           if(!$codebox.is(":visible")){
@@ -120,12 +126,10 @@ $(document).ready(function(){
     });
     
     $('button.run').click(function(){
-        if($('input[name="run_q"]').val() != ""){
-            $.post('/run', { data: { q: $('input[name="run_q"]').val(), routine: getRoutine() } }, function(data) {
-              console.log(data);
-              $('#routine_results pre').html(syntaxHighlight(JSON.stringify(data, null, 4)));              
-            });
-        }
+        $.post('/run', { data: { q: $('input[name="run_q"]').val(), routine: getRoutine() } }, function(data) {
+          console.log(data);
+          $('#routine_results pre').html(syntaxHighlight(JSON.stringify(data, null, 4)));              
+        });
     });
     
     $('button#set').click(function(){

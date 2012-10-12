@@ -7,7 +7,7 @@ var request = require('request');
 
 suite.addBatch({// Batch
     'a tmdb connector': {// Context
-        topic: connector.tmdb, // Topic
+        topic: new connector.tmdb, // Topic
         'has an api key that is valid *async': {// Sub-Context  
                 topic: function (connector) {// async vow
                     var dummyConfig = { action: 'movieSearch', in_source: null, in_param_name: "query" };

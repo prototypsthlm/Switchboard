@@ -7,7 +7,7 @@ var request = require('request');
 
 suite.addBatch({// Batch
     'an echonest connector': {// Context
-        topic: connector.echonest, // Topic
+        topic: new connector.echonest, // Topic
         'has an api key that is valid *async': {// Sub-Context  
                 topic: function (connector) {// async vow
                     var dummyConfig = { action: 'artistBiographies', in_source: null, in_param_name: "name" };
