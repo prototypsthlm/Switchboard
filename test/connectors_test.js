@@ -11,7 +11,7 @@ function connectorValid(testLookup) {
 	var context = {
 		topic: function(){
 			var contextName = this.context.name;
-			return connectors.apiMap[contextName];
+			return new connectors.apiMap[contextName];
 		}
 	};
 	
