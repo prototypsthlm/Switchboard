@@ -14,6 +14,7 @@
 
 // Test data to be written. Specify each example_routine here.
 var config = require('./test_config.json');
+var logger = require('../lib/sb_tracer.js')();
 
 // REQUIRE
 var fs = require('fs'),
@@ -38,10 +39,10 @@ var GenTestResults = {
 	handleOne: function(routineName, query, mergeMethod, config) {
 		var self = this;															// access to 'this' inside runJob
 		var routine = require( config.folderRoutines + routineName +'.json' );		// get routine from path
-		var jobId = Switchboard.addJob(routine, [query]);							// addJob
+		//var jobId = Switchboard.addJob(routine, [query]);							// addJob
 
 		// runJob
-		Switchboard.runJob(jobId, function(usedRoutine, clean, raw){				
+		Switchboard.addAndRunJob(routine, query, function(usedRoutine, clean, raw){				
 			self.writeResults(usedRoutine, clean, raw, routineName, config.folderTestResults, query, mergeMethod);
 		}, mergeMethod);
 
