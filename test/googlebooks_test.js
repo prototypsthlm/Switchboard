@@ -7,7 +7,7 @@ var request = require('request');
 
 suite.addBatch({// Batch
     'a google books connector': {// Context
-        topic: connector.googlebooks, // Topic
+        topic: new connector.googlebooks, // Topic
         'has an api key that is valid *async': {  
                 topic: function (connector) {// async vow
                     //var action = Object.keys(connector.apiActions)[0]; //general case
