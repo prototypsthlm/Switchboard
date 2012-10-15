@@ -68,7 +68,7 @@ app.post('/set',function(req,res){
 
 app.post('/run',function(req,res){
     var data = req.param('data', null);
-    switchboard.addAndRunJob(data.routine, [data.q], function(usedRoutine, formatted, raw){
+    switchboard.addAndRunJob(data.routine, [data.q], function(error, usedRoutine, formatted, raw){
         res.send({ routine: usedRoutine, formatted: formatted, raw: raw });
     });
 });
