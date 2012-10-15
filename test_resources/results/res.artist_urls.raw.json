@@ -1,0 +1,342 @@
+[
+    {
+        "api": "Spotify",
+        "calls": [
+            {
+                "meta": {
+                    "query": "Foo",
+                    "index": 0,
+                    "callIndex": null,
+                    "apiConfig": {
+                        "action": "artistSearch",
+                        "in_param_name": "q",
+                        "in_source": "entry query"
+                    }
+                },
+                "result": {
+                    "artists": [
+                        {
+                            "href": "spotify:artist:7jy3rLJdDQY21OgRLCZ9sD",
+                            "name": "Foo Fighters",
+                            "popularity": "0.50611"
+                        },
+                        {
+                            "href": "spotify:artist:2Oi3mmkapgdIQtx1SdFJBx",
+                            "name": "Foo Kit Yan",
+                            "popularity": "0.00014"
+                        },
+                        {
+                            "href": "spotify:artist:1eUkfJuU4CVdtMXSwgWqrP",
+                            "name": "Foo Yun Guang",
+                            "popularity": "0.00008"
+                        },
+                        {
+                            "href": "spotify:artist:7qiLrKoGb00lbCSBkJGKoU",
+                            "name": "Francisco Foo",
+                            "popularity": "0.00000"
+                        },
+                        {
+                            "href": "spotify:artist:7q2059FlMO4oJKF7Qy8hUc",
+                            "name": "Jun Fan Gung Foo",
+                            "popularity": "0.00000"
+                        },
+                        {
+                            "href": "spotify:artist:7BwOCTBw5XiJ7ZG2xIL8u8",
+                            "name": "Karaoke - Foo Fighters",
+                            "popularity": "0.00022"
+                        },
+                        {
+                            "href": "spotify:artist:6iEinlrmGT9lMfK0DujCbT",
+                            "name": "Kung Foo",
+                            "popularity": "0.00000"
+                        },
+                        {
+                            "href": "spotify:artist:2TNOr8MZ3zzjKxg4pgQpgR",
+                            "name": "Foo",
+                            "popularity": "0.00024"
+                        },
+                        {
+                            "href": "spotify:artist:3p79QQCiu1IVlmT027XhuU",
+                            "name": "Mei Yi Foo",
+                            "popularity": "0.00003"
+                        },
+                        {
+                            "href": "spotify:artist:40PrhCEaf2WsLaoUQgiZKv",
+                            "name": "Kung Foo Preacher",
+                            "popularity": "0.00001"
+                        },
+                        {
+                            "href": "spotify:artist:08h0HmFljdjnIXpaARHbgu",
+                            "name": "Foo Foo Click",
+                            "popularity": "0.00001"
+                        },
+                        {
+                            "href": "spotify:artist:6AcNCnxChWevoeQ3RCNNXV",
+                            "name": "Alley Foo",
+                            "popularity": "0.00000"
+                        },
+                        {
+                            "href": "spotify:artist:3cKNTokaE0pqLjn8aRPx7z",
+                            "name": "Foo Ensemble",
+                            "popularity": "0.00000"
+                        },
+                        {
+                            "href": "spotify:artist:68X7EQtVYHuUAYoFilK3wE",
+                            "name": "Kommil Foo",
+                            "popularity": "0.03241"
+                        },
+                        {
+                            "href": "spotify:artist:5ubdtgTMIQ7hPogoDTDMum",
+                            "name": "Egg Foo Young",
+                            "popularity": "0.00000"
+                        },
+                        {
+                            "href": "spotify:artist:52zbDqBv1tuK1bG5XL60sf",
+                            "name": "Kung Foo Grip",
+                            "popularity": "0.00001"
+                        },
+                        {
+                            "href": "spotify:artist:1Z2SMSicr9ipCqRGE4oWN2",
+                            "name": "360Graus & Eduardo Foo",
+                            "popularity": "0.00000"
+                        },
+                        {
+                            "href": "spotify:artist:0YM0VkBAhvdNWG3AyFLu0D",
+                            "name": "360Graus & Eduardo Foo feat. Eduardo Foo",
+                            "popularity": "0.00000"
+                        },
+                        {
+                            "href": "spotify:artist:50n1Ur4QWBlteiNGZ2LDg0",
+                            "name": "Edu Foo",
+                            "popularity": "0.00000"
+                        },
+                        {
+                            "href": "spotify:artist:0nR8PKdHBzD17SPAUTB1RI",
+                            "name": "MeeWee feat. Kung Foo Kid",
+                            "popularity": "0.00000"
+                        },
+                        {
+                            "href": "spotify:artist:4Ks0UlHMS6jo6VqjinoexJ",
+                            "name": "Jen Foo",
+                            "popularity": "0.00000"
+                        },
+                        {
+                            "href": "spotify:artist:469Zq98bdkn4r0rroFuhRL",
+                            "name": "Rob Nordkamp NickFaulhaber Jen Foo",
+                            "popularity": "0.00000"
+                        },
+                        {
+                            "href": "spotify:artist:6XmseMX8TEX900bqwZypcj",
+                            "name": "Zhang Ping Foo",
+                            "popularity": "0.00000"
+                        },
+                        {
+                            "href": "spotify:artist:3nRzTLBEOoRqGRiUUUUcS9",
+                            "name": "R. Foo",
+                            "popularity": "0.00000"
+                        },
+                        {
+                            "href": "spotify:artist:7yhGwVmmcwihpQLK4Wckj9",
+                            "name": "Louise Lind Foo",
+                            "popularity": "0.00000"
+                        },
+                        {
+                            "href": "spotify:artist:65DGrC8NRyk1aJ8wKFxwX0",
+                            "name": "Red Foo",
+                            "popularity": "0.00000"
+                        },
+                        {
+                            "href": "spotify:artist:0pk6AD9usSeJg5OtE4JJ8T",
+                            "name": "Louise Foo",
+                            "popularity": "0.00000"
+                        },
+                        {
+                            "href": "spotify:artist:2wMaMD3sR58wd26tbDDHhu",
+                            "name": "Ha-Foo",
+                            "popularity": "0.00000"
+                        }
+                    ]
+                },
+                "raw": {
+                    "artists": [
+                        {
+                            "href": "spotify:artist:7jy3rLJdDQY21OgRLCZ9sD",
+                            "name": "Foo Fighters",
+                            "popularity": "0.50611"
+                        },
+                        {
+                            "href": "spotify:artist:2Oi3mmkapgdIQtx1SdFJBx",
+                            "name": "Foo Kit Yan",
+                            "popularity": "0.00014"
+                        },
+                        {
+                            "href": "spotify:artist:1eUkfJuU4CVdtMXSwgWqrP",
+                            "name": "Foo Yun Guang",
+                            "popularity": "0.00008"
+                        },
+                        {
+                            "href": "spotify:artist:7qiLrKoGb00lbCSBkJGKoU",
+                            "name": "Francisco Foo",
+                            "popularity": "0.00000"
+                        },
+                        {
+                            "href": "spotify:artist:7q2059FlMO4oJKF7Qy8hUc",
+                            "name": "Jun Fan Gung Foo",
+                            "popularity": "0.00000"
+                        },
+                        {
+                            "href": "spotify:artist:7BwOCTBw5XiJ7ZG2xIL8u8",
+                            "name": "Karaoke - Foo Fighters",
+                            "popularity": "0.00022"
+                        },
+                        {
+                            "href": "spotify:artist:6iEinlrmGT9lMfK0DujCbT",
+                            "name": "Kung Foo",
+                            "popularity": "0.00000"
+                        },
+                        {
+                            "href": "spotify:artist:2TNOr8MZ3zzjKxg4pgQpgR",
+                            "name": "Foo",
+                            "popularity": "0.00024"
+                        },
+                        {
+                            "href": "spotify:artist:3p79QQCiu1IVlmT027XhuU",
+                            "name": "Mei Yi Foo",
+                            "popularity": "0.00003"
+                        },
+                        {
+                            "href": "spotify:artist:40PrhCEaf2WsLaoUQgiZKv",
+                            "name": "Kung Foo Preacher",
+                            "popularity": "0.00001"
+                        },
+                        {
+                            "href": "spotify:artist:08h0HmFljdjnIXpaARHbgu",
+                            "name": "Foo Foo Click",
+                            "popularity": "0.00001"
+                        },
+                        {
+                            "href": "spotify:artist:6AcNCnxChWevoeQ3RCNNXV",
+                            "name": "Alley Foo",
+                            "popularity": "0.00000"
+                        },
+                        {
+                            "href": "spotify:artist:3cKNTokaE0pqLjn8aRPx7z",
+                            "name": "Foo Ensemble",
+                            "popularity": "0.00000"
+                        },
+                        {
+                            "href": "spotify:artist:68X7EQtVYHuUAYoFilK3wE",
+                            "name": "Kommil Foo",
+                            "popularity": "0.03241"
+                        },
+                        {
+                            "href": "spotify:artist:5ubdtgTMIQ7hPogoDTDMum",
+                            "name": "Egg Foo Young",
+                            "popularity": "0.00000"
+                        },
+                        {
+                            "href": "spotify:artist:52zbDqBv1tuK1bG5XL60sf",
+                            "name": "Kung Foo Grip",
+                            "popularity": "0.00001"
+                        },
+                        {
+                            "href": "spotify:artist:1Z2SMSicr9ipCqRGE4oWN2",
+                            "name": "360Graus & Eduardo Foo",
+                            "popularity": "0.00000"
+                        },
+                        {
+                            "href": "spotify:artist:0YM0VkBAhvdNWG3AyFLu0D",
+                            "name": "360Graus & Eduardo Foo feat. Eduardo Foo",
+                            "popularity": "0.00000"
+                        },
+                        {
+                            "href": "spotify:artist:50n1Ur4QWBlteiNGZ2LDg0",
+                            "name": "Edu Foo",
+                            "popularity": "0.00000"
+                        },
+                        {
+                            "href": "spotify:artist:0nR8PKdHBzD17SPAUTB1RI",
+                            "name": "MeeWee feat. Kung Foo Kid",
+                            "popularity": "0.00000"
+                        },
+                        {
+                            "href": "spotify:artist:4Ks0UlHMS6jo6VqjinoexJ",
+                            "name": "Jen Foo",
+                            "popularity": "0.00000"
+                        },
+                        {
+                            "href": "spotify:artist:469Zq98bdkn4r0rroFuhRL",
+                            "name": "Rob Nordkamp NickFaulhaber Jen Foo",
+                            "popularity": "0.00000"
+                        },
+                        {
+                            "href": "spotify:artist:6XmseMX8TEX900bqwZypcj",
+                            "name": "Zhang Ping Foo",
+                            "popularity": "0.00000"
+                        },
+                        {
+                            "href": "spotify:artist:3nRzTLBEOoRqGRiUUUUcS9",
+                            "name": "R. Foo",
+                            "popularity": "0.00000"
+                        },
+                        {
+                            "href": "spotify:artist:7yhGwVmmcwihpQLK4Wckj9",
+                            "name": "Louise Lind Foo",
+                            "popularity": "0.00000"
+                        },
+                        {
+                            "href": "spotify:artist:65DGrC8NRyk1aJ8wKFxwX0",
+                            "name": "Red Foo",
+                            "popularity": "0.00000"
+                        },
+                        {
+                            "href": "spotify:artist:0pk6AD9usSeJg5OtE4JJ8T",
+                            "name": "Louise Foo",
+                            "popularity": "0.00000"
+                        },
+                        {
+                            "href": "spotify:artist:2wMaMD3sR58wd26tbDDHhu",
+                            "name": "Ha-Foo",
+                            "popularity": "0.00000"
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "api": "Echonest",
+        "calls": [
+            {
+                "meta": {
+                    "query": "spotify:artist:7jy3rLJdDQY21OgRLCZ9sD",
+                    "index": 0,
+                    "callIndex": 0,
+                    "apiConfig": {
+                        "action": "artistURLs",
+                        "in_param_name": "name",
+                        "in_source": "artists.href"
+                    }
+                },
+                "result": {
+                    "response": {
+                        "status": {
+                            "version": "4.2",
+                            "code": 5,
+                            "message": "The Identifier specified does not exist"
+                        }
+                    }
+                },
+                "raw": {
+                    "response": {
+                        "status": {
+                            "version": "4.2",
+                            "code": 5,
+                            "message": "The Identifier specified does not exist"
+                        }
+                    }
+                }
+            }
+        ]
+    }
+]
