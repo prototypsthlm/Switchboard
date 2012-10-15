@@ -38,7 +38,7 @@ var GenTestResults = {
 	// Uses Switchboard to fetch data for one routine and sends it to the writing callback method.
 	handleOne: function(routineName, query, mergeMethod, config) {
 		var self = this;															// access to 'this' inside runJob
-		var routine = require( config.folderRoutines + routineName +'.json' );		// get routine from path
+		var routine = require(config.folderRoutines + routineName +'.json' );		// get routine from path
 		//var jobId = Switchboard.addJob(routine, [query]);							// addJob
 
 		// runJob
@@ -50,7 +50,7 @@ var GenTestResults = {
 
 	// Writes the data to file. Used in handleOne. 
 	writeResults: function(usedRoutine, clean, raw, routineName, folderTestResults, query, mergeMethod){
-		var path = folderTestResults+"res."+routineName;
+		var path = folderTestResults + "res."+routineName;
 		if(mergeMethod == 'injectMerge'){
 			this.writeItDown( path + ".clean.inject.json" , clean);						// Only clean
 		} else {
@@ -64,7 +64,7 @@ var GenTestResults = {
 			if(err) {
 				logger.error(err);
 			} else {
-				logger.debug("Testresults written to " + path);
+				logger.debug("Test results written to " + path);
 			}
 		});
 	}

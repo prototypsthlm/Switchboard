@@ -91,7 +91,7 @@ suite.addBatch({
         	'server should respond': serverShouldRespond,
 
         	'the engine routine should be the posted routine': function(error,response,result){ //async vow callback
-                assert.deepEqual(result.routine,routineToPost);
+                assert.deepEqual(result.routine, routineToPost);
             }
         }
     	

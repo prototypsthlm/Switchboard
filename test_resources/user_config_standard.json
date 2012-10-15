@@ -1,26 +1,29 @@
 [
     {
-        "order": "0",
         "api": "TMDB",
-        "action": "personSearch",
+        "action": "movieSearch",
         "in_param_name": "query",
         "value_source": "entry query",
-        "limit": 5
+        "limit": 5,
+        "optionals": [
+            {
+                "paramName": "year",
+                "paramValue": "1977"
+            }
+        ]
     },
     {
-        "order": "1",
         "api": "TMDB",
-        "action": "personCredits",
+        "action": "movieCast",
         "in_param_name": "id",
         "value_source": "results.id",
         "limit": 5
     },
     {
-        "order": "2",
-        "api": "Google Books",
-        "action": "volumesSearch",
+        "api": "Spotify",
+        "action": "artistSearch",
         "in_param_name": "q",
-        "value_source": "cast.original_title",
+        "value_source": "cast.character",
         "limit": 5
     }
 ]

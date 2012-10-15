@@ -224,4 +224,7 @@ levels:
 When chosing level 4 in setup the logger will only output warns and errors.
 Likewise logger.debug('Response sent.') will be seen only if level <= 2.
 
-
+Tests
+-------
+Vows.
+Gen test results etc.
