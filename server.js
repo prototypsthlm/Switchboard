@@ -45,8 +45,8 @@ function handleResponse(usedRoutine, c, r,  req, res, allowJSONP) {
 function handleRequest(httpMethod, req, res) {
 
   // Only POST and GET requests are allowed
-  if(!(httpMethod == "post" || httpMethod == "get")) {
-    logger.warn('httpMethod not post or get. Method: ' + httpMethod);
+  if(!(httpMethod == "POST" || httpMethod == "GET")) {
+    logger.warn('HTTP-method not POST or GET. Method: ' + httpMethod);
     
     res.send(JSON.stringify({}));
     return;
@@ -55,7 +55,7 @@ function handleRequest(httpMethod, req, res) {
   // Use routine if sent in the request
   if(req.param('routine') != undefined) {
       try {
-        if(httpMethod == "get") {
+        if(httpMethod == "GET") {
           liveRoutine = require('./example_routines/' + req.param('routine') + ".json");         
         }
         else {
@@ -68,11 +68,11 @@ function handleRequest(httpMethod, req, res) {
       }
     }
 
-    logger.trace("ROUTINE: ", liveRoutine);
+    logger.trace("Live Routine: ", JSON.stringify(liveRoutine, null, 4));
 
     if(req.param('q') != undefined){
         var jobId = switchboard.addJob(liveRoutine, [req.param('q')]); //switchboard.setRoutine(liveRoutine);
-        var allowJSONP = httpMethod == "get";
+        var allowJSONP = httpMethod == "GET";
         switchboard.runJob(jobId, function(usedRoutine, clean, raw) { handleResponse(usedRoutine, clean, raw, req, res, allowJSONP); });
     }
     else {
@@ -99,22 +99,22 @@ runs the set switchboard routine with the entry query and outputs the formatted 
 app.get('/switchboard', function(req, res){
     res.contentType('json');
     
-    logger.debug("GET REQUEST RECEIVED");
+    logger.debug("GET request received");
     logger.trace(req.url);
     logger.trace(req.query);
     
-    handleRequest("get", req, res);
+    handleRequest("GET", req, res);
  
 });
 
 app.post('/switchboard', function(req, res){
     res.contentType('json'); 
     
-    logger.debug("POST REQUEST RECEIVED");
+    logger.debug("POST request received");
     logger.trace(req.url);
     logger.trace(req.body);
     
-    handleRequest("post", req, res);
+    handleRequest("POST", req, res);
     
 });
 
