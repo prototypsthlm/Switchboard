@@ -5,11 +5,11 @@ var suite = vows.describe('spotify connector');
 var connector = require('../lib/connectors/connectors');
 var request = require('request');
 
-suite.addBatch({// Batch
-    'Spotify connector': {// Context
-        topic: new connector.spotify,// Topic
+suite.addBatch({ // Batch
+    'Spotify connector': { // Context
+        topic: new connector.spotify, // Topic
 
-        'should have name Spotify': function (spotify) {// Vow
+        'should have name Spotify': function (spotify) { // Vow
             assert.equal(spotify.name, "Spotify");
         },
 
@@ -48,28 +48,11 @@ suite.addBatch({// Batch
                 var url = spotify.getActionUrl("hello world", dummyConfig);
                 request({url: url, headers: { "Accept" : "application/json" }}, this.callback);
             },
-            'and gets a response': function(error,response,result){ //async vow callback
+            'and gets a response': function(error,response,result){ // async vow callback
                 assert.equal(response.statusCode, 200);
             }
         }
     }
 });
-
-/*
-suite.addBatch({// Batch
-    'The apiActions property': {// Context
-
-    	topic: new connector.spotify.apiActions,
-
-    	'is an object': function(apiActions) {
-    		assert.isObject(apiActions, "apiActions is an object");
-    	},
-
-		'has a artistSearch action': function(apiActions) {
-    		assert.isTrue("artistSearch" in apiActions, "artistSearch is not a defined action");
-    	}
-    }
-});
-*/
 
 suite.export(module);

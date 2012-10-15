@@ -9,22 +9,22 @@ var TestHelper = require('../lib/test_helper.js');
 function resultAfterMergeValidation(routineToTest, mergeMethod) {
 	var context = {
 		topic: function(topic) {
-			var cleanResult;
+			var formattedResult;
 			if(mergeMethod == "extractMerge") {
-				cleanResult = topic.formatter.extractMerge();
+				formattedResult = topic.formatter.extractMerge();
 			}
 			else if(mergeMethod == "injectMerge") {
-				cleanResult = topic.formatter.injectMerge();
+				formattedResult = topic.formatter.injectMerge();
 			}
-			return {cleanResult: cleanResult, formatter: topic.formatter};
+			return {formattedResult: formattedResult, formatter: topic.formatter};
 		}
 	};
 
-	context['should return a valid clean result'] = function(topic) {
-		var cleanResult = topic.cleanResult;
-		var expectedCleanResult = new TestResult(routineToTest, "clean", mergeMethod); //hämtar ut clean result
-		var isEqual = TestHelper.compareObjects(cleanResult, expectedCleanResult, false);
-		assert.isTrue(isEqual, "Clean result differs");
+	context['should return a valid formatted result'] = function(topic) {
+		var formattedResult = topic.formattedResult;
+		var expectedFormattedResult = new TestResult(routineToTest, "formatted", mergeMethod); //hämtar ut formatted result
+		var isEqual = TestHelper.compareObjects(formattedResult, expectedFormattedResult, false);
+		assert.isTrue(isEqual, "Formatted result differs");
 	};
 	
 	context['should not affect the raw result'] = function(topic) {

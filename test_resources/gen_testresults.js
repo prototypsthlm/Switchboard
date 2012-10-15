@@ -5,8 +5,8 @@
  * Run this from Switchboard folder: 'node test_resources/gen_testresults.js'
  * 
  * This will generate files with the naming convention of:
- * 		[routineName].[raw/clean].[(extract/inject)?].json
- *		ex: artist_urls.clean.extract.json
+ * 		[routineName].[raw/formatted].[(extract/inject)?].json
+ *		ex: artist_urls.formatted.extract.json
  *
  * And be put in folder 'test_resources/results/'
  */
@@ -42,19 +42,19 @@ var GenTestResults = {
 		//var jobId = Switchboard.addJob(routine, [query]);							// addJob
 
 		// runJob
-		Switchboard.addAndRunJob(routine, query, function(usedRoutine, clean, raw){				
-			self.writeResults(usedRoutine, clean, raw, routineName, config.folderTestResults, query, mergeMethod);
+		Switchboard.addAndRunJob(routine, query, function(usedRoutine, formatted, raw){				
+			self.writeResults(usedRoutine, formatted, raw, routineName, config.folderTestResults, query, mergeMethod);
 		}, mergeMethod);
 
 	},
 
 	// Writes the data to file. Used in handleOne. 
-	writeResults: function(usedRoutine, clean, raw, routineName, folderTestResults, query, mergeMethod){
+	writeResults: function(usedRoutine, formatted, raw, routineName, folderTestResults, query, mergeMethod){
 		var path = folderTestResults + "res."+routineName;
 		if(mergeMethod == 'injectMerge'){
-			this.writeItDown( path + ".clean.inject.json" , clean);						// Only clean
+			this.writeItDown( path + ".formatted.inject.json" , formatted);				// Only formatted
 		} else {
-			this.writeItDown( path + ".clean.extract.json" , clean);					// Clean
+			this.writeItDown( path + ".formatted.extract.json" , formatted);			// Formatted
 			this.writeItDown( path + ".raw.json" , raw);								// Raw
 		}
 	},

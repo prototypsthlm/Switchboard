@@ -9,12 +9,12 @@ var vows = require('vows'),
 var suite = vows.describe('Engine job');
 var engine = require('../lib/switchboard.js');
 var EngineJob = require('../lib/engine_job.js');
-var userConfig = require('../test_resources/user_config_standard.json');
+var userRoutine = require('../test_resources/test_user_routine.json');
+var logger = require('../lib/sb_tracer.js')();
 
 var testData = {
 	request: ["search query"],
-	id: 1234,
-	translatedConfig: engine.translateUserConfig(userConfig)
+	machineRoutine: engine.translateUserRoutine(userRoutine)
 };
 
 suite.addBatch({
@@ -22,15 +22,15 @@ suite.addBatch({
 	'Engine job': {
 
 		'topic': function() {
-			return new EngineJob(testData.translatedConfig, testData.request, testData.id);			
+			return new EngineJob(userRoutine, testData.machineRoutine, testData.request);
 		},
 
 		'should have a id': function (job) {
-			assert.equal(job.id(), testData.id);
+			assert.isNumber(job.id())
 		},
 
 		'should have a request': function (job) {
-			assert.equal(job.request(), testData.request);
+			assert.isArray(job.entryQueries());
 		}		
 	}
 });

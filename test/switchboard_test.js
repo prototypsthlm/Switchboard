@@ -23,7 +23,7 @@ var testData = require("../test_resources/test_config.json");
 
 var validateResponse = function(routineName, mergeMethod) {
 
-	var context = {
+	var context = { // Context is an actual switchboard job
 		topic: function(switchboard) {
 			var routine = require( testData.folderRoutines + routineName +'.json' );			// get routine from path
 			var query = testData.routineTestData[routineName];									// query a.k.a. request is a string like 'Bilbo'
@@ -33,16 +33,15 @@ var validateResponse = function(routineName, mergeMethod) {
 		}
 	};
 
-	context['raw result should be valid'] = function (usedRoutine, cleanResult, rawResult) {
+	context['raw result should be valid'] = function (usedRoutine, formattedResult, rawResult) {
 
 		// Get raw json from previously generated test data.
 		var expectedRawResult = new TestResult(routineName, "raw");
 		
-		// For tracing purposes.
 		logger.trace(rawResult);
 		logger.trace(expectedRawResult);
 
-		// Incomming jsons are arrays
+		// Incoming JSON are arrays
 		assert.isArray(rawResult, "rawresult");
 		assert.isArray(expectedRawResult, "expectedRaw");
 
@@ -51,17 +50,17 @@ var validateResponse = function(routineName, mergeMethod) {
 		expResObj = $.extend(true, {}, expectedRawResult);
 		logger.debug(rawResObj);
 		logger.debug("exp", expResObj);
+		
 		// Comparing the objects with our own method.
 		var isEqual = TestHelper.compareObjects(rawResObj, expResObj, false);
 
-		// Is it true?!
 		assert.isTrue(isEqual);
 	};
 	
-	context['clean result should be valid'] = function (usedRoutine, cleanResult, rawResult) {		
+	context['formatted result should be valid'] = function (usedRoutine, formattedResult, rawResult) {		
 		
-		var expectedCleanResult = new TestResult(routineName, "clean", mergeMethod);
-		var isEqual = TestHelper.compareObjects(cleanResult, expectedCleanResult, false);
+		var expectedFormattedResult = new TestResult(routineName, "formatted", mergeMethod);
+		var isEqual = TestHelper.compareObjects(formattedResult, expectedFormattedResult, false);
 		assert.isTrue(isEqual);
 	};
 	

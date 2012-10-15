@@ -23,6 +23,14 @@
                     ]
                 },
                 "raw": {
+                    "info": {
+                        "num_results": 1,
+                        "limit": 100,
+                        "offset": 0,
+                        "query": "Moa Lignell",
+                        "type": "artist",
+                        "page": 1
+                    },
                     "artists": [
                         {
                             "href": "spotify:artist:0HrcSCqklP5G1QFHrIiztO",

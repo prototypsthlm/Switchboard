@@ -149,15 +149,15 @@ Optionally install as a node package and:
 4. insert query and routine:
 
 		var jobId = sb.addJob(yourRoutine, ["entry query"]);
-		sb.runJob(jobId, function(usedRoutine, clean, raw) {
-			//usedRoutine => the inputted routine (for reference)
-			//clean => a formatted response
-			//raw => raw call blocks 
+		sb.runJob(jobId, function(usedRoutine, formatted, raw) {
+			// usedRoutine => the inputted routine (for reference)
+			// formatted => a formatted response with results from API-calls nestled with its value source
+			// raw => raw call blocks 
 		});
 		
 	alternatively
 	
-		sb.addAndRunJob(yourRoutine, ["entry query"], yourCallback(usedRoutine, clean, raw));
+		sb.addAndRunJob(yourRoutine, ["entry query"], yourCallback(usedRoutine, formatted, raw));
 
 JSONP
 ------
@@ -205,6 +205,19 @@ or do it by script element injection:
 		<script type="text/javascript" src="http://localhost:4000/switchboard?q=star%20wars&callback=myHandler"></script>
 
 
+
+Tests
+-------
+Vows.
+
+vows --spec in root
+
+resultsformattertest
+example_routines
+test_config.json
+
+		node /test_resources/gen_testresults.js
+
 Logging
 -------
 
@@ -223,8 +236,3 @@ levels:
 
 When chosing level 4 in setup the logger will only output warns and errors.
 Likewise logger.debug('Response sent.') will be seen only if level <= 2.
-
-Tests
--------
-Vows.
-Gen test results etc.

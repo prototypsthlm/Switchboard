@@ -23,11 +23,9 @@ console.log = function () {};
 var testUrl = "http://localhost:4000/switchboard/?q=hello";
 var postTestUrl = "http://localhost:4000/switchboard";
 var callbackParam = "thisIsACallback";
-var routineToPost = require('../test_resources/user_config_standard.json');
+var routineToPost = require('../test_resources/test_user_routine.json');
 
-console.log(routineToPost);
-
-function serverShouldRespond(error,response,result){ //async vow callback
+function serverShouldRespond(error,response,result){ // async vow callback
  	var message = "No result. The server appears to be offline.";
 	assert.notEqual(result, undefined, message);
 }
@@ -43,7 +41,7 @@ suite.addBatch({
 			
 			'server should respond': serverShouldRespond,
 
-    		'the result should be wrapped with the callback param as a function (jsonp)': function(error,response,result){//async vow callback
+    		'the result should be wrapped with the callback param as a function (jsonp)': function(error,response,result){ // async vow callback
     			var prefix = callbackParam + "(";
     			var suffix = ")";
 				var resultWrapper = result ? result.slice(0,prefix.length) + result.slice(result.length-suffix.length) : "";
@@ -66,7 +64,7 @@ suite.addBatch({
     		
     		'server should respond': serverShouldRespond,
 
-    		'should return a valid stringified json object': function(error,response,result){//async vow callback    			
+    		'should return a valid stringified json object': function(error,response,result){ // async vow callback    			
     			var json = result ? JSON.parse(result) : undefined;
                 assert.typeOf(json, "object");
             }
@@ -90,7 +88,7 @@ suite.addBatch({
 
         	'server should respond': serverShouldRespond,
 
-        	'the engine routine should be the posted routine': function(error,response,result){ //async vow callback
+        	'the engine routine should be the posted routine': function(error,response,result){ // async vow callback
                 assert.deepEqual(result.routine, routineToPost);
             }
         }

@@ -45,10 +45,10 @@ app.post('/taste',function(req,res){
     var setup = req.param('data', null);
     var connectors = switchboard.connectors();
     var connector = new connectors.apiMap[setup.api];
-    connector.responseObject = [];
+    connector.responseArray = [];
     var url = connector.getActionUrl(setup.query,setup.config);
     connector.get(url, setup.query, setup.config, null, null, function(){
-        res.send({ response: connector.responseObject, url: url });
+        res.send({ response: connector.responseArray, url: url });
     });
     
 });
@@ -68,8 +68,8 @@ app.post('/set',function(req,res){
 
 app.post('/run',function(req,res){
     var data = req.param('data', null);
-    switchboard.addAndRunJob(data.routine, [data.q], function(usedRoutine, clean, raw){
-        res.send({ routine: usedRoutine, clean: clean, raw: raw });
+    switchboard.addAndRunJob(data.routine, [data.q], function(usedRoutine, formatted, raw){
+        res.send({ routine: usedRoutine, formatted: formatted, raw: raw });
     });
 });
 

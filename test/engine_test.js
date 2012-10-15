@@ -4,30 +4,30 @@ var vows = require('vows'),
 var suite = vows.describe('Switchboard engine');
 var engine = require('../lib/switchboard.js');
 
-var userConfig = require('../test_resources/user_config_standard.json');
+var userRoutine = require('../test_resources/test_user_routine.json');
 
-suite.addBatch({// Batch
+suite.addBatch({ // Batch
     'A routine': { // Context
-        topic: userConfig,
+        topic: userRoutine,
         'is transformed correctly': { // Sub-Context
-            topic: function(userConfig) {                
-                return engine.translateUserConfig(userConfig);
+            topic: function(userRoutine) {                
+                return engine.translateUserRoutine(userRoutine);
             },
-            'is properly translated': function (translatedConfig) {// Vow
-                assert.isArray(userConfig);
-                assert.isArray(translatedConfig);
-        	    for(var i in translatedConfig) {
-        	        assert.isObject(translatedConfig[i]);
-        	        assert.isString(translatedConfig[i].connector.name);
-        	        assert.isString(translatedConfig[i].connector.host);         
-        	        assert.isArray(translatedConfig[i].connector.responseObject);         
-        	        assert.isString(translatedConfig[i].connector.apiKey);         
-        	        assert.isObject(translatedConfig[i].connector.apiActions);         
-        	        assert.isObject(translatedConfig[i].options);         
-        	        assert.isObject(translatedConfig[i].apiConfig);         
-        	        assert.isString(translatedConfig[i].apiConfig.action);         
-        	        assert.isString(translatedConfig[i].apiConfig.in_param_name);         
-        	        assert.isString(translatedConfig[i].apiConfig.in_source);                	        
+            'is properly translated': function (machineRoutine) { // Vow
+                assert.isArray(userRoutine);
+                assert.isArray(machineRoutine);
+        	    for(var i in machineRoutine) {
+        	        assert.isObject(machineRoutine[i]);
+        	        assert.isString(machineRoutine[i].connector.name);
+        	        assert.isString(machineRoutine[i].connector.host);         
+        	        assert.isArray(machineRoutine[i].connector.responseObject);         
+        	        assert.isString(machineRoutine[i].connector.apiKey);         
+        	        assert.isObject(machineRoutine[i].connector.apiActions);         
+        	        assert.isObject(machineRoutine[i].options);         
+        	        assert.isObject(machineRoutine[i].apiConfig);         
+        	        assert.isString(machineRoutine[i].apiConfig.action);         
+        	        assert.isString(machineRoutine[i].apiConfig.in_param_name);         
+        	        assert.isString(machineRoutine[i].apiConfig.in_source);                	        
         	    }
             }
         }        

@@ -9,7 +9,13 @@
     {
         "api": "Echonest",
         "action": "artistURLs",
-        "in_param_name": "name",
+        "in_param_name": "id",
+        "optionals": [
+            {
+                "paramName": "in param type",
+                "paramValue": "spotify-WW:artist"
+            }
+        ],
         "value_source": "artists.href",
         "limit": "1"
     }

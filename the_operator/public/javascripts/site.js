@@ -109,7 +109,6 @@ $(document).ready(function(){
         });
         var taste_config = { api: $api.attr('name'), query: query, config: { action: action, in_param_name: in_param_name, optionals: selected_optionals } };
         $.post('/taste', { data: taste_config }, function(data) {
-          console.log(data);
           var output;
           if(data.response.length > 0)
             output = data.response[0].result
@@ -127,7 +126,6 @@ $(document).ready(function(){
     
     $('button.run').click(function(){
         $.post('/run', { data: { q: $('input[name="run_q"]').val(), routine: getRoutine() } }, function(data) {
-          console.log(data);
           $('#routine_results pre').html(syntaxHighlight(JSON.stringify(data, null, 4)));              
         });
     });

@@ -410,26 +410,8 @@
         "calls": [
             {
                 "meta": {
-                    "query": "Gandalf the Grey",
-                    "index": 3,
-                    "callIndex": 0,
-                    "apiConfig": {
-                        "action": "artistSearch",
-                        "in_param_name": "q",
-                        "in_source": "cast.character"
-                    }
-                },
-                "result": {
-                    "artists": []
-                },
-                "raw": {
-                    "artists": []
-                }
-            },
-            {
-                "meta": {
-                    "query": "Elvenking",
-                    "index": 4,
+                    "query": "Smaug",
+                    "index": 1,
                     "callIndex": 0,
                     "apiConfig": {
                         "action": "artistSearch",
@@ -440,18 +422,26 @@
                 "result": {
                     "artists": [
                         {
-                            "href": "spotify:artist:09b5OcuIELTdD7FfzQzcdB",
-                            "name": "Elvenking",
-                            "popularity": "0.07951"
+                            "href": "spotify:artist:1fIraGNUIufBhLMYTiXs6n",
+                            "name": "Smaug",
+                            "popularity": "0.00002"
                         }
                     ]
                 },
                 "raw": {
+                    "info": {
+                        "num_results": 1,
+                        "limit": 100,
+                        "offset": 0,
+                        "query": "Smaug",
+                        "type": "artist",
+                        "page": 1
+                    },
                     "artists": [
                         {
-                            "href": "spotify:artist:09b5OcuIELTdD7FfzQzcdB",
-                            "name": "Elvenking",
-                            "popularity": "0.07951"
+                            "href": "spotify:artist:1fIraGNUIufBhLMYTiXs6n",
+                            "name": "Smaug",
+                            "popularity": "0.00002"
                         }
                     ]
                 }
@@ -492,6 +482,14 @@
                     ]
                 },
                 "raw": {
+                    "info": {
+                        "num_results": 4,
+                        "limit": 100,
+                        "offset": 0,
+                        "query": "Thorin",
+                        "type": "artist",
+                        "page": 1
+                    },
                     "artists": [
                         {
                             "href": "spotify:artist:5mnVc8HcbjQcLbx67KX137",
@@ -518,36 +516,6 @@
             },
             {
                 "meta": {
-                    "query": "Smaug",
-                    "index": 1,
-                    "callIndex": 0,
-                    "apiConfig": {
-                        "action": "artistSearch",
-                        "in_param_name": "q",
-                        "in_source": "cast.character"
-                    }
-                },
-                "result": {
-                    "artists": [
-                        {
-                            "href": "spotify:artist:1fIraGNUIufBhLMYTiXs6n",
-                            "name": "Smaug",
-                            "popularity": "0.00002"
-                        }
-                    ]
-                },
-                "raw": {
-                    "artists": [
-                        {
-                            "href": "spotify:artist:1fIraGNUIufBhLMYTiXs6n",
-                            "name": "Smaug",
-                            "popularity": "0.00002"
-                        }
-                    ]
-                }
-            },
-            {
-                "meta": {
                     "query": "Bilbo Baggins",
                     "index": 0,
                     "callIndex": 0,
@@ -561,7 +529,79 @@
                     "artists": []
                 },
                 "raw": {
+                    "info": {
+                        "num_results": 0,
+                        "limit": 100,
+                        "offset": 0,
+                        "query": "Bilbo Baggins",
+                        "type": "artist",
+                        "page": 1
+                    },
                     "artists": []
+                }
+            },
+            {
+                "meta": {
+                    "query": "Gandalf the Grey",
+                    "index": 3,
+                    "callIndex": 0,
+                    "apiConfig": {
+                        "action": "artistSearch",
+                        "in_param_name": "q",
+                        "in_source": "cast.character"
+                    }
+                },
+                "result": {
+                    "artists": []
+                },
+                "raw": {
+                    "info": {
+                        "num_results": 0,
+                        "limit": 100,
+                        "offset": 0,
+                        "query": "Gandalf the Grey",
+                        "type": "artist",
+                        "page": 1
+                    },
+                    "artists": []
+                }
+            },
+            {
+                "meta": {
+                    "query": "Elvenking",
+                    "index": 4,
+                    "callIndex": 0,
+                    "apiConfig": {
+                        "action": "artistSearch",
+                        "in_param_name": "q",
+                        "in_source": "cast.character"
+                    }
+                },
+                "result": {
+                    "artists": [
+                        {
+                            "href": "spotify:artist:09b5OcuIELTdD7FfzQzcdB",
+                            "name": "Elvenking",
+                            "popularity": "0.07951"
+                        }
+                    ]
+                },
+                "raw": {
+                    "info": {
+                        "num_results": 1,
+                        "limit": 100,
+                        "offset": 0,
+                        "query": "Elvenking",
+                        "type": "artist",
+                        "page": 1
+                    },
+                    "artists": [
+                        {
+                            "href": "spotify:artist:09b5OcuIELTdD7FfzQzcdB",
+                            "name": "Elvenking",
+                            "popularity": "0.07951"
+                        }
+                    ]
                 }
             }
         ]
