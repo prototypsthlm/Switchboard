@@ -112,7 +112,7 @@ $(document).ready(function(){
           console.log(data);
           var output;
           if(data.response.length > 0)
-            output = data.response[0].raw
+            output = data.response[0].result
           else
             output = data.response
         

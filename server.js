@@ -87,7 +87,7 @@ if it fails, a local routine is used instead and is inserted into switchboard
 */
 loadRemoteRecipe(function(routine){
     if(routine != null){
-        logger.debug("REMOTE ROUTINE LOADED");                          
+        logger.info("Remote routine loaded from the operator.");                          
         liveRoutine = routine;
     }
 });
