@@ -6,9 +6,9 @@
 
 var vows = require('vows'),
     assert = require('assert');    
-var suite = vows.describe('Engine job');
+var suite = vows.describe('Switchboard job');
 var engine = require('../lib/switchboard.js');
-var EngineJob = require('../lib/engine_job.js');
+var SwitchboardJob = require('../lib/switchboard_job.js');
 var userRoutine = require('../test_resources/test_user_routine.json');
 var logger = require('../lib/sb_tracer.js')();
 
@@ -19,10 +19,10 @@ var testData = {
 
 suite.addBatch({
 
-	'Engine job': {
+	'Switchboard job': {
 
 		'topic': function() {
-			return new EngineJob(userRoutine, testData.machineRoutine, testData.request);
+			return new SwitchboardJob(userRoutine, testData.machineRoutine, testData.request);
 		},
 
 		'should have a id': function (job) {
