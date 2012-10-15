@@ -1,12 +1,12 @@
 var vows = require('vows'),
     assert = require('assert');
     
-var suite = vows.describe('google books connector');
+var suite = vows.describe('Google Books connector');
 var connector = require('../lib/connectors/connectors');
 var request = require('request');
 
 suite.addBatch({ // Batch
-    'a google books connector': { // Context
+    'A Google Books connector': { // Context
         topic: new connector.googlebooks, // Topic
         'has an api key that is valid *async': {  
                 topic: function (connector) { // async vow

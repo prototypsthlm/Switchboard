@@ -1,12 +1,12 @@
 var vows = require('vows'),
     assert = require('assert');
     
-var suite = vows.describe('spotify connector');
+var suite = vows.describe('Spotify connector');
 var connector = require('../lib/connectors/connectors');
 var request = require('request');
 
 suite.addBatch({ // Batch
-    'Spotify connector': { // Context
+    'A Spotify connector': { // Context
         topic: new connector.spotify, // Topic
 
         'should have name Spotify': function (spotify) { // Vow

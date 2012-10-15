@@ -1,12 +1,12 @@
 var vows = require('vows'),
     assert = require('assert');
     
-var suite = vows.describe('echonest connector');
+var suite = vows.describe('Echonest connector');
 var connector = require('../lib/connectors/connectors');
 var request = require('request');
 
 suite.addBatch({// Batch
-    'an echonest connector': {// Context
+    'An Echonest connector': {// Context
         topic: new connector.echonest, // Topic
         'has an api key that is valid *async': { // Sub-Context  
                 topic: function (connector) { // async vow

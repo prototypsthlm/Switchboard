@@ -1,12 +1,12 @@
 var vows = require('vows'),
     assert = require('assert');
     
-var suite = vows.describe('tmdb connector');
+var suite = vows.describe('TMDB connector');
 var connector = require('../lib/connectors/connectors');
 var request = require('request');
 
 suite.addBatch({ // Batch
-    'a tmdb connector': { // Context
+    'a TMDB connector': { // Context
         topic: new connector.tmdb, // Topic
         'has an api key that is valid *async': { // Sub-Context  
                 topic: function (connector) { // async vow
