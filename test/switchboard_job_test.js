@@ -6,7 +6,7 @@
 
 var vows = require('vows'),
     assert = require('assert');    
-var suite = vows.describe('Switchboard job');
+var suite = vows.describe('A Switchboard job');
 var engine = require('../lib/switchboard.js');
 var SwitchboardJob = require('../lib/switchboard_job.js');
 var userRoutine = require('../test_resources/test_user_routine.json');

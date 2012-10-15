@@ -153,7 +153,8 @@ Optionally install as a node package and:
 4. insert query and routine:
 
 		var jobId = sb.addJob(yourRoutine, ["an entry query"]);
-		sb.runJob(jobId, function(usedRoutine, formatted, raw) {
+		sb.runJob(jobId, function(error, usedRoutine, formatted, raw) {
+			// error => any produced errors
 			// usedRoutine => the inputted routine (for reference)
 			// formatted => a formatted response with results from API-calls nestled with its value source
 			// raw => raw call blocks 
@@ -161,7 +162,7 @@ Optionally install as a node package and:
 		
 	alternatively
 	
-		sb.addAndRunJob(yourRoutine, ["entry query"], yourCallback(usedRoutine, formatted, raw));
+		sb.addAndRunJob(yourRoutine, ["entry query"], yourCallback(error, usedRoutine, formatted, raw));
 
 JSONP
 ------

@@ -9,7 +9,7 @@
 
 var vows = require('vows'),
     assert = require('assert');    
-var suite = vows.describe('The Engine');
+var suite = vows.describe('The Switchboard Engine');
 var $ = require('jquery');
 
 var Switchboard = require('../index');
@@ -36,13 +36,13 @@ var validateResponse = function(routineName, mergeMethod) {
 		}
 	};
 
-	context['raw result should be valid'] = function (usedRoutine, formattedResult, rawResult) {
+	context['raw result should be valid'] = function (err, usedRoutine, formattedResult, rawResult) {
 
 		// Get raw json from previously generated test data.
 		var expectedRawResult = new TestResult(routineName, "raw");
 		
-		logger.trace(rawResult);
-		logger.trace(expectedRawResult);
+		logger.trace(JSON.stringify(rawResult, null, 4));
+		logger.trace(JSON.stringify(expectedRawResult, null, 4));
 
 		// Incoming JSON are arrays
 		assert.isArray(rawResult, "rawresult");
@@ -53,14 +53,14 @@ var validateResponse = function(routineName, mergeMethod) {
 		expResObj = $.extend(true, {}, expectedRawResult);
 		logger.debug(rawResObj);
 		logger.debug("exp", expResObj);
-		
+
 		// Comparing the objects with our own method.
 		var isEqual = TestHelper.compareObjects(rawResObj, expResObj, false);
 
 		assert.isTrue(isEqual);
 	};
 	
-	context['formatted result should be valid'] = function (usedRoutine, formattedResult, rawResult) {		
+	context['formatted result should be valid'] = function (err, usedRoutine, formattedResult, rawResult) {		
 		
 		var expectedFormattedResult = new TestResult(routineName, "formatted", mergeMethod);
 		var isEqual = TestHelper.compareObjects(formattedResult, expectedFormattedResult, false);

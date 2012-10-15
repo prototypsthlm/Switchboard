@@ -1,15 +1,17 @@
 var express = require("express");
 var app = express();
 app.use(express.bodyParser());
+app.use(express.errorHandler({showStack: true, dumpExceptions: true}));
+
 var request = require('request');
 var $ = require('jquery');
 var logger = require('./lib/sb_tracer.js')();
 
 var switchboard = require('./index');
 
-//var liveRoutine = require('./example_routines/starwars_artists.json');
+var liveRoutine = require('./example_routines/starwars_artists.json');
 //var liveRoutine = require('./example_routines/headliner_biographies.json');
-var liveRoutine = require('./example_routines/actor_movies_books.json');
+//var liveRoutine = require('./example_routines/actor_movies_books.json');
 
 /* Loads a JSON-routine from the operator */
 function loadRemoteRoutine(callback){
@@ -23,52 +25,58 @@ function loadRemoteRoutine(callback){
     }); 
 }
 
-function handleResponse(usedRoutine, f, r,  req, res, allowJSONP) {
-  var jsonString = JSON.stringify({ routine: usedRoutine, formatted: f, raw: r });
-
-  if(allowJSONP) {
-    var callback = req.query.callback;
+function handleResponse(err, usedRoutine, f, r,  req, res, allowJSONP) {
+    res.set('Content-Type', 'application/json; charset=utf-8');
     
-    if(callback) {
-        jsonString = callback + "(" + jsonString + ")";
-    }
-  }
+    if(err) {
+        logger.error(err);
+        res.send(500, { error: err.stack });
+        return;
+    }          
+    
+    var jsonString = JSON.stringify({ routine: usedRoutine, formatted: f, raw: r });
 
-  res.set('Content-Type', 'application/json; charset=utf-8');
-  res.send(jsonString);
+    if(allowJSONP) {
+        var callback = req.query.callback;
+        if(callback)
+            jsonString = callback + "(" + jsonString + ")";
+    }
+
+    res.send(jsonString);
+    
+
 }
 
 function handleRequest(httpMethod, req, res) {
+    
+    try {
+       // Only POST and GET requests are allowed
+       if(!(httpMethod == "POST" || httpMethod == "GET")) {
+           logger.warn('HTTP-method not POST or GET. Method: ' + httpMethod);
+           res.send(JSON.stringify({}));
+           return;
+       }
 
-  // Only POST and GET requests are allowed
-  if(!(httpMethod == "POST" || httpMethod == "GET")) {
-    logger.warn('HTTP-method not POST or GET. Method: ' + httpMethod);
-    res.send(JSON.stringify({}));
-    return;
-  }
+       // Use routine if sent in the request
+       if(req.param('routine') != undefined) {
+           if(httpMethod == "GET")
+               liveRoutine = JSON.parse(req.param('routine'));
+           else
+               liveRoutine = req.param('routine') instanceof Array ? req.param('routine') : JSON.parse(req.param('routine')); // Whole routine is posted as json (form data or raw)
+       }
 
-  // Use routine if sent in the request
-  if(req.param('routine') != undefined) {
-      try {
-        if(httpMethod == "GET") {
-            liveRoutine = JSON.parse(req.param('routine'));
-        }
-        else {
-            liveRoutine = req.param('routine') instanceof Array ? req.param('routine') : JSON.parse(req.param('routine')); // Whole routine is posted as json (form data or raw)
-        }
-      }
-      catch(e) {
-        res.status(500);
-        logger.error(e);
-      }
+       logger.trace("Live Routine: ", JSON.stringify(liveRoutine, null, 4));
+
+       var jobId = switchboard.addJob(liveRoutine, req.param('q'));
+       
+       var allowJSONP = httpMethod == "GET";
+       
+       switchboard.runJob(jobId, function(err, usedRoutine, formatted, raw) { handleResponse(err, usedRoutine, formatted, raw, req, res, allowJSONP); });
+       
     }
-
-    logger.trace("Live Routine: ", JSON.stringify(liveRoutine, null, 4));
-
-    var jobId = switchboard.addJob(liveRoutine, req.param('q'));
-    var allowJSONP = httpMethod == "GET";
-    switchboard.runJob(jobId, function(usedRoutine, formatted, raw) { handleResponse(usedRoutine, formatted, raw, req, res, allowJSONP); });
-
+    catch(e) {
+        throw(e); //return instead?
+    }
 }
 
 /* 
@@ -86,14 +94,20 @@ loadRemoteRoutine(function(routine){
 http://localhost:4000/switchboard?q=yourquery 
 Runs the set switchboard routine with the entry query and outputs the formatted results
 */
-app.get('/switchboard', function(req, res){
+app.get('/switchboard', function(req, res, next){
     res.contentType('json');
     
     logger.debug("GET request received");
     logger.trace(req.url);
     logger.trace(req.query);
     
-    handleRequest("GET", req, res);
+    try {
+        handleRequest("GET", req, res);
+    }
+    catch(e) {
+        logger.error(e);
+        res.send(500, { error: e.stack });
+    }
  
 });
 
@@ -104,7 +118,13 @@ app.post('/switchboard', function(req, res){
     logger.trace(req.url);
     logger.trace(req.body);
     
-    handleRequest("POST", req, res);
+    try {
+        handleRequest("POST", req, res);
+    }
+    catch(e) {
+        logger.error(e);
+        res.send(500, { error: e.stack });
+    }
     
 });
 
