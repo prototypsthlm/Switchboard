@@ -40,6 +40,7 @@ function setValueSources(){
         
     });
 }
+
 function getRoutine(){
     var routine = [];
     $("div.api.live").each(function(){
@@ -65,10 +66,9 @@ function getRoutine(){
     });
     return routine;
 }
+
 $(document).ready(function(){
-    
-    var actionConfig;
-    
+        
     $("select.methods option:selected").each(function(){
         $(this).parents("div.api").find('#'+$(this).val()).show();
     });
@@ -89,6 +89,7 @@ $(document).ready(function(){
     $(window).delegate("a.hide_json", "click", function(){
         $(this).parents("div.api").find('.taste_box').slideUp();
     });
+    
     $(window).delegate("button.taste", "click", function(){
         var $api = $(this).parents("div.api");
         var $codebox = $api.find("div.taste_box pre");
@@ -150,4 +151,5 @@ $(document).ready(function(){
         $('div.api.dummy[name="'+add+'"]').clone().removeClass('dummy').addClass('live').appendTo('#routine');
         setValueSources();
     });
+    
 });

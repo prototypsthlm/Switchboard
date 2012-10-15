@@ -51,10 +51,10 @@ function handleRequest(httpMethod, req, res) {
   if(req.param('routine') != undefined) {
       try {
         if(httpMethod == "GET") {
-          liveRoutine = require('./example_routines/' + req.param('routine') + ".json");         
+            liveRoutine = JSON.parse(req.param('routine'));
         }
         else {
-          liveRoutine = req.param('routine') instanceof Array ? req.param('routine') : JSON.parse(req.param('routine')); // Whole routine is posted as json (form data or raw)
+            liveRoutine = req.param('routine') instanceof Array ? req.param('routine') : JSON.parse(req.param('routine')); // Whole routine is posted as json (form data or raw)
         }
       }
       catch(e) {

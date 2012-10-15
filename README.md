@@ -41,9 +41,9 @@ Running switchboard:
 2. copy connectors/keys_template.json to connectors/keys.json and fill in your API-keys
 3. create routine with the operator or use an example routine from example_routines
 4. node server.js
-5. http://localhost:4000/switchboard?q=entryquery
+5. http://localhost:4000/switchboard?q=entryquery 
 
-You can also POST configs to the switchboard service as mentioned below. POST data should be structured as:
+You can also send routines as parameters to the switchboard service as mentioned below. POST data should be structured as:
 
 		{
 		    "q": "your entry query",
@@ -72,6 +72,9 @@ You can also POST configs to the switchboard service as mentioned below. POST da
 		    ]
 		}
 
+Using GET it would be:
+
+	http://localhost:4000/switchboard?q=entryquery&routine=[%20{%20"api":%20"Spotify",%20"action":%20"artistSearch",%20"in_param_name":%20"q",%20"value_source":%20"entry%20query",%20"limit":%20"1"%20},%20{%20"api":%20"Last.fm",%20"action":%20"artistGetEvents",%20"in_param_name":%20"artist",%20"value_source":%20"artists.name",%20"limit":%20"3"%20},%20{%20"api":%20"Echonest",%20"action":%20"artistBiographies",%20"in_param_name":%20"name",%20"value_source":%20"events.event.artists.headliner",%20"limit":%20"3"%20}%20]
 
 Running The Operator
 -------------
@@ -84,6 +87,7 @@ Running The Operator
 7. input your config to switchboard by one of the below 
 	* manually requiring from file as a JSON-variable (requires service restart)
 	* automatically reading it from http://localhost:3000/routine on switchboard server instance startup (requires service restart to recognize routine changes)
+	* sending the routine as a string via a GET-parameter to the service and executing it on the fly
 	* POSTing the config as a parameter "routine" along with an entry query "q" to the service and executing it on the fly. the posted routine is now the "live" routine that will be executed for all calls to the service until another one is POSTed in
 
 You can also run routines directly in the operator to get a view of the output.
