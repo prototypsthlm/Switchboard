@@ -125,6 +125,7 @@ $(document).ready(function(){
     });
     
     $('button.run').click(function(){
+        $('#routine_results pre').html("Running...");
         $.post('/run', { data: { q: $('input[name="run_q"]').val(), routine: getRoutine() } }, function(data) {
           $('#routine_results pre').html(syntaxHighlight(JSON.stringify(data, null, 4)));              
         });

@@ -54,7 +54,7 @@ function handleRequest(httpMethod, req, res) {
           liveRoutine = require('./example_routines/' + req.param('routine') + ".json");         
         }
         else {
-          liveRoutine = JSON.parse(req.param('routine')); // Whole routine is posted as json
+          liveRoutine = req.param('routine') instanceof Array ? req.param('routine') : JSON.parse(req.param('routine')); // Whole routine is posted as json (form data or raw)
         }
       }
       catch(e) {
@@ -65,14 +65,9 @@ function handleRequest(httpMethod, req, res) {
 
     logger.trace("Live Routine: ", JSON.stringify(liveRoutine, null, 4));
 
-    if(req.param('q') != undefined){
-        var jobId = switchboard.addJob(liveRoutine, [req.param('q')]);
-        var allowJSONP = httpMethod == "GET";
-        switchboard.runJob(jobId, function(usedRoutine, formatted, raw) { handleResponse(usedRoutine, formatted, raw, req, res, allowJSONP); });
-    }
-    else {
-        res.send(JSON.stringify({}));
-    }
+    var jobId = switchboard.addJob(liveRoutine, req.param('q'));
+    var allowJSONP = httpMethod == "GET";
+    switchboard.runJob(jobId, function(usedRoutine, formatted, raw) { handleResponse(usedRoutine, formatted, raw, req, res, allowJSONP); });
 
 }
 

@@ -148,7 +148,7 @@ Optionally install as a node package and:
  
 4. insert query and routine:
 
-		var jobId = sb.addJob(yourRoutine, ["entry query"]);
+		var jobId = sb.addJob(yourRoutine, ["an entry query"]);
 		sb.runJob(jobId, function(usedRoutine, formatted, raw) {
 			// usedRoutine => the inputted routine (for reference)
 			// formatted => a formatted response with results from API-calls nestled with its value source
