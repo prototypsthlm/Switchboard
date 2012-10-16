@@ -1,9 +1,5 @@
 /**
 	Echonest tests.
-
-	Tests made:
-	- has an api key that is valid *async
-	
 	@module Test
 **/
 
@@ -15,8 +11,8 @@ var suite = vows.describe('Echonest connector');
 var connector = require('../lib/connectors/connectors');
 var request = require('request');
 
-suite.addBatch({// Batch
-    'An Echonest connector': {// Context
+suite.addBatch({ // Batch
+    'An Echonest connector': { // Context
         topic: new connector.echonest, // Topic
         'has an api key that is valid *async': { // Sub-Context  
                 topic: function (connector) { // async vow

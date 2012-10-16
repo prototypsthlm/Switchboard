@@ -1,9 +1,5 @@
 /**
 	Test of the Switchboard engine (switchboard.js)
-
-	Tests made:
-	Checks that given a config object and a response the returned response is valid
-	
 	@module Test
 **/
 

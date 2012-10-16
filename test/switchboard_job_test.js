@@ -1,6 +1,5 @@
 /**
 	Test of a SwitchboardJob
-	
 	@module Test
 **/
 

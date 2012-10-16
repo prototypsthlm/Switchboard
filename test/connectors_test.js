@@ -1,9 +1,8 @@
 /**
 	General tests of all conneectors.
-
-	Tests made:
-	- checks that given a config object and a response the returned response is valid
-	- ...
+	@todo - getActionURL (for each connector)
+	@todo - validate all apiActions
+    
 	@module Test
 **/
 
@@ -23,9 +22,7 @@ function connectorValid(testLookup) {
 			return new connectors.apiMap[contextName];
 		}
 	};
-	
-    /* todo getActionURL, in each connector? */
-    
+	    
 	context['should exist'] = function(con){
 		assert.isObject(con);
 	};

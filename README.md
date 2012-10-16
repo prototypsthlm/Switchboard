@@ -11,7 +11,7 @@
 What does it do?
 -------------
 
-Switchboard is a mashup-helper and it's basic functionality is enabling simple data flows between APIs: in essence taking a result from one API, feeding it to another and presenting the joined result for parsing and display in your app or whatever it might be. 
+Switchboard is a mashup-helper with the basic functionality of enabling simple data flows between APIs, in essence taking a result from one API, feeding it to another and presenting the joined result for parsing and display in your app or whatever it might be. 
 
 An example might be 
 
@@ -28,7 +28,7 @@ At the moment supported APIs include
 * Spotify
 * The Movie Database
 
-although not 100% of all API-actions are supported.
+although not 100% of all API-methods are supported.
 
 Setting it up as a service
 -------------

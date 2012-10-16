@@ -1,9 +1,5 @@
 /**
 	Last.fm tests.
-
-	Tests made:
-	- has an api key that is valid *async
-	
 	@module Test
 **/
 

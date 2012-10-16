@@ -1,10 +1,5 @@
 /**
 	Google Books tests.
-
-	Tests made:
-	- has an api key that is valid *async
-	- has apiActions
-	
 	@module Test
 **/
 
@@ -42,6 +37,6 @@ suite.addBatch({ // Batch
             }
         }
     } // end context
-}); //end batch
+}); // end batch
 
 suite.export(module);
