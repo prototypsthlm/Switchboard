@@ -1,7 +1,7 @@
 {
     "name": "switchboard",
     "preferGlobal": "true",
-    "version": "0.5.0",
+    "version": "0.1.0",
     "author": "Prototyp <jacob.broms@prototyp.se>",
     "description": "API Mashup helper",
     "contributors": [
@@ -16,7 +16,7 @@
     ],
     "scripts": {
         "start": "node server.js",
-        "test": ""
+        "test": "vows"
     },
     "main": "./lib/switchboard",
     "repository": {

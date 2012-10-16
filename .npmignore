@@ -1,7 +1,11 @@
-test/
 .DS_Store
 .git*
 lib/connectors/keys.json
-recipe.json
-chef/
-example_routines/
+the_operator/routine.json
+apidoc
+wrkshp
+test
+test_resources
+the_operator
+example_routines
+yuidoc.json
