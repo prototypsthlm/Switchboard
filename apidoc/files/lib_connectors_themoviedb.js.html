@@ -43,7 +43,25 @@
             
                 <li><a href="..&#x2F;classes/BaseConnector.html">BaseConnector</a></li>
             
+                <li><a href="..&#x2F;classes/ConnectorResponse.html">ConnectorResponse</a></li>
+            
+                <li><a href="..&#x2F;classes/Echonest.html">Echonest</a></li>
+            
+                <li><a href="..&#x2F;classes/GoogleBooks.html">GoogleBooks</a></li>
+            
+                <li><a href="..&#x2F;classes/Lastfm.html">Lastfm</a></li>
+            
                 <li><a href="..&#x2F;classes/ResultFormatter.html">ResultFormatter</a></li>
+            
+                <li><a href="..&#x2F;classes/Spotify.html">Spotify</a></li>
+            
+                <li><a href="..&#x2F;classes/Switchboard.html">Switchboard</a></li>
+            
+                <li><a href="..&#x2F;classes/SwitchboardJob.html">SwitchboardJob</a></li>
+            
+                <li><a href="..&#x2F;classes/TestHelper.html">TestHelper</a></li>
+            
+                <li><a href="..&#x2F;classes/TMDB.html">TMDB</a></li>
             
             </ul>
 
@@ -53,7 +71,9 @@
             
                 <li><a href="..&#x2F;modules/Connectors.html">Connectors</a></li>
             
-                <li><a href="..&#x2F;modules/Engine.html">Engine</a></li>
+                <li><a href="..&#x2F;modules/Switchboard.html">Switchboard</a></li>
+            
+                <li><a href="..&#x2F;modules/Test.html">Test</a></li>
             
             </ul>
         </div>
@@ -131,55 +151,129 @@ var config = {
   }
 };
 
+
+var include_adult = { paramName: &quot;include_adult&quot;, paramValues: [&quot;true&quot;,&quot;false&quot;] };
 var apiActions = {
     &#x2F;&#x2F;GET http:&#x2F;&#x2F;api.themoviedb.org&#x2F;3&#x2F;search&#x2F;movie
-    &quot;movieSearch&quot; : { action: [&#x27;movie&#x27;,&#x27;search&#x27;], in_param: [&#x27;query&#x27;], out: [&#x27;results.id&#x27;, &#x27;results.original_title&#x27;], optionals: [&#x27;year&#x27;,&#x27;language&#x27;,&#x27;include_adult&#x27;,&#x27;page&#x27;] },
+    &quot;movieSearch&quot; : { action: [&#x27;movie&#x27;,&#x27;search&#x27;], in_param_names: [&#x27;query&#x27;], output_nodes: [&#x27;results.id&#x27;, &#x27;results.original_title&#x27;], optionals: [&#x27;year&#x27;,&#x27;language&#x27;,include_adult,&#x27;page&#x27;] },
+   
     &#x2F;&#x2F;GET http:&#x2F;&#x2F;api.themoviedb.org&#x2F;3&#x2F;movie&#x2F;11
-    &quot;movieLookup&quot; : { action: [&#x27;movie&#x27;,&#x27;lookup&#x27;], in_param: [&#x27;id&#x27;], out: [&#x27;id&#x27;, &#x27;imdb_id&#x27;, &#x27;belongs_to_collection.id&#x27;, &#x27;belongs_to_collection.name&#x27;, &#x27;genres.id&#x27;, 
+    &quot;movieLookup&quot; : { action: [&#x27;movie&#x27;,&#x27;lookup&#x27;], in_param_names: [&#x27;id&#x27;], output_nodes: [&#x27;id&#x27;, &#x27;imdb_id&#x27;, &#x27;belongs_to_collection.id&#x27;, &#x27;belongs_to_collection.name&#x27;, &#x27;genres.id&#x27;, 
         &#x27;genres.name&#x27;,&#x27;production_companies.id&#x27;,&#x27;production_companies.name&#x27;,&#x27;production_countries.iso_3166_1&#x27;,&#x27;production_countries.name&#x27;, &#x27;tagline&#x27;], optionals: [&#x27;language&#x27;] }, &#x2F;&#x2F;note that things in array...works still?
+   
     &#x2F;&#x2F;http:&#x2F;&#x2F;api.themoviedb.org&#x2F;3&#x2F;movie&#x2F;11&#x2F;casts
-    &quot;movieCast&quot; : { action: [&#x27;movie&#x27;,&#x27;casts&#x27;], in_param: [&#x27;id&#x27;], out: [&#x27;cast.id&#x27;, &#x27;cast.name&#x27;,&#x27;cast.character&#x27;], optionals: [&#x27;language&#x27;] },
+    &quot;movieCast&quot; : { action: [&#x27;movie&#x27;,&#x27;casts&#x27;], in_param_names: [&#x27;id&#x27;], output_nodes: [&#x27;cast.id&#x27;, &#x27;cast.name&#x27;,&#x27;cast.character&#x27;], optionals: [&#x27;language&#x27;] },
     
-    &quot;movieAltTitles&quot; : { action: [&#x27;movie&#x27;,&#x27;alternative_titles&#x27;], in_param: [&#x27;id&#x27;], out: [&#x27;id&#x27;, &#x27;titles.iso_3166_1&#x27;,&#x27;titles.title&#x27;], optionals: [&#x27;country&#x27;] },
-    &quot;movieImages&quot; : { action: [&#x27;movie&#x27;,&#x27;images&#x27;], in_param: [&#x27;id&#x27;], out: [], optionals: [&#x27;language&#x27;] },
-    &quot;movieKeywords&quot; : { action: [&#x27;movie&#x27;,&#x27;keywords&#x27;], in_param: [&#x27;id&#x27;], out: [&#x27;id&#x27;,&#x27;keywords.id&#x27;,&#x27;keywords.name&#x27;], optionals: [&#x27;language&#x27;] },
-    &quot;movieReleases&quot; : { action: [&#x27;movie&#x27;,&#x27;releases&#x27;], in_param: [&#x27;id&#x27;], out: [&#x27;countries.release_date&#x27;], optionals: [] },
-    &quot;movieTrailers&quot; : { action: [&#x27;movie&#x27;,&#x27;trailers&#x27;], in_param: [&#x27;id&#x27;], out: [], optionals: [&#x27;language&#x27;] },
-    &quot;movieTranslations&quot; : { action: [&#x27;movie&#x27;,&#x27;translations&#x27;], in_param: [&#x27;id&#x27;], out: [], optionals: [&#x27;language&#x27;] },
-    &quot;similarMovies&quot; : { action: [&#x27;movie&#x27;,&#x27;similar_movies&#x27;], in_param: [&#x27;id&#x27;], out: [&#x27;results.id&#x27;, &#x27;results.title&#x27;, &#x27;results.original_title&#x27;], optionals: [&#x27;page&#x27;,&#x27;language&#x27;] },
+    &quot;movieAltTitles&quot; : { action: [&#x27;movie&#x27;,&#x27;alternative_titles&#x27;], in_param_names: [&#x27;id&#x27;], output_nodes: [&#x27;id&#x27;, &#x27;titles.iso_3166_1&#x27;,&#x27;titles.title&#x27;], optionals: [&#x27;country&#x27;] },
+    &quot;movieImages&quot; : { action: [&#x27;movie&#x27;,&#x27;images&#x27;], in_param_names: [&#x27;id&#x27;], output_nodes: [], optionals: [&#x27;language&#x27;] },
+    &quot;movieKeywords&quot; : { action: [&#x27;movie&#x27;,&#x27;keywords&#x27;], in_param_names: [&#x27;id&#x27;], output_nodes: [&#x27;id&#x27;,&#x27;keywords.id&#x27;,&#x27;keywords.name&#x27;], optionals: [&#x27;language&#x27;] },
+    &quot;movieReleases&quot; : { action: [&#x27;movie&#x27;,&#x27;releases&#x27;], in_param_names: [&#x27;id&#x27;], output_nodes: [&#x27;countries.release_date&#x27;], optionals: [] },
+    &quot;movieTrailers&quot; : { action: [&#x27;movie&#x27;,&#x27;trailers&#x27;], in_param_names: [&#x27;id&#x27;], output_nodes: [], optionals: [&#x27;language&#x27;] },
+    &quot;movieTranslations&quot; : { action: [&#x27;movie&#x27;,&#x27;translations&#x27;], in_param_names: [&#x27;id&#x27;], output_nodes: [], optionals: [&#x27;language&#x27;] },
+    &quot;similarMovies&quot; : { action: [&#x27;movie&#x27;,&#x27;similar_movies&#x27;], in_param_names: [&#x27;id&#x27;], output_nodes: [&#x27;results.id&#x27;, &#x27;results.title&#x27;, &#x27;results.original_title&#x27;], optionals: [&#x27;page&#x27;,&#x27;language&#x27;] },
     
-    &quot;genreMovies&quot; : { action: [&#x27;genre&#x27;,&#x27;movies&#x27;], in_param: [&#x27;id&#x27;], out: [&#x27;results.id&#x27;, &#x27;results.title&#x27;, &#x27;results.original_title&#x27;], optionals: [&#x27;page&#x27;,&#x27;language&#x27;] },
+    &quot;genreMovies&quot; : { action: [&#x27;genre&#x27;,&#x27;movies&#x27;], in_param_names: [&#x27;id&#x27;], output_nodes: [&#x27;results.id&#x27;, &#x27;results.title&#x27;, &#x27;results.original_title&#x27;], optionals: [&#x27;page&#x27;,&#x27;language&#x27;] },
     
-    &quot;personSearch&quot; : { action: [&#x27;person&#x27;,&#x27;search&#x27;], in_param: [&#x27;query&#x27;], out: [&#x27;results.id&#x27;, &#x27;results.name&#x27;], optionals: [&#x27;include_adult&#x27;,&#x27;page&#x27;] },
-    &quot;personLookup&quot; : { action: [&#x27;person&#x27;,&#x27;lookup&#x27;], in_param: [&#x27;id&#x27;], out: [&#x27;id&#x27;, &#x27;name&#x27;, &#x27;birthday&#x27;, &#x27;place_of_birth&#x27;], optionals: [&#x27;language&#x27;] },
-    &quot;personCredits&quot; : { action: [&#x27;person&#x27;,&#x27;credits&#x27;], in_param: [&#x27;id&#x27;], out: [&#x27;cast.character&#x27;, &#x27;cast.id&#x27;, &#x27;cast.original_title&#x27;], optionals: [&#x27;language&#x27;] },
-    &quot;personImages&quot; : { action: [&#x27;person&#x27;,&#x27;images&#x27;], in_param: [&#x27;id&#x27;], out: [], optionals: [&#x27;language&#x27;] },
+    &quot;personSearch&quot; : { action: [&#x27;person&#x27;,&#x27;search&#x27;], in_param_names: [&#x27;query&#x27;], output_nodes: [&#x27;results.id&#x27;, &#x27;results.name&#x27;], optionals: [include_adult,&#x27;page&#x27;] },
+    &quot;personLookup&quot; : { action: [&#x27;person&#x27;,&#x27;lookup&#x27;], in_param_names: [&#x27;id&#x27;], output_nodes: [&#x27;id&#x27;, &#x27;name&#x27;, &#x27;birthday&#x27;, &#x27;place_of_birth&#x27;], optionals: [&#x27;language&#x27;] },
+    &quot;personCredits&quot; : { action: [&#x27;person&#x27;,&#x27;credits&#x27;], in_param_names: [&#x27;id&#x27;], output_nodes: [&#x27;cast.character&#x27;, &#x27;cast.id&#x27;, &#x27;cast.original_title&#x27;], optionals: [&#x27;language&#x27;] },
+    &quot;personImages&quot; : { action: [&#x27;person&#x27;,&#x27;images&#x27;], in_param_names: [&#x27;id&#x27;], output_nodes: [], optionals: [&#x27;language&#x27;] },
     
-    &quot;companyLookup&quot; : { action: [&#x27;company&#x27;,&#x27;lookup&#x27;], in_param: [&#x27;id&#x27;], out: [&#x27;id&#x27;, &#x27;name&#x27;], optionals: [] },
-    &quot;companySearch&quot; : { action: [&#x27;company&#x27;,&#x27;search&#x27;], in_param: [&#x27;query&#x27;], out: [&#x27;results.id&#x27;, &#x27;results.name&#x27;], optionals: [&#x27;page&#x27;] },
-    &quot;companyMovies&quot; : { action: [&#x27;company&#x27;,&#x27;movies&#x27;], in_param: [&#x27;id&#x27;], out: [&#x27;id&#x27;,&#x27;results.id&#x27;, &#x27;results.title&#x27;,&#x27;results.original_title&#x27;], optionals: [&#x27;page&#x27;, &#x27;language&#x27;] },
+    &quot;companyLookup&quot; : { action: [&#x27;company&#x27;,&#x27;lookup&#x27;], in_param_names: [&#x27;id&#x27;], output_nodes: [&#x27;id&#x27;, &#x27;name&#x27;], optionals: [] },
+    &quot;companySearch&quot; : { action: [&#x27;company&#x27;,&#x27;search&#x27;], in_param_names: [&#x27;query&#x27;], output_nodes: [&#x27;results.id&#x27;, &#x27;results.name&#x27;], optionals: [&#x27;page&#x27;] },
+    &quot;companyMovies&quot; : { action: [&#x27;company&#x27;,&#x27;movies&#x27;], in_param_names: [&#x27;id&#x27;], output_nodes: [&#x27;id&#x27;,&#x27;results.id&#x27;, &#x27;results.title&#x27;,&#x27;results.original_title&#x27;], optionals: [&#x27;page&#x27;, &#x27;language&#x27;] },
     
-    &quot;collectionInfo&quot; : { action: [&#x27;collection&#x27;,&#x27;info&#x27;], in_param: [&#x27;id&#x27;], out: [&#x27;id&#x27;, &#x27;name&#x27;, &#x27;parts.id&#x27;,&#x27;parts.title&#x27;], optionals: [&#x27;language&#x27;] },
-    &quot;collectionImages&quot; : { action: [&#x27;collection&#x27;,&#x27;images&#x27;], in_param: [&#x27;id&#x27;], out: [], optionals: [&#x27;language&#x27;] }
+    &quot;collectionInfo&quot; : { action: [&#x27;collection&#x27;,&#x27;info&#x27;], in_param_names: [&#x27;id&#x27;], output_nodes: [&#x27;id&#x27;, &#x27;name&#x27;, &#x27;parts.id&#x27;,&#x27;parts.title&#x27;], optionals: [&#x27;language&#x27;] },
+    &quot;collectionImages&quot; : { action: [&#x27;collection&#x27;,&#x27;images&#x27;], in_param_names: [&#x27;id&#x27;], output_nodes: [], optionals: [&#x27;language&#x27;] }
     
 };
 
+&#x2F;**
+The TMDB Connector inherits the BaseConnector and handles requests to the TMDB API.
 
+@class TMDB 
+@constructor
+
+*&#x2F;
+
+&#x2F;**
+The name of the API.
+@property name
+@type {String}
+*&#x2F;
+&#x2F;**
+The base URL of the API.
+@property host
+@type {String}
+*&#x2F;
+&#x2F;**
+The API-key (retrieved from keys.json)
+@property apiKey
+@type {String}
+*&#x2F;
+&#x2F;**
+A partial mapping of the API-methods (used by the operator)
+@property apiActions
+@type {Object}
+*&#x2F;
+&#x2F;**
+A URL to the API documentation.
+@property docs
+@type {String}
+*&#x2F;
 
 function TMDB(param) {
     this.name = &quot;TMDB&quot;;
-	this.host = param.host;
-	this.responseObject = [];
+	this.host = &quot;http:&#x2F;&#x2F;api.themoviedb.org&#x2F;3&#x2F;&quot;;
 	this.apiKey = keys[this.name][&#x27;key&#x27;];
 	this.apiActions = apiActions;
+	this.docs = &quot;http:&#x2F;&#x2F;help.themoviedb.org&#x2F;kb&#x2F;api&#x2F;about-3&quot;;
+}
+
+util.inherits(TMDB, BaseConnector);
+
+&#x2F;**
+Builds a URL for the TMDB Connector based on an API-configuration from a machine routine.
+
+@method TMDB.prototype.getActionUrl
+@param {String} query Actual query string
+@param {Object} apiConfig Object containing API-configuration data from the machine routine such as API-method
+@return {String} Returns a URL to corresponding to inputted query and apiConfig
+
+*&#x2F;
+
+TMDB.prototype.getActionUrl = function(query, apiConfig){
+    var apiAction = apiActions[apiConfig.action];    
+    var domain = apiAction.action[0]; &#x2F;&#x2F;t ex &quot;artist&quot;
+    var action = apiAction.action[1];
+    var actionPath;
+    var parameterObject = {};
+    parameterObject[&#x27;api_key&#x27;] = this.apiKey;
+    
+    for(var param in apiConfig.optionals){
+        parameterObject[apiConfig.optionals[param].paramName] = apiConfig.optionals[param].paramValue; 
+    }
+    if(action == &quot;search&quot;){
+        parameterObject[apiConfig.in_param_name] = query
+        actionPath = action + &quot;&#x2F;&quot; + domain + &quot;?&quot; + querystring.stringify(parameterObject)
+    }
+    else if(action == &#x27;lookup&#x27;) {
+        actionPath = domain + &quot;&#x2F;&quot; + query + &quot;?&quot; + querystring.stringify(parameterObject)
+    }
+    else {
+        actionPath = domain + &quot;&#x2F;&quot; + query + &quot;&#x2F;&quot; + action + &quot;?&quot; + querystring.stringify(parameterObject)
+    }
+    return this.host + actionPath
 }
 
 &#x2F;**
+    @method generateImageUrls
     @param {String} keyInResult the key used in the result from the API. It is used to parse what type of image we should generate a URL for
     @param {String} fileName The filename of the image as defined in the result from the API
 *&#x2F;
+
 function generateImageUrls(keyInResult, fileName) {
-    &#x2F;&#x2F; http:&#x2F;&#x2F;cf2.imgobject.com&#x2F;t&#x2F;p&#x2F;w500&#x2F;mOTtuakUTb1qY6jG6lzMfjdhLwc.jpg
+    &#x2F;&#x2F; -&gt; http:&#x2F;&#x2F;cf2.imgobject.com&#x2F;t&#x2F;p&#x2F;w500&#x2F;mOTtuakUTb1qY6jG6lzMfjdhLwc.jpg
     var images = [];
     var typeOfImage = keyInResult.slice(0, keyInResult.search(&quot;_&quot;));
     var sizes = config.images[typeOfImage + &quot;_sizes&quot;];
@@ -191,9 +285,11 @@ function generateImageUrls(keyInResult, fileName) {
 
 &#x2F;**
     Adds full URL to images found in the API response. Since there are several dimensions for every image the filepath is replaced with an array with multiple image URLs. Each with a different size
-
+    
+    @method addImageUrlsToResponse
     @param {Object} response The result object returned by the API
-**&#x2F;
+*&#x2F;
+
 function addImageUrlsToResponse(result) {
     if(typeof result == &quot;object&quot;) {
         for(var i in result) {
@@ -211,45 +307,22 @@ function addImageUrlsToResponse(result) {
     }
 }
 
-
-
-util.inherits(TMDB, BaseConnector);
-
 &#x2F;**
-    Modifies the result, adding image urls instead of only paths to the clean result
-
+    Modifies the result, adding image urls instead of only paths to the formatted result
+    
+    @method TMDB.prototype.connectorResult
     @param {Object} resultObj Result object as defined by the BaseConnector. Includes, among other things, the result returned by the API
     @return {ConnectorResponse}
-**&#x2F;
-TMDB.prototype.connectorResult = function(resultObj) {
-    addImageUrlsToResponse(resultObj.result);    
-    return new ConnectorResponse(resultObj, resultObj.result);    
+*&#x2F;
+
+TMDB.prototype.connectorResult = function(resultObject) {
+    var connectorResponse =  new ConnectorResponse(resultObject);
+    addImageUrlsToResponse(connectorResponse.result);
+    return connectorResponse;    
 }
 
-TMDB.prototype.getActionUrl = function(query, apiConfig){
-    var apiAction = apiActions[apiConfig.action];    
-    var domain = apiAction.action[0]; &#x2F;&#x2F;t ex &quot;artist&quot;
-    var action = apiAction.action[1];
-    var actionPath;
-    var parameterObject = {};
-    parameterObject[&#x27;api_key&#x27;] = this.apiKey;
-    if(action == &quot;search&quot;){
-        parameterObject[apiAction.in_param[apiConfig.in_param]] = query
-        actionPath = action + &quot;&#x2F;&quot; + domain + &quot;?&quot; + querystring.stringify(parameterObject)
-    }
-    else if(action == &#x27;lookup&#x27;) {
-        actionPath = domain + &quot;&#x2F;&quot; + query + &quot;?&quot; + querystring.stringify(parameterObject)
-    }
-    else {
-        actionPath = domain + &quot;&#x2F;&quot; + query + &quot;&#x2F;&quot; + action + &quot;?&quot; + querystring.stringify(parameterObject)
-    }
-    return this.host + actionPath
-}
+module.exports = TMDB;
 
-var tmdb = new TMDB({
-	host: &quot;http:&#x2F;&#x2F;api.themoviedb.org&#x2F;3&#x2F;&quot;
-});
-module.exports = tmdb;
     </pre>
 </div>
 

@@ -95,7 +95,6 @@ suite.addBatch({
         	        assert.isObject(machineRoutine[i]);
         	        assert.isString(machineRoutine[i].connector.name);
         	        assert.isString(machineRoutine[i].connector.host);         
-        	        assert.isArray(machineRoutine[i].connector.responseObject);         
         	        assert.isString(machineRoutine[i].connector.apiKey);         
         	        assert.isObject(machineRoutine[i].connector.apiActions);         
         	        assert.isObject(machineRoutine[i].options);         

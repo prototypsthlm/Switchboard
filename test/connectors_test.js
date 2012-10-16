@@ -1,3 +1,12 @@
+/**
+	General tests of all conneectors.
+
+	Tests made:
+	- checks that given a config object and a response the returned response is valid
+	- ...
+	@module: Test
+**/
+
 var vows = require('vows'),
     assert = require('assert');
     
@@ -28,10 +37,6 @@ function connectorValid(testLookup) {
 	context['has http host'] = function(con){
 		assert.isString(con.host);
 		assert.include(con.host, 'http');
-	};
-
-	context['has responseObject'] = function(con){
-		assert.isArray(con.responseObject);
 	};
 
 	context["apiAction"] = {

@@ -43,7 +43,25 @@
             
                 <li><a href="..&#x2F;classes/BaseConnector.html">BaseConnector</a></li>
             
+                <li><a href="..&#x2F;classes/ConnectorResponse.html">ConnectorResponse</a></li>
+            
+                <li><a href="..&#x2F;classes/Echonest.html">Echonest</a></li>
+            
+                <li><a href="..&#x2F;classes/GoogleBooks.html">GoogleBooks</a></li>
+            
+                <li><a href="..&#x2F;classes/Lastfm.html">Lastfm</a></li>
+            
                 <li><a href="..&#x2F;classes/ResultFormatter.html">ResultFormatter</a></li>
+            
+                <li><a href="..&#x2F;classes/Spotify.html">Spotify</a></li>
+            
+                <li><a href="..&#x2F;classes/Switchboard.html">Switchboard</a></li>
+            
+                <li><a href="..&#x2F;classes/SwitchboardJob.html">SwitchboardJob</a></li>
+            
+                <li><a href="..&#x2F;classes/TestHelper.html">TestHelper</a></li>
+            
+                <li><a href="..&#x2F;classes/TMDB.html">TMDB</a></li>
             
             </ul>
 
@@ -53,7 +71,9 @@
             
                 <li><a href="..&#x2F;modules/Connectors.html">Connectors</a></li>
             
-                <li><a href="..&#x2F;modules/Engine.html">Engine</a></li>
+                <li><a href="..&#x2F;modules/Switchboard.html">Switchboard</a></li>
+            
+                <li><a href="..&#x2F;modules/Test.html">Test</a></li>
             
             </ul>
         </div>
@@ -95,292 +115,292 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 &#x2F;**
-Engine takes a json configuration and executes all connectors defined in the config
-in correct order, gathering the result and at the end returning a merged object with
+Switchboard takes a JSON-routine and executes all connectors defined in the routine
+in the specified order, gathering the result and at the end returning a merged object with
 all results.
 
-@module Engine
+@module Switchboard
 **&#x2F;
 
 var $ = require(&#x27;jquery&#x27;);
 var async = require(&quot;async&quot;);
-&#x2F;&#x2F;var _ = require(&#x27;underscore&#x27;);
+var jpath = require(&quot;node-jpath&quot;);
 
-var Engine = function() {};
+&#x2F;&#x2F; get the resultFormatter class and all connectors
+var Formatter = require(&#x27;.&#x2F;results_formatter.js&#x27;);
+var SwitchboardJob = require(&quot;.&#x2F;switchboard_job.js&quot;);
+var connectors = require(&#x27;.&#x2F;connectors&#x2F;connectors&#x27;);
+var logger = require(&#x27;.&#x2F;sb_tracer.js&#x27;)();
 
-Engine.prototype = (function(){
+&#x2F;**
+Switchboard is a sort of engine, setting up and executing jobs which retrieve and format data through configured
+data flows (&quot;routines&quot;).
+
+@class Switchboard 
+@constructor
+
+*&#x2F;
+
+&#x2F;**
+The mergeMethod (formatting method) to be used when formatting results.
+@property mergeMethod
+@type {String}
+@default &quot;extractMerge&quot;
+*&#x2F;
+&#x2F;**
+Array of jobs waiting to be executed.
+@property jobs
+@type {Array}
+*&#x2F;
+
+function Switchboard() {
+
+    var mergeMethod = &quot;extractMerge&quot;;
+    var jobs = [];
+    var latestId = 0;
+
+    &#x2F;**
+    Transforms a userRoutine to Switchboard-executable machineRoutine.
+
+    @method translateUserRoutine
+    @private
+    @param {Object} userRoutine Object specifying API-methods and API-execution order
+    @return {Object} Returns a machineRoutine reflecting the userRoutine data but with references to Connector objects
     
-    
-    &#x2F;&#x2F;get the resultFormatter class and all connectors
-    var Formatter = require(&#x27;.&#x2F;results_formatter.js&#x27;);
-    var resultFormatter = new Formatter();
-    var connectors = require(&#x27;.&#x2F;connectors&#x2F;connectors&#x27;);
-    
-    var searchArray = null; &#x2F;&#x2F;deprecated?
-    
-    var config = null;
-    var requestBody = {};
-    var requestBodyArray = [];
-    var req = null;
-    var routine;
-    
-    &#x2F;****
-        PRIVATE METHODS
-    ***&#x2F;
-    &#x2F;*
-    recursive function that parses a JSON-tree and extracts a value from a node
-    crawlPath = an array of &quot;levels&quot; in the tree
-    tree = the JSON-tree to crawl
-    queries = array of queries to be populated
     *&#x2F;
-    var crawl = function(crawlPath, tree, queries){
-        var level;
-        &#x2F;&#x2F;console.log(&quot;crawl(crawlPath, tree, queries)&quot;, crawlPath, tree, queries);
-        &#x2F;&#x2F;tree = tree.dataResult;
-        &#x2F;&#x2F;check if we should move further down in the tree
-        if (!(tree instanceof Array) &amp;&amp; crawlPath.length &gt; 0){
-            level = crawlPath.shift();
+    
+    function translateUserRoutine(userRoutine){
+
+      var machineRoutine = [];
+
+        $.each(userRoutine, function(i,item){
+           var routineObject = {};
+           routineObject.connector = new connectors.apiMap[item.api];
+           routineObject.options = { limit: item.limit == undefined ? 5 : item.limit };
+           routineObject.apiConfig = { action: item.action, in_param_name: item.in_param_name, optionals: item.optionals, in_source: item.value_source };
+           machineRoutine.push(routineObject);
+        });
+        
+        return machineRoutine;
+    }
+
+    &#x2F;**
+    Runs when a job has finished. Initiates results formatting and sends everything back
+    via callback.
+
+    @method jobDone
+    @private
+    @param {Object} err Error object containing any thrown errors.
+    @param {Object} response Object specifying API-methods and API-execution order
+    @param {Function} callback Object specifying API-methods and API-execution order
+    @param {String} mergeMethod Object specifying API-methods and API-execution order
+    @param {Object} usedRoutine Object specifying API-methods and API-execution order
+    
+    *&#x2F;
+    
+    function jobDone(err, response, callback, mergeMethod, usedRoutine) {
+        if(err) {            
+            callback(err, usedRoutine, null, response);
+            return;
         }
         
-        &#x2F;&#x2F;console.log(&quot;LEVEL-----------------------------------------------------------------&quot;);
-        &#x2F;&#x2F;console.log(level);
-        &#x2F;&#x2F;console.log(crawlPath);
-        &#x2F;&#x2F;console.log(&quot;----------------------------------------------------------------------&quot;);
+        logger.debug(&#x27;Start results formatting.&#x27;);
         
-        &#x2F;&#x2F;not there yet!
-        if(crawlPath.length &gt; 0){
-            &#x2F;&#x2F;the tree branches, clone the path and crawl each branch
-            if (tree instanceof Array){                
-                $.each(tree, function(i){
-                    
-                    &#x2F;&#x2F;console.log(&quot;----------------------------------------------------------------------&quot;);
-                    &#x2F;&#x2F;console.log(&quot;branch &quot; + i);
-                    &#x2F;&#x2F;console.log(crawlPath);
-                    &#x2F;&#x2F;console.log(&quot;----------------------------------------------------------------------&quot;);
-                    
-                    crawl(crawlPath.slice(0), tree[i], queries); &#x2F;&#x2F;slice(0) =&gt; clone array
-                });
-            }
-            &#x2F;&#x2F;move one level down
-            else{
-                if(typeof tree[level] !== &#x27;undefined&#x27;)
-                    crawl(crawlPath, tree[level], queries);
-            }
-        }
-        &#x2F;&#x2F;we found our end-node and the value(s) are extracted to queries
-        else { 
+        var resultFormatter = new Formatter();
+        
+        resultFormatter.setRaw(response); &#x2F;&#x2F;make a deep copy, copy objects not just references to objects
+        
+        var mergedResult = [];
+        
+        switch(mergeMethod) {
             
-            &#x2F;&#x2F;console.log(&quot;----------------------------------------------------------------------&quot;);
-            &#x2F;&#x2F;console.log(tree[level]);
-            &#x2F;&#x2F;console.log(&quot;----------------------------------------------------------------------&quot;);
-            
-            if(tree[level] instanceof Array){
-                $.each(tree[level], function(i){
-                    queries.push(tree[level][i]);
-                });
-            }
-            else {
-                queries.push(tree[level]);
-            }
-        }
-    };
-    
-    &#x2F;*
-        sets up the JSON-tree extraction
-    *&#x2F;
-    var crawlResults = function(querySource, tree){
-        var extractedQueries = [];
-        var crawlPath = querySource.split(&quot;.&quot;);
-        crawlPath.unshift(&#x27;result&#x27;); &#x2F;&#x2F;hack
-        crawl(crawlPath, tree, extractedQueries);
-        return extractedQueries;
-    };
-    
-    &#x2F;*
-        gets data to be sent to an API
-    *&#x2F;
-    var getQueries = function(config, connectorResponse) {
-        var callSessions = [];
-        var queries = [];
-        
-        &#x2F;&#x2F;where should the data points come from?
-        var querySource = config.apiConfig.in_source
-        if (&quot;request.get&quot; == querySource) { &#x2F;&#x2F;data point is the entry query
-            queries.push(req.query.q);
-            callSessions.push({queries: queries, callIndex: null});
-        }
-        else { &#x2F;&#x2F;extract data points from previous result
-            $.each(connectorResponse, function(i){ &#x2F;&#x2F;extract queries from previous result
-                var queryData = {};
-
-                queryData.queries = crawlResults(querySource, connectorResponse[i]).slice(0,config.options.limit); &#x2F;&#x2F;the actual extracted data points
+            case &quot;injectMerge&quot;:
+                mergedResult = resultFormatter.injectMerge();                
+                break;
                 
-                &#x2F;&#x2F; Before ConnectorResponse object
-                &#x2F;&#x2F;queryData.callIndex = connectorResponse[i].meta.index; &#x2F;&#x2F;basically the &quot;call id&quot;, used in the results transformation for mapping an API-result to an earlier API-result 
-                queryData.callIndex = connectorResponse[i].meta.index;
-                callSessions.push(queryData);
-            });
+            case &quot;extractMerge&quot;:
+                mergedResult = resultFormatter.extractMerge();
+                break;
+                
+            default:
+                mergedResult = resultFormatter.extractMerge();
+                 
         }
-        console.log(&quot;acquired queries: &quot;);
-        console.log(queries);
-          
-        return callSessions;
-    };
-    
-    &#x2F;****
-        PUBLIC METHODS
-    ***&#x2F;
-    return {
         
-        setRequest: function(request) { &#x2F;&#x2F;entry query
-            req = request;
+        logger.debug(&#x27;Results formatted. Calling callback.&#x27;);
+        
+        callback(err, usedRoutine, mergedResult, response); 
+    }
+    
+    &#x2F;**
+    Gets a job by id.
+
+    @method getJob
+    @private
+    @param {Integer} jobId Id of job to get.
+    
+    *&#x2F;
+    
+    function getJob(jobId) {
+        for(var i in jobs) {
+            if (jobs[i].id() == jobId) {
+                return jobs[i];
+            }
+        }
+        return null;
+    }
+
+    &#x2F;**
+    Remove a job.
+
+    @method removeJob
+    @private
+    @param {Object} job Job to be removed.
+    
+    *&#x2F;
+    
+    function removeJob(job) {
+        for(var i in jobs) {
+            if (jobs[i].id() == job.id()) {
+                logger.trace(&quot;Job &quot;+job.id()+&quot; at index&quot;,i,&quot; has been removed&quot;);
+                jobs.splice(i,1);
+                logger.trace(&quot;There are&quot;,jobs.length+&quot; job(s) left&quot;);
+            }
+        }        
+    }
+
+    &#x2F;**
+    Executes and removes a Switchboard job. Triggers jobDone
+
+    @method removeJob
+    @private
+    @param {Object} job Job to run.
+    @param {Function} callback Callback to send onto jobDone
+    @param {String} mergeMethod Merge method to use.
+    
+    *&#x2F;
+    
+    function runJob(job, callback, mergeMethod) {
+        if(!job) return false; 
+        removeJob(job);
+        logger.debug(&#x27;Job started.&#x27;);
+        logger.trace(&#x27;Job.queries&#x27;, job.entryQueries());
+        job.run(function(err, response) { 
+            logger.debug(&#x27;Job done.&#x27;);
+            jobDone(err, response, callback, mergeMethod, job.userRoutine()); 
+        });
+        return true;
+    }
+
+    &#x2F;&#x2F; Public methods
+    return {    
+        
+        &#x2F;**
+        Transforms a userRoutine to Switchboard-executable machineRoutine.
+
+        @method translateUserRoutine
+        @param {Object} userRoutine Object specifying API-methods and API-execution order
+        @return {Object} Returns a machineRoutine reflecting the userRoutine data but with references to Connector objects
+
+        *&#x2F;
+        translateUserRoutine: function(userRoutine) {
+            return translateUserRoutine(userRoutine);
         },
-        setSearchArray: function(searchArrayIn) { &#x2F;&#x2F;deprecated?
-            searchArray = searchArrayIn;
+        
+        &#x2F;**
+        Sets the merge method.
+
+        @method setMergeMethod
+        @param {String} mergeMethod
+
+        *&#x2F;
+        
+        setMergeMethod: function(mergeMethod) {
+            this.mergeMethod = mergeMethod;
         },
-        getConnectors: function() {
+
+        &#x2F;**
+          Sets the merge method.
+
+          @method connectors
+          @return {Object} Returns all imported connectors
+
+        *&#x2F;
+          
+        connectors: function() {
             return connectors;
         },
-        
-        &#x2F;* transforms a user config to a switchboard config with references to connector objects *&#x2F;
-        translateUserConfig: function(config){
 
-            var translatedConfig = [];
+        &#x2F;**
+          Add a job to the &quot;queue&quot;.
 
-            config.sort(function(a,b){
-                if(a.order &lt; b.order) return -1;
-                if(a.order &gt; b.order) return 1;
-                return 0;
-            });
-            
-            $.each(config, function(i,item){
-               var routineObject = {};
-               routineObject[&#x27;connector&#x27;] = connectors.apiMap[item.api];
-               routineObject.options = { limit: item.limit == undefined ? 5 : item.limit };
-               var in_source;
-               if (item.order == 0){
-                   in_source = &quot;request.get&quot;;
-               }
-               else {
-                   var prevConnect = translatedConfig[i-1].connector;
-                   in_source = prevConnect.apiActions[config[i-1].action].out[config[i-1].out]
-               }
-               routineObject.apiConfig = { action: item.action, in_source: in_source, in_param: item.in_param };
-               translatedConfig.push(routineObject);
-            });
-            console.log(&quot;service config built:&quot;);
-            console.log(translatedConfig);
-            return translatedConfig;
-        },
-        &#x2F;*
-            builds an array of functions, with calls to different APIs, to be inputted into runEngine
+          @method addJob
+          @param {Object} userRoutine Routine to be used for the job
+          @param {Array} entryQueries Array of queries to initiated the job. Can also be a single string
+          @return {Integer} Returns the ID of the added job
+
         *&#x2F;
-        buildRoutine: function(translatedConfig){
-            console.log(&quot;buildRoutine&quot;);
-            config = translatedConfig;
-            routine = [];
-            $.each(translatedConfig, function(i,a){ &#x2F;&#x2F;for each API-step in the routine config...
-                var r;
-                var received = null;
-                var config = translatedConfig[i];
-                console.log(&quot;routine&quot; + i);
-                console.log(config);
-                
-                if (i &lt; 1) { &#x2F;&#x2F;needed to comply with async syntax
-                    r = function(callback) {
-                        var connector = config.connector;
-                        var queryData = getQueries(config, received); &#x2F;&#x2F;acquire queries from earlier API calls or from the entry query
-                        
-                        console.log(&quot;attempting to execute routine&quot; + i);
-                        console.log(&quot;queryData: &quot;);
-                        console.log(queryData);
-                        &#x2F;&#x2F;console.log(&quot;cleaned: &quot;);
-                        &#x2F;&#x2F;console.log(_.uniq(queryData[0].queries));
-                        
-                        connector.execute(queryData, config.apiConfig, function(results) {
-                            &#x2F;&#x2F;console.log(&quot;routine&quot; + i + &quot; complete&quot;);
-                            &#x2F;&#x2F;console.log(results); &#x2F;&#x2F;raw response from each http-request
-                            
-                            requestBodyArray.push({api: connector.name, calls: results}); &#x2F;&#x2F;an API-call block is completed, append results to global routine result array
-                            
-                            callback(null, results); &#x2F;&#x2F;send results onward to the next function in the waterfall
-                        });
-                    };
-                }
-                else { &#x2F;&#x2F;needed to comply with async syntax
-                    r = function(received, callback) {
-                        var connector = config.connector;
-                        var queryData = getQueries(config, received);
+        
+        addJob: function(userRoutine, entryQueries) {
+            var machineRoutine = translateUserRoutine(userRoutine);
+            var job = new SwitchboardJob(userRoutine, machineRoutine, entryQueries, ++latestId);
+            jobs.push(job);
+            return job.id();
+        },
 
-                        console.log(&quot;attempting to execute routine&quot; + i);
-                        console.log(&quot;queryData: &quot;);
-                        console.log(queryData);
-                        &#x2F;&#x2F;console.log(&quot;cleaned: &quot;);
-                        &#x2F;&#x2F;console.log(_.uniq(queryData[0].queries)); &#x2F;&#x2F;this fucks up merge?
-                                                            
-                        connector.execute(queryData, config.apiConfig, function(results) {
-                            console.log(&quot;routine&quot; + i + &quot; complete&quot;);
-                            console.log(results); &#x2F;&#x2F;raw response from each http-request
-                            requestBodyArray.push({api: connector.name, calls: results});
-                            callback(null, results); &#x2F;&#x2F;send results onward to the next function in the waterfal
-                        });
-                    };
-                }
-                
-                routine.push(r);
-                
-            });
+        &#x2F;**
+         Execute and remove a job from queue.
+
+          @method runJob
+          @param {Integer} jobId ID of the job to run
+          @param {Function} callback Callback to be executed on job completion
+          @param {String} mergeMethod Merge method to use
+
+        *&#x2F;
+
+        runJob: function(jobId, callback, mergeMethod) {
+            var job = getJob(jobId);
+            if(job) {
+                runJob(job, callback, mergeMethod);
+            }
+        },
+
+        &#x2F;**
+          Create, execute and remove a job from queue all in one go.
+
+          @method addAndRunJob
+          @param {Object} userRoutine Routine to be used for the job
+          @param {Array} entryQueries Array of queries to initiate the job. Can also be a single string
+          @param {Function} callback Callback to be executed on job completion
+          @param {String} mergeMethod Merge method to use
+
+        *&#x2F;
+
+        addAndRunJob: function(userRoutine, entryQueries, callback, mergeMethod) {            
+            var jobId = this.addJob(userRoutine, entryQueries);            
+            this.runJob(jobId, callback, mergeMethod)
         },
         
-        &#x2F;* 
-            executes the routine via async waterfall and returns the result once the whole routine is completed.
+        &#x2F;**
+          Execute all jobs in queue.
+
+          @method run
+          @param {Function} callback Callback to be executed on job completion
+          @param {String} mergeMethod Merge method to use
+
         *&#x2F;
-        runEngine: function(cb){
-            console.log(&quot;runEngine&quot;);
-            requestBodyArray = [];
-            async.waterfall(routine, function (err, result) {
-               console.log(&quot;END&quot;);
-               resultFormatter.setRaw(requestBodyArray); &#x2F;&#x2F;make a deep copy, copy objects not just references to objects
-               cb(requestBodyArray, resultFormatter.extractMerge()); 
-               &#x2F;&#x2F;cb(requestBodyArray, resultFormatter.injectMerge()); 
-            });
+        
+        run: function(callback, mergeMethod) {
+            for(var i in jobs) {
+                runJob(jobs[i], callback, mergeMethod);
+            }
         }
-    }
-})();
+        
+    };
+};
 
-var engine = new Engine();
+module.exports = new Switchboard();
 
-module.exports = {
-    
-    &#x2F;* main *&#x2F;
-    setRoutine: function(userRecipe){
-        engine.buildRoutine(engine.translateUserConfig(userRecipe));
-    },
-    execute: function(request,cb){
-        engine.setRequest(request); &#x2F;&#x2F;entry query
-        engine.runEngine(cb);
-    },
-    
-    &#x2F;* utility *&#x2F;
-    setRequest: function(request){
-        engine.setRequest(request);  
-    },
-    setSearch: function(query){
-        engine.setSearchArray(query);
-    },
-    connectors: function(){
-        return engine.getConnectors();
-    },
-    translateUserConfig: function(userConfig){
-        return engine.translateUserConfig(userConfig);
-    },
-    buildRoutine: function(translatedConfig){
-        engine.buildRoutine(translatedConfig);
-    },
-    runEngine: function(cb){
-        engine.runEngine(cb);
-    }
-}
     </pre>
 </div>
 

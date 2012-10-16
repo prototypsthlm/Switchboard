@@ -200,7 +200,7 @@ Switchboard supports JSONP. jQuery example usage:
 			</body>
 		</html>
 
-or do it by script element injection (here with a routine sent along as well):
+or do it by script element injection (here with a routine sent along):
 
 		<script type="text/javascript">
 			function myHandler(response){
@@ -212,14 +212,14 @@ or do it by script element injection (here with a routine sent along as well):
 
 Tests
 -------
-Vows.
+Switchboard implements asynchronous testing via [vows](http://vowsjs.org/).
 
-vows --spec in root
+		vows --spec
 
-resultsformattertest
-example_routines
-test_config.json
+in root directory to run these tests. 
 
+The results_formatter_test.js is a bit special in that it executes the routines from the example_routines folder, as configured in /test_resources/test_config.json, and compares the JSON-structure from the formatted results to the structure from previously run routines. It is in that respect a sort of "live" test. To re-generate the formatted results to compare to (to handle any API-changes etc.) run:
+		
 		node /test_resources/gen_testresults.js
 
 Logging

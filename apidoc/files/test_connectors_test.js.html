@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>lib&#x2F;connectors&#x2F;connector_response.js - Switchboard</title>
+    <title>test&#x2F;connectors_test.js - Switchboard</title>
     <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
@@ -110,36 +110,113 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: lib&#x2F;connectors&#x2F;connector_response.js</h1>
+                        <h1 class="file-heading">File: test&#x2F;connectors_test.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
-var $ = require(&#x27;jquery&#x27;);
 &#x2F;**
-Contains results from a Connector HTTP-request.
-All connectors must return an object of this instance. By doing so we can make sure that we know
-some things for every result, i.e. how many results we retrieved.
+	General tests of all conneectors.
 
-@class ConnectorResponse 
-@constructor
-@param {Object} resultObject A config object containing machine routine data for this call
-@return {Object} Return a new object containing formatted request meta-data, cloned raw response data and response data to be manipulated
-*&#x2F;
+	Tests made:
+	Checks that given a config object and a response the returned response is valid
+	...
+	@module: Test
+**&#x2F;
 
-function ConnectorResponse(resultObject) {
-    var rawResult = $.extend(true, {}, resultObject.result);
-	var result = resultObject.result;
-	var meta = resultObject;
-	delete meta[&quot;result&quot;];
+var vows = require(&#x27;vows&#x27;),
+    assert = require(&#x27;assert&#x27;);
+    
+var suite = vows.describe(&#x27;Connectors&#x27;);
+var connectors = require(&#x27;..&#x2F;lib&#x2F;connectors&#x2F;connectors&#x27;);
+var request = require(&#x27;request&#x27;);
+var querystring = require(&#x27;querystring&#x27;);
+
+function connectorValid(testLookup) {
 	
-	return {
-		meta: meta,	
-		result: result,
-		raw: rawResult		
+	var context = {
+		topic: function(){
+			var contextName = this.context.name;
+			return new connectors.apiMap[contextName];
+		}
 	};
-}
+	
+    &#x2F;* todo getActionURL, in each connector? *&#x2F;
+    
+	context[&#x27;should exist&#x27;] = function(con){
+		assert.isObject(con);
+	};
 
-module.exports = ConnectorResponse;
+	context[&#x27;should have name&#x27;] = function(con){
+		assert.equal(this.context.name, con.name);
+	};
+
+	context[&#x27;has http host&#x27;] = function(con){
+		assert.isString(con.host);
+		assert.include(con.host, &#x27;http&#x27;);
+	};
+
+	context[&#x27;has responseObject&#x27;] = function(con){
+		assert.isArray(con.responseObject);
+	};
+
+	context[&quot;apiAction&quot;] = {
+		topic: function(con){
+			return con.apiActions;
+		},
+
+		&#x27;is object&#x27;: function(apiActions){
+			assert.isObject(apiActions);
+		},
+
+		&#x27;is not empty&#x27;: function(apiActions){
+			assert.isNotEmpty(apiActions);
+		},
+
+		&#x27;contains action, in_param_names and output_nodes arrays&#x27;: function(apiActions){
+			assert.isObject(apiActions);
+			assert.isNotEmpty(apiActions);
+
+			for (var action in apiActions) {
+				var row = apiActions[action];
+				assert.isObject(row);
+
+				assert.include(row, &quot;action&quot;, &quot;action must be defined&quot;);
+				assert.isArray(row.action);
+
+				assert.include(row, &quot;in_param_names&quot;);
+				assert.isArray(row.in_param_names);
+
+				assert.include(row, &quot;output_nodes&quot;);
+				assert.isArray(row.output_nodes);
+			}
+			
+		}
+
+	},
+	
+	context[&#x27;has an api key&#x27;] = {
+        &#x27;that is not empty&#x27;: function (topic) {&#x2F;&#x2F; Vow
+            assert.notEqual(topic.apiKey, &quot;&quot;, &quot;no api key set&quot;);
+            assert.notEqual(topic.apiKey, null, &quot;no api key set&quot;);
+        }
+    }
+
+	return context;
+};
+
+
+suite.addBatch({&#x2F;&#x2F; Batch
+    &#x27;Connector&#x27;: {&#x2F;&#x2F; Context
+
+    	&#x27;Spotify&#x27; : connectorValid(),
+    	&#x27;Echonest&#x27; : connectorValid(),
+    	&#x27;Last.fm&#x27; : connectorValid(),
+    	&#x27;Google Books&#x27; : connectorValid(),
+    	&#x27;TMDB&#x27; : connectorValid()
+    }
+});
+
+suite.export(module);
     </pre>
 </div>
 

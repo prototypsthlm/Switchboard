@@ -1,3 +1,14 @@
+/**
+	ResultsFormatter tests.
+
+	Tests made:
+	- compares structure of performed formatting to previous formattings
+
+	@module: Test
+**/
+
+
+
 var vows = require('vows'),
     assert = require('assert');
     

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>lib&#x2F;connectors&#x2F;lastfm.js - Switchboard</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.7.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="..&#x2F;assets/css/logo.png" title="Switchboard"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.1</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="..&#x2F;classes/BaseConnector.html">BaseConnector</a></li>
+            
+                <li><a href="..&#x2F;classes/ConnectorResponse.html">ConnectorResponse</a></li>
+            
+                <li><a href="..&#x2F;classes/Echonest.html">Echonest</a></li>
+            
+                <li><a href="..&#x2F;classes/GoogleBooks.html">GoogleBooks</a></li>
+            
+                <li><a href="..&#x2F;classes/Lastfm.html">Lastfm</a></li>
+            
+                <li><a href="..&#x2F;classes/ResultFormatter.html">ResultFormatter</a></li>
+            
+                <li><a href="..&#x2F;classes/Spotify.html">Spotify</a></li>
+            
+                <li><a href="..&#x2F;classes/Switchboard.html">Switchboard</a></li>
+            
+                <li><a href="..&#x2F;classes/SwitchboardJob.html">SwitchboardJob</a></li>
+            
+                <li><a href="..&#x2F;classes/TestHelper.html">TestHelper</a></li>
+            
+                <li><a href="..&#x2F;classes/TMDB.html">TMDB</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="..&#x2F;modules/: Test.html">: Test</a></li>
+            
+                <li><a href="..&#x2F;modules/Connectors.html">Connectors</a></li>
+            
+                <li><a href="..&#x2F;modules/Switchboard.html">Switchboard</a></li>
+            
+                <li><a href="..&#x2F;modules/Test.html">Test</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: lib&#x2F;connectors&#x2F;lastfm.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+&#x2F;**
+    Connector for Last.fm.
+
+    API used: The Last.fm web API.
+    Retrieves data about artists, tracks, and albums as well as events and venus.
+    
+    @module Connectors
+    @resources: http:&#x2F;&#x2F;www.last.fm&#x2F;api
+**&#x2F;
+
+var util = require(&#x27;util&#x27;);
+var BaseConnector = require(&#x27;.&#x2F;base_connector.js&#x27;);
+var querystring = require(&#x27;querystring&#x27;);
+var keys = require(&#x27;.&#x2F;keys&#x27;);
+
+var apiActions = {
+    &quot;albumSearch&quot; : { action: [&#x27;album&#x27;,&#x27;search&#x27;], in_param_names: [&#x27;album&#x27;], output_nodes: [&#x27;albummatches.album.name&#x27;,&#x27;albummatches.album.artist&#x27;,&#x27;albummatches.album.id&#x27;,&#x27;albummatches.album.mbid&#x27;], optionals: [ &#x27;page&#x27;, &#x27;limit&#x27; ] },
+    &quot;albumGetTopTags&quot; : { action: [&#x27;album&#x27;,&#x27;getTopTags&#x27;], in_param_names: [&#x27;mbid&#x27;], output_nodes: [&#x27;toptags.tag.name&#x27;, &#x27;toptags.tag.count&#x27;] },
+    
+    &quot;artistGetCorrection&quot; : { action: [&#x27;artist&#x27;,&#x27;getCorrection&#x27;], in_param_names: [&#x27;artist&#x27;], output_nodes: [&#x27;corrections.correction.artist.name&#x27;, &#x27;corrections.correction.artist.mbid&#x27;] },
+    &quot;artistGetEvents&quot; : { action: [&#x27;artist&#x27;,&#x27;getEvents&#x27;], in_param_names: [&#x27;artist&#x27;,&#x27;mbid&#x27;], output_nodes: [&#x27;events.event.id&#x27;, &#x27;events.event.title&#x27;, &#x27;events.event.artists.artist&#x27;, &#x27;events.event.artists.headliner&#x27;, &#x27;events.event.venue.id&#x27;, 
+        &#x27;events.event.venue.name&#x27;,&#x27;events.event.venue.location.city&#x27;,&#x27;events.event.venue.location.country&#x27;, &#x27;events.event.venue.location.street&#x27;, &#x27;events.event.startDate&#x27;], optionals: [&#x27;page&#x27;,&#x27;limit&#x27;] },
+    &quot;artistGetInfo&quot; : { action: [&#x27;artist&#x27;,&#x27;getInfo&#x27;], in_param_names: [&#x27;artist&#x27;,&#x27;mbid&#x27;], output_nodes: [&#x27;artist.name&#x27;, &#x27;artist.mbid&#x27;, &#x27;artist.similar.artist.name&#x27;], optionals: [&#x27;lang&#x27;] },
+    &quot;artistGetPastEvents&quot; : { action: [&#x27;artist&#x27;,&#x27;getPastEvents&#x27;], in_param_names: [&#x27;artist&#x27;,&#x27;mbid&#x27;], output_nodes: [&#x27;events.event.id&#x27;, &#x27;events.event.title&#x27;, &#x27;events.event.artists.artist&#x27;, &#x27;events.event.artists.headliner&#x27;, &#x27;events.event.venue.id&#x27;, 
+        &#x27;events.event.venue.name&#x27;,&#x27;events.event.venue.location.city&#x27;,&#x27;events.event.venue.location.country&#x27;, &#x27;events.event.venue.location.street&#x27;, &#x27;events.event.startDate&#x27;], optionals: [&#x27;page&#x27;,&#x27;limit&#x27;] },
+    &quot;artistGetPodcast&quot; : { action: [&#x27;artist&#x27;,&#x27;getPodcast&#x27;], in_param_names: [&#x27;artist&#x27;,&#x27;mbid&#x27;], output_nodes: [&#x27;rss.channel.title&#x27;, &#x27;rss.channel.link&#x27;] },
+    &quot;artistGetShouts&quot; : { action: [&#x27;artist&#x27;,&#x27;getShouts&#x27;], in_param_names: [&#x27;artist&#x27;,&#x27;mbid&#x27;], output_nodes: [&#x27;shouts.shout.body&#x27;, &#x27;shouts.shout.author&#x27;], optionals: [&#x27;page&#x27;,&#x27;limit&#x27;] },
+    &quot;artistGetSimilar&quot; : { action: [&#x27;artist&#x27;,&#x27;getSimilar&#x27;], in_param_names: [&#x27;artist&#x27;,&#x27;mbid&#x27;], output_nodes: [&#x27;similarartists.artist.name&#x27;, &#x27;similarartists.artist.mbid&#x27;], optionals: [&#x27;limit&#x27;] },
+    &quot;artistGetTags&quot; : { action: [&#x27;artist&#x27;,&#x27;getTags&#x27;], in_param_names: [&#x27;artist&#x27;,&#x27;mbid&#x27;], output_nodes: [&#x27;tags.tag.name&#x27;, &#x27;tags.tag.url&#x27;]},
+    &quot;artistGetTopAlbums&quot; : { action: [&#x27;artist&#x27;,&#x27;getTopAlbums&#x27;], in_param_names: [&#x27;artist&#x27;,&#x27;mbid&#x27;], output_nodes: [&#x27;topalbums.albums.name&#x27;, &#x27;topalbums.albums.mbid&#x27;, &#x27;topalbums.albums.playcount&#x27;], optionals: [&#x27;page&#x27;,&#x27;limit&#x27;] },
+    &quot;artistGetTopFans&quot; : { action: [&#x27;artist&#x27;,&#x27;getTopFans&#x27;], in_param_names: [&#x27;artist&#x27;,&#x27;mbid&#x27;], output_nodes: [&#x27;topfans.user.name&#x27;, &#x27;topfans.user.realname&#x27;] },
+    &quot;artistGetTopTags&quot; : { action: [&#x27;artist&#x27;,&#x27;getTopTags&#x27;], in_param_names: [&#x27;artist&#x27;,&#x27;mbid&#x27;], output_nodes: [&#x27;toptags.tag.name&#x27;, &#x27;toptags.tag.count&#x27;]},
+    &quot;artistGetTopTracks&quot; : { action: [&#x27;artist&#x27;,&#x27;getTopTracks&#x27;], in_param_names: [&#x27;artist&#x27;,&#x27;mbid&#x27;], output_nodes: [&#x27;toptracks.track.name&#x27;, &#x27;toptracks.track.mbid&#x27;, &#x27;toptracks.track.duration&#x27;, &#x27;toptracks.track.playcount&#x27;], optionals: [&#x27;page&#x27;,&#x27;limit&#x27;] },
+    &quot;artistSearch&quot; : { action: [&#x27;artist&#x27;,&#x27;search&#x27;], in_param_names: [&#x27;artist&#x27;], output_nodes: [&#x27;artistmatches.artist.name&#x27;, &#x27;artistmatches.artist.mbid&#x27;, &#x27;artistmatches.artist.listeners&#x27;,&#x27;artistmatches.artist.url&#x27;], optionals: [&#x27;page&#x27;,&#x27;limit&#x27;] },
+    
+    &quot;getHypedArtists&quot; : { action: [&#x27;chart&#x27;,&#x27;getHypedArtists&#x27;], in_param_names: [], output_nodes: [&#x27;artists.artist.name&#x27;, &#x27;artists.artist.mbid&#x27;, &#x27;artists.artist.percentagechange&#x27;], optionals: [&#x27;page&#x27;,&#x27;limit&#x27;] },
+    &quot;getHypedTracks&quot; : { action: [&#x27;chart&#x27;,&#x27;getHypedTracks&#x27;], in_param_names: [], output_nodes: [&#x27;tracks.track.name&#x27;, &#x27;tracks.track.mbid&#x27;, &#x27;tracks.track.percentagechange&#x27;, &#x27;tracks.track.artist.name&#x27;, &#x27;tracks.track.artist.mbid&#x27;], optionals: [&#x27;page&#x27;,&#x27;limit&#x27;] },
+    &quot;getLovedTracks&quot; : { action: [&#x27;chart&#x27;,&#x27;getLovedTracks&#x27;], in_param_names: [], output_nodes: [&#x27;tracks.track.name&#x27;, &#x27;tracks.track.mbid&#x27;, &#x27;tracks.track.loves&#x27;, &#x27;tracks.track.artist.name&#x27;, &#x27;tracks.track.artist.mbid&#x27;], optionals: [&#x27;page&#x27;,&#x27;limit&#x27;] },
+    &quot;getTopArtists&quot; : { action: [&#x27;chart&#x27;,&#x27;getTopArtists&#x27;], in_param_names: [], output_nodes: [&#x27;artists.artist.name&#x27;, &#x27;artists.artist.mbid&#x27;,&#x27;artists.artist.listeners&#x27;,&#x27;artists.artist.playcount&#x27;], optionals: [&#x27;page&#x27;,&#x27;limit&#x27;] },
+    &quot;getTopTags&quot; : { action: [&#x27;chart&#x27;,&#x27;getTopTags&#x27;], in_param_names: [], output_nodes: [&#x27;tags.tag.name&#x27;, &#x27;tags.tag.reach&#x27;,&#x27;tags.tag.taggings&#x27;], optionals: [&#x27;page&#x27;,&#x27;limit&#x27;] },
+    &quot;getTopTracks&quot; : { action: [&#x27;chart&#x27;,&#x27;getTopTracks&#x27;], in_param_names: [], output_nodes: [&#x27;tracks.track.name&#x27;, &#x27;tracks.track.mbid&#x27;, &#x27;tracks.track.duration&#x27;, &#x27;tracks.track.playcount&#x27;, &#x27;tracks.track.artist.name&#x27;, &#x27;tracks.track.artist.mbid&#x27;], optionals: [&#x27;page&#x27;,&#x27;limit&#x27;] },
+    
+    &quot;eventGetAttendees&quot; : { action: [&#x27;event&#x27;,&#x27;getAttendees&#x27;], in_param_names: [&#x27;event&#x27;], output_nodes: [&#x27;attendees.user.name&#x27;,&#x27;attendees.user.realname&#x27;], optionals: [&#x27;page&#x27;,&#x27;limit&#x27;] },
+    &quot;eventGetInfo&quot; : { action: [&#x27;event&#x27;,&#x27;getInfo&#x27;], in_param_names: [&#x27;event&#x27;], output_nodes: [&#x27;event.id&#x27;,&#x27;event.title&#x27;,&#x27;event.artists.headliner&#x27;, &#x27;event.venue.id&#x27;, &#x27;event.venue.name&#x27;,&#x27;event.venue.location.city&#x27;,&#x27;event.venue.location.country&#x27;, &#x27;event.venue.location.street&#x27;, &#x27;event.venue.startDate&#x27;], optionals: [&#x27;page&#x27;,&#x27;limit&#x27;] },
+    &quot;eventGetShouts&quot; : { action: [&#x27;event&#x27;,&#x27;getShouts&#x27;], in_param_names: [&#x27;event&#x27;], output_nodes: [&#x27;shouts.shout.body&#x27;,&#x27;shouts.shout.author&#x27;], optionals: [&#x27;page&#x27;,&#x27;limit&#x27;] },
+    
+    &quot;geoGetEvents&quot; : { action: [&#x27;geo&#x27;,&#x27;getEvents&#x27;], in_param_names: [&#x27;location&#x27;], output_nodes: [&#x27;event.id&#x27;, &#x27;event.title&#x27;, &#x27;event.tag&#x27;, &#x27;event.url&#x27;, &#x27;event.website&#x27;, &#x27;event.artists.artist&#x27;, &#x27;event.artists.headliner&#x27;, &#x27;event.venue.name&#x27;, &#x27;event.venue.location.city&#x27;, &#x27;event.venue.location.country&#x27;, &#x27;event.venue.location.street&#x27;, &#x27;event.venue.location.postalcode&#x27;, &#x27;event.venue.location.startDate&#x27;, &#x27;event.venue.url&#x27;, &#x27;event.venue.website&#x27;, &#x27;event.venue.phonenumber&#x27;], optionals: [&#x27;page&#x27;,&#x27;limit&#x27;,&#x27;distance&#x27;,&#x27;long&#x27;,&#x27;lat&#x27;] },
+    
+    &quot;tagGetInfo&quot; : { action: [&#x27;tag&#x27;,&#x27;getInfo&#x27;], in_param_names: [&#x27;tag&#x27;], output_nodes: [&#x27;tag.name&#x27;,&#x27;tag.reach&#x27;,&#x27;tag.taggings&#x27;], optionals: [] },
+    &quot;tagGetSimilar&quot; : { action: [&#x27;tag&#x27;,&#x27;getSimilar&#x27;], in_param_names: [&#x27;tag&#x27;], output_nodes: [&#x27;similartags.tag.name&#x27;], optionals: [] },
+    &quot;tagGetTopAlbums&quot; : { action: [&#x27;tag&#x27;,&#x27;getTopAlbums&#x27;], in_param_names: [&#x27;tag&#x27;], output_nodes: [&#x27;topalbums.album.name&#x27;,&#x27;topalbums.album.mbid&#x27;,&#x27;topalbums.album.artist.name&#x27;,&#x27;topalbums.album.artist.mbid&#x27;], optionals: [&#x27;page&#x27;,&#x27;limit&#x27;] },
+    &quot;tagGetTopArtists&quot; : { action: [&#x27;tag&#x27;,&#x27;getTopArtists&#x27;], in_param_names: [&#x27;tag&#x27;], output_nodes: [&#x27;topartists.artist.name&#x27;,&#x27;topartists.artist.mbid&#x27;], optionals: [&#x27;page&#x27;,&#x27;limit&#x27;] },
+    &quot;tagGetTopTags&quot; : { action: [&#x27;tag&#x27;,&#x27;getTopTags&#x27;], in_param_names: [], output_nodes: [&#x27;toptags.tag.name&#x27;,&#x27;toptags.tag.count&#x27;], optionals: [] },
+    &quot;tagGetTopTracks&quot; : { action: [&#x27;tag&#x27;,&#x27;getTopTracks&#x27;], in_param_names: [&#x27;tag&#x27;], output_nodes: [&#x27;toptracks.track.name&#x27;,&#x27;toptracks.track.mbid&#x27;,&#x27;toptracks.track.artist.name&#x27;,&#x27;toptracks.track.artist.mbid&#x27;], optionals:  [&#x27;page&#x27;,&#x27;limit&#x27;] },
+    &quot;tagSearch&quot; : { action: [&#x27;tag&#x27;,&#x27;search&#x27;], in_param_names: [&#x27;tag&#x27;], output_nodes: [&#x27;results.tagmatches.tag.name&#x27;,&#x27;results.tagmatches.tag.count&#x27;], optionals: [&#x27;page&#x27;,&#x27;limit&#x27;] },
+    
+    &quot;trackSearch&quot; : { action: [&#x27;track&#x27;,&#x27;search&#x27;], in_param_names: [&#x27;track&#x27;], output_nodes: [&#x27;results.trackmatches.track.name&#x27;, &#x27;results.trackmatches.track.mbid&#x27;, &#x27;results.trackmatches.track.listeners&#x27;, &#x27;results.trackmatches.track.artist.name&#x27;], optionals: [&#x27;page&#x27;,&#x27;limit&#x27;,&#x27;artist&#x27;] },
+    
+    &quot;venueGetEvents&quot; : { action: [&#x27;venue&#x27;,&#x27;getEvents&#x27;], in_param_names: [&#x27;venue&#x27;], output_nodes: [&#x27;events.event.id&#x27;, &#x27;events.event.title&#x27;, &#x27;events.event.artists.artist&#x27;, &#x27;events.event.artists.headliner&#x27;, &#x27;events.event.venue.id&#x27;, 
+        &#x27;events.event.venue.name&#x27;,&#x27;events.event.venue.location.city&#x27;,&#x27;events.event.venue.location.country&#x27;, &#x27;events.event.venue.location.street&#x27;, &#x27;events.event.startDate&#x27;], optionals: [] },
+    &quot;venueGetPastEvents&quot; : { action: [&#x27;venue&#x27;,&#x27;getPastEvents&#x27;], in_param_names: [&#x27;venue&#x27;], output_nodes: [&#x27;events.event.id&#x27;, &#x27;events.event.title&#x27;, &#x27;events.event.artists.artist&#x27;, &#x27;events.event.artists.headliner&#x27;, &#x27;events.event.venue.id&#x27;, 
+        &#x27;events.event.venue.name&#x27;,&#x27;events.event.venue.location.city&#x27;,&#x27;events.event.venue.location.country&#x27;, &#x27;events.event.venue.location.street&#x27;, &#x27;events.event.startDate&#x27;], optionals: [&#x27;page&#x27;,&#x27;limit&#x27;] },
+    &quot;venueSearch&quot; : { action: [&#x27;venue&#x27;,&#x27;search&#x27;], in_param_names: [&#x27;venue&#x27;], output_nodes: [&#x27;results.venuematches.venue.name&#x27;, &#x27;results.venuematches.venue.id&#x27;, 
+        &#x27;results.venuematches.venue.location.country&#x27;, &#x27;results.venuematches.venue.location.city&#x27;, &#x27;results.venuematches.venue.location.street&#x27;], optionals: [&#x27;page&#x27;,&#x27;limit&#x27;,&#x27;country&#x27;] }
+};
+
+&#x2F;**
+The Last.fm Connector inherits the BaseConnector and handles requests to the Last.fm API.
+
+@class Lastfm 
+@constructor
+
+*&#x2F;
+
+&#x2F;**
+The name of the API.
+@property name
+@type {String}
+*&#x2F;
+&#x2F;**
+The base URL of the API.
+@property host
+@type {String}
+*&#x2F;
+&#x2F;**
+The API-key (retrieved from keys.json)
+@property apiKey
+@type {String}
+*&#x2F;
+&#x2F;**
+A partial mapping of the API-methods (used by the operator)
+@property apiActions
+@type {Object}
+*&#x2F;
+&#x2F;**
+A URL to the API documentation.
+@property docs
+@type {String}
+*&#x2F;
+
+function Lastfm() {
+    this.name = &quot;Last.fm&quot;;
+	this.host = &quot;http:&#x2F;&#x2F;ws.audioscrobbler.com&quot;;
+	this.responseObject = [];
+	this.apiKey = keys[this.name][&#x27;key&#x27;];
+	this.apiActions = apiActions;
+	this.docs = &quot;http:&#x2F;&#x2F;www.last.fm&#x2F;api&quot;;
+}
+
+util.inherits(Lastfm, BaseConnector);
+
+&#x2F;**
+Builds a URL for the Last.fm Connector based on an API-configuration from a machine routine.
+
+@method Lastfm.prototype.getActionUrl
+@param {String} query Actual query string
+@param {Object} apiConfig Object containing API-configuration data from the machine routine such as API-method
+@return {String} Returns a URL to corresponding to inputted query and apiConfig
+
+*&#x2F;
+
+Lastfm.prototype.getActionUrl = function(query, apiConfig){
+    var apiAction = apiActions[apiConfig.action];
+    var domain = apiAction.action[0]; &#x2F;&#x2F;t ex &quot;artist&quot;
+    var action = apiAction.action[1];  
+     
+    var parameterObject = {};
+    parameterObject[&#x27;method&#x27;] = domain + &quot;.&quot; + action;
+    parameterObject[&#x27;format&#x27;] = &#x27;json&#x27;;
+    if(domain != &#x27;chart&#x27;)
+        parameterObject[apiConfig.in_param_name] = query;
+    
+    for(var param in apiConfig.optionals){
+        parameterObject[apiConfig.optionals[param].paramName] = apiConfig.optionals[param].paramValue; 
+    }
+    
+    parameterObject[&#x27;api_key&#x27;] = this.apiKey;
+    
+    var actionPath = querystring.stringify(parameterObject);
+    return this.host + &quot;&#x2F;2.0&#x2F;?&quot; + actionPath
+}
+
+module.exports = Lastfm;
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="..&#x2F;assets/js/yui-prettify.js"></script>
+<script src="..&#x2F;assets/../api.js"></script>
+<script src="..&#x2F;assets/js/api-filter.js"></script>
+<script src="..&#x2F;assets/js/api-list.js"></script>
+<script src="..&#x2F;assets/js/api-search.js"></script>
+<script src="..&#x2F;assets/js/apidocs.js"></script>
+</body>
+</html>

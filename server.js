@@ -9,8 +9,8 @@ var logger = require('./lib/sb_tracer.js')();
 
 var switchboard = require('./index');
 
-var liveRoutine = require('./example_routines/starwars_artists.json');
-//var liveRoutine = require('./example_routines/headliner_biographies.json');
+//var liveRoutine = require('./example_routines/starwars_artists.json');
+var liveRoutine = require('./example_routines/headliner_biographies.json');
 //var liveRoutine = require('./example_routines/actor_movies_books.json');
 
 /* Loads a JSON-routine from the operator */
@@ -65,7 +65,7 @@ function handleRequest(httpMethod, req, res) {
                liveRoutine = req.param('routine') instanceof Array ? req.param('routine') : JSON.parse(req.param('routine')); // Whole routine is posted as json (form data or raw)
        }
 
-       logger.trace("Live Routine: ", JSON.stringify(liveRoutine, null, 4));
+       logger.debug("Running Routine: ", JSON.stringify(liveRoutine, null, 4));
 
        var jobId = switchboard.addJob(liveRoutine, req.param('q'));
        
@@ -75,7 +75,7 @@ function handleRequest(httpMethod, req, res) {
        
     }
     catch(e) {
-        throw(e); //return instead?
+        throw(e); // return instead?
     }
 }
 
@@ -97,9 +97,9 @@ Runs the set switchboard routine with the entry query and outputs the formatted 
 app.get('/switchboard', function(req, res, next){
     res.contentType('json');
     
-    logger.debug("GET request received");
-    logger.trace(req.url);
-    logger.trace(req.query);
+    logger.info("GET request received");
+    logger.debug(req.url);
+    logger.debug(req.query);
     
     try {
         handleRequest("GET", req, res);
@@ -114,9 +114,9 @@ app.get('/switchboard', function(req, res, next){
 app.post('/switchboard', function(req, res){
     res.contentType('json'); 
     
-    logger.debug("POST request received");
-    logger.trace(req.url);
-    logger.trace(req.body);
+    logger.info("POST request received");
+    logger.debug(req.url);
+    logger.debug(req.body);
     
     try {
         handleRequest("POST", req, res);

@@ -43,7 +43,25 @@
             
                 <li><a href="..&#x2F;classes/BaseConnector.html">BaseConnector</a></li>
             
+                <li><a href="..&#x2F;classes/ConnectorResponse.html">ConnectorResponse</a></li>
+            
+                <li><a href="..&#x2F;classes/Echonest.html">Echonest</a></li>
+            
+                <li><a href="..&#x2F;classes/GoogleBooks.html">GoogleBooks</a></li>
+            
+                <li><a href="..&#x2F;classes/Lastfm.html">Lastfm</a></li>
+            
                 <li><a href="..&#x2F;classes/ResultFormatter.html">ResultFormatter</a></li>
+            
+                <li><a href="..&#x2F;classes/Spotify.html">Spotify</a></li>
+            
+                <li><a href="..&#x2F;classes/Switchboard.html">Switchboard</a></li>
+            
+                <li><a href="..&#x2F;classes/SwitchboardJob.html">SwitchboardJob</a></li>
+            
+                <li><a href="..&#x2F;classes/TestHelper.html">TestHelper</a></li>
+            
+                <li><a href="..&#x2F;classes/TMDB.html">TMDB</a></li>
             
             </ul>
 
@@ -53,7 +71,9 @@
             
                 <li><a href="..&#x2F;modules/Connectors.html">Connectors</a></li>
             
-                <li><a href="..&#x2F;modules/Engine.html">Engine</a></li>
+                <li><a href="..&#x2F;modules/Switchboard.html">Switchboard</a></li>
+            
+                <li><a href="..&#x2F;modules/Test.html">Test</a></li>
             
             </ul>
         </div>
@@ -96,16 +116,15 @@
     <pre class="code prettyprint linenums">
 &#x2F;**
 * The ResultFormatter takes the response gathered by all connectors 
-* and merges them to one clean result.
+* and merges them to one formatted result.
 *
-* @todo NODEPATHS MED NESTED ARRAYS ?! KOMMER SMÄLLA... ???
 * @class ResultFormatter
 * @constructor
 * @param {Array} result Array holding the result gathered from all connectors
 *&#x2F;
 var $ = require(&#x27;jquery&#x27;);
 var jpath = require(&quot;node-jpath&quot;);
-
+var logger = require(&#x27;.&#x2F;sb_tracer.js&#x27;)();
 
 &#x2F;**
 * The constructor. The result given to the constructor is always cloned
@@ -114,15 +133,175 @@ var jpath = require(&quot;node-jpath&quot;);
 * @method
 * @param {Array} result Array holding the result gathered from all connectors. Example: [{api: &quot;Name of Connector A&quot;, calls: []}, {api: &quot;Name of Connector B&quot;, calls: []}]
 *&#x2F;
-function ResultFormatter(result) {    
+
+function ResultFormatter(result, config) {    
+    
     &#x2F;&#x2F; raw contains the result retrieved by all connectors
     &#x2F;&#x2F; raw cannot be accessed directly to ensure that the result is always cloned
     &#x2F;&#x2F; Otherwise we would end up affecting the raw result while building the clean result
+    
     var raw = typeof result != &quot;object&quot; ? [] : $.extend(true, [], result);
-    &#x2F;&#x2F;var raw = typeof result != &quot;object&quot; ? [] : result;
+    
+    var config = {     
+        mergeMethod: &#x27;extract&#x27;
+    };
+
+    if(typeof config == &quot;object&quot;) {
+        this.config = $.extend(true, this.config, config);
+    }
+
+    &#x2F;*
+        Updates a object with new data given a set of keys that should be traversed
+        
+        E.g.
+        If you want to add data to the artist, e.g. website, you need to use the following data
+
+        var obj = {                                 &#x2F;&#x2F; The object you want to update; 
+            artists: {
+                artist: {
+                    name: &quot;Spice Girls&quot;                    
+                }
+            },
+            events: {...}
+        };                                          
+        keys = [&#x27;artists&#x27;, &#x27;artist&#x27;, &#x27;website&#x27;];    &#x2F;&#x2F; The keys specifying where the updated value should be set
+        value = &#x27;http:&#x2F;&#x2F;www.thespicegirls.com&#x2F;&#x27;;    &#x2F;&#x2F; The value you want to set
+
+        setObjectData(obj, keys, value);
+
+        obj after function is called:
+
+        { 
+            artists: {
+                artist: {
+                    name: &quot;Spice Girls&quot;,
+                    website: &#x27;http:&#x2F;&#x2F;www.thespicegirls.com&#x2F;&#x27;                 
+                }
+            },
+            events: {...}
+        };   
+
+        @param {Object} obj The object you want to update
+        @param {Object} keys An array with keys leading to the location in the object where you want to set your value.
+        @param {Mix} value The value you want to set
+    *&#x2F;
+    var setObjectData = function(obj, keys, value) { 
+               
+        &#x2F;&#x2F; logger.trace(&quot;setObjectData(obj, keys, value) &quot;, obj, keys, value);
+        
+        if(obj == undefined) {
+            logger.warn(&quot;Object is undefined. Doing nothing&quot;);
+            return obj;
+        }
+        if(keys.length &gt; 1) {
+            var key = keys.splice(0,1);
+            if(obj[key] instanceof Array) {
+                for(var i=0; i &lt; obj[key].length; i++) {
+                    return setObjectData(obj[key][i], keys, value);    
+                }
+            } else {
+                return setObjectData(obj[key], keys, value);
+            }
+            
+        }
+        
+        if(keys[0] == undefined) {
+            logger.trace(&quot;Replacing whole object with value&quot;);
+            obj = value;
+        }
+        else {
+            var message = (keys[0] in obj ? &quot;Replacing&quot; : &quot;Updating&quot;) + &quot;  value for key &quot;+keys[0];
+            logger.trace(message);
+            obj[keys[0]] = value;
+        }
+        
+        return obj;
+    }
+
+    &#x2F;*
+        Goes through the path and finds the first path part that is an array
+        e.g.
+
+        obj = [
+            {
+                &quot;events&quot;: {
+                    &quot;event&quot;: [
+                        {
+                            &quot;artists&quot;: [],
+                            &quot;artists&quot;: [],
+                            &quot;artists&quot;: [],
+                        }
+                    ]
+                }
+            }
+        ];
+
+        path = &quot;events.event.artists&quot;;
+
+        returned result would be events.event, since event is an array
+    *&#x2F;
+    var findArrayPath = function(obj, path, index) {
+        logger.trace(&quot;findArrayPath(obj,&quot;,path,&quot;,&quot;,index,&quot;)&quot;);
+        var lastPath, objPart;
+        index = index == undefined ? 0 : index;
+
+        var pathArray = path.split(&#x27;.&#x27;);
+        var pathPart = pathArray[index];  
+
+        if(obj) {
+            if(obj[pathPart] instanceof Array) {
+                pathArray.splice(index+1,pathArray.length);
+                return pathArray.join(&#x27;.&#x27;);
+            } else {                
+                return findArrayPath(obj[pathPart], path, ++index);
+            }
+        }
+        
+        return null;
+    }
+
+    var removeUnusedResult = function(connectorResult, inSource, indexToRemove) {
+        &#x2F;&#x2F; Locate which path (from the end) in the in source that points to an array
+        &#x2F;&#x2F; When found we want to remove that data using the indexToRemove argument
+        var pathToArray = findArrayPath(connectorResult, inSource);
+        logger.trace(&quot;pathToArray: &quot;, pathToArray);
+        
+        if(pathToArray) {
+            &#x2F;&#x2F; Remove the part that is an array
+            var insourceArray = pathToArray.split(&#x27;.&#x27;);
+            var keyHoldingArray = insourceArray.pop();
+            var path = insourceArray.join(&#x27;.&#x27;);
+
+            if(insourceArray.length) {
+                logger.trace(&quot;The key&quot;,keyHoldingArray,path);
+                var resultHoldingArray = jpath.filter(connectorResult, path);
+                if(resultHoldingArray instanceof Array) {
+                    for(var i in resultHoldingArray) {
+                        resultHoldingArray[i][keyHoldingArray].splice(indexToRemove,1); &#x2F;&#x2F; remove one at indexToRemove
+                    }
+                } else {
+                    resultHoldingArray[keyHoldingArray].splice(indexToRemove,1);
+                }
+            }
+            else {
+                connectorResult[keyHoldingArray].splice(indexToRemove,1);
+            }
+        } else {
+            connectorResult.splice(indexToRemove,1);
+        }
+    }
+
     &#x2F;&#x2F; Public function to retrieve the cloned raw data
     this.raw = function() {
         return $.extend(true, [], raw);
+    };
+
+    this.config = function(mergeMethod) {
+        return mergeMethod in config ? config[mergeMethod] : undefined;
+    };
+
+    this.setConfig = function(mergeMethod, value) {
+        config[mergeMethod] = value;
     };
 
     &#x2F;&#x2F; Public function to set the raw result. Always cloned
@@ -130,207 +309,165 @@ function ResultFormatter(result) {
         raw = $.extend(true, [], rawResult);
     };
 
+    &#x2F;&#x2F; Finds a result from a connector and merges the result from the following connector (if found)
+    this.findConnectorResult = function(connectorIndex, callIndex, index, returnOnlyResult) {
+        
+        logger.trace(&quot;this.findConnectorResult(&quot;,connectorIndex,&quot;,&quot;,callIndex,&quot;,&quot;,index,&quot;)&quot;);
+        
+        var rawResults = this.raw();
+        if(!rawResults[connectorIndex]) {
+            logger.trace(&quot;No rawResults found for index &quot;+connectorIndex);
+            return undefined;
+        }
+
+        &#x2F;&#x2F; Holds all calls and their results for a given connector
+        var connectorResults = rawResults[connectorIndex];
+        
+        &#x2F;&#x2F; Hold the connector result for the given input params, i.e. callIndex and index
+        var connectorResult = null;
+
+        &#x2F;&#x2F; Go through all calls and find the one we want, i.e. where callIndex and index matches
+        &#x2F;&#x2F; When found check if the following connector&#x27;s results exists and add it to the current result
+
+        &#x2F;&#x2F; @todo Fundera på om det går att använda jpath för att hämta rätt resultat istället för att loopa
+        for(var i in connectorResults.calls) {
+            var connectorCall = connectorResults.calls[i];
+
+            &#x2F;&#x2F; Make sure we are using the results from the right call
+            if(!(connectorCall.meta.callIndex == callIndex &amp;&amp; connectorCall.meta.index == index)) {            
+                continue;
+            }
+            
+            &#x2F;&#x2F; @todo: Flytta meta.apiConfig till samma ställe som api och calls ligger
+            &#x2F;&#x2F; Flytta då in namnet på api i apiConfig. apiConfig kanske ska döpas om oxå
+            &#x2F;&#x2F; @todo? Add limit to meta
+
+            &#x2F;&#x2F; @todo: Results generated deeper down in the chain is not removed correctly
+
+            connectorResult = connectorCall;
+            &#x2F;&#x2F; Retrieve the next connector&#x27;s results
+            var nextConnectorResults = rawResults[connectorIndex+1] ? rawResults[connectorIndex+1] : null;
+            if(nextConnectorResults) {
+                if(!nextConnectorResults.calls.length) {
+                    logger.trace(&quot;No data found in nextConnectorResuls. Leaving...&quot;);
+                    break;
+                }
+                logger.trace(&quot;nextConnectorResults: &quot;, nextConnectorResults);
+                
+                &#x2F;&#x2F; Flytta så att inte meta.apiConfig ligger i calls utan direkt i &quot;roten&quot;
+                &#x2F;&#x2F; apiAction is used as a key when merging the result
+                var apiAction = nextConnectorResults.calls[0].meta.apiConfig.action;
+                &#x2F;&#x2F; Retrieve the in source
+                var inSourceString = nextConnectorResults.calls[0].meta.apiConfig.in_source;
+                var nrOfResultsInSource = jpath.filter(connectorResult.result, inSourceString).length;
+                &#x2F;&#x2F; Make an array of the in source so that we later can remove the last part of it and store it
+                var inSourceArray = inSourceString.split(&#x27;.&#x27;);
+                &#x2F;&#x2F; Remove the last part of the in source and store it.
+                &#x2F;&#x2F; Is used to detect if the source contains data from an array or not                
+                var queryKey = inSourceArray.pop();
+                &#x2F;&#x2F; Reset the in source so that it doesn&#x27;t have the last portion of the path
+                inSourceString = inSourceArray.join(&#x27;.&#x27;);
+                
+                &#x2F;&#x2F; @TODO
+                &#x2F;&#x2F; Leta efter första arrayen i inSourceString
+                &#x2F;&#x2F; Exempel inSource: response.artists.foreign_ids.foreign_id
+                &#x2F;&#x2F; Leta efter första arrayen i inSource ovan
+                &#x2F;&#x2F; Låt oss säga att den finns vid response.artists
+                &#x2F;&#x2F; var result = jpath.filter(connectorResult.result, response.artists)
+                &#x2F;&#x2F; for(var i in result) 
+                &#x2F;&#x2F; Ta bort response.artists från inSource
+                &#x2F;&#x2F; var tmpResult = jpath.filter(result[i], foreign_ids.foreign_id);
+                &#x2F;&#x2F; Om vi inte får något resultat, ta bort den result.splice(i,1);
+                &#x2F;&#x2F; Om vi får resultat, gör som i loopen nedan
+                
+                &#x2F;&#x2F; Retrieve all results matching the in source
+                var results = jpath.filter(connectorResult.result, inSourceString);
+
+                &#x2F;&#x2F; Array holding all new results since we may want to remove results that
+                &#x2F;&#x2F; wasn&#x27;t used by another connector. If merge method is &quot;inject&quot; result is unchanged.
+                var newResults = [];
+
+                &#x2F;&#x2F; Go through all results and add the result from next connector
+                for(var j = results.length-1; j &gt;= 0; j--) { 
+                &#x2F;&#x2F;for(var j = 0; j &lt; results.length; j++) { 
+                    var nextConnectorResult = this.findConnectorResult(connectorIndex+1, connectorCall.meta.index, j, false);
+                    
+                    if(nextConnectorResult) {
+                        &#x2F;&#x2F;logger.trace(nextConnectorResults.api, nextConnectorResults.calls[0].meta.apiConfig.in_source,&quot;:&quot;,nextConnectorResult.meta.query);
+                        logger.trace(&quot;Result retrieved from the next connector. Result going to be merged in connector &quot;+connectorIndex+&quot;, result at index &quot;+j);
+                        
+                        &#x2F;&#x2F; Check if the query used by the next connector is retrieved from an array source or not
+                        &#x2F;&#x2F; If query was taken from an array we should merge the result in a special way
+                        var arrayInSource = results[j][queryKey] instanceof Array;
+                        &#x2F;&#x2F; Store the result in a temporary variable
+                        var tmpResult = results[j];
+
+                        if(arrayInSource) {
+                            &#x2F;&#x2F; If the query used by next connector was retrieved from an array
+                            &#x2F;&#x2F; (i.e. the in source points to an array) we collect in an inner
+                            &#x2F;&#x2F; loop and adds it to the result.
+                            var tmpResults = [nextConnectorResult];
+                            while(tmpResults.length &lt; nrOfResultsInSource &amp;&amp; j &gt;= 0) {
+                                var conRes = this.findConnectorResult(connectorIndex+1, connectorCall.meta.index, --j, false);                                
+                                if(conRes) {
+                                    tmpResults.push(conRes);
+                                } else {
+                                    break;
+                                }                       
+                            }
+
+                            tmpResult = results[j+1];
+                            tmpResult[apiAction] = {};
+                             &#x2F;&#x2F; Reverse since we are collecting data from the end to start,
+                             &#x2F;&#x2F; But we want the result to be in the right order.
+                            tmpResults.reverse();
+                            for(var tr in tmpResults) {
+                                var res = tmpResults[tr];
+                                tmpResult[apiAction][res.meta.query] = res.result;
+                            }
+                            
+                        } else {
+                            &#x2F;&#x2F; If the result was retrieved using a query taken from a in source that wasn&#x27;t an array it is pushed to the new result
+                            tmpResult[apiAction] = nextConnectorResult.result;
+                        }
+
+                    } else if(this.config(&quot;mergeMethod&quot;) == &quot;extract&quot;) {
+                        logger.debug(&quot;No result found in connector&quot;,connectorIndex+1,&quot;at index&quot;, j,&quot;using callindex&quot;,connectorCall.meta.index,&quot;. Remove! (extract merge)!&quot;);
+                        
+                        removeUnusedResult(connectorResult.result, inSourceString, j);
+                    }
+                }
+            }
+            
+            &#x2F;&#x2F; We have found what we want so we can stop searching
+            break;
+        }
+
+        &#x2F;&#x2F; If returnOnlyResult == true we return only the generated result from the connector resul, i.e. not meta and raw data
+        if(returnOnlyResult) {
+            return connectorResult &amp;&amp; &quot;result&quot; in connectorResult ? connectorResult.result : null;
+        }
+        &#x2F;&#x2F; Return the whole result, i.e. with meta and raw data
+        return connectorResult;
+    };
+
 }
 
-&#x2F;*  NODEPATHS MED NESTED ARRAYS ?! KOMMER SMÄLLA... *&#x2F;
+ResultFormatter.prototype.mergeResult = function(){
+    return this.findConnectorResult(0, null, 0, true);
+};
+
 ResultFormatter.prototype.injectMerge = function(){
-   var cleanResult = this.raw();
-   $.each(cleanResult, function(i,block){
-       if(cleanResult.length-(i+2) &gt;= 0){
-           blockInject(cleanResult[cleanResult.length-(i+1)], cleanResult[cleanResult.length-(i+2)]); &#x2F;&#x2F;inject things from child block into parent block
-       }
-   });
-   return cleanResult;
+    this.setConfig(&quot;mergeMethod&quot;, &quot;inject&quot;);
+    logger.debug(&quot;Using injectMerge&quot;);
+    return this.mergeResult();
 };
 
 ResultFormatter.prototype.extractMerge = function(){
-    var cleanResult = [];
-    var extractedRestul = null;
-    var rawResults = this.raw();
-    console.log(rawResults);
-    $.each(rawResults,function(i,block){ &#x2F;&#x2F;this should be a while..?
-        
-        var index = rawResults.length-i-1;
-        &#x2F;&#x2F;console.log(&quot;------- Going through rawResults, i: &quot; + i + &quot;, index: &quot;+index+&quot; i+2==rawResults.length &quot;+(i+2)+&quot;==&quot;+rawResults.length+&quot; ---------&quot;);
-        var prevBlock = index-1 &gt;= 0 ? rawResults[index-1] : null;
-        
-        &#x2F;&#x2F; Since we are building the clean result from the last connector block to the first
-        &#x2F;&#x2F; we know that we have reached the end when we don&#x27;t have any previous block and hence no more data to extract
-        if(prevBlock == null) {            
-            return cleanResult;
-        } 
-        
-        var currentBlock = rawResults[index];
-        var nextBlock = index+1 &lt; rawResults.length ? rawResults[index+1] : null;
-        
-        cleanResult = blockExtract(currentBlock, prevBlock, nextBlock);        
-    });
-   return cleanResult;
-}
-
-
-var setObjectDataOld = function(arr,parts, value) {
-    if(parts.length &gt; 1) {
-        return setObjectData(arr[part], parts.pop(), value);
-    }
-
-    arr[parts[0]] = value;
-    
-    return arr;
-}
-
-var setObjectData = function(arr, parts, value) {
-    if(parts.length &gt; 1) {
-        var part = parts.splice(0,1);
-        if(arr[part] instanceof Array) {
-            for(var i=0; i &lt; arr[part].length; i++) {
-                return setObjectData(arr[part][i], parts, value);    
-            }
-        } else {
-            return setObjectData(arr[part], parts, value);
-        }
-        
-    }
-    arr[parts[0]] = value;
-    
-    return arr;
-}
-
-var sortByIndex = function(a, b) {
-    if(a.meta.index &lt; b.meta.index) return -1;
-    if(a.meta.index &gt; b.meta.index) return 1;
-    return 0;
+    this.setConfig(&quot;mergeMethod&quot;, &quot;extract&quot;);
+    logger.debug(&quot;Using extractMerge&quot;);
+    return this.mergeResult();
 };
-
-
-var blockExtract = function(currentBlock, prevBlock, nextBlock){
-        &#x2F;&#x2F;console.log(&quot;blockExtract(childBlock, parentBlock)&quot;, childBlock, parentBlock);
-        var nodes = [];
-        var leaves = currentBlock.calls;
-        leaves.sort(sortByIndex);
-        if(prevBlock != null) prevBlock.calls.sort(sortByIndex);
-        if(nextBlock != null) nextBlock.calls.sort(sortByIndex);
-
-        $.each(leaves,function(i,leaf){
-            var nodePath = leaf.meta.apiConfig.in_source.split(&quot;.&quot;);
-            nodePath.pop();
-            &#x2F;&#x2F;console.log(&quot;-------------------------&quot;);
-            &#x2F;&#x2F;console.log(&quot;ATTACHING: &quot;)
-            &#x2F;&#x2F;console.log(leaf);
-            &#x2F;&#x2F;console.log(&quot;TO PARENT: &quot;);
-            
-            var prevBlockResult = prevBlock != undefined ? prevBlock.calls[leaf.meta.callIndex].result : null;
-            var resultPart = []; &#x2F;&#x2F;varför måste det vara en array här? om vanlig variabel sätts den inte
-
-            var node = getNode(nodePath, leaf, prevBlockResult);
-
-            &#x2F;&#x2F; If there are a next connector block we store the in_source (e.g. artists.artist.name) it used and the highest index value found
-            &#x2F;&#x2F; We need the in_source to determine which results should be removed from leaf.results
-            &#x2F;&#x2F; The index is needed to know how many results we should keep from the &quot;in_source&quot; part of leaf.results.
-            &#x2F;&#x2F; e.g in_source may be &quot;artists.artist.name&quot;
-            &#x2F;&#x2F; Then we know that we should look for leaf.result.artists.artist.name but we need the nextBlockMaxIndex
-            &#x2F;&#x2F; to find out how many of these items we should keep
-            var nextBlockMaxIndex = 0;
-            var nextBlockInSource = &quot;&quot;;
-            if(nextBlock != null) {
-                for(var i in nextBlock.calls) {
-                    var nextBlockCall = nextBlock.calls[i];
-                    if(nextBlockCall.meta.callIndex != leaf.meta.index || nextBlockCall.meta.index &lt;= nextBlockMaxIndex) {
-                        continue;
-                    }
-
-                    nextBlockMaxIndex = nextBlockCall.meta.index;
-                    nextBlockInSource = nextBlockCall.meta.apiConfig.in_source;
-                }
-            }
-
-            if(nextBlockInSource != &quot;&quot;) {
-                var inSourceArr = nextBlockInSource.split(&quot;.&quot;);
-                &#x2F;&#x2F; Retrieve current result from the inSource pattern (e.g. artists.artist.name)
-                inSourceArr = inSourceArr.splice(0,inSourceArr.length-1);
-                &#x2F;&#x2F; Remove result that the next connector result didn&#x27;t use in a query
-                var inSourceResult = jpath.filter(leaf.result, inSourceArr.join(&quot;.&quot;)).slice(0, nextBlockMaxIndex + 1);
-                &#x2F;&#x2F; Update the leaf with the inSourceResult
-                &#x2F;&#x2F; This object only contains results that has data that has been used by the next connector
-                setObjectData(leaf.result, inSourceArr, inSourceResult);
-            }
-
-            injectNode(nodePath, node, leaf);
-
-            nodes.push(node);
-        });
-        return nodes;
-};
-
-var injectNode =  function(nodePath, node, leaf){
-    &#x2F;&#x2F;console.log(&quot;INJECTING NODE&quot;);
-    &#x2F;&#x2F;console.log(nodePath);
-    &#x2F;&#x2F;console.log(tree);
-    var level;
-    if (!(node instanceof Array) &amp;&amp; nodePath.length &gt; 0){
-        level = nodePath.shift();
-    }
-    
-    if(nodePath.length &gt; 0){
-        if(node instanceof Array){ &#x2F;&#x2F;if nested arrays in nodepath this will break.....
-            injectNode(nodePath.slice(0), node[leaf.meta.index], leaf); &#x2F;&#x2F;slice(0) =&gt; clone array...
-        }
-        else if(node[level] != null){
-            injectNode(nodePath, node[level], leaf);                    
-        }        
-    }
-    else if(node[level] instanceof Array){
-        node[level][leaf.meta.index][leaf.meta.apiConfig.action] = leaf.result;
-    }
-    else if(node[level] != null) {            
-        node[level][leaf.meta.apiConfig.action] = leaf.result;
-    } else {
-        node[leaf.meta.apiConfig.action] = leaf.result;
-    }  
-
-};
-
-var getNode =  function(nodePath, leaf, tree){
-    &#x2F;&#x2F;console.log(&quot;getNode(nodePath, tree, leaf, objects)&quot;, nodePath, tree, leaf, objects);
-    var node = [];
-    var level;
-
-    if (!(tree instanceof Array) &amp;&amp; nodePath.length &gt; 0){
-        level = nodePath.shift();
-    }
-
-    if(nodePath.length &gt; 0) {
-        if(tree instanceof Array){ &#x2F;&#x2F;nested arrays....this isn&#x27;t the guaranteed end node              
-            node = (tree[leaf.meta.index]);
-        }
-        else if(tree[level] != null) {
-            return getNode(nodePath, leaf, tree[level]);               
-        }
-    }
-    else {   
-        node = (tree[level] instanceof Array ? tree[level][leaf.meta.index] : tree[level]);
-    }    
-    
-    return node;
-};
-
-var blockInject = function(childBlock, parentBlock){
-        var leaves = childBlock.calls;
-        leaves.sort(sortByIndex);
-        parentBlock.calls.sort(sortByIndex);
-        $.each(leaves,function(i,leaf){
-                var nodePath = leaf.meta.apiConfig.in_source.split(&quot;.&quot;);
-                nodePath.pop();
-                &#x2F;&#x2F;console.log(&quot;-------------------------&quot;);
-                &#x2F;&#x2F;console.log(&quot;ATTACHING: &quot;)
-                &#x2F;&#x2F;console.log(leaf);
-                &#x2F;&#x2F;console.log(&quot;TO PARENT: &quot;);
-                injectNode(nodePath, parentBlock.calls[leaf.meta.callIndex].result, leaf);
-        });
-        return parentBlock;
-};
-
-
 
 module.exports = ResultFormatter;
     </pre>

@@ -1,3 +1,14 @@
+/**
+	Spotify tests.
+
+	Tests made:
+	- has an api key that is valid *async
+	- ...
+	
+	@module: Test
+**/
+
+
 var vows = require('vows'),
     assert = require('assert');
     

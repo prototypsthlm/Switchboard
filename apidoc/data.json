@@ -20,14 +20,54 @@
         "lib/connectors/connector_response.js": {
             "name": "lib/connectors/connector_response.js",
             "modules": {},
-            "classes": {},
+            "classes": {
+                "ConnectorResponse": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/connectors/echonest.js": {
+            "name": "lib/connectors/echonest.js",
+            "modules": {},
+            "classes": {
+                "Echonest": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/connectors/googlebooks.js": {
+            "name": "lib/connectors/googlebooks.js",
+            "modules": {},
+            "classes": {
+                "GoogleBooks": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/connectors/lastfm.js": {
+            "name": "lib/connectors/lastfm.js",
+            "modules": {},
+            "classes": {
+                "Lastfm": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/connectors/spotify.js": {
+            "name": "lib/connectors/spotify.js",
+            "modules": {},
+            "classes": {
+                "Spotify": 1
+            },
             "fors": {},
             "namespaces": {}
         },
         "lib/connectors/themoviedb.js": {
             "name": "lib/connectors/themoviedb.js",
             "modules": {},
-            "classes": {},
+            "classes": {
+                "TMDB": 1
+            },
             "fors": {},
             "namespaces": {}
         },
@@ -43,8 +83,63 @@
         "lib/switchboard.js": {
             "name": "lib/switchboard.js",
             "modules": {
-                "Engine": 1
+                "Switchboard": 1
             },
+            "classes": {
+                "Switchboard": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/switchboard_job.js": {
+            "name": "lib/switchboard_job.js",
+            "modules": {},
+            "classes": {
+                "SwitchboardJob": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/test_helper.js": {
+            "name": "lib/test_helper.js",
+            "modules": {},
+            "classes": {
+                "TestHelper": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "test/connectors_test.js": {
+            "name": "test/connectors_test.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "test/echonest_test.js": {
+            "name": "test/echonest_test.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "test/googlebooks_test.js": {
+            "name": "test/googlebooks_test.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "test/lastfm_test.js": {
+            "name": "test/lastfm_test.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "test/results_formatter_test.js": {
+            "name": "test/results_formatter_test.js",
+            "modules": {},
             "classes": {},
             "fors": {},
             "namespaces": {}
@@ -52,8 +147,38 @@
         "test/server_test.js": {
             "name": "test/server_test.js",
             "modules": {
+                "Test": 1
+            },
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "test/spotify_test.js": {
+            "name": "test/spotify_test.js",
+            "modules": {
                 ": Test": 1
             },
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "test/switchboard_job_test.js": {
+            "name": "test/switchboard_job_test.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "test/switchboard_test.js": {
+            "name": "test/switchboard_test.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "test/tmdb_test.js": {
+            "name": "test/tmdb_test.js",
+            "modules": {},
             "classes": {},
             "fors": {},
             "namespaces": {}
@@ -65,6 +190,12 @@
             "submodules": {},
             "classes": {
                 "BaseConnector": 1,
+                "ConnectorResponse": 1,
+                "Echonest": 1,
+                "GoogleBooks": 1,
+                "Lastfm": 1,
+                "Spotify": 1,
+                "TMDB": 1,
                 "ResultFormatter": 1
             },
             "fors": {},
@@ -73,18 +204,38 @@
             "file": "lib/results_formatter.js",
             "line": 1,
             "description": "A Connector works like an interface to third party API's, such as Spotify, Last.fm, Google and more.\nEvery connector exposes methods which can be used to make calls to those API's.\nWhen ready a Connector should always return a ConnectorResponse object containing meta information\nabout the request and response and the result.",
-            "resources": ": http://help.themoviedb.org/kb/api/about-3"
+            "resources": ": https://developers.google.com/books/docs/v1/using"
         },
-        "Engine": {
-            "name": "Engine",
+        "Switchboard": {
+            "name": "Switchboard",
             "submodules": {},
-            "classes": {},
+            "classes": {
+                "Switchboard": 1,
+                "SwitchboardJob": 1
+            },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "lib/switchboard.js",
-            "line": 1,
-            "description": "Engine takes a json configuration and executes all connectors defined in the config\nin correct order, gathering the result and at the end returning a merged object with\nall results."
+            "file": "lib/switchboard_job.js",
+            "line": 15,
+            "description": "Switchboard takes a JSON-routine and executes all connectors defined in the routine\nin the specified order, gathering the result and at the end returning a merged object with\nall results."
+        },
+        "Test": {
+            "name": "Test",
+            "submodules": {},
+            "classes": {
+                "TestHelper": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "lib/test_helper.js",
+            "line": 7,
+            "description": "Test for the server.js\n\nTests made:\nChecks that a jsonp call is wrapped with the callback param if exists",
+            "is_constructor": 1,
+            "todo": [
+                "Merge batches into one batch. Hade problem with having them in the same since the server crashed when both tests were making requests"
+            ]
         },
         ": Test": {
             "name": ": Test",
@@ -93,12 +244,9 @@
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "test/server_test.js",
+            "file": "test/spotify_test.js",
             "line": 1,
-            "description": "Test for the server.js\n\nTests made:\nChecks that a jsonp call is wrapped with the callback param if exists",
-            "todo": [
-                "Merge batches into one batch. Hade problem with having them in the same since the server crashed when both tests were making requests"
-            ]
+            "description": "Spotify tests.\n\nTests made:\n- has an api key that is valid *async\n- ..."
         }
     },
     "classes": {
@@ -113,8 +261,109 @@
             "module": "Connectors",
             "namespace": "",
             "file": "lib/connectors/base_connector.js",
-            "line": 19,
-            "description": "The BaseConnector should be inherited by all other Connectors.\nIt can be seen as a Abstract Class containing some functions\nthat are used by all other Connectors.\nThe BaseConnector executes all requests and collects all data but\nevery Connector is responsible for given the right URL and param data and to\nhandle the response",
+            "line": 15,
+            "description": "The BaseConnector should be inherited by all other Connectors.\nIt can be seen as a Abstract Class containing some functions\nthat are used by all other Connectors.\nThe BaseConnector executes all async requests and collects all data but\nevery Connector subclass is responsible for providing the right URL and param data and to\nhandle the response.",
+            "is_constructor": 1
+        },
+        "ConnectorResponse": {
+            "name": "ConnectorResponse",
+            "shortname": "ConnectorResponse",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Connectors",
+            "namespace": "",
+            "file": "lib/connectors/connector_response.js",
+            "line": 2,
+            "description": "Contains results from a Connector HTTP-request.\nAll connectors must return an object of this instance. By doing so we can make sure that we know\nsome things for every result, i.e. how many results we retrieved.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "resultObject",
+                    "description": "A config object containing machine routine data for this call",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Return a new object containing formatted request meta-data, cloned raw response data and response data to be manipulated",
+                "type": "Object"
+            }
+        },
+        "Echonest": {
+            "name": "Echonest",
+            "shortname": "Echonest",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Connectors",
+            "namespace": "",
+            "file": "lib/connectors/echonest.js",
+            "line": 69,
+            "description": "The Echonest Connector inherits the BaseConnector and handles requests to the Echonest API.",
+            "is_constructor": 1
+        },
+        "GoogleBooks": {
+            "name": "GoogleBooks",
+            "shortname": "GoogleBooks",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Connectors",
+            "namespace": "",
+            "file": "lib/connectors/googlebooks.js",
+            "line": 33,
+            "description": "The Google Books Connector inherits the BaseConnector and handles requests to the Google Books API.",
+            "is_constructor": 1
+        },
+        "Lastfm": {
+            "name": "Lastfm",
+            "shortname": "Lastfm",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Connectors",
+            "namespace": "",
+            "file": "lib/connectors/lastfm.js",
+            "line": 67,
+            "description": "The Last.fm Connector inherits the BaseConnector and handles requests to the Last.fm API.",
+            "is_constructor": 1
+        },
+        "Spotify": {
+            "name": "Spotify",
+            "shortname": "Spotify",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Connectors",
+            "namespace": "",
+            "file": "lib/connectors/spotify.js",
+            "line": 25,
+            "description": "The Spotify Connector inherits the BaseConnector and handles requests to the Spotify API.",
+            "is_constructor": 1
+        },
+        "TMDB": {
+            "name": "TMDB",
+            "shortname": "TMDB",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Connectors",
+            "namespace": "",
+            "file": "lib/connectors/themoviedb.js",
+            "line": 75,
+            "description": "The TMDB Connector inherits the BaseConnector and handles requests to the TMDB API.",
             "is_constructor": 1
         },
         "ResultFormatter": {
@@ -129,10 +378,7 @@
             "namespace": "",
             "file": "lib/results_formatter.js",
             "line": 1,
-            "description": "The ResultFormatter takes the response gathered by all connectors \nand merges them to one clean result.",
-            "todo": [
-                "NODEPATHS MED NESTED ARRAYS ?! KOMMER SMÄLLA... ???"
-            ],
+            "description": "The ResultFormatter takes the response gathered by all connectors \nand merges them to one formatted result.",
             "is_constructor": 1,
             "params": [
                 {
@@ -141,26 +387,592 @@
                     "type": "Array"
                 }
             ]
+        },
+        "Switchboard": {
+            "name": "Switchboard",
+            "shortname": "Switchboard",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Switchboard",
+            "namespace": "",
+            "file": "lib/switchboard.js",
+            "line": 19,
+            "description": "Switchboard is a sort of engine, setting up and executing jobs which retrieve and format data through configured\ndata flows (\"routines\").",
+            "is_constructor": 1
+        },
+        "SwitchboardJob": {
+            "name": "SwitchboardJob",
+            "shortname": "SwitchboardJob",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Switchboard",
+            "namespace": "",
+            "file": "lib/switchboard_job.js",
+            "line": 15,
+            "description": "Instance of a SwitchboardJob.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "userRoutine",
+                    "description": "Object specifying API-methods and API-execution order",
+                    "type": "Object"
+                },
+                {
+                    "name": "machineRoutine",
+                    "description": "Object specifying API-methods and API-execution order",
+                    "type": "Object"
+                },
+                {
+                    "name": "entryQueries",
+                    "description": "Object specifying API-methods and API-execution order",
+                    "type": "Array"
+                },
+                {
+                    "name": "jobId",
+                    "description": "Object specifying API-methods and API-execution order",
+                    "type": "Integer"
+                }
+            ]
+        },
+        "TestHelper": {
+            "name": "TestHelper",
+            "shortname": "TestHelper",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Test",
+            "namespace": "",
+            "file": "lib/test_helper.js",
+            "line": 7,
+            "description": "Test helper."
         }
     },
     "classitems": [
         {
             "file": "lib/connectors/base_connector.js",
-            "line": 13,
-            "description": "inherited by all connectors.\nimplements methods for doiing async HTTP-requests to APIs and sending the results back to the switchboard engine\nthe url to send GETs to is built in the subclass.",
+            "line": 28,
+            "description": "Array containing ConnectorResults from GET-requests.",
+            "itemtype": "property",
+            "name": "responseArray",
+            "type": "{Array} queryData query-object containing actual query data as well as indices from previous calls",
             "class": "BaseConnector",
             "module": "Connectors"
         },
         {
-            "file": "lib/connectors/connector_response.js",
-            "line": 2,
-            "description": "All connectors must return an object of this instance. By doing so we can make sure that we now\nsome things for every result, i.e. how many results we retrieved",
-            "class": "ResultFormatter",
+            "file": "lib/connectors/base_connector.js",
+            "line": 43,
+            "description": "Handles JSON-results from a request and returns a new ConnectorResponse containing cloned request results as well as\nmeta-data.",
+            "itemtype": "method",
+            "name": "BaseConnector.prototype.connectorResult",
+            "params": [
+                {
+                    "name": "resultObject",
+                    "description": "Object containing HTTP-request meta-data as well as a HTTP-request results",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Returns a new ConnectorResponse instance",
+                "type": "ConnectorResponse"
+            },
+            "class": "BaseConnector",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/connectors/base_connector.js",
+            "line": 56,
+            "description": "Executes one or more queries to an API and returns the results.",
+            "itemtype": "method",
+            "name": "BaseConnector.prototype.execute",
+            "params": [
+                {
+                    "name": "queryData",
+                    "description": "query-object containing actual query data as well as indices from previous calls",
+                    "type": "Object"
+                },
+                {
+                    "name": "apiConfig",
+                    "description": "A config object containing machine routine data for this call",
+                    "type": "Object"
+                },
+                {
+                    "name": "cb",
+                    "description": "Callback returning the results from all the async HTTP-requests",
+                    "type": "Function"
+                }
+            ],
+            "class": "BaseConnector",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/connectors/base_connector.js",
+            "line": 88,
+            "description": "Performs a single GET-request and appends the data to the connector responseArray.",
+            "itemtype": "method",
+            "name": "BaseConnector.prototype.get",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "The URL to GET",
+                    "type": "String"
+                },
+                {
+                    "name": "query",
+                    "description": "The query/in-parameter value",
+                    "type": "String"
+                },
+                {
+                    "name": "apiConfig",
+                    "description": "A config object containing machine routine data for this call",
+                    "type": "String"
+                },
+                {
+                    "name": "index",
+                    "description": "The index of the GET-request. Used for formatting the final result.",
+                    "type": "Integer"
+                },
+                {
+                    "name": "callIndex",
+                    "description": "The index of the GET-request that provided the query for this call. Used for formatting the final result.",
+                    "type": "Integer"
+                },
+                {
+                    "name": "done",
+                    "description": "Callback indicating to the async forEach that the HTTP-request is finished.",
+                    "type": "Function"
+                }
+            ],
+            "class": "BaseConnector",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/connectors/echonest.js",
+            "line": 77,
+            "description": "The name of the API.",
+            "itemtype": "property",
+            "name": "name",
+            "type": "{String}",
+            "class": "Echonest",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/connectors/echonest.js",
+            "line": 82,
+            "description": "The base URL of the API.",
+            "itemtype": "property",
+            "name": "host",
+            "type": "{String}",
+            "class": "Echonest",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/connectors/echonest.js",
+            "line": 87,
+            "description": "The API-key (retrieved from keys.json)",
+            "itemtype": "property",
+            "name": "apiKey",
+            "type": "{String}",
+            "class": "Echonest",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/connectors/echonest.js",
+            "line": 92,
+            "description": "A partial mapping of the API-methods (used by the operator)",
+            "itemtype": "property",
+            "name": "apiActions",
+            "type": "{Object}",
+            "class": "Echonest",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/connectors/echonest.js",
+            "line": 97,
+            "description": "A URL to the API documentation.",
+            "itemtype": "property",
+            "name": "docs",
+            "type": "{String}",
+            "class": "Echonest",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/connectors/echonest.js",
+            "line": 113,
+            "description": "Builds a URL for the Echonest Connector based on an API-configuration from a machine routine.",
+            "itemtype": "method",
+            "name": "Echonest.prototype.getActionUrl",
+            "params": [
+                {
+                    "name": "query",
+                    "description": "Actual query string",
+                    "type": "String"
+                },
+                {
+                    "name": "apiConfig",
+                    "description": "Object containing API-configuration data from the machine routine such as API-method",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Returns a URL to corresponding to inputted query and apiConfig",
+                "type": "String"
+            },
+            "class": "Echonest",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/connectors/echonest.js",
+            "line": 190,
+            "description": "Modifies the result, replacing spotify-WW: with the global identifier spotify: and removes musicbrainz:artist: style markup before\nreturning a new ConnectorResponse instance.",
+            "itemtype": "method",
+            "name": "Echonest.prototype.connectorResult",
+            "params": [
+                {
+                    "name": "resultObject",
+                    "description": "Result object as defined by the BaseConnector. Includes, among other things, the result returned by the API.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Returns a new ConnectorResponse instance",
+                "type": "ConnectorResponse"
+            },
+            "class": "Echonest",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/connectors/googlebooks.js",
+            "line": 41,
+            "description": "The name of the API.",
+            "itemtype": "property",
+            "name": "name",
+            "type": "{String}",
+            "class": "GoogleBooks",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/connectors/googlebooks.js",
+            "line": 46,
+            "description": "The base URL of the API.",
+            "itemtype": "property",
+            "name": "host",
+            "type": "{String}",
+            "class": "GoogleBooks",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/connectors/googlebooks.js",
+            "line": 51,
+            "description": "The API-key (retrieved from keys.json)",
+            "itemtype": "property",
+            "name": "apiKey",
+            "type": "{String}",
+            "class": "GoogleBooks",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/connectors/googlebooks.js",
+            "line": 56,
+            "description": "A partial mapping of the API-methods (used by the operator)",
+            "itemtype": "property",
+            "name": "apiActions",
+            "type": "{Object}",
+            "class": "GoogleBooks",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/connectors/googlebooks.js",
+            "line": 61,
+            "description": "A URL to the API documentation.",
+            "itemtype": "property",
+            "name": "docs",
+            "type": "{String}",
+            "class": "GoogleBooks",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/connectors/googlebooks.js",
+            "line": 77,
+            "description": "Builds a URL for the Google Books Connector based on an API-configuration from a machine routine.",
+            "itemtype": "method",
+            "name": "GoogleBooks.prototype.getActionUrl",
+            "params": [
+                {
+                    "name": "query",
+                    "description": "Actual query string",
+                    "type": "String"
+                },
+                {
+                    "name": "apiConfig",
+                    "description": "Object containing API-configuration data from the machine routine such as API-method",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Returns a URL to corresponding to inputted query and apiConfig",
+                "type": "String"
+            },
+            "class": "GoogleBooks",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/connectors/lastfm.js",
+            "line": 75,
+            "description": "The name of the API.",
+            "itemtype": "property",
+            "name": "name",
+            "type": "{String}",
+            "class": "Lastfm",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/connectors/lastfm.js",
+            "line": 80,
+            "description": "The base URL of the API.",
+            "itemtype": "property",
+            "name": "host",
+            "type": "{String}",
+            "class": "Lastfm",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/connectors/lastfm.js",
+            "line": 85,
+            "description": "The API-key (retrieved from keys.json)",
+            "itemtype": "property",
+            "name": "apiKey",
+            "type": "{String}",
+            "class": "Lastfm",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/connectors/lastfm.js",
+            "line": 90,
+            "description": "A partial mapping of the API-methods (used by the operator)",
+            "itemtype": "property",
+            "name": "apiActions",
+            "type": "{Object}",
+            "class": "Lastfm",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/connectors/lastfm.js",
+            "line": 95,
+            "description": "A URL to the API documentation.",
+            "itemtype": "property",
+            "name": "docs",
+            "type": "{String}",
+            "class": "Lastfm",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/connectors/lastfm.js",
+            "line": 112,
+            "description": "Builds a URL for the Last.fm Connector based on an API-configuration from a machine routine.",
+            "itemtype": "method",
+            "name": "Lastfm.prototype.getActionUrl",
+            "params": [
+                {
+                    "name": "query",
+                    "description": "Actual query string",
+                    "type": "String"
+                },
+                {
+                    "name": "apiConfig",
+                    "description": "Object containing API-configuration data from the machine routine such as API-method",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Returns a URL to corresponding to inputted query and apiConfig",
+                "type": "String"
+            },
+            "class": "Lastfm",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/connectors/spotify.js",
+            "line": 33,
+            "description": "The name of the API.",
+            "itemtype": "property",
+            "name": "name",
+            "type": "{String}",
+            "class": "Spotify",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/connectors/spotify.js",
+            "line": 38,
+            "description": "The base URL of the API.",
+            "itemtype": "property",
+            "name": "host",
+            "type": "{String}",
+            "class": "Spotify",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/connectors/spotify.js",
+            "line": 43,
+            "description": "The API-key (retrieved from keys.json)",
+            "itemtype": "property",
+            "name": "apiKey",
+            "type": "{String}",
+            "class": "Spotify",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/connectors/spotify.js",
+            "line": 48,
+            "description": "A partial mapping of the API-methods (used by the operator)",
+            "itemtype": "property",
+            "name": "apiActions",
+            "type": "{Object}",
+            "class": "Spotify",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/connectors/spotify.js",
+            "line": 53,
+            "description": "A URL to the API documentation.",
+            "itemtype": "property",
+            "name": "docs",
+            "type": "{String}",
+            "class": "Spotify",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/connectors/spotify.js",
+            "line": 69,
+            "description": "Builds a URL for the Spotify Connector based on an API-configuration from a machine routine.",
+            "itemtype": "method",
+            "name": "Spotify.prototype.getActionUrl",
+            "params": [
+                {
+                    "name": "query",
+                    "description": "Actual query string",
+                    "type": "String"
+                },
+                {
+                    "name": "apiConfig",
+                    "description": "Object containing API-configuration data from the machine routine such as API-method",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Returns a URL to corresponding to inputted query and apiConfig",
+                "type": "String"
+            },
+            "class": "Spotify",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/connectors/spotify.js",
+            "line": 105,
+            "description": "Modifies the result, cleaning away API-response meta data from the original call.",
+            "itemtype": "method",
+            "name": "Spotify.prototype.connectorResult",
+            "params": [
+                {
+                    "name": "resultObject",
+                    "description": "Result object as defined by the BaseConnector. Includes, among other things, the result returned by the API.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Returns a new ConnectorResponse instance",
+                "type": "ConnectorResponse"
+            },
+            "class": "Spotify",
             "module": "Connectors"
         },
         {
             "file": "lib/connectors/themoviedb.js",
-            "line": 81,
+            "line": 83,
+            "description": "The name of the API.",
+            "itemtype": "property",
+            "name": "name",
+            "type": "{String}",
+            "class": "TMDB",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/connectors/themoviedb.js",
+            "line": 88,
+            "description": "The base URL of the API.",
+            "itemtype": "property",
+            "name": "host",
+            "type": "{String}",
+            "class": "TMDB",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/connectors/themoviedb.js",
+            "line": 93,
+            "description": "The API-key (retrieved from keys.json)",
+            "itemtype": "property",
+            "name": "apiKey",
+            "type": "{String}",
+            "class": "TMDB",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/connectors/themoviedb.js",
+            "line": 98,
+            "description": "A partial mapping of the API-methods (used by the operator)",
+            "itemtype": "property",
+            "name": "apiActions",
+            "type": "{Object}",
+            "class": "TMDB",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/connectors/themoviedb.js",
+            "line": 103,
+            "description": "A URL to the API documentation.",
+            "itemtype": "property",
+            "name": "docs",
+            "type": "{String}",
+            "class": "TMDB",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/connectors/themoviedb.js",
+            "line": 119,
+            "description": "Builds a URL for the TMDB Connector based on an API-configuration from a machine routine.",
+            "itemtype": "method",
+            "name": "TMDB.prototype.getActionUrl",
+            "params": [
+                {
+                    "name": "query",
+                    "description": "Actual query string",
+                    "type": "String"
+                },
+                {
+                    "name": "apiConfig",
+                    "description": "Object containing API-configuration data from the machine routine such as API-method",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Returns a URL to corresponding to inputted query and apiConfig",
+                "type": "String"
+            },
+            "class": "TMDB",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/connectors/themoviedb.js",
+            "line": 153,
+            "itemtype": "method",
+            "name": "generateImageUrls",
             "params": [
                 {
                     "name": "keyInResult",
@@ -173,13 +985,15 @@
                     "type": "String"
                 }
             ],
-            "class": "ResultFormatter",
+            "class": "TMDB",
             "module": "Connectors"
         },
         {
             "file": "lib/connectors/themoviedb.js",
-            "line": 96,
+            "line": 170,
             "description": "Adds full URL to images found in the API response. Since there are several dimensions for every image the filepath is replaced with an array with multiple image URLs. Each with a different size",
+            "itemtype": "method",
+            "name": "addImageUrlsToResponse",
             "params": [
                 {
                     "name": "response",
@@ -187,13 +1001,15 @@
                     "type": "Object"
                 }
             ],
-            "class": "ResultFormatter",
+            "class": "TMDB",
             "module": "Connectors"
         },
         {
             "file": "lib/connectors/themoviedb.js",
-            "line": 122,
-            "description": "Modifies the result, adding image urls instead of only paths to the clean result",
+            "line": 194,
+            "description": "Modifies the result, adding image urls instead of only paths to the formatted result",
+            "itemtype": "method",
+            "name": "TMDB.prototype.connectorResult",
             "params": [
                 {
                     "name": "resultObj",
@@ -205,12 +1021,12 @@
                 "description": "",
                 "type": "ConnectorResponse"
             },
-            "class": "ResultFormatter",
+            "class": "TMDB",
             "module": "Connectors"
         },
         {
             "file": "lib/results_formatter.js",
-            "line": 14,
+            "line": 13,
             "description": "The constructor. The result given to the constructor is always cloned\nto ensure that the raw result isn't altered in any way",
             "itemtype": "method",
             "name": "",
@@ -226,17 +1042,467 @@
         },
         {
             "file": "lib/switchboard.js",
-            "line": 31,
-            "description": "PRIVATE METHODS",
-            "class": "",
-            "module": "Engine"
+            "line": 28,
+            "description": "The mergeMethod (formatting method) to be used when formatting results.",
+            "itemtype": "property",
+            "name": "mergeMethod",
+            "type": "{String}",
+            "default": "\"extractMerge\"",
+            "class": "Switchboard",
+            "module": "Switchboard"
         },
         {
             "file": "lib/switchboard.js",
-            "line": 134,
-            "description": "PUBLIC METHODS",
-            "class": "",
-            "module": "Engine"
+            "line": 34,
+            "description": "Array of jobs waiting to be executed.",
+            "itemtype": "property",
+            "name": "jobs",
+            "type": "{Array}",
+            "class": "Switchboard",
+            "module": "Switchboard"
+        },
+        {
+            "file": "lib/switchboard.js",
+            "line": 46,
+            "description": "Transforms a userRoutine to Switchboard-executable machineRoutine.",
+            "itemtype": "method",
+            "name": "translateUserRoutine",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "userRoutine",
+                    "description": "Object specifying API-methods and API-execution order",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Returns a machineRoutine reflecting the userRoutine data but with references to Connector objects",
+                "type": "Object"
+            },
+            "class": "Switchboard",
+            "module": "Switchboard"
+        },
+        {
+            "file": "lib/switchboard.js",
+            "line": 71,
+            "description": "Runs when a job has finished. Initiates results formatting and sends everything back\nvia callback.",
+            "itemtype": "method",
+            "name": "jobDone",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "err",
+                    "description": "Error object containing any thrown errors.",
+                    "type": "Object"
+                },
+                {
+                    "name": "response",
+                    "description": "Object specifying API-methods and API-execution order",
+                    "type": "Object"
+                },
+                {
+                    "name": "callback",
+                    "description": "Object specifying API-methods and API-execution order",
+                    "type": "Function"
+                },
+                {
+                    "name": "mergeMethod",
+                    "description": "Object specifying API-methods and API-execution order",
+                    "type": "String"
+                },
+                {
+                    "name": "usedRoutine",
+                    "description": "Object specifying API-methods and API-execution order",
+                    "type": "Object"
+                }
+            ],
+            "class": "Switchboard",
+            "module": "Switchboard"
+        },
+        {
+            "file": "lib/switchboard.js",
+            "line": 119,
+            "description": "Gets a job by id.",
+            "itemtype": "method",
+            "name": "getJob",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "jobId",
+                    "description": "Id of job to get.",
+                    "type": "Integer"
+                }
+            ],
+            "class": "Switchboard",
+            "module": "Switchboard"
+        },
+        {
+            "file": "lib/switchboard.js",
+            "line": 137,
+            "description": "Remove a job.",
+            "itemtype": "method",
+            "name": "removeJob",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "job",
+                    "description": "Job to be removed.",
+                    "type": "Object"
+                }
+            ],
+            "class": "Switchboard",
+            "module": "Switchboard"
+        },
+        {
+            "file": "lib/switchboard.js",
+            "line": 156,
+            "description": "Executes and removes a Switchboard job. Triggers jobDone",
+            "itemtype": "method",
+            "name": "removeJob",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "job",
+                    "description": "Job to run.",
+                    "type": "Object"
+                },
+                {
+                    "name": "callback",
+                    "description": "Callback to send onto jobDone",
+                    "type": "Function"
+                },
+                {
+                    "name": "mergeMethod",
+                    "description": "Merge method to use.",
+                    "type": "String"
+                }
+            ],
+            "class": "Switchboard",
+            "module": "Switchboard"
+        },
+        {
+            "file": "lib/switchboard.js",
+            "line": 182,
+            "description": "Transforms a userRoutine to Switchboard-executable machineRoutine.",
+            "itemtype": "method",
+            "name": "translateUserRoutine",
+            "params": [
+                {
+                    "name": "userRoutine",
+                    "description": "Object specifying API-methods and API-execution order",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Returns a machineRoutine reflecting the userRoutine data but with references to Connector objects",
+                "type": "Object"
+            },
+            "class": "Switchboard",
+            "module": "Switchboard"
+        },
+        {
+            "file": "lib/switchboard.js",
+            "line": 194,
+            "description": "Sets the merge method.",
+            "itemtype": "method",
+            "name": "setMergeMethod",
+            "params": [
+                {
+                    "name": "mergeMethod",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "Switchboard",
+            "module": "Switchboard"
+        },
+        {
+            "file": "lib/switchboard.js",
+            "line": 206,
+            "description": "Sets the merge method.",
+            "itemtype": "method",
+            "name": "connectors",
+            "return": {
+                "description": "Returns all imported connectors",
+                "type": "Object"
+            },
+            "class": "Switchboard",
+            "module": "Switchboard"
+        },
+        {
+            "file": "lib/switchboard.js",
+            "line": 218,
+            "description": "Add a job to the \"queue\".",
+            "itemtype": "method",
+            "name": "addJob",
+            "params": [
+                {
+                    "name": "userRoutine",
+                    "description": "Routine to be used for the job",
+                    "type": "Object"
+                },
+                {
+                    "name": "entryQueries",
+                    "description": "Array of queries to initiated the job. Can also be a single string",
+                    "type": "Array"
+                }
+            ],
+            "return": {
+                "description": "Returns the ID of the added job",
+                "type": "Integer"
+            },
+            "class": "Switchboard",
+            "module": "Switchboard"
+        },
+        {
+            "file": "lib/switchboard.js",
+            "line": 235,
+            "description": "Execute and remove a job from queue.",
+            "itemtype": "method",
+            "name": "runJob",
+            "params": [
+                {
+                    "name": "jobId",
+                    "description": "ID of the job to run",
+                    "type": "Integer"
+                },
+                {
+                    "name": "callback",
+                    "description": "Callback to be executed on job completion",
+                    "type": "Function"
+                },
+                {
+                    "name": "mergeMethod",
+                    "description": "Merge method to use",
+                    "type": "String"
+                }
+            ],
+            "class": "Switchboard",
+            "module": "Switchboard"
+        },
+        {
+            "file": "lib/switchboard.js",
+            "line": 252,
+            "description": "Create, execute and remove a job from queue all in one go.",
+            "itemtype": "method",
+            "name": "addAndRunJob",
+            "params": [
+                {
+                    "name": "userRoutine",
+                    "description": "Routine to be used for the job",
+                    "type": "Object"
+                },
+                {
+                    "name": "entryQueries",
+                    "description": "Array of queries to initiate the job. Can also be a single string",
+                    "type": "Array"
+                },
+                {
+                    "name": "callback",
+                    "description": "Callback to be executed on job completion",
+                    "type": "Function"
+                },
+                {
+                    "name": "mergeMethod",
+                    "description": "Merge method to use",
+                    "type": "String"
+                }
+            ],
+            "class": "Switchboard",
+            "module": "Switchboard"
+        },
+        {
+            "file": "lib/switchboard.js",
+            "line": 268,
+            "description": "Execute all jobs in queue.",
+            "itemtype": "method",
+            "name": "run",
+            "params": [
+                {
+                    "name": "callback",
+                    "description": "Callback to be executed on job completion",
+                    "type": "Function"
+                },
+                {
+                    "name": "mergeMethod",
+                    "description": "Merge method to use",
+                    "type": "String"
+                }
+            ],
+            "class": "Switchboard",
+            "module": "Switchboard"
+        },
+        {
+            "file": "lib/switchboard_job.js",
+            "line": 27,
+            "description": "The user routine (for reference)",
+            "itemtype": "property",
+            "name": "userRoutine",
+            "type": "{Object}",
+            "class": "SwitchboardJob",
+            "module": "Switchboard"
+        },
+        {
+            "file": "lib/switchboard_job.js",
+            "line": 32,
+            "description": "The machine routine to be made into a waterfall routine",
+            "itemtype": "property",
+            "name": "machineRoutine",
+            "type": "{Object}",
+            "class": "SwitchboardJob",
+            "module": "Switchboard"
+        },
+        {
+            "file": "lib/switchboard_job.js",
+            "line": 37,
+            "description": "A jobs progression (retrieved API-results) is appended here.",
+            "itemtype": "property",
+            "name": "jobResult",
+            "type": "{Array}",
+            "class": "SwitchboardJob",
+            "module": "Switchboard"
+        },
+        {
+            "file": "lib/switchboard_job.js",
+            "line": 42,
+            "description": "Array of queries to initiate the job.",
+            "itemtype": "property",
+            "name": "entryQueries",
+            "type": "{Array}",
+            "class": "SwitchboardJob",
+            "module": "Switchboard"
+        },
+        {
+            "file": "lib/switchboard_job.js",
+            "line": 47,
+            "description": "The job ID",
+            "itemtype": "property",
+            "name": "id",
+            "type": "{Integer}",
+            "class": "SwitchboardJob",
+            "module": "Switchboard"
+        },
+        {
+            "file": "lib/switchboard_job.js",
+            "line": 71,
+            "description": "Extracts query data from a previous Connectors ConnectorResponse via jpath.",
+            "itemtype": "method",
+            "name": "extractQueries",
+            "access": "protected",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "machineRoutineObject",
+                    "description": "A routine step configuration.",
+                    "type": "Object"
+                },
+                {
+                    "name": "connectorResponse",
+                    "description": "Object containting previous Connectors results.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Returns an array of query data to be executed by a Connector",
+                "type": "Array"
+            },
+            "class": "SwitchboardJob",
+            "module": "Switchboard"
+        },
+        {
+            "file": "lib/switchboard_job.js",
+            "line": 103,
+            "description": "Builds an array of functions, with calls to different APIs, to be inputted into run and executed\nby async.waterfall",
+            "itemtype": "method",
+            "name": "buildWaterfallRoutine",
+            "access": "protected",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "machineRoutine",
+                    "description": "Routine with references to Connector instances",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Returns an array of functions to be run by async.waterfall",
+                "type": "Array"
+            },
+            "class": "SwitchboardJob",
+            "module": "Switchboard"
+        },
+        {
+            "file": "lib/switchboard_job.js",
+            "line": 167,
+            "description": "Executes the job routine via async waterfall.",
+            "itemtype": "method",
+            "name": "run",
+            "params": [
+                {
+                    "name": "callback",
+                    "description": "Callback to be executed upon completion",
+                    "type": "Function"
+                }
+            ],
+            "class": "SwitchboardJob",
+            "module": "Switchboard"
+        },
+        {
+            "file": "lib/switchboard_job.js",
+            "line": 183,
+            "description": "Returns the job ID",
+            "itemtype": "method",
+            "name": "id",
+            "class": "SwitchboardJob",
+            "module": "Switchboard"
+        },
+        {
+            "file": "lib/switchboard_job.js",
+            "line": 194,
+            "description": "Returns the jobs entry queries",
+            "itemtype": "method",
+            "name": "entryQueries",
+            "class": "SwitchboardJob",
+            "module": "Switchboard"
+        },
+        {
+            "file": "lib/switchboard_job.js",
+            "line": 206,
+            "description": "Returns the jobs user routine",
+            "itemtype": "method",
+            "name": "userRoutine",
+            "class": "SwitchboardJob",
+            "module": "Switchboard"
+        },
+        {
+            "file": "lib/test_helper.js",
+            "line": 18,
+            "description": "Compares keys of two objects. \nIf compareValues == false. Values are not compared at all, we only care about the keys.\nThe intended use of this function is to compare saved static result and results generated by a connector.\nHence the amount of data does not need to be the same since the API response \ncontains \"living\" data that might be updated from time to time.",
+            "itemtype": "method",
+            "name": "TestHelper.prototype.compareObjects",
+            "params": [
+                {
+                    "name": "obj1",
+                    "description": "The result object we want to test",
+                    "type": "Object"
+                },
+                {
+                    "name": "obj2",
+                    "description": "The result object with the real structure, e.g. our expected test data",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Bool"
+            },
+            "class": "TestHelper",
+            "module": "Test"
         }
     ]
 }

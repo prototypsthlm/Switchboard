@@ -5,7 +5,7 @@
 	Checks that a jsonp call is wrapped with the callback param if exists
 
 	@todo Merge batches into one batch. Hade problem with having them in the same since the server crashed when both tests were making requests
-	@module: Test
+	@module Test
 **/
 
 var vows = require('vows'),

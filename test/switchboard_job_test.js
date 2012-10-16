@@ -1,5 +1,5 @@
 /**
-	Test of a Engine job (switchboard.js)
+	Test of a SwitchboardJob
 	
 	@module: Test
 **/

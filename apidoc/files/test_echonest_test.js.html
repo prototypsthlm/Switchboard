@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>lib&#x2F;connectors&#x2F;connector_response.js - Switchboard</title>
+    <title>test&#x2F;echonest_test.js - Switchboard</title>
     <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
@@ -110,36 +110,44 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: lib&#x2F;connectors&#x2F;connector_response.js</h1>
+                        <h1 class="file-heading">File: test&#x2F;echonest_test.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
-var $ = require(&#x27;jquery&#x27;);
 &#x2F;**
-Contains results from a Connector HTTP-request.
-All connectors must return an object of this instance. By doing so we can make sure that we know
-some things for every result, i.e. how many results we retrieved.
+	Echonest tests.
 
-@class ConnectorResponse 
-@constructor
-@param {Object} resultObject A config object containing machine routine data for this call
-@return {Object} Return a new object containing formatted request meta-data, cloned raw response data and response data to be manipulated
-*&#x2F;
-
-function ConnectorResponse(resultObject) {
-    var rawResult = $.extend(true, {}, resultObject.result);
-	var result = resultObject.result;
-	var meta = resultObject;
-	delete meta[&quot;result&quot;];
+	Tests made:
+	- has an api key that is valid *async
 	
-	return {
-		meta: meta,	
-		result: result,
-		raw: rawResult		
-	};
-}
+	@module: Test
+**&#x2F;
 
-module.exports = ConnectorResponse;
+
+var vows = require(&#x27;vows&#x27;),
+    assert = require(&#x27;assert&#x27;);
+    
+var suite = vows.describe(&#x27;Echonest connector&#x27;);
+var connector = require(&#x27;..&#x2F;lib&#x2F;connectors&#x2F;connectors&#x27;);
+var request = require(&#x27;request&#x27;);
+
+suite.addBatch({&#x2F;&#x2F; Batch
+    &#x27;An Echonest connector&#x27;: {&#x2F;&#x2F; Context
+        topic: new connector.echonest, &#x2F;&#x2F; Topic
+        &#x27;has an api key that is valid *async&#x27;: { &#x2F;&#x2F; Sub-Context  
+                topic: function (connector) { &#x2F;&#x2F; async vow
+                    var dummyConfig = { action: &#x27;artistBiographies&#x27;, in_source: null, in_param_name: &quot;name&quot; };
+                    var url = connector.getActionUrl(&quot;hello world&quot;, dummyConfig);
+                    request({url: url, headers: { &quot;Accept&quot; : &quot;application&#x2F;json&quot; }}, this.callback); &#x2F;&#x2F; @todo use connector.get instead?
+                },
+                &#x27;gets a response&#x27;: function(error,response,result){ &#x2F;&#x2F; async vow callback
+                    assert.equal(response.statusCode, 200);
+                }
+        } &#x2F;&#x2F; end sub context
+    } &#x2F;&#x2F; end context
+}); &#x2F;&#x2F;end batch
+
+suite.export(module);
     </pre>
 </div>
 

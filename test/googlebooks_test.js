@@ -1,3 +1,13 @@
+/**
+	Google Books tests.
+
+	Tests made:
+	- has an api key that is valid *async
+	- has apiActions
+	
+	@module: Test
+**/
+
 var vows = require('vows'),
     assert = require('assert');
     

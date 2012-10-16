@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>ResultFormatter - Switchboard</title>
+    <title>TestHelper - Switchboard</title>
     <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
@@ -110,7 +110,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>ResultFormatter Class</h1>
+                        <h1>TestHelper Class</h1>
 <div class="box meta">
     
 
@@ -118,13 +118,13 @@
 
     
         <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;lib_results_formatter.js.html#l1"><code>lib&#x2F;results_formatter.js:1</code></a>
+            Defined in: <a href="..&#x2F;files&#x2F;lib_test_helper.js.html#l7"><code>lib&#x2F;test_helper.js:7</code></a>
         </div>
     
 
     
         
-            Module: <a href="../modules/Connectors.html">Connectors</a>
+            Module: <a href="../modules/Test.html">Test</a>
         
     
 
@@ -134,100 +134,9 @@
 
 
 <div class="box intro">
-    <p>The ResultFormatter takes the response gathered by all connectors 
-and merges them to one formatted result.</p>
+    <p>Test helper.</p>
 </div>
 
-
-    <div class="constructor">
-        <h2>Constructor</h2>
-        <div id="method_ResultFormatter" class="method item">
-    <h3 class="name"><code>ResultFormatter</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>result</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;lib_results_formatter.js.html#l1"><code>lib&#x2F;results_formatter.js:1</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">result</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Array holding the result gathered from all connectors</p>
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-    </div>
 
 
 <div id="classdocs" class="tabview">
@@ -253,7 +162,7 @@ and merges them to one formatted result.</p>
                     <ul class="index-list methods">
                         
                             <li class="index-item method">
-                                <a href="#method_"></a>
+                                <a href="#method_TestHelper.prototype.compareObjects">TestHelper.prototype.compareObjects</a>
 
                                 
                                 
@@ -275,8 +184,8 @@ and merges them to one formatted result.</p>
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method_" class="method item">
-    <h3 class="name"><code></code></h3>
+                    <div id="method_TestHelper.prototype.compareObjects" class="method item">
+    <h3 class="name"><code>TestHelper.prototype.compareObjects</code></h3>
 
     
         <div class="args">
@@ -284,7 +193,13 @@ and merges them to one formatted result.</p>
             
                 <li class="arg">
                     
-                        <code>result</code>
+                        <code>obj1</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>obj2</code>
                     
                 </li>
             
@@ -292,6 +207,10 @@ and merges them to one formatted result.</p>
         </div>
     
 
+    
+        <span class="returns-inline">
+            <span class="type">Bool</span>
+        </span>
     
 
     
@@ -317,7 +236,7 @@ and merges them to one formatted result.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_results_formatter.js.html#l13"><code>lib&#x2F;results_formatter.js:13</code></a>
+        <a href="..&#x2F;files&#x2F;lib_test_helper.js.html#l18"><code>lib&#x2F;test_helper.js:18</code></a>
         
         </p>
 
@@ -328,8 +247,11 @@ and merges them to one formatted result.</p>
     </div>
 
     <div class="description">
-        <p>The constructor. The result given to the constructor is always cloned
-to ensure that the raw result isn't altered in any way</p>
+        <p>Compares keys of two objects. 
+If compareValues == false. Values are not compared at all, we only care about the keys.
+The intended use of this function is to compare saved static result and results generated by a connector.
+Hence the amount of data does not need to be the same since the API response 
+contains "living" data that might be updated from time to time.</p>
     </div>
 
     
@@ -340,14 +262,29 @@ to ensure that the raw result isn't altered in any way</p>
             
                 <li class="param">
                     
-                        <code class="param-name">result</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+                        <code class="param-name">obj1</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>Array holding the result gathered from all connectors. Example: [{api: "Name of Connector A", calls: []}, {api: "Name of Connector B", calls: []}]</p>
+                        <p>The result object we want to test</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">obj2</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The result object with the real structure, e.g. our expected test data</p>
                     </div>
 
                     
@@ -357,6 +294,18 @@ to ensure that the raw result isn't altered in any way</p>
         </div>
     
 
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Bool</span>:
+                    
+                
+            </div>
+        </div>
     
 
     

@@ -38,7 +38,8 @@
     },
     "analyze": true,
     "devDependencies": {
-        "vows": "*"
+        "vows": "*",
+		"yuidocjs": "*"
     },
     "license": "MIT",
     "engine": {

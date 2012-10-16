@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>lib&#x2F;connectors&#x2F;connector_response.js - Switchboard</title>
+    <title>test&#x2F;results_formatter_test.js - Switchboard</title>
     <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
@@ -110,36 +110,115 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: lib&#x2F;connectors&#x2F;connector_response.js</h1>
+                        <h1 class="file-heading">File: test&#x2F;results_formatter_test.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
-var $ = require(&#x27;jquery&#x27;);
 &#x2F;**
-Contains results from a Connector HTTP-request.
-All connectors must return an object of this instance. By doing so we can make sure that we know
-some things for every result, i.e. how many results we retrieved.
+	ResultsFormatter tests.
 
-@class ConnectorResponse 
-@constructor
-@param {Object} resultObject A config object containing machine routine data for this call
-@return {Object} Return a new object containing formatted request meta-data, cloned raw response data and response data to be manipulated
-*&#x2F;
+	Tests made:
+	- compares structure of performed formatting to previous formattings
 
-function ConnectorResponse(resultObject) {
-    var rawResult = $.extend(true, {}, resultObject.result);
-	var result = resultObject.result;
-	var meta = resultObject;
-	delete meta[&quot;result&quot;];
-	
-	return {
-		meta: meta,	
-		result: result,
-		raw: rawResult		
+	@module: Test
+**&#x2F;
+
+
+
+var vows = require(&#x27;vows&#x27;),
+    assert = require(&#x27;assert&#x27;);
+    
+var suite = vows.describe(&#x27;Class resonsible for formatting all results to a mega object&#x27;);
+var ResultFormatter = require(&#x27;..&#x2F;lib&#x2F;results_formatter.js&#x27;);
+var TestResult = require(&#x27;..&#x2F;test_resources&#x2F;results.js&#x27;);
+var TestHelper = require(&#x27;..&#x2F;lib&#x2F;test_helper.js&#x27;);
+
+function resultAfterMergeValidation(routineToTest, mergeMethod) {
+	var context = {
+		topic: function(topic) {
+			var formattedResult;
+			if(mergeMethod == &quot;extractMerge&quot;) {
+				formattedResult = topic.formatter.extractMerge();
+			}
+			else if(mergeMethod == &quot;injectMerge&quot;) {
+				formattedResult = topic.formatter.injectMerge();
+			}
+			return {formattedResult: formattedResult, formatter: topic.formatter};
+		}
 	};
+
+	context[&#x27;should return a valid formatted result&#x27;] = function(topic) {
+		var formattedResult = topic.formattedResult;
+		var expectedFormattedResult = new TestResult(routineToTest, &quot;formatted&quot;, mergeMethod); &#x2F;&#x2F;hämtar ut formatted result
+		var isEqual = TestHelper.compareObjects(formattedResult, expectedFormattedResult, false);
+		assert.isTrue(isEqual, &quot;Formatted result differs&quot;);
+	};
+	
+	context[&#x27;should not affect the raw result&#x27;] = function(topic) {
+		var formatter = topic.formatter;
+		var expectedRawResult = new TestResult(routineToTest, &quot;raw&quot;, mergeMethod);
+		var isEqual = TestHelper.compareObjects(formatter.raw(), expectedRawResult, false);
+		assert.isTrue(isEqual, &quot;Raw result differs&quot;);
+	};
+	
+	return context;
 }
 
-module.exports = ConnectorResponse;
+
+function populatedDataValidation(routineToTest) {
+	var context = { &#x2F;&#x2F; Context
+		topic: function (formatter) {				
+			var rawResult = new TestResult(routineToTest, &quot;raw&quot;);
+			var formatter = new ResultFormatter(rawResult);				
+			return {formatter: formatter, rawResult: rawResult};
+		}
+	};
+
+	context[&#x27;could not affect the raw result after it has been set&#x27;] = function (topic) {
+		topic.rawResult.push({api:&quot;Dummy&quot;, calls:[]});
+		assert.notDeepEqual(topic.formatter.raw(), topic.rawResult, &quot;Raw result affected after it has been set&quot;);
+	};
+
+	context[&#x27;could not affect the raw result after it has retrieved&#x27;] = function (topic) {
+		var rawResult = topic.formatter.raw();
+		rawResult.push({api:&quot;Dummy&quot;, calls:[]});
+
+		assert.notDeepEqual(topic.formatter.raw(), rawResult, &quot;Raw result affected after it has been retrieved&quot;);
+	};
+
+	context[&#x27;should have a valid raw array&#x27;] = function(topic) {
+		assert.isArray(topic.formatter.raw());
+		assert.isNotEmpty(topic.formatter.raw());
+	};
+
+	context[&#x27;using extractMerge&#x27;] = resultAfterMergeValidation(routineToTest, &quot;extractMerge&quot;);
+
+	context[&#x27;using injectMerge&#x27;] = resultAfterMergeValidation(routineToTest, &quot;injectMerge&quot;);
+
+	return context;
+}
+
+suite.addBatch({ &#x2F;&#x2F; Batch
+
+	&#x27;Result formatter&#x27;: {
+
+		&#x27;without populated data&#x27;: {
+			topic: function() {
+				return new ResultFormatter();
+			},
+
+	    	&#x27;should have an empty result&#x27;: function(formatter) {
+	    		assert.isArray(formatter.raw());
+	    		assert.isEmpty(formatter.raw());
+	    	},
+	    },
+
+	    &#x27;with populated data from starwars_artists&#x27;:  populatedDataValidation(&quot;starwars_artists&quot;),
+	    &#x27;with populated data from headliner_biographies&#x27;:  populatedDataValidation(&quot;headliner_biographies&quot;)	    
+	}
+});
+
+suite.export(module);
     </pre>
 </div>
 

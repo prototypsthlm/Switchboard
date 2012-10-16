@@ -43,7 +43,25 @@
             
                 <li><a href="..&#x2F;classes/BaseConnector.html">BaseConnector</a></li>
             
+                <li><a href="..&#x2F;classes/ConnectorResponse.html">ConnectorResponse</a></li>
+            
+                <li><a href="..&#x2F;classes/Echonest.html">Echonest</a></li>
+            
+                <li><a href="..&#x2F;classes/GoogleBooks.html">GoogleBooks</a></li>
+            
+                <li><a href="..&#x2F;classes/Lastfm.html">Lastfm</a></li>
+            
                 <li><a href="..&#x2F;classes/ResultFormatter.html">ResultFormatter</a></li>
+            
+                <li><a href="..&#x2F;classes/Spotify.html">Spotify</a></li>
+            
+                <li><a href="..&#x2F;classes/Switchboard.html">Switchboard</a></li>
+            
+                <li><a href="..&#x2F;classes/SwitchboardJob.html">SwitchboardJob</a></li>
+            
+                <li><a href="..&#x2F;classes/TestHelper.html">TestHelper</a></li>
+            
+                <li><a href="..&#x2F;classes/TMDB.html">TMDB</a></li>
             
             </ul>
 
@@ -53,7 +71,9 @@
             
                 <li><a href="..&#x2F;modules/Connectors.html">Connectors</a></li>
             
-                <li><a href="..&#x2F;modules/Engine.html">Engine</a></li>
+                <li><a href="..&#x2F;modules/Switchboard.html">Switchboard</a></li>
+            
+                <li><a href="..&#x2F;modules/Test.html">Test</a></li>
             
             </ul>
         </div>
@@ -106,49 +126,70 @@ about the request and response and the result.
 var request = require(&#x27;request&#x27;);
 var async = require(&quot;async&quot;);
 var ConnectorResponse = require(&#x27;.&#x2F;connector_response.js&#x27;);
-&#x2F;**
-    inherited by all connectors.
-    implements methods for doiing async HTTP-requests to APIs and sending the results back to the switchboard engine
-    the url to send GETs to is built in the subclass.
-**&#x2F;
+var logger = require(&#x27;..&#x2F;sb_tracer.js&#x27;)();
 
 &#x2F;**
 The BaseConnector should be inherited by all other Connectors.
 It can be seen as a Abstract Class containing some functions
 that are used by all other Connectors.
-The BaseConnector executes all requests and collects all data but
-every Connector is responsible for given the right URL and param data and to
-handle the response
+The BaseConnector executes all async requests and collects all data but
+every Connector subclass is responsible for providing the right URL and param data and to
+handle the response.
 
 @class BaseConnector 
 @constructor
-**&#x2F;
+
+*&#x2F;
+
+&#x2F;**
+Array containing ConnectorResults from GET-requests.
+@property responseArray
+@type {Array} queryData query-object containing actual query data as well as indices from previous calls
+
+*&#x2F;
 function BaseConnector(param) {
-    &#x2F;&#x2F;this.name;
 	this.host = param.host;
-	this.responseObject;
+	this.responseArray;
 }
 
-
-BaseConnector.prototype.getActionUrl = function(query, api_domain) {
+BaseConnector.prototype.getActionUrl = function(query, apiConfig) {
     throw NotImplementedError(&quot;getActionUrl&quot;);
 }
 
-BaseConnector.prototype.connectorResult = function(resultObj) {
-    return new ConnectorResponse(resultObj, resultObj.result);
+&#x2F;**
+Handles JSON-results from a request and returns a new ConnectorResponse containing cloned request results as well as
+meta-data.
+
+@method BaseConnector.prototype.connectorResult
+@param {Object} resultObject Object containing HTTP-request meta-data as well as a HTTP-request results
+@return {ConnectorResponse} Returns a new ConnectorResponse instance
+
+*&#x2F;
+BaseConnector.prototype.connectorResult = function(resultObject) {
+    return new ConnectorResponse(resultObject);
 }
 
-BaseConnector.prototype.execute = function(queryData, api_domain, cb) {
-    console.log(this.name + &quot; EXECUTE&quot;);
+&#x2F;**
+Executes one or more queries to an API and returns the results.
+
+@method BaseConnector.prototype.execute
+@param {Object} queryData query-object containing actual query data as well as indices from previous calls
+@param {Object} apiConfig A config object containing machine routine data for this call
+@param {Function} cb Callback returning the results from all the async HTTP-requests
+
+*&#x2F;
+BaseConnector.prototype.execute = function(queryData, apiConfig, cb) {
+    logger.debug(this.name + &quot; execute.&quot;);
     var self = this;
-    self.responseObject = [];
+    self.responseArray = [];
     
-    async.forEach(queryData, function fetchData(queryDataItem, seriesDone){ &#x2F;&#x2F;so that callIndex gets set properly
+    async.forEach(queryData, function fetchData(queryDataItem, seriesDone){
         var index = 0;
+        
         async.forEach(queryDataItem.queries, function getResults(query, done) {
-            var url = self.getActionUrl(query, api_domain);
-            console.log(&#x27;preparing request to &#x27; + url);
-            self.get(url, query, api_domain, index, queryDataItem.callIndex, done);
+            var url = self.getActionUrl(query, apiConfig);
+            logger.trace(&#x27;Preparing request to : &#x27; + url);
+            self.get(url, query, apiConfig, index, queryDataItem.callIndex, done);
             index += 1;
         },
         function(err){
@@ -156,20 +197,37 @@ BaseConnector.prototype.execute = function(queryData, api_domain, cb) {
         });
         
     },function(err){
-        cb(self.responseObject);
+        cb(self.responseArray);
     });
 }
 
-BaseConnector.prototype.get = function(url, query, domain, index, callIndex, done) {
+&#x2F;**
+Performs a single GET-request and appends the data to the connector responseArray.
+
+@method BaseConnector.prototype.get
+@param {String} url The URL to GET
+@param {String} query The query&#x2F;in-parameter value
+@param {String} apiConfig A config object containing machine routine data for this call
+@param {Integer} index The index of the GET-request. Used for formatting the final result.
+@param {Integer} callIndex The index of the GET-request that provided the query for this call. Used for formatting the final result.
+@param {Function} done Callback indicating to the async forEach that the HTTP-request is finished.
+
+*&#x2F;
+BaseConnector.prototype.get = function(url, query, apiConfig, index, callIndex, done) {
     var self = this;
-    request({url: url, headers: { &quot;Accept&quot; : &quot;application&#x2F;json&quot; }}, function (error, response, result) {
+    request({ url: url, headers: { &quot;Accept&quot; : &quot;application&#x2F;json&quot; } }, function (error, response, result) {
       if (!error &amp;&amp; response.statusCode == 200) {
-        console.log(&quot;successful HTTP-request : &quot; + query);
-        self.responseObject.push(self.connectorResult({query: query, index: index, callIndex: callIndex, apiConfig: domain, result: JSON.parse(result)}));
-        &#x2F;&#x2F;self.responseObject.push({query: query, index: index, callIndex: callIndex, apiConfig: domain, result: JSON.parse(result)});
+        logger.info(&quot;Successful HTTP-request : &quot; + url);
+        self.responseArray.push(self.connectorResult({query: query, index: index, callIndex: callIndex, apiConfig: apiConfig, result: JSON.parse(result)}));
       }
       else {
-          console.log(&quot;HTTP-request FAILED &quot; + response.statusCode + &quot; : &quot; + response.body);
+          if(response){
+              &#x2F;&#x2F;throw(new Error(&quot;HTTP-request FAILED : &quot; + url + &quot; : &quot; + response.statusCode + &quot; : &quot; + response.body));
+              logger.error(&quot;HTTP-request FAILED : &quot; + url + &quot; : &quot; + response.statusCode + &quot; : &quot; + response.body);
+          }
+          else {
+              throw(new Error(&quot;HTTP-request FAILED : &quot; + url));
+          }
       }
       done();
     });

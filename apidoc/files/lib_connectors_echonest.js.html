@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>lib&#x2F;connectors&#x2F;echonest.js - Switchboard</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.7.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="..&#x2F;assets/css/logo.png" title="Switchboard"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.1</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="..&#x2F;classes/BaseConnector.html">BaseConnector</a></li>
+            
+                <li><a href="..&#x2F;classes/ConnectorResponse.html">ConnectorResponse</a></li>
+            
+                <li><a href="..&#x2F;classes/Echonest.html">Echonest</a></li>
+            
+                <li><a href="..&#x2F;classes/GoogleBooks.html">GoogleBooks</a></li>
+            
+                <li><a href="..&#x2F;classes/Lastfm.html">Lastfm</a></li>
+            
+                <li><a href="..&#x2F;classes/ResultFormatter.html">ResultFormatter</a></li>
+            
+                <li><a href="..&#x2F;classes/Spotify.html">Spotify</a></li>
+            
+                <li><a href="..&#x2F;classes/Switchboard.html">Switchboard</a></li>
+            
+                <li><a href="..&#x2F;classes/SwitchboardJob.html">SwitchboardJob</a></li>
+            
+                <li><a href="..&#x2F;classes/TestHelper.html">TestHelper</a></li>
+            
+                <li><a href="..&#x2F;classes/TMDB.html">TMDB</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="..&#x2F;modules/: Test.html">: Test</a></li>
+            
+                <li><a href="..&#x2F;modules/Connectors.html">Connectors</a></li>
+            
+                <li><a href="..&#x2F;modules/Switchboard.html">Switchboard</a></li>
+            
+                <li><a href="..&#x2F;modules/Test.html">Test</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: lib&#x2F;connectors&#x2F;echonest.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+&#x2F;**
+    Connector for Echonest.
+
+    API used: The Echonest API.
+    Retrieves data related to artists, tracks, albums including data such as artist biographies. Some data contains cross references to
+    other data sources (Spotify, Musicbrainz) such as artists and tracks.
+    
+    @module Connectors
+    @resources: https:&#x2F;&#x2F;developers.google.com&#x2F;books&#x2F;docs&#x2F;v1&#x2F;using
+**&#x2F;
+
+var util = require(&#x27;util&#x27;);
+var BaseConnector = require(&#x27;.&#x2F;base_connector.js&#x27;);
+var ConnectorResponse = require(&#x27;.&#x2F;connector_response.js&#x27;);
+var querystring = require(&#x27;querystring&#x27;);
+var keys = require(&#x27;.&#x2F;keys&#x27;);
+var jpath = require(&quot;node-jpath&quot;);
+
+&#x2F;* 
+INS AND OUTS MAPPING FOR THE OPERATOR
+Leftout: Track, Playlist, Taste Profile
+*&#x2F;
+
+var license = { paramName: &quot;license&quot;, paramValues: [&quot;echo-source&quot;, &quot;all-rights-reserved&quot;, &quot;cc-by-sa&quot;, &quot;cc-by-nc&quot;, &quot;cc-by-nc-nd&quot;, &quot;cc-by-nc-sa&quot;, &quot;cc-by-nd&quot;, &quot;cc-by&quot;, &quot;public-domain&quot;, &quot;unknown&quot;] };
+var relevance = { paramName: &quot;high_relevance&quot;, paramValues: [&quot;true&quot;, &quot;false&quot;] };
+var limit = { paramName: &quot;limit&quot;, paramValues: [&quot;true&quot;, &quot;false&quot;] };
+var sort = { paramName: &quot;sort&quot;, paramValues: [&quot;familiarity-asc&quot;, &quot;hotttnesss-asc&quot;, &quot;familiarity-desc&quot;, &quot;hotttnesss-desc&quot;, &quot;artist_start_year-asc&quot;, &quot;artist_start_year-desc&quot;, &quot;artist_end_year-asc&quot;, &quot;artist_end_year-desc&quot;]}
+var songSort = { paramName: &quot;sort&quot;, paramValues: [&quot;tempo-asc&quot;, &quot;duration-asc&quot;, &quot;loudness-asc&quot;, &quot;artist_familiarity-asc&quot;, &quot;artist_hotttnesss-asc&quot;, &quot;artist_start_year-asc&quot;, &quot;artist_start_year-desc&quot;, &quot;artist_end_year-asc&quot;, &quot;artist_end_year-desc&quot;, &quot;song_hotttness-asc&quot;, &quot;latitude-asc&quot;, &quot;longitude-asc&quot;, &quot;mode-asc&quot;, &quot;key-asc&quot;, &quot;tempo-desc&quot;, &quot;duration-desc&quot;, &quot;loudness-desc&quot;, &quot;artist_familiarity-desc&quot;, &quot;artist_hotttnesss-desc&quot;, &quot;song_hotttnesss-desc&quot;, &quot;latitude-desc&quot;, &quot;longitude-desc&quot;, &quot;mode-desc&quot;, &quot;key-desc&quot;, &quot;energy-asc&quot;, &quot;energy-desc&quot;, &quot;danceability-asc&quot;, &quot;danceability-desc&quot;]}
+
+&#x2F;&#x2F; id:spotify-WW  songSearch requires track bucket too...
+var foreignKeyBucket =  { paramName: &quot;bucket&quot;, paramValues: [&quot;id:spotify-WW&quot;, &quot;id:musicbrainz&quot;], info: &quot;choose to receive foreign-keys to, for example, musicbrainz and spotify in the response&quot; }
+
+&#x2F;&#x2F; http:&#x2F;&#x2F;developer.echonest.com&#x2F;docs&#x2F;v4&#x2F;#project-rosetta-stone, no musicbrainz:track yet
+&#x2F;&#x2F; @todo this is sort of a hack and should probably be a type in a in_param object (replacing &quot;in_param_name&quot;)
+var inParamTypesArtist = { paramName: &quot;in param type&quot;, paramValues: [&quot;musicbrainz:artist&quot;,&quot;spotify-WW:artist&quot;], info: &quot;specify the type of the in-parameter (spotify id etc.)&quot; }
+var inParamTypesTrack = { paramName: &quot;in param type&quot;, paramValues: [&quot;spotify-WW:track&quot;], info: &quot;specify the type of the in-parameter (spotify id etc.)&quot; } 
+
+var apiActions = {
+    &quot;artistBiographies&quot; : { action: [&#x27;artist&#x27;,&#x27;biographies&#x27;], in_param_names: [&#x27;id&#x27;,&#x27;name&#x27;], output_nodes: [], optionals: [inParamTypesArtist,&#x27;results&#x27;,&#x27;start&#x27;,license] },
+    &quot;artistBlogs&quot; : { action: [&#x27;artist&#x27;,&#x27;blogs&#x27;], in_param_names: [&#x27;id&#x27;,&#x27;name&#x27;], output_nodes: [&#x27;response.blogs.name&#x27;, &#x27;response.blogs.url&#x27;], optionals: [inParamTypesArtist,&#x27;results&#x27;,&#x27;start&#x27;, relevance] },
+    &quot;artistFamiliarity&quot; : { action: [&#x27;artist&#x27;,&#x27;familiarity&#x27;], in_param_names: [&#x27;id&#x27;,&#x27;name&#x27;], output_nodes: [&#x27;response.artist.familiarity&#x27;], optionals: [inParamTypesArtist,&#x27;results&#x27;,&#x27;start&#x27;] },
+    &quot;artistHotness&quot; : { action: [&#x27;artist&#x27;,&#x27;hotttnesss&#x27;], in_param_names: [&#x27;id&#x27;,&#x27;name&#x27;], output_nodes: [&#x27;response.artist.hotttnesss&#x27;], optionals: [inParamTypesArtist,&#x27;results&#x27;,&#x27;start&#x27;, { paramName: &quot;type&quot;, paramValues: [&quot;overall&quot;, &quot;social&quot;, &quot;reviews&quot;, &quot;mainstream&quot;] } ] },
+    &quot;artistImages&quot; : { action: [&#x27;artist&#x27;,&#x27;hotttnesss&#x27;], in_param_names: [&#x27;id&#x27;,&#x27;name&#x27;], output_nodes: [&#x27;response.images.url&#x27;], optionals: [inParamTypesArtist,&#x27;results&#x27;,&#x27;start&#x27;, license] },
+    &quot;artistListTerms&quot; : { action: [&#x27;artist&#x27;,&#x27;list_terms&#x27;], in_param_names: [], output_nodes: [&#x27;response.terms.name&#x27;], optionals: [ { paramName: &#x27;type&#x27;, paramValues: [&quot;style&quot;, &quot;mood&quot;] } ] },
+    &quot;artistNews&quot; : { action: [&#x27;artist&#x27;,&#x27;biographies&#x27;], in_param_names: [&#x27;id&#x27;,&#x27;name&#x27;], output_nodes: [&#x27;response.news.url&#x27;, &#x27;response.news.id&#x27;], optionals: [inParamTypesArtist,&#x27;results&#x27;,&#x27;start&#x27;, relevance] },
+    &quot;artistProfile&quot; : { action: [&#x27;artist&#x27;,&#x27;profile&#x27;], in_param_names: [&#x27;id&#x27;,&#x27;name&#x27;], output_nodes: [&#x27;response.artist.id&#x27;, &#x27;response.artist.name&#x27;], optionals: [inParamTypesArtist,foreignKeyBucket,&#x27;bucket&#x27;,&#x27;results&#x27;,&#x27;start&#x27;] },
+    &quot;artistReviews&quot; : { action: [&#x27;artist&#x27;,&#x27;reviews&#x27;], in_param_names: [&#x27;id&#x27;,&#x27;name&#x27;], output_nodes: [&#x27;response.reviews.id&#x27;, &#x27;response.reviews.name&#x27;], optionals: [inParamTypesArtist,&#x27;results&#x27;,&#x27;start&#x27;] },
+    &quot;artistSearch&quot; : { action: [&#x27;artist&#x27;,&#x27;search&#x27;], in_param_names: [&#x27;name&#x27;], output_nodes: [&#x27;response.artists.artist.id&#x27;,&#x27;response.artists.artist.name&#x27;], 
+        optionals: [foreignKeyBucket,&#x27;bucket&#x27;,&#x27;results&#x27;,&#x27;start&#x27;,limit,&#x27;description&#x27;,&#x27;style&#x27;,&#x27;mood&#x27;, { paramName: &quot;rank_type&quot;, paramValues: [&quot;relevance&quot;, &quot;familiarity&quot;] }, { paramName: &quot;fuzzy_match&quot;, paramValues: [&quot;true&quot;, &quot;false&quot;] },
+        &#x27;max_familiarity&#x27;,&#x27;min_familiarity&#x27;,&#x27;max_hotttnesss&#x27;,&#x27;min_hotttnesss&#x27;, &quot;artist_start_year_before&quot;, &quot;artist_start_year_after&quot;, &quot;artist_end_year_before&quot;, &quot;artist_end_year_after&quot;, sort] },
+    &quot;artistExtract&quot; : { action: [&#x27;artist&#x27;,&#x27;extract&#x27;], in_param_names: [&#x27;text&#x27;], output_nodes: [&#x27;response.artists.artist.id&#x27;,&#x27;response.artists.artist.name&#x27;], optionals: [foreignKeyBucket,&#x27;bucket&#x27;,&#x27;results&#x27;,&#x27;start&#x27;,&#x27;max_familiarity&#x27;,&#x27;min_familiarity&#x27;,&#x27;max_hotttnesss&#x27;,&#x27;min_hotttnesss&#x27;,limit,sort] },
+    &quot;artistSongs&quot; : { action: [&#x27;artist&#x27;,&#x27;songs&#x27;], in_param_names: [&#x27;id&#x27;,&#x27;name&#x27;], output_nodes: [&#x27;response.songs.id&#x27;, &#x27;response.songs.title&#x27;], optionals: [inParamTypesArtist,&#x27;results&#x27;,&#x27;start&#x27;] },
+    &quot;artistSimilar&quot; : { action: [&#x27;artist&#x27;,&#x27;similar&#x27;], in_param_names: [&#x27;id&#x27;,&#x27;name&#x27;], output_nodes: [&#x27;response.artists.id&#x27;, &#x27;response.artists.name&#x27;], optionals: [inParamTypesArtist,foreignKeyBucket,&#x27;bucket&#x27;,&#x27;results&#x27;,&#x27;min_results&#x27;,&#x27;start&#x27;,&#x27;max_familiarity&#x27;,&#x27;min_familiarity&#x27;,&#x27;max_hotttnesss&#x27;,&#x27;min_hotttnesss&#x27;, &quot;artist_start_year_before&quot;, &quot;artist_start_year_after&quot;, &quot;artist_end_year_before&quot;, &quot;artist_end_year_after&quot;, limit] },
+    &quot;artistSuggest&quot; : { action: [&#x27;artist&#x27;,&#x27;suggest&#x27;], in_param_names: [&#x27;name&#x27;], output_nodes: [&#x27;response.artists.artist.id&#x27;, &#x27;response.artists.artist.name&#x27;] , optionals: [&#x27;results&#x27;,&#x27;start&#x27;] },
+    &quot;artistTerms&quot; : { action: [&#x27;artist&#x27;,&#x27;terms&#x27;], in_param_names: [&#x27;id&#x27;,&#x27;name&#x27;], output_nodes: [&#x27;response.terms.name&#x27;] , optionals: [inParamTypesArtist,&#x27;results&#x27;,&#x27;start&#x27;, { paramName: &quot;sort&quot;, paramValues: [&quot;weight&quot;,&quot;frequency&quot;] } ] },
+    &quot;artistTopHot&quot; : { action: [&#x27;artist&#x27;,&#x27;top_hottt&#x27;], in_param_names: [], output_nodes: [&#x27;response.artists.id&#x27;] , optionals: [inParamTypesArtist,foreignKeyBucket,&#x27;bucket&#x27;,&#x27;results&#x27;,&#x27;start&#x27;,limit] },
+    &quot;artistTopTerms&quot; : { action: [&#x27;artist&#x27;,&#x27;top_terms&#x27;], in_param_names: [], output_nodes: [&#x27;response.terms.name&#x27;] , optionals: [&#x27;results&#x27;] },
+    &quot;artistTwitter&quot; : { action: [&#x27;artist&#x27;,&#x27;twitter&#x27;], in_param_names: [&#x27;id&#x27;,&#x27;name&#x27;], output_nodes: [&#x27;response.artist.twitter&#x27;] , optionals: [inParamTypesArtist] },
+    &quot;artistURLs&quot; : { action: [&#x27;artist&#x27;,&#x27;urls&#x27;], in_param_names: [&#x27;id&#x27;,&#x27;name&#x27;], output_nodes: [&#x27;response.urls.lastfm_url&#x27;,&#x27;response.urls.aolmusic_url&#x27;,&#x27;response.urls.myspace_url&#x27;,&#x27;response.urls.amazon_url&#x27;,&#x27;response.urls.itunes_url&#x27;,&#x27;response.urls.mb_url&#x27;], optionals: [inParamTypesArtist] },
+    &quot;artistVideos&quot; : { action: [&#x27;artist&#x27;,&#x27;videos&#x27;], in_param_names: [&#x27;id&#x27;,&#x27;name&#x27;], output_nodes: [&#x27;response.videos.title&#x27;,&#x27;response.videos.url&#x27;,&#x27;response.videos.site&#x27;,&#x27;response.videos.image_url&#x27;,&#x27;response.videos.id&#x27;] , optionals: [&#x27;results&#x27;,&#x27;start&#x27;,inParamTypesArtist] },
+    
+    &quot;songSearch&quot; : { action: [&#x27;song&#x27;,&#x27;search&#x27;], 
+    in_param_names: [&#x27;title&#x27;,&#x27;artist&#x27;,&#x27;combined&#x27;,&#x27;artist_id&#x27;, &#x27;min_duration&#x27;,&#x27;max_duration&#x27;], 
+    output_nodes: [&#x27;response.songs.artist_id&#x27;, &#x27;response.songs.id&#x27;, &#x27;response.songs.artist_name&#x27;, &#x27;response.songs.title&#x27;], optionals: [foreignKeyBucket,&#x27;bucket&#x27;,&#x27;results&#x27;,&#x27;start&#x27;,&#x27;min_tempo&#x27;,&#x27;max_tempo&#x27;,&#x27;min_duration&#x27;,&#x27;max_duration&#x27;,&#x27;min_loudness&#x27;,&#x27;max_loudness&#x27;, &#x27;min_danceability&#x27;,&#x27;max_danceability&#x27;, &#x27;min_energy&#x27;,&#x27;max_energy&#x27;, &#x27;mode&#x27;, &#x27;key&#x27;, &#x27;description&#x27;,&#x27;style&#x27;,&#x27;mood&#x27;,limit, songSort] },
+    
+    &quot;songProfile&quot; : { action: [&#x27;song&#x27;,&#x27;profile&#x27;], in_param_names: [&#x27;id&#x27;,&#x27;track_id&#x27;], output_nodes: [&#x27;response.songs.artist_id&#x27;, &#x27;response.songs.id&#x27;, &#x27;response.songs.artist_name&#x27;, &#x27;response.songs.title&#x27;], optionals: [foreignKeyBucket,inParamTypesTrack,&#x27;bucket&#x27;,&#x27;results&#x27;,&#x27;start&#x27;, limit] }
+};
+
+&#x2F;**
+The Echonest Connector inherits the BaseConnector and handles requests to the Echonest API.
+
+@class Echonest 
+@constructor
+
+*&#x2F;
+
+&#x2F;**
+The name of the API.
+@property name
+@type {String}
+*&#x2F;
+&#x2F;**
+The base URL of the API.
+@property host
+@type {String}
+*&#x2F;
+&#x2F;**
+The API-key (retrieved from keys.json)
+@property apiKey
+@type {String}
+*&#x2F;
+&#x2F;**
+A partial mapping of the API-methods (used by the operator)
+@property apiActions
+@type {Object}
+*&#x2F;
+&#x2F;**
+A URL to the API documentation.
+@property docs
+@type {String}
+*&#x2F;
+
+function Echonest() {
+    this.name = &quot;Echonest&quot;;
+	this.host = &quot;http:&#x2F;&#x2F;developer.echonest.com&#x2F;api&#x2F;v4&#x2F;&quot;;
+	this.apiKey = keys[this.name][&#x27;key&#x27;];
+	this.apiActions = apiActions;
+	this.docs = &quot;http:&#x2F;&#x2F;developer.echonest.com&#x2F;docs&#x2F;v4&#x2F;&quot;;
+}
+
+util.inherits(Echonest, BaseConnector);
+
+&#x2F;**
+Builds a URL for the Echonest Connector based on an API-configuration from a machine routine.
+
+@method Echonest.prototype.getActionUrl
+@param {String} query Actual query string
+@param {Object} apiConfig Object containing API-configuration data from the machine routine such as API-method
+@return {String} Returns a URL to corresponding to inputted query and apiConfig
+
+*&#x2F;
+
+Echonest.prototype.getActionUrl = function(query, apiConfig){
+    
+    var apiAction = apiActions[apiConfig.action];    
+    var domain = apiAction.action[0]; &#x2F;&#x2F; t ex &quot;artist&quot;
+    var action = apiAction.action[1];  
+    
+    var parameterObject = {};
+    parameterObject[&#x27;format&#x27;] = &#x27;json&#x27;;
+    if(apiAction.in_param_names.length !== 0) &#x2F;&#x2F; does the action take params at all?
+        parameterObject[apiConfig.in_param_name] = query;
+        
+    parameterObject[&#x27;api_key&#x27;] = this.apiKey;
+    
+    var buckets = &quot;&quot;;
+    &#x2F;&#x2F; handle optionals
+    for(var param in apiConfig.optionals){
+        if(apiConfig.optionals[param].paramName !== &quot;in param type&quot; &amp;&amp; apiConfig.optionals[param].paramName !== &quot;bucket&quot;){
+            parameterObject[apiConfig.optionals[param].paramName] = apiConfig.optionals[param].paramValue;
+        }
+        else if(apiConfig.optionals[param].paramName == &quot;bucket&quot;) { &#x2F;&#x2F; allow multiples of bucket-parameters, querystring override
+            buckets = buckets + &quot;&amp;bucket=&quot; + apiConfig.optionals[param].paramValue;
+        }
+        else {
+            if(apiConfig.in_param_name == &quot;id&quot;){ &#x2F;&#x2F; id only param that has types in this case
+                &#x2F;&#x2F; is it a spotify-ID or musicbrainz-ID?
+                if(apiConfig.optionals[param].paramValue.indexOf(&quot;spotify&quot;) != -1 &amp;&amp; query.indexOf(&quot;spotify:&quot;) != -1){ &#x2F;&#x2F;case of spotify-WW: solves itself since only echonest marks it like this
+                    parameterObject[apiConfig.in_param_name] = query.replace(&quot;spotify:&quot;, &quot;spotify-WW:&quot;);
+                }
+                else if(apiConfig.optionals[param].paramValue.indexOf(&quot;musicbrainz&quot;) != -1){
+                    parameterObject[apiConfig.in_param_name] = &quot;musicbrainz:artist:&quot; + query;
+                }
+            }
+        }
+    }
+    
+    var actionPath = domain + &quot;&#x2F;&quot; + action + &quot;?&quot; + querystring.stringify(parameterObject) + buckets;
+    return this.host + actionPath
+}
+
+
+&#x2F;* 
+Removes weird formatting of foreign keys from a Echonest response.
+@method cleanForeignKeys
+@param {result} connector request result to iterate over.
+@todo move &#x27;traverse-tree&#x27; part to base connector and have different formatters that can hook into it
+*&#x2F;
+
+function cleanForeignKeys(result) {
+    if(typeof result == &quot;object&quot;) {
+        for(var i in result) {
+            var responsePart = result[i];
+            if(typeof responsePart == &quot;object&quot;) {
+                cleanForeignKeys(responsePart);
+            }
+            else if(typeof responsePart == &quot;string&quot;) {
+                if(responsePart.indexOf(&#x27;spotify-WW:&#x27;) != -1) {
+                     result[i] = result[i].replace(&#x27;spotify-WW:&#x27;,&#x27;spotify:&#x27;);                
+                }
+                else if(responsePart.indexOf(&#x27;musicbrainz:artist:&#x27;) != -1) {
+                     result[i] = result[i].replace(&#x27;musicbrainz:artist:&#x27;,&#x27;&#x27;);              
+                }
+            }
+            
+        }
+    }
+}
+
+&#x2F;**
+Modifies the result, replacing spotify-WW: with the global identifier spotify: and removes musicbrainz:artist: style markup before
+returning a new ConnectorResponse instance.
+
+@method Echonest.prototype.connectorResult
+@param {Object} resultObject Result object as defined by the BaseConnector. Includes, among other things, the result returned by the API.
+@return {ConnectorResponse} Returns a new ConnectorResponse instance
+
+*&#x2F;
+
+Echonest.prototype.connectorResult = function(resultObject) {
+    var connectorResponse =  new ConnectorResponse(resultObject);
+    cleanForeignKeys(connectorResponse.result);
+    return connectorResponse;
+}
+
+module.exports = Echonest;
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="..&#x2F;assets/js/yui-prettify.js"></script>
+<script src="..&#x2F;assets/../api.js"></script>
+<script src="..&#x2F;assets/js/api-filter.js"></script>
+<script src="..&#x2F;assets/js/api-list.js"></script>
+<script src="..&#x2F;assets/js/api-search.js"></script>
+<script src="..&#x2F;assets/js/apidocs.js"></script>
+</body>
+</html>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>test&#x2F;server_test.js - Switchboard</title>
+    <title>test&#x2F;switchboard_test.js - Switchboard</title>
     <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
@@ -110,110 +110,121 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: test&#x2F;server_test.js</h1>
+                        <h1 class="file-heading">File: test&#x2F;switchboard_test.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 &#x2F;**
-	Test for the server.js
+	Test of the Switchboard engine (switchboard.js)
 
 	Tests made:
-	Checks that a jsonp call is wrapped with the callback param if exists
-
-	@todo Merge batches into one batch. Hade problem with having them in the same since the server crashed when both tests were making requests
-	@module Test
+	Checks that given a config object and a response the returned response is valid
+	
+	@module: Test
 **&#x2F;
 
 var vows = require(&#x27;vows&#x27;),
     assert = require(&#x27;assert&#x27;);    
-var suite = vows.describe(&#x27;The starter file of Switchboard&#x27;);
-var connectors = require(&#x27;..&#x2F;lib&#x2F;connectors&#x2F;connectors&#x27;);
-var request = require(&#x27;request&#x27;);
-console.log(&quot;Server is started...&quot;)
-var app = require(&#x27;..&#x2F;server.js&#x27;);
+var suite = vows.describe(&#x27;The Switchboard Engine&#x27;);
+var $ = require(&#x27;jquery&#x27;);
+
+var Switchboard = require(&#x27;..&#x2F;index&#x27;);
+var TestResult = require(&#x27;..&#x2F;test_resources&#x2F;results.js&#x27;);
+var TestHelper = require(&#x27;..&#x2F;lib&#x2F;test_helper.js&#x27;);
+var logger = require(&#x27;..&#x2F;lib&#x2F;sb_tracer.js&#x27;)();
+
+&#x2F;&#x2F; Test data
+var testData = require(&quot;..&#x2F;test_resources&#x2F;test_config.json&quot;);
+var userRoutine = require(&#x27;..&#x2F;test_resources&#x2F;test_user_routine.json&#x27;);
 
 &#x2F;&#x2F; Disable console.log, too much output in app
 console.log = function () {};
 
-&#x2F;&#x2F; Data needed for tests
-var testUrl = &quot;http:&#x2F;&#x2F;localhost:4000&#x2F;switchboard&#x2F;?q=hello&quot;;
-var postTestUrl = &quot;http:&#x2F;&#x2F;localhost:4000&#x2F;switchboard&quot;;
-var callbackParam = &quot;thisIsACallback&quot;;
-var routineToPost = require(&#x27;..&#x2F;test_resources&#x2F;test_user_routine.json&#x27;);
+var validateResponse = function(routineName, mergeMethod) {
 
-function serverShouldRespond(error,response,result){ &#x2F;&#x2F; async vow callback
- 	var message = &quot;No result. The server appears to be offline.&quot;;
-	assert.notEqual(result, undefined, message);
+	var context = { &#x2F;&#x2F; Context is an actual switchboard job
+		topic: function(switchboard) {
+			var routine = require( testData.folderRoutines + routineName +&#x27;.json&#x27; );			&#x2F;&#x2F; get routine from path
+			var query = testData.routineTestData[routineName];									&#x2F;&#x2F; query a.k.a. request is a string like &#x27;Bilbo&#x27;
+
+			&#x2F;&#x2F; Add and run test job
+			switchboard.addAndRunJob(routine, query, this.callback, mergeMethod);
+		}
+	};
+
+	context[&#x27;raw result should be valid&#x27;] = function (err, usedRoutine, formattedResult, rawResult) {
+
+		&#x2F;&#x2F; Get raw json from previously generated test data.
+		var expectedRawResult = new TestResult(routineName, &quot;raw&quot;);
+		
+		logger.trace(JSON.stringify(rawResult, null, 4));
+		logger.trace(JSON.stringify(expectedRawResult, null, 4));
+
+		&#x2F;&#x2F; Incoming JSON are arrays
+		assert.isArray(rawResult, &quot;rawresult&quot;);
+		assert.isArray(expectedRawResult, &quot;expectedRaw&quot;);
+
+		&#x2F;&#x2F; Putting the arrays in objects.
+		rawResObj = $.extend(true, {}, rawResult);
+		expResObj = $.extend(true, {}, expectedRawResult);
+		logger.debug(rawResObj);
+		logger.debug(&quot;exp&quot;, expResObj);
+
+		&#x2F;&#x2F; Comparing the objects with our own method.
+		var isEqual = TestHelper.compareObjects(rawResObj, expResObj, false);
+
+		assert.isTrue(isEqual);
+	};
+	
+	context[&#x27;formatted result should be valid&#x27;] = function (err, usedRoutine, formattedResult, rawResult) {		
+		
+		var expectedFormattedResult = new TestResult(routineName, &quot;formatted&quot;, mergeMethod);
+		var isEqual = TestHelper.compareObjects(formattedResult, expectedFormattedResult, false);
+		assert.isTrue(isEqual);
+	};
+	
+	return context;
 }
 
 suite.addBatch({
-    &#x27;When making a request to Switchboard server&#x27;: {
 
-    	&#x27;with a &quot;callback&quot; query for GET parameter&#x27;: {
-			topic: function () {    
-				var url = testUrl + &quot;&amp;callback=&quot; + callbackParam;	
-				request.get(url, this.callback);
-    		},  		
-			
-			&#x27;server should respond&#x27;: serverShouldRespond,
+	&#x27;A valid response&#x27;: {
 
-    		&#x27;the result should be wrapped with the callback param as a function (jsonp)&#x27;: function(error,response,result){ &#x2F;&#x2F; async vow callback
-    			var prefix = callbackParam + &quot;(&quot;;
-    			var suffix = &quot;)&quot;;
-				var resultWrapper = result ? result.slice(0,prefix.length) + result.slice(result.length-suffix.length) : &quot;&quot;;
-				var wantedWrapper = prefix + suffix;
-    			
-                assert.equal(resultWrapper, wantedWrapper);
+		&#x27;topic&#x27;: function() {
+			return Switchboard;
+		},
+		
+		&#x27;is retrieved using the &quot;starwars_artists&quot; example routine extractMerge&#x27;: validateResponse(&quot;starwars_artists&quot;, &quot;extractMerge&quot;),
+		&#x27;is retrieved using the &quot;starwars_artists&quot; example routine injectMerge&#x27;: validateResponse(&quot;starwars_artists&quot;, &quot;injectMerge&quot;)
+	},
+	
+	&#x27;A routine&#x27;: { &#x2F;&#x2F; Context
+        topic: userRoutine,
+        &#x27;is transformed correctly&#x27;: { &#x2F;&#x2F; Sub-Context
+            topic: function(userRoutine) {                
+                return Switchboard.translateUserRoutine(userRoutine);
+            },
+            &#x27;is properly translated&#x27;: function (machineRoutine) { &#x2F;&#x2F; Vow
+                assert.isArray(userRoutine);
+                assert.isArray(machineRoutine);
+        	    for(var i in machineRoutine) {
+        	        assert.isObject(machineRoutine[i]);
+        	        assert.isString(machineRoutine[i].connector.name);
+        	        assert.isString(machineRoutine[i].connector.host);         
+        	        assert.isString(machineRoutine[i].connector.apiKey);         
+        	        assert.isObject(machineRoutine[i].connector.apiActions);         
+        	        assert.isObject(machineRoutine[i].options);         
+        	        assert.isObject(machineRoutine[i].apiConfig);         
+        	        assert.isString(machineRoutine[i].apiConfig.action);         
+        	        assert.isString(machineRoutine[i].apiConfig.in_param_name);         
+        	        assert.isString(machineRoutine[i].apiConfig.in_source);                	        
+        	    }
             }
-    	}
-    	
-    }
-});
-
-suite.addBatch({
-    &#x27;When making a GET request to Switchboard server&#x27;: {
-
-    	&#x27;with no &quot;callback&quot; query parameter&#x27;: {
-			topic: function () {    		
-				request.get(testUrl, this.callback);
-    		},  		
-    		
-    		&#x27;server should respond&#x27;: serverShouldRespond,
-
-    		&#x27;should return a valid stringified json object&#x27;: function(error,response,result){ &#x2F;&#x2F; async vow callback    			
-    			var json = result ? JSON.parse(result) : undefined;
-                assert.typeOf(json, &quot;object&quot;);
-            }
-    	}
-    	
-    }
-});
-
-suite.addBatch({
-    &#x27;When making a POST request to Switchboard server&#x27;: {
-
-        &#x27;with a posted routine and query&#x27;: {
-        	topic: function () {
-        	    request({
-                  method: &#x27;POST&#x27;,
-                  uri: postTestUrl,
-                  body: { q:&#x27;hello&#x27;, routine: routineToPost },
-                  json: true
-                },this.callback);
-        	},  		
-
-        	&#x27;server should respond&#x27;: serverShouldRespond,
-
-        	&#x27;the engine routine should be the posted routine&#x27;: function(error,response,result){ &#x2F;&#x2F; async vow callback
-                assert.deepEqual(result.routine, routineToPost);
-            }
-        }
-    	
+        }        
     }
 });
 
 suite.export(module);
-
 
     </pre>
 </div>
