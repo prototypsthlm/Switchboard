@@ -95,9 +95,13 @@ You can also run routines directly in the operator to get a view of the output.
 Node package
 -------------
 
-Optionally install as a node package and:
+Optionally install as a node package 
 
-1. var sb = require('switchboard');
+		npm install swtchbrd
+
+and:
+
+1. var sb = require('swtchbrd');
 
 2. configure keys as above in node_modules/switchboard/lib/connectors
 

@@ -1,9 +1,9 @@
 {
-    "name": "switchboard",
+    "name": "swtchbrd",
     "preferGlobal": "true",
     "version": "0.1.0",
     "author": "Prototyp <jacob.broms@prototyp.se>",
-    "description": "API Mashup helper",
+    "description": "API mashup helper",
     "contributors": [
         {
             "name": "Jacob Broms Engblom",
@@ -16,7 +16,7 @@
     ],
     "scripts": {
         "start": "node server.js",
-        "test": "vows"
+        "test": "vows --spec"
     },
     "main": "./lib/switchboard",
     "repository": {
