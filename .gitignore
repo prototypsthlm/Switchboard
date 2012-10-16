@@ -10,6 +10,7 @@ lib-cov
 
 pids
 logs
+lib/connectors/keys.json
 wrkshp
 node_modules
 npm-debug.log
