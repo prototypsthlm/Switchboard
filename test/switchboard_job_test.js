@@ -1,7 +1,7 @@
 /**
 	Test of a SwitchboardJob
 	
-	@module: Test
+	@module Test
 **/
 
 var vows = require('vows'),

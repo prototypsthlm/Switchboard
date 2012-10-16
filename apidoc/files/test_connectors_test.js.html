@@ -67,8 +67,6 @@
 
             <ul id="api-modules" class="apis modules">
             
-                <li><a href="..&#x2F;modules/: Test.html">: Test</a></li>
-            
                 <li><a href="..&#x2F;modules/Connectors.html">Connectors</a></li>
             
                 <li><a href="..&#x2F;modules/Switchboard.html">Switchboard</a></li>
@@ -118,9 +116,9 @@
 	General tests of all conneectors.
 
 	Tests made:
-	Checks that given a config object and a response the returned response is valid
-	...
-	@module: Test
+	- checks that given a config object and a response the returned response is valid
+	- ...
+	@module Test
 **&#x2F;
 
 var vows = require(&#x27;vows&#x27;),
@@ -153,10 +151,6 @@ function connectorValid(testLookup) {
 	context[&#x27;has http host&#x27;] = function(con){
 		assert.isString(con.host);
 		assert.include(con.host, &#x27;http&#x27;);
-	};
-
-	context[&#x27;has responseObject&#x27;] = function(con){
-		assert.isArray(con.responseObject);
 	};
 
 	context[&quot;apiAction&quot;] = {

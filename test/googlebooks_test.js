@@ -5,7 +5,7 @@
 	- has an api key that is valid *async
 	- has apiActions
 	
-	@module: Test
+	@module Test
 **/
 
 var vows = require('vows'),

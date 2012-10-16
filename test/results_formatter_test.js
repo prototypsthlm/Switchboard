@@ -4,7 +4,7 @@
 	Tests made:
 	- compares structure of performed formatting to previous formattings
 
-	@module: Test
+	@module Test
 **/
 
 

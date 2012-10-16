@@ -4,7 +4,7 @@
 	Tests made:
 	- has an api key that is valid *async
 	
-	@module: Test
+	@module Test
 **/
 
 var vows = require('vows'),

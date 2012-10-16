@@ -14,17 +14,11 @@ YUI.add("yuidoc-meta", function(Y) {
         "TestHelper"
     ],
     "modules": [
-        ": Test",
         "Connectors",
         "Switchboard",
         "Test"
     ],
     "allModules": [
-        {
-            "displayName": ": Test",
-            "name": ": Test",
-            "description": "Spotify tests.\n\nTests made:\n- has an api key that is valid *async\n- ..."
-        },
         {
             "displayName": "Connectors",
             "name": "Connectors",
@@ -38,7 +32,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Test",
             "name": "Test",
-            "description": "Test for the server.js\n\nTests made:\nChecks that a jsonp call is wrapped with the callback param if exists"
+            "description": "Test helper."
         }
     ]
 } };

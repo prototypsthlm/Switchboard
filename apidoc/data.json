@@ -102,7 +102,9 @@
         },
         "lib/test_helper.js": {
             "name": "lib/test_helper.js",
-            "modules": {},
+            "modules": {
+                "Test": 1
+            },
             "classes": {
                 "TestHelper": 1
             },
@@ -146,18 +148,14 @@
         },
         "test/server_test.js": {
             "name": "test/server_test.js",
-            "modules": {
-                "Test": 1
-            },
+            "modules": {},
             "classes": {},
             "fors": {},
             "namespaces": {}
         },
         "test/spotify_test.js": {
             "name": "test/spotify_test.js",
-            "modules": {
-                ": Test": 1
-            },
+            "modules": {},
             "classes": {},
             "fors": {},
             "namespaces": {}
@@ -231,22 +229,11 @@
             "tag": "module",
             "file": "lib/test_helper.js",
             "line": 7,
-            "description": "Test for the server.js\n\nTests made:\nChecks that a jsonp call is wrapped with the callback param if exists",
+            "description": "Test helper.",
             "is_constructor": 1,
             "todo": [
                 "Merge batches into one batch. Hade problem with having them in the same since the server crashed when both tests were making requests"
             ]
-        },
-        ": Test": {
-            "name": ": Test",
-            "submodules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {},
-            "tag": "module",
-            "file": "test/spotify_test.js",
-            "line": 1,
-            "description": "Spotify tests.\n\nTests made:\n- has an api key that is valid *async\n- ..."
         }
     },
     "classes": {

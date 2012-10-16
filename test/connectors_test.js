@@ -4,7 +4,7 @@
 	Tests made:
 	- checks that given a config object and a response the returned response is valid
 	- ...
-	@module: Test
+	@module Test
 **/
 
 var vows = require('vows'),
