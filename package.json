@@ -21,7 +21,7 @@
     "main": "./lib/switchboard",
     "repository": {
         "type": "git",
-        "url": "https://github.com/sanocore/Switchboard.git"
+        "url": "https://github.com/prototypsthlm/Switchboard.git"
     },
     "keywords": [
         "API",
