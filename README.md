@@ -97,11 +97,11 @@ Node package
 
 Optionally install as a node package 
 
-		npm install swtchbrd
+		npm install swchbrd
 
 and:
 
-1. var sb = require('swtchbrd');
+1. var sb = require('swchbrd');
 
 2. configure keys as above in node_modules/switchboard/lib/connectors
 

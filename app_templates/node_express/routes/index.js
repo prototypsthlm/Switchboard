@@ -2,7 +2,7 @@
 /*
  * GET home page.
  */
-var switchboard = require('swtchbrd');
+var switchboard = require('swchbrd');
 var routine = require('../routine.json'); // routine from json-file
 
 exports.index = function(req, res){
