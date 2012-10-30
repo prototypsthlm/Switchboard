@@ -97,11 +97,11 @@ Node package
 
 Optionally install as a node package 
 
-		npm install swtchbrd
+		npm install swchbrd
 
 and:
 
-1. var sb = require('swtchbrd');
+1. var sb = require('swchbrd');
 
 2. configure keys as above in node_modules/switchboard/lib/connectors
 
@@ -213,6 +213,9 @@ or do it by script element injection (here with a routine sent along):
 		</script>
 		<script type="text/javascript" src='http://localhost:4000/switchboard?q=star%20wars&routine=[%20{%20"api":%20"TMDB",%20"action":%20"movieSearch",%20"in_param_name":%20"query",%20"value_source":%20"entry%20query",%20"limit":%205,%20"optionals":%20[%20{%20"paramName":%20"year",%20"paramValue":%20"1977"%20}%20]%20},%20{%20"api":%20"TMDB",%20"action":%20"movieCast",%20"in_param_name":%20"id",%20"value_source":%20"results.id",%20"limit":%205%20},%20{%20"api":%20"Spotify",%20"action":%20"artistSearch",%20"in_param_name":%20"q",%20"value_source":%20"cast.character",%20"limit":%205%20}%20]&callback=myHandler'></script>
 
+App Templates
+-------
+In app_templates you can find a template for a [Node Express](http://expressjs.com/) driven applications. Note that the app requires a npm install in the template app root directory followed by the configuration of API-keys as specified above.
 
 Tests
 -------
