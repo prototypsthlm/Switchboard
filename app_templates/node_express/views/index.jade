@@ -1,0 +1,9 @@
+extends layout
+
+block content
+	h1= title
+	p Welcome to #{title}
+	p Here is the used routine:
+		pre #{JSON.stringify(usedRoutine, null, 4)}
+	p Here are some results:
+		pre #{JSON.stringify(data, null, 4)}
