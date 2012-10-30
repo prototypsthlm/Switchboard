@@ -63,6 +63,8 @@ function handleRequest(httpMethod, req, res) {
                liveRoutine = JSON.parse(req.param('routine'));
            else
                liveRoutine = req.param('routine') instanceof Array ? req.param('routine') : JSON.parse(req.param('routine')); // Whole routine is posted as json (form data or raw)
+       } else if(req.param('example_routine')) {
+          liveRoutine = require('./example_routines/'+ req.param('example_routine') +'.json');          
        }
 
        logger.debug("Running Routine: ", JSON.stringify(liveRoutine, null, 4));
