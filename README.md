@@ -215,7 +215,7 @@ or do it by script element injection (here with a routine sent along):
 
 App Templates
 -------
-In app_templates you can find a template for a [Node Express](http://expressjs.com/) driven applications. Note that the app requires a npm install in the template app root directory followed by the configuration of API-keys as specified above.
+In app_templates you can find a template for [Node Express](http://expressjs.com/) driven applications. Note that the app requires a npm install in the template app root directory followed by the configuration of API-keys as specified above.
 
 Tests
 -------
