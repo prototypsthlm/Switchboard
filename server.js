@@ -10,10 +10,10 @@ var logger = require('./lib/sb_tracer.js')();
 var switchboard = require('./index');
 
 //var liveRoutine = require('./example_routines/starwars_artists.json');
-var liveRoutine = require('./example_routines/headliner_biographies.json');
 //var liveRoutine = require('./example_routines/artist_urls.json');
-
 //var liveRoutine = require('./example_routines/actor_movies_books.json');
+var liveRoutine = require('./example_routines/headliner_biographies.json');
+
 
 /* Loads a JSON-routine from the operator */
 function loadRemoteRoutine(callback){

@@ -21,7 +21,7 @@
             }
         ],
         "value_source": "artists.href",
-        "limit": "1"
+        "limit": "2"
     },
     {
         "api": "Last.fm",

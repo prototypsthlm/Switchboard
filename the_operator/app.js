@@ -47,7 +47,7 @@ app.post('/taste',function(req,res){
     var connector = new connectors.apiMap[setup.api];
     connector.responseArray = [];
     var url = connector.getActionUrl(setup.query,setup.config);
-    connector.get(url, setup.query, setup.config, null, null, function(){
+    connector.get(url, setup.query, setup.config, null, null, null, function(){
         res.send({ response: connector.responseArray, url: url });
     });
     

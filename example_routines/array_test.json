@@ -1,0 +1,23 @@
+[
+    {
+        "api": "Spotify",
+        "action": "artistSearch",
+        "in_param_name": "q",
+        "value_source": "entry query",
+        "limit": "1"
+    },
+    {
+        "api": "Last.fm",
+        "action": "artistGetEvents",
+        "in_param_name": "artist",
+        "value_source": "artists.name",
+        "limit": "2"
+    },
+    {
+        "api": "Echonest",
+        "action": "artistBiographies",
+        "in_param_name": "name",
+        "value_source": "events.event.artists",
+        "limit": "3"
+    }
+]
