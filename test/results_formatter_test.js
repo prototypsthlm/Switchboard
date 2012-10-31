@@ -3,8 +3,6 @@
 	@module Test
 **/
 
-
-
 var vows = require('vows'),
     assert = require('assert');
     
@@ -17,6 +15,7 @@ function resultAfterMergeValidation(routineToTest, mergeMethod) {
 	var context = {
 		topic: function(topic) {
 			var formattedResult;
+    		
 			if(mergeMethod == "extractMerge") {
 				formattedResult = topic.formatter.extractMerge();
 			}
@@ -49,11 +48,15 @@ function populatedDataValidation(routineToTest) {
 	var context = { // Context
 		topic: function (formatter) {				
 			var rawResult = new TestResult(routineToTest, "raw");
-			var formatter = new ResultFormatter(rawResult);				
+			console.log("FNERP");
+			console.log(rawResult);
+			var formatter = new ResultFormatter(rawResult);
+
 			return {formatter: formatter, rawResult: rawResult};
 		}
 	};
 
+    /* test to check if cloning performs correctly */
 	context['could not affect the raw result after it has been set'] = function (topic) {
 		topic.rawResult.push({api:"Dummy", calls:[]});
 		assert.notDeepEqual(topic.formatter.raw(), topic.rawResult, "Raw result affected after it has been set");

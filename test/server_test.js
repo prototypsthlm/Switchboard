@@ -13,7 +13,7 @@ console.log("Server is started...")
 var app = require('../server.js');
 
 // Disable console.log, too much output in app
-console.log = function () {};
+//console.log = function () {};
 
 // Data needed for tests
 var testUrl = "http://localhost:4000/switchboard/?q=hello";

@@ -42,7 +42,7 @@ var GenTestResults = {
 		//var jobId = Switchboard.addJob(routine, [query]);							// addJob
 
 		// runJob
-		Switchboard.addAndRunJob(routine, query, function(usedRoutine, formatted, raw){				
+    		Switchboard.addAndRunJob(routine, query, function(error, usedRoutine, formatted, raw){				
 			self.writeResults(usedRoutine, formatted, raw, routineName, config.folderTestResults, query, mergeMethod);
 		}, mergeMethod);
 

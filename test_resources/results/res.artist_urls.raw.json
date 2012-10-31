@@ -7,6 +7,12 @@
                     "query": "Foo",
                     "index": 0,
                     "callIndex": null,
+                    "sourceInfo": {
+                        "query": "Foo",
+                        "pathToArray": null,
+                        "arrayIndex": null,
+                        "queryIndex": 0
+                    },
                     "apiConfig": {
                         "action": "artistSearch",
                         "in_param_name": "q",
@@ -18,17 +24,17 @@
                         {
                             "href": "spotify:artist:7jy3rLJdDQY21OgRLCZ9sD",
                             "name": "Foo Fighters",
-                            "popularity": "0.50611"
+                            "popularity": "0.49735"
                         },
                         {
                             "href": "spotify:artist:2Oi3mmkapgdIQtx1SdFJBx",
                             "name": "Foo Kit Yan",
-                            "popularity": "0.00014"
+                            "popularity": "0.00012"
                         },
                         {
                             "href": "spotify:artist:1eUkfJuU4CVdtMXSwgWqrP",
                             "name": "Foo Yun Guang",
-                            "popularity": "0.00008"
+                            "popularity": "0.00012"
                         },
                         {
                             "href": "spotify:artist:7qiLrKoGb00lbCSBkJGKoU",
@@ -43,7 +49,7 @@
                         {
                             "href": "spotify:artist:7BwOCTBw5XiJ7ZG2xIL8u8",
                             "name": "Karaoke - Foo Fighters",
-                            "popularity": "0.00022"
+                            "popularity": "0.00020"
                         },
                         {
                             "href": "spotify:artist:6iEinlrmGT9lMfK0DujCbT",
@@ -53,7 +59,7 @@
                         {
                             "href": "spotify:artist:2TNOr8MZ3zzjKxg4pgQpgR",
                             "name": "Foo",
-                            "popularity": "0.00024"
+                            "popularity": "0.00023"
                         },
                         {
                             "href": "spotify:artist:3p79QQCiu1IVlmT027XhuU",
@@ -63,12 +69,12 @@
                         {
                             "href": "spotify:artist:40PrhCEaf2WsLaoUQgiZKv",
                             "name": "Kung Foo Preacher",
-                            "popularity": "0.00001"
+                            "popularity": "0.00000"
                         },
                         {
                             "href": "spotify:artist:08h0HmFljdjnIXpaARHbgu",
                             "name": "Foo Foo Click",
-                            "popularity": "0.00001"
+                            "popularity": "0.00000"
                         },
                         {
                             "href": "spotify:artist:6AcNCnxChWevoeQ3RCNNXV",
@@ -83,7 +89,7 @@
                         {
                             "href": "spotify:artist:68X7EQtVYHuUAYoFilK3wE",
                             "name": "Kommil Foo",
-                            "popularity": "0.03241"
+                            "popularity": "0.03159"
                         },
                         {
                             "href": "spotify:artist:5ubdtgTMIQ7hPogoDTDMum",
@@ -153,13 +159,18 @@
                         {
                             "href": "spotify:artist:2wMaMD3sR58wd26tbDDHhu",
                             "name": "Ha-Foo",
-                            "popularity": "0.00000"
+                            "popularity": "0.00001"
+                        },
+                        {
+                            "href": "spotify:artist:3C1Hh05M8jHohaNCGgmv0o",
+                            "name": "Sharin Foo",
+                            "popularity": "0.00086"
                         }
                     ]
                 },
                 "raw": {
                     "info": {
-                        "num_results": 28,
+                        "num_results": 29,
                         "limit": 100,
                         "offset": 0,
                         "query": "Foo",
@@ -170,17 +181,17 @@
                         {
                             "href": "spotify:artist:7jy3rLJdDQY21OgRLCZ9sD",
                             "name": "Foo Fighters",
-                            "popularity": "0.50611"
+                            "popularity": "0.49735"
                         },
                         {
                             "href": "spotify:artist:2Oi3mmkapgdIQtx1SdFJBx",
                             "name": "Foo Kit Yan",
-                            "popularity": "0.00014"
+                            "popularity": "0.00012"
                         },
                         {
                             "href": "spotify:artist:1eUkfJuU4CVdtMXSwgWqrP",
                             "name": "Foo Yun Guang",
-                            "popularity": "0.00008"
+                            "popularity": "0.00012"
                         },
                         {
                             "href": "spotify:artist:7qiLrKoGb00lbCSBkJGKoU",
@@ -195,7 +206,7 @@
                         {
                             "href": "spotify:artist:7BwOCTBw5XiJ7ZG2xIL8u8",
                             "name": "Karaoke - Foo Fighters",
-                            "popularity": "0.00022"
+                            "popularity": "0.00020"
                         },
                         {
                             "href": "spotify:artist:6iEinlrmGT9lMfK0DujCbT",
@@ -205,7 +216,7 @@
                         {
                             "href": "spotify:artist:2TNOr8MZ3zzjKxg4pgQpgR",
                             "name": "Foo",
-                            "popularity": "0.00024"
+                            "popularity": "0.00023"
                         },
                         {
                             "href": "spotify:artist:3p79QQCiu1IVlmT027XhuU",
@@ -215,12 +226,12 @@
                         {
                             "href": "spotify:artist:40PrhCEaf2WsLaoUQgiZKv",
                             "name": "Kung Foo Preacher",
-                            "popularity": "0.00001"
+                            "popularity": "0.00000"
                         },
                         {
                             "href": "spotify:artist:08h0HmFljdjnIXpaARHbgu",
                             "name": "Foo Foo Click",
-                            "popularity": "0.00001"
+                            "popularity": "0.00000"
                         },
                         {
                             "href": "spotify:artist:6AcNCnxChWevoeQ3RCNNXV",
@@ -235,7 +246,7 @@
                         {
                             "href": "spotify:artist:68X7EQtVYHuUAYoFilK3wE",
                             "name": "Kommil Foo",
-                            "popularity": "0.03241"
+                            "popularity": "0.03159"
                         },
                         {
                             "href": "spotify:artist:5ubdtgTMIQ7hPogoDTDMum",
@@ -305,7 +316,12 @@
                         {
                             "href": "spotify:artist:2wMaMD3sR58wd26tbDDHhu",
                             "name": "Ha-Foo",
-                            "popularity": "0.00000"
+                            "popularity": "0.00001"
+                        },
+                        {
+                            "href": "spotify:artist:3C1Hh05M8jHohaNCGgmv0o",
+                            "name": "Sharin Foo",
+                            "popularity": "0.00086"
                         }
                     ]
                 }
@@ -320,6 +336,13 @@
                     "query": "spotify:artist:7jy3rLJdDQY21OgRLCZ9sD",
                     "index": 0,
                     "callIndex": 0,
+                    "sourceInfo": {
+                        "query": "spotify:artist:7jy3rLJdDQY21OgRLCZ9sD",
+                        "pathToArray": "artists",
+                        "detailedInSource": "artists.0.href",
+                        "arrayIndex": 0,
+                        "queryIndex": 0
+                    },
                     "apiConfig": {
                         "action": "artistURLs",
                         "in_param_name": "id",
