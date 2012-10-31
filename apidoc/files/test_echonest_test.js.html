@@ -57,6 +57,8 @@
             
                 <li><a href="..&#x2F;classes/Switchboard.html">Switchboard</a></li>
             
+                <li><a href="..&#x2F;classes/SwitchboardHelper.html">SwitchboardHelper</a></li>
+            
                 <li><a href="..&#x2F;classes/SwitchboardJob.html">SwitchboardJob</a></li>
             
                 <li><a href="..&#x2F;classes/TestHelper.html">TestHelper</a></li>
@@ -114,10 +116,6 @@
     <pre class="code prettyprint linenums">
 &#x2F;**
 	Echonest tests.
-
-	Tests made:
-	- has an api key that is valid *async
-	
 	@module Test
 **&#x2F;
 
@@ -129,8 +127,8 @@ var suite = vows.describe(&#x27;Echonest connector&#x27;);
 var connector = require(&#x27;..&#x2F;lib&#x2F;connectors&#x2F;connectors&#x27;);
 var request = require(&#x27;request&#x27;);
 
-suite.addBatch({&#x2F;&#x2F; Batch
-    &#x27;An Echonest connector&#x27;: {&#x2F;&#x2F; Context
+suite.addBatch({ &#x2F;&#x2F; Batch
+    &#x27;An Echonest connector&#x27;: { &#x2F;&#x2F; Context
         topic: new connector.echonest, &#x2F;&#x2F; Topic
         &#x27;has an api key that is valid *async&#x27;: { &#x2F;&#x2F; Sub-Context  
                 topic: function (connector) { &#x2F;&#x2F; async vow

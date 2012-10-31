@@ -57,6 +57,8 @@
             
                 <li><a href="..&#x2F;classes/Switchboard.html">Switchboard</a></li>
             
+                <li><a href="..&#x2F;classes/SwitchboardHelper.html">SwitchboardHelper</a></li>
+            
                 <li><a href="..&#x2F;classes/SwitchboardJob.html">SwitchboardJob</a></li>
             
                 <li><a href="..&#x2F;classes/TestHelper.html">TestHelper</a></li>
@@ -114,14 +116,8 @@
     <pre class="code prettyprint linenums">
 &#x2F;**
 	ResultsFormatter tests.
-
-	Tests made:
-	- compares structure of performed formatting to previous formattings
-
 	@module Test
 **&#x2F;
-
-
 
 var vows = require(&#x27;vows&#x27;),
     assert = require(&#x27;assert&#x27;);
@@ -135,6 +131,7 @@ function resultAfterMergeValidation(routineToTest, mergeMethod) {
 	var context = {
 		topic: function(topic) {
 			var formattedResult;
+    		
 			if(mergeMethod == &quot;extractMerge&quot;) {
 				formattedResult = topic.formatter.extractMerge();
 			}
@@ -167,11 +164,15 @@ function populatedDataValidation(routineToTest) {
 	var context = { &#x2F;&#x2F; Context
 		topic: function (formatter) {				
 			var rawResult = new TestResult(routineToTest, &quot;raw&quot;);
-			var formatter = new ResultFormatter(rawResult);				
+			console.log(&quot;FNERP&quot;);
+			console.log(rawResult);
+			var formatter = new ResultFormatter(rawResult);
+
 			return {formatter: formatter, rawResult: rawResult};
 		}
 	};
 
+    &#x2F;* test to check if cloning performs correctly *&#x2F;
 	context[&#x27;could not affect the raw result after it has been set&#x27;] = function (topic) {
 		topic.rawResult.push({api:&quot;Dummy&quot;, calls:[]});
 		assert.notDeepEqual(topic.formatter.raw(), topic.rawResult, &quot;Raw result affected after it has been set&quot;);

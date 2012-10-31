@@ -57,6 +57,8 @@
             
                 <li><a href="..&#x2F;classes/Switchboard.html">Switchboard</a></li>
             
+                <li><a href="..&#x2F;classes/SwitchboardHelper.html">SwitchboardHelper</a></li>
+            
                 <li><a href="..&#x2F;classes/SwitchboardJob.html">SwitchboardJob</a></li>
             
                 <li><a href="..&#x2F;classes/TestHelper.html">TestHelper</a></li>
@@ -114,11 +116,7 @@
     <pre class="code prettyprint linenums">
 &#x2F;**
 	Test for the server.js
-
-	Tests made:
-	Checks that a jsonp call is wrapped with the callback param if exists
-
-	@todo Merge batches into one batch. Hade problem with having them in the same since the server crashed when both tests were making requests
+	@todo - Merge batches into one batch. Hade problem with having them in the same since the server crashed when both tests were making requests
 	@module Test
 **&#x2F;
 
@@ -131,7 +129,7 @@ console.log(&quot;Server is started...&quot;)
 var app = require(&#x27;..&#x2F;server.js&#x27;);
 
 &#x2F;&#x2F; Disable console.log, too much output in app
-console.log = function () {};
+&#x2F;&#x2F;console.log = function () {};
 
 &#x2F;&#x2F; Data needed for tests
 var testUrl = &quot;http:&#x2F;&#x2F;localhost:4000&#x2F;switchboard&#x2F;?q=hello&quot;;

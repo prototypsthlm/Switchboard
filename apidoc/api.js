@@ -9,6 +9,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "ResultFormatter",
         "Spotify",
         "Switchboard",
+        "SwitchboardHelper",
         "SwitchboardJob",
         "TMDB",
         "TestHelper"

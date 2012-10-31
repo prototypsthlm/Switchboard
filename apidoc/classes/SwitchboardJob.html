@@ -57,6 +57,8 @@
             
                 <li><a href="..&#x2F;classes/Switchboard.html">Switchboard</a></li>
             
+                <li><a href="..&#x2F;classes/SwitchboardHelper.html">SwitchboardHelper</a></li>
+            
                 <li><a href="..&#x2F;classes/SwitchboardJob.html">SwitchboardJob</a></li>
             
                 <li><a href="..&#x2F;classes/TestHelper.html">TestHelper</a></li>
@@ -116,7 +118,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;lib_switchboard_job.js.html#l15"><code>lib&#x2F;switchboard_job.js:15</code></a>
+            Defined in: <a href="..&#x2F;files&#x2F;lib_switchboard_job.js.html#l16"><code>lib&#x2F;switchboard_job.js:16</code></a>
         </div>
     
 
@@ -198,7 +200,7 @@
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_switchboard_job.js.html#l15"><code>lib&#x2F;switchboard_job.js:15</code></a>
+        <a href="..&#x2F;files&#x2F;lib_switchboard_job.js.html#l16"><code>lib&#x2F;switchboard_job.js:16</code></a>
         
         </p>
 
@@ -335,6 +337,13 @@
                                 
                             </li>
                         
+                            <li class="index-item method protected">
+                                <a href="#method_getValueSourcePaths">getValueSourcePaths</a>
+
+                                
+                                
+                            </li>
+                        
                             <li class="index-item method">
                                 <a href="#method_id">id</a>
 
@@ -463,7 +472,7 @@
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_switchboard_job.js.html#l103"><code>lib&#x2F;switchboard_job.js:103</code></a>
+        <a href="..&#x2F;files&#x2F;lib_switchboard_job.js.html#l167"><code>lib&#x2F;switchboard_job.js:167</code></a>
         
         </p>
 
@@ -554,7 +563,7 @@ by async.waterfall</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_switchboard_job.js.html#l194"><code>lib&#x2F;switchboard_job.js:194</code></a>
+        <a href="..&#x2F;files&#x2F;lib_switchboard_job.js.html#l258"><code>lib&#x2F;switchboard_job.js:258</code></a>
         
         </p>
 
@@ -630,7 +639,7 @@ by async.waterfall</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_switchboard_job.js.html#l71"><code>lib&#x2F;switchboard_job.js:71</code></a>
+        <a href="..&#x2F;files&#x2F;lib_switchboard_job.js.html#l116"><code>lib&#x2F;switchboard_job.js:116</code></a>
         
         </p>
 
@@ -703,6 +712,138 @@ by async.waterfall</p>
 </div>
 
                 
+                    <div id="method_getValueSourcePaths" class="method item protected">
+    <h3 class="name"><code>getValueSourcePaths</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>result</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>valueSource</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;lib_switchboard_job.js.html#l75"><code>lib&#x2F;switchboard_job.js:75</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>From a value source and a result all possible paths is generatet.
+The path shows the hierarchy in an object with dot notation with added indices.</p>
+
+<p>E.g. inSource = "events.event.artists.artist"
+might result in a path looking like "events.event.2.artists.artist.0".
+Where 2 indicates index 2 of the event array, and 0 the first index in the artist array.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">result</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The result object generated by a ConnectorResponse.</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">valueSource</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>String showing the path to the query that should be used by another connector.</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>:
+                    
+                    Returns an array with all possible paths given the valueSource and the result
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
                     <div id="method_id" class="method item">
     <h3 class="name"><code>id</code></h3>
 
@@ -735,7 +876,7 @@ by async.waterfall</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_switchboard_job.js.html#l183"><code>lib&#x2F;switchboard_job.js:183</code></a>
+        <a href="..&#x2F;files&#x2F;lib_switchboard_job.js.html#l247"><code>lib&#x2F;switchboard_job.js:247</code></a>
         
         </p>
 
@@ -799,7 +940,7 @@ by async.waterfall</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_switchboard_job.js.html#l167"><code>lib&#x2F;switchboard_job.js:167</code></a>
+        <a href="..&#x2F;files&#x2F;lib_switchboard_job.js.html#l231"><code>lib&#x2F;switchboard_job.js:231</code></a>
         
         </p>
 
@@ -876,7 +1017,7 @@ by async.waterfall</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_switchboard_job.js.html#l206"><code>lib&#x2F;switchboard_job.js:206</code></a>
+        <a href="..&#x2F;files&#x2F;lib_switchboard_job.js.html#l270"><code>lib&#x2F;switchboard_job.js:270</code></a>
         
         </p>
 
@@ -929,7 +1070,7 @@ by async.waterfall</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_switchboard_job.js.html#l42"><code>lib&#x2F;switchboard_job.js:42</code></a>
+        <a href="..&#x2F;files&#x2F;lib_switchboard_job.js.html#l43"><code>lib&#x2F;switchboard_job.js:43</code></a>
         
         </p>
 
@@ -973,7 +1114,7 @@ by async.waterfall</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_switchboard_job.js.html#l47"><code>lib&#x2F;switchboard_job.js:47</code></a>
+        <a href="..&#x2F;files&#x2F;lib_switchboard_job.js.html#l48"><code>lib&#x2F;switchboard_job.js:48</code></a>
         
         </p>
 
@@ -1017,7 +1158,7 @@ by async.waterfall</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_switchboard_job.js.html#l37"><code>lib&#x2F;switchboard_job.js:37</code></a>
+        <a href="..&#x2F;files&#x2F;lib_switchboard_job.js.html#l38"><code>lib&#x2F;switchboard_job.js:38</code></a>
         
         </p>
 
@@ -1061,7 +1202,7 @@ by async.waterfall</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_switchboard_job.js.html#l32"><code>lib&#x2F;switchboard_job.js:32</code></a>
+        <a href="..&#x2F;files&#x2F;lib_switchboard_job.js.html#l33"><code>lib&#x2F;switchboard_job.js:33</code></a>
         
         </p>
 
@@ -1105,7 +1246,7 @@ by async.waterfall</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_switchboard_job.js.html#l27"><code>lib&#x2F;switchboard_job.js:27</code></a>
+        <a href="..&#x2F;files&#x2F;lib_switchboard_job.js.html#l28"><code>lib&#x2F;switchboard_job.js:28</code></a>
         
         </p>
 

@@ -57,6 +57,8 @@
             
                 <li><a href="..&#x2F;classes/Switchboard.html">Switchboard</a></li>
             
+                <li><a href="..&#x2F;classes/SwitchboardHelper.html">SwitchboardHelper</a></li>
+            
                 <li><a href="..&#x2F;classes/SwitchboardJob.html">SwitchboardJob</a></li>
             
                 <li><a href="..&#x2F;classes/TestHelper.html">TestHelper</a></li>
@@ -118,6 +120,7 @@ in the specified order, gathering the result and at the end returning a merged o
 all results.
 
 @module Switchboard
+
 **&#x2F;
 
 var $ = require(&#x27;jquery&#x27;);
@@ -145,6 +148,7 @@ The mergeMethod (formatting method) to be used when formatting results.
 @type {String}
 @default &quot;extractMerge&quot;
 *&#x2F;
+
 &#x2F;**
 Array of jobs waiting to be executed.
 @property jobs
@@ -225,7 +229,9 @@ function Switchboard() {
                  
         }
         
-        logger.debug(&#x27;Results formatted. Calling callback.&#x27;);
+        logger.debug(&#x27;Results formatted.&#x27;);
+        
+        logger.info(&#x27;Job done.&#x27;);
         
         callback(err, usedRoutine, mergedResult, response); 
     }
@@ -284,7 +290,7 @@ function Switchboard() {
         logger.debug(&#x27;Job started.&#x27;);
         logger.trace(&#x27;Job.queries&#x27;, job.entryQueries());
         job.run(function(err, response) { 
-            logger.debug(&#x27;Job done.&#x27;);
+            logger.info(&#x27;Job executed.&#x27;);
             jobDone(err, response, callback, mergeMethod, job.userRoutine()); 
         });
         return true;

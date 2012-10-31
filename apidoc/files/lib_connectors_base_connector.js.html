@@ -57,6 +57,8 @@
             
                 <li><a href="..&#x2F;classes/Switchboard.html">Switchboard</a></li>
             
+                <li><a href="..&#x2F;classes/SwitchboardHelper.html">SwitchboardHelper</a></li>
+            
                 <li><a href="..&#x2F;classes/SwitchboardJob.html">SwitchboardJob</a></li>
             
                 <li><a href="..&#x2F;classes/TestHelper.html">TestHelper</a></li>
@@ -187,7 +189,8 @@ BaseConnector.prototype.execute = function(queryData, apiConfig, cb) {
         async.forEach(queryDataItem.queries, function getResults(query, done) {
             var url = self.getActionUrl(query, apiConfig);
             logger.trace(&#x27;Preparing request to : &#x27; + url);
-            self.get(url, query, apiConfig, index, queryDataItem.callIndex, done);
+            var info = queryDataItem.info[index];      
+            self.get(url, query, apiConfig, index, queryDataItem.callIndex, info.valueSourcePath, done);
             index += 1;
         },
         function(err){
@@ -208,15 +211,16 @@ Performs a single GET-request and appends the data to the connector responseArra
 @param {String} apiConfig A config object containing machine routine data for this call
 @param {Integer} index The index of the GET-request. Used for formatting the final result.
 @param {Integer} callIndex The index of the GET-request that provided the query for this call. Used for formatting the final result.
+@param {String} valueSourcePath A dot notated string path pointing to the location where the query was found, e.g. events.event.1.artists where every part within dots (&#x27;.&#x27;) is a key in an object
 @param {Function} done Callback indicating to the async forEach that the HTTP-request is finished.
 
 *&#x2F;
-BaseConnector.prototype.get = function(url, query, apiConfig, index, callIndex, done) {
+BaseConnector.prototype.get = function(url, query, apiConfig, index, callIndex, valueSourcePath, done) {
     var self = this;
     request({ url: url, headers: { &quot;Accept&quot; : &quot;application&#x2F;json&quot; } }, function (error, response, result) {
       if (!error &amp;&amp; response.statusCode == 200) {
         logger.info(&quot;Successful HTTP-request : &quot; + url);
-        self.responseArray.push(self.connectorResult({query: query, index: index, callIndex: callIndex, apiConfig: apiConfig, result: JSON.parse(result)}));
+        self.responseArray.push(self.connectorResult({query: query, index: index, callIndex: callIndex, valueSourcePath: valueSourcePath, apiConfig: apiConfig, result: JSON.parse(result)}));
       }
       else {
           if(response){

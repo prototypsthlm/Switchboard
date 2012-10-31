@@ -6,6 +6,13 @@
         "url": "https://github.com/prototypsthlm/Switchboard"
     },
     "files": {
+        "app_templates/node_express/app.js": {
+            "name": "app_templates/node_express/app.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
         "lib/connectors/base_connector.js": {
             "name": "lib/connectors/base_connector.js",
             "modules": {
@@ -87,6 +94,15 @@
             },
             "classes": {
                 "Switchboard": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/switchboard_helper.js": {
+            "name": "lib/switchboard_helper.js",
+            "modules": {},
+            "classes": {
+                "SwitchboardHelper": 1
             },
             "fors": {},
             "namespaces": {}
@@ -209,14 +225,16 @@
             "submodules": {},
             "classes": {
                 "Switchboard": 1,
+                "SwitchboardHelper": 1,
                 "SwitchboardJob": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
             "file": "lib/switchboard_job.js",
-            "line": 15,
-            "description": "Switchboard takes a JSON-routine and executes all connectors defined in the routine\nin the specified order, gathering the result and at the end returning a merged object with\nall results."
+            "line": 16,
+            "description": "Switchboard takes a JSON-routine and executes all connectors defined in the routine\nin the specified order, gathering the result and at the end returning a merged object with\nall results.",
+            "is_constructor": 1
         },
         "Test": {
             "name": "Test",
@@ -232,7 +250,8 @@
             "description": "Test helper.",
             "is_constructor": 1,
             "todo": [
-                "Merge batches into one batch. Hade problem with having them in the same since the server crashed when both tests were making requests"
+                "- getActionURL (for each connector)",
+                "- validate all apiActions"
             ]
         }
     },
@@ -386,9 +405,23 @@
             "module": "Switchboard",
             "namespace": "",
             "file": "lib/switchboard.js",
-            "line": 19,
+            "line": 20,
             "description": "Switchboard is a sort of engine, setting up and executing jobs which retrieve and format data through configured\ndata flows (\"routines\").",
             "is_constructor": 1
+        },
+        "SwitchboardHelper": {
+            "name": "SwitchboardHelper",
+            "shortname": "SwitchboardHelper",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Switchboard",
+            "namespace": "",
+            "file": "lib/switchboard_helper.js",
+            "line": 1,
+            "description": "Switchboard helper. Contains helper functions to be used within the Switchboard module."
         },
         "SwitchboardJob": {
             "name": "SwitchboardJob",
@@ -401,7 +434,7 @@
             "module": "Switchboard",
             "namespace": "",
             "file": "lib/switchboard_job.js",
-            "line": 15,
+            "line": 16,
             "description": "Instance of a SwitchboardJob.",
             "is_constructor": 1,
             "params": [
@@ -443,6 +476,12 @@
         }
     },
     "classitems": [
+        {
+            "file": "app_templates/node_express/app.js",
+            "line": 1,
+            "description": "Module dependencies.",
+            "class": "BaseConnector"
+        },
         {
             "file": "lib/connectors/base_connector.js",
             "line": 28,
@@ -501,7 +540,7 @@
         },
         {
             "file": "lib/connectors/base_connector.js",
-            "line": 88,
+            "line": 89,
             "description": "Performs a single GET-request and appends the data to the connector responseArray.",
             "itemtype": "method",
             "name": "BaseConnector.prototype.get",
@@ -530,6 +569,11 @@
                     "name": "callIndex",
                     "description": "The index of the GET-request that provided the query for this call. Used for formatting the final result.",
                     "type": "Integer"
+                },
+                {
+                    "name": "valueSourcePath",
+                    "description": "A dot notated string path pointing to the location where the query was found, e.g. events.event.1.artists where every part within dots ('.') is a key in an object",
+                    "type": "String"
                 },
                 {
                     "name": "done",
@@ -1013,7 +1057,7 @@
         },
         {
             "file": "lib/results_formatter.js",
-            "line": 13,
+            "line": 14,
             "description": "The constructor. The result given to the constructor is always cloned\nto ensure that the raw result isn't altered in any way",
             "itemtype": "method",
             "name": "",
@@ -1022,14 +1066,315 @@
                     "name": "result",
                     "description": "Array holding the result gathered from all connectors. Example: [{api: \"Name of Connector A\", calls: []}, {api: \"Name of Connector B\", calls: []}]",
                     "type": "Array"
+                },
+                {
+                    "name": "config",
+                    "description": "Object holding configuration used when merging the result",
+                    "type": "Object"
                 }
             ],
             "class": "ResultFormatter",
             "module": "Connectors"
         },
         {
+            "file": "lib/results_formatter.js",
+            "line": 50,
+            "description": "Remove results in an object given an array holding parts of an path (i.e. keys in an object)",
+            "itemtype": "method",
+            "name": "removeUnusedResult",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "connectorResult",
+                    "description": "Object containing result that should be removed",
+                    "type": "Object"
+                },
+                {
+                    "name": "pathToArray",
+                    "description": "Path to an array in the connectoResult object where data should be removed",
+                    "type": "String"
+                },
+                {
+                    "name": "indexToRemvoe",
+                    "description": "The index that should be removed",
+                    "type": "Int"
+                }
+            ],
+            "class": "ResultFormatter",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/results_formatter.js",
+            "line": 87,
+            "description": "Returns a cloned version of the raw result.",
+            "itemtype": "method",
+            "name": "raw",
+            "access": "public",
+            "tagname": "",
+            "return": {
+                "description": "Cloned version of the raw result",
+                "type": "Array"
+            },
+            "class": "ResultFormatter",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/results_formatter.js",
+            "line": 98,
+            "description": "Returns a configuration value for a given configuration if found",
+            "itemtype": "method",
+            "name": "config",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "String Name of the configuration",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "The value of a specified configuration or undefined if not found",
+                "type": "String"
+            },
+            "class": "ResultFormatter",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/results_formatter.js",
+            "line": 110,
+            "description": "Sets config file which is used by the ResultFormatter when mergin the result,\ne.g. merge method",
+            "itemtype": "method",
+            "name": "setConfig",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "String Name of the configuration",
+                    "type": "String"
+                },
+                {
+                    "name": "value",
+                    "description": "Value of the configuration",
+                    "type": "String"
+                }
+            ],
+            "class": "ResultFormatter",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/results_formatter.js",
+            "line": 123,
+            "description": "Sets the raw value that is used when all results is merged.\nAlways cloned to make sure that it can't be changed after it is set",
+            "itemtype": "method",
+            "name": "setRaw",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "rawResult",
+                    "description": "The result generated by all connectors involved in a routine",
+                    "type": "Array"
+                }
+            ],
+            "class": "ResultFormatter",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/results_formatter.js",
+            "line": 135,
+            "description": "Helper function to retrieve all results generated by a connector given the connector index.",
+            "itemtype": "method",
+            "name": "findConnectorResults",
+            "access": "protected",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "connectorIndex",
+                    "description": "The order index of the connector that should be retrieved. connectorIndex = 0 is the first connector used to retrieve the data",
+                    "type": "Int"
+                },
+                {
+                    "name": "Returns",
+                    "description": "all results generated by a connector",
+                    "type": "Array"
+                }
+            ],
+            "class": "ResultFormatter",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/results_formatter.js",
+            "line": 157,
+            "description": "Helper function to retrieve a ConnectorReponse",
+            "itemtype": "method",
+            "name": "findConnectorResponse",
+            "access": "protected",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "connectorIndex",
+                    "description": "The order index of the connector that should be retrieved. connectorIndex = 0 is the first connector used to retrieve the data",
+                    "type": "Int"
+                },
+                {
+                    "name": "index",
+                    "description": "Used to retrieve a connector response matching this index",
+                    "type": "Int"
+                },
+                {
+                    "name": "Returns",
+                    "description": "a ConnectorResponse object",
+                    "type": "ConnectorResponse"
+                }
+            ],
+            "class": "ResultFormatter",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/results_formatter.js",
+            "line": 181,
+            "description": "Used to sort an array with ConnectorResponse object by call index and then index",
+            "itemtype": "method",
+            "name": "sortByIndexAndCallIndex",
+            "access": "protected",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "a",
+                    "description": "ConnectorResponse object to be compared with b",
+                    "type": "Object"
+                },
+                {
+                    "name": "b",
+                    "description": "ConnectorResponse object to be compared with a",
+                    "type": "Object"
+                }
+            ],
+            "class": "ResultFormatter",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/results_formatter.js",
+            "line": 197,
+            "description": "Helper function to retrieve the index of the first array found in the given path",
+            "itemtype": "method",
+            "name": "indexOfFirstArrayInPath",
+            "access": "protected",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "valueSourcePath",
+                    "description": "String containing a dot notated path used to traverse an object. Every dot indicates a new level in the object.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "The index of the first array found in the given path. If no array is found, undefined is returned",
+                "type": "Int"
+            },
+            "class": "ResultFormatter",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/results_formatter.js",
+            "line": 216,
+            "description": "Helper function to create a path used when adding data to a connector result",
+            "itemtype": "method",
+            "name": "createAddPath",
+            "access": "protected",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "valueSourcePath",
+                    "description": "String containing a dot notated path used to traverse an object. Every dot indicates a new level in the object.",
+                    "type": "String"
+                },
+                {
+                    "name": "key",
+                    "description": "A text that is be added to the last part of the path",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "A path to be used when adding result from one connector to another",
+                "type": "String"
+            },
+            "class": "ResultFormatter",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/results_formatter.js",
+            "line": 243,
+            "description": "Merges all results from a given connector with all other connector result.\nDepending on merge method unused results may be removed.",
+            "itemtype": "method",
+            "name": "mergeConnectorResults",
+            "access": "protected",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "connectorIndex",
+                    "description": "The index of the connector the merge should use",
+                    "type": "Int"
+                }
+            ],
+            "return": {
+                "description": "A merged result from a number of connectors",
+                "type": "Array"
+            },
+            "class": "ResultFormatter",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/results_formatter.js",
+            "line": 353,
+            "description": "Merges the result using the merge method found in config",
+            "itemtype": "method",
+            "name": "mergeResult",
+            "access": "public",
+            "tagname": "",
+            "return": {
+                "description": "A merged result from all connectors",
+                "type": "Array"
+            },
+            "class": "ResultFormatter",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/results_formatter.js",
+            "line": 364,
+            "description": "Merges the result using the \"inject\" merge method. \nThe \"inject\" method does not remove any result",
+            "itemtype": "method",
+            "name": "injectMerge",
+            "access": "public",
+            "tagname": "",
+            "return": {
+                "description": "A merged result from all connectors. No result removed",
+                "type": "Array"
+            },
+            "class": "ResultFormatter",
+            "module": "Connectors"
+        },
+        {
+            "file": "lib/results_formatter.js",
+            "line": 378,
+            "description": "Merges the result using the \"extract\" merge method. \nThe \"extract\" method removes results that wasn't used by another connector",
+            "itemtype": "method",
+            "name": "extractMerge",
+            "access": "public",
+            "tagname": "",
+            "return": {
+                "description": "A merged result from all connectors. Unused result is removed",
+                "type": "Array"
+            },
+            "class": "ResultFormatter",
+            "module": "Connectors"
+        },
+        {
             "file": "lib/switchboard.js",
-            "line": 28,
+            "line": 29,
             "description": "The mergeMethod (formatting method) to be used when formatting results.",
             "itemtype": "property",
             "name": "mergeMethod",
@@ -1040,7 +1385,7 @@
         },
         {
             "file": "lib/switchboard.js",
-            "line": 34,
+            "line": 36,
             "description": "Array of jobs waiting to be executed.",
             "itemtype": "property",
             "name": "jobs",
@@ -1050,7 +1395,7 @@
         },
         {
             "file": "lib/switchboard.js",
-            "line": 46,
+            "line": 48,
             "description": "Transforms a userRoutine to Switchboard-executable machineRoutine.",
             "itemtype": "method",
             "name": "translateUserRoutine",
@@ -1072,7 +1417,7 @@
         },
         {
             "file": "lib/switchboard.js",
-            "line": 71,
+            "line": 73,
             "description": "Runs when a job has finished. Initiates results formatting and sends everything back\nvia callback.",
             "itemtype": "method",
             "name": "jobDone",
@@ -1110,7 +1455,7 @@
         },
         {
             "file": "lib/switchboard.js",
-            "line": 119,
+            "line": 123,
             "description": "Gets a job by id.",
             "itemtype": "method",
             "name": "getJob",
@@ -1128,7 +1473,7 @@
         },
         {
             "file": "lib/switchboard.js",
-            "line": 137,
+            "line": 141,
             "description": "Remove a job.",
             "itemtype": "method",
             "name": "removeJob",
@@ -1146,7 +1491,7 @@
         },
         {
             "file": "lib/switchboard.js",
-            "line": 156,
+            "line": 160,
             "description": "Executes and removes a Switchboard job. Triggers jobDone",
             "itemtype": "method",
             "name": "removeJob",
@@ -1174,7 +1519,7 @@
         },
         {
             "file": "lib/switchboard.js",
-            "line": 182,
+            "line": 186,
             "description": "Transforms a userRoutine to Switchboard-executable machineRoutine.",
             "itemtype": "method",
             "name": "translateUserRoutine",
@@ -1194,7 +1539,7 @@
         },
         {
             "file": "lib/switchboard.js",
-            "line": 194,
+            "line": 198,
             "description": "Sets the merge method.",
             "itemtype": "method",
             "name": "setMergeMethod",
@@ -1210,7 +1555,7 @@
         },
         {
             "file": "lib/switchboard.js",
-            "line": 206,
+            "line": 210,
             "description": "Sets the merge method.",
             "itemtype": "method",
             "name": "connectors",
@@ -1223,7 +1568,7 @@
         },
         {
             "file": "lib/switchboard.js",
-            "line": 218,
+            "line": 222,
             "description": "Add a job to the \"queue\".",
             "itemtype": "method",
             "name": "addJob",
@@ -1248,7 +1593,7 @@
         },
         {
             "file": "lib/switchboard.js",
-            "line": 235,
+            "line": 239,
             "description": "Execute and remove a job from queue.",
             "itemtype": "method",
             "name": "runJob",
@@ -1274,7 +1619,7 @@
         },
         {
             "file": "lib/switchboard.js",
-            "line": 252,
+            "line": 256,
             "description": "Create, execute and remove a job from queue all in one go.",
             "itemtype": "method",
             "name": "addAndRunJob",
@@ -1305,7 +1650,7 @@
         },
         {
             "file": "lib/switchboard.js",
-            "line": 268,
+            "line": 272,
             "description": "Execute all jobs in queue.",
             "itemtype": "method",
             "name": "run",
@@ -1325,8 +1670,84 @@
             "module": "Switchboard"
         },
         {
+            "file": "lib/switchboard_helper.js",
+            "line": 16,
+            "description": "Goes through the path and finds the first part of the path that is an array",
+            "itemtype": "method",
+            "name": "findFirstArrayFromPath",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "valueSourcePath",
+                    "description": "String containing a dot notated path used to traverse an object. Every dot indicates a new level in the object.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Returns the path leading to the first array found in the path",
+                "type": "String"
+            },
+            "class": "SwitchboardHelper",
+            "module": "Switchboard"
+        },
+        {
+            "file": "lib/switchboard_helper.js",
+            "line": 40,
+            "description": "Goes through the path and finds the first part of the path that is an array",
+            "itemtype": "method",
+            "name": "findFirstArrayInPath",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "obj",
+                    "description": "Object that should be used to look for the first array",
+                    "type": "Object"
+                },
+                {
+                    "name": "valueSource",
+                    "description": "A dot notated path, as defined in a user routine, where the first array should be found",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Returns the path leading to the first array found in the path",
+                "type": "String"
+            },
+            "class": "SwitchboardHelper",
+            "module": "Switchboard"
+        },
+        {
+            "file": "lib/switchboard_helper.js",
+            "line": 138,
+            "description": "Returns the data the keys points to in an object",
+            "itemtype": "method",
+            "name": "getObjectData",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "obj",
+                    "description": "Object containing the information we want to retrieve",
+                    "type": "Object"
+                },
+                {
+                    "name": "keys",
+                    "description": "An array with keys leading to the inforamtion we want. E.g. keys = ['artists', 'artist', 0] will traverse the oject, first looking for artists, then artist and return the data found at the first index.",
+                    "type": "Array"
+                }
+            ],
+            "return": {
+                "description": "Returns the data found in the object",
+                "type": "Mixed"
+            },
+            "class": "SwitchboardHelper",
+            "module": "Switchboard"
+        },
+        {
             "file": "lib/switchboard_job.js",
-            "line": 27,
+            "line": 28,
             "description": "The user routine (for reference)",
             "itemtype": "property",
             "name": "userRoutine",
@@ -1336,7 +1757,7 @@
         },
         {
             "file": "lib/switchboard_job.js",
-            "line": 32,
+            "line": 33,
             "description": "The machine routine to be made into a waterfall routine",
             "itemtype": "property",
             "name": "machineRoutine",
@@ -1346,7 +1767,7 @@
         },
         {
             "file": "lib/switchboard_job.js",
-            "line": 37,
+            "line": 38,
             "description": "A jobs progression (retrieved API-results) is appended here.",
             "itemtype": "property",
             "name": "jobResult",
@@ -1356,7 +1777,7 @@
         },
         {
             "file": "lib/switchboard_job.js",
-            "line": 42,
+            "line": 43,
             "description": "Array of queries to initiate the job.",
             "itemtype": "property",
             "name": "entryQueries",
@@ -1366,7 +1787,7 @@
         },
         {
             "file": "lib/switchboard_job.js",
-            "line": 47,
+            "line": 48,
             "description": "The job ID",
             "itemtype": "property",
             "name": "id",
@@ -1376,7 +1797,34 @@
         },
         {
             "file": "lib/switchboard_job.js",
-            "line": 71,
+            "line": 75,
+            "description": "From a value source and a result all possible paths is generatet.\nThe path shows the hierarchy in an object with dot notation with added indices.\n\nE.g. inSource = \"events.event.artists.artist\"\nmight result in a path looking like \"events.event.2.artists.artist.0\".\nWhere 2 indicates index 2 of the event array, and 0 the first index in the artist array.",
+            "itemtype": "method",
+            "name": "getValueSourcePaths",
+            "access": "protected",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "result",
+                    "description": "The result object generated by a ConnectorResponse.",
+                    "type": "Object"
+                },
+                {
+                    "name": "valueSource",
+                    "description": "String showing the path to the query that should be used by another connector.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Returns an array with all possible paths given the valueSource and the result",
+                "type": "Array"
+            },
+            "class": "SwitchboardJob",
+            "module": "Switchboard"
+        },
+        {
+            "file": "lib/switchboard_job.js",
+            "line": 116,
             "description": "Extracts query data from a previous Connectors ConnectorResponse via jpath.",
             "itemtype": "method",
             "name": "extractQueries",
@@ -1403,7 +1851,7 @@
         },
         {
             "file": "lib/switchboard_job.js",
-            "line": 103,
+            "line": 167,
             "description": "Builds an array of functions, with calls to different APIs, to be inputted into run and executed\nby async.waterfall",
             "itemtype": "method",
             "name": "buildWaterfallRoutine",
@@ -1425,7 +1873,7 @@
         },
         {
             "file": "lib/switchboard_job.js",
-            "line": 167,
+            "line": 231,
             "description": "Executes the job routine via async waterfall.",
             "itemtype": "method",
             "name": "run",
@@ -1441,7 +1889,7 @@
         },
         {
             "file": "lib/switchboard_job.js",
-            "line": 183,
+            "line": 247,
             "description": "Returns the job ID",
             "itemtype": "method",
             "name": "id",
@@ -1450,7 +1898,7 @@
         },
         {
             "file": "lib/switchboard_job.js",
-            "line": 194,
+            "line": 258,
             "description": "Returns the jobs entry queries",
             "itemtype": "method",
             "name": "entryQueries",
@@ -1459,7 +1907,7 @@
         },
         {
             "file": "lib/switchboard_job.js",
-            "line": 206,
+            "line": 270,
             "description": "Returns the jobs user routine",
             "itemtype": "method",
             "name": "userRoutine",

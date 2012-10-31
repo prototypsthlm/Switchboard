@@ -57,6 +57,8 @@
             
                 <li><a href="..&#x2F;classes/Switchboard.html">Switchboard</a></li>
             
+                <li><a href="..&#x2F;classes/SwitchboardHelper.html">SwitchboardHelper</a></li>
+            
                 <li><a href="..&#x2F;classes/SwitchboardJob.html">SwitchboardJob</a></li>
             
                 <li><a href="..&#x2F;classes/TestHelper.html">TestHelper</a></li>
@@ -123,6 +125,7 @@
 var $ = require(&#x27;jquery&#x27;);
 var jpath = require(&quot;node-jpath&quot;);
 var logger = require(&#x27;.&#x2F;sb_tracer.js&#x27;)();
+var SwitchboardHelper = require(&#x27;.&#x2F;switchboard_helper.js&#x27;);
 
 &#x2F;**
 * The constructor. The result given to the constructor is always cloned
@@ -130,6 +133,7 @@ var logger = require(&#x27;.&#x2F;sb_tracer.js&#x27;)();
 *
 * @method
 * @param {Array} result Array holding the result gathered from all connectors. Example: [{api: &quot;Name of Connector A&quot;, calls: []}, {api: &quot;Name of Connector B&quot;, calls: []}]
+* @param {Object} config Object holding configuration used when merging the result
 *&#x2F;
 
 function ResultFormatter(result, config) {    
@@ -138,132 +142,40 @@ function ResultFormatter(result, config) {
     &#x2F;&#x2F; raw cannot be accessed directly to ensure that the result is always cloned
     &#x2F;&#x2F; Otherwise we would end up affecting the raw result while building the clean result
     
-    var raw = typeof result != &quot;object&quot; ? [] : $.extend(true, [], result);
+    var raw = typeof result != &quot;object&quot; ? [] : $.extend(true, [], result); &#x2F;&#x2F; MAKE sure result is an array
     
+    &#x2F;&#x2F; When connector results is retrieved they are stored in this object
+    &#x2F;&#x2F; If same connector results is retrieved multiple times it is retrieved from this object
+    &#x2F;&#x2F; instead of the raw object. The reason for this is that raw should never be affected
+    &#x2F;&#x2F; by changes, but when results is merged result should be altered
+    var connectorResults = {};
+
+    &#x2F;&#x2F; Pointer to this object, used within &quot;private&quot; functions
+    var self = this;
+
+    &#x2F;&#x2F; Holds configurations used when merging the result
     var config = {     
         mergeMethod: &#x27;extract&#x27;
     };
 
+    &#x2F;&#x2F; If configuration is passed as an argument it is added to the local config object
     if(typeof config == &quot;object&quot;) {
         this.config = $.extend(true, this.config, config);
     }
 
-    &#x2F;*
-        Updates a object with new data given a set of keys that should be traversed
-        
-        E.g.
-        If you want to add data to the artist, e.g. website, you need to use the following data
+    &#x2F;**
+        Remove results in an object given an array holding parts of an path (i.e. keys in an object)
 
-        var obj = {                                 &#x2F;&#x2F; The object you want to update; 
-            artists: {
-                artist: {
-                    name: &quot;Spice Girls&quot;                    
-                }
-            },
-            events: {...}
-        };                                          
-        keys = [&#x27;artists&#x27;, &#x27;artist&#x27;, &#x27;website&#x27;];    &#x2F;&#x2F; The keys specifying where the updated value should be set
-        value = &#x27;http:&#x2F;&#x2F;www.thespicegirls.com&#x2F;&#x27;;    &#x2F;&#x2F; The value you want to set
-
-        setObjectData(obj, keys, value);
-
-        obj after function is called:
-
-        { 
-            artists: {
-                artist: {
-                    name: &quot;Spice Girls&quot;,
-                    website: &#x27;http:&#x2F;&#x2F;www.thespicegirls.com&#x2F;&#x27;                 
-                }
-            },
-            events: {...}
-        };   
-
-        @param {Object} obj The object you want to update
-        @param {Object} keys An array with keys leading to the location in the object where you want to set your value.
-        @param {Mix} value The value you want to set
+        @method removeUnusedResult
+        @public        
+        @param {Object} connectorResult Object containing result that should be removed
+        @param {String} pathToArray Path to an array in the connectoResult object where data should be removed
+        @param {int} indexToRemvoe The index that should be removed
     *&#x2F;
-    var setObjectData = function(obj, keys, value) { 
-               
-        &#x2F;&#x2F; logger.trace(&quot;setObjectData(obj, keys, value) &quot;, obj, keys, value);
-        
-        if(obj == undefined) {
-            logger.warn(&quot;Object is undefined. Doing nothing&quot;);
-            return obj;
-        }
-        if(keys.length &gt; 1) {
-            var key = keys.splice(0,1);
-            if(obj[key] instanceof Array) {
-                for(var i=0; i &lt; obj[key].length; i++) {
-                    return setObjectData(obj[key][i], keys, value);    
-                }
-            } else {
-                return setObjectData(obj[key], keys, value);
-            }
-            
-        }
-        
-        if(keys[0] == undefined) {
-            logger.trace(&quot;Replacing whole object with value&quot;);
-            obj = value;
-        }
-        else {
-            var message = (keys[0] in obj ? &quot;Replacing&quot; : &quot;Updating&quot;) + &quot;  value for key &quot;+keys[0];
-            logger.trace(message);
-            obj[keys[0]] = value;
-        }
-        
-        return obj;
-    }
-
-    &#x2F;*
-        Goes through the path and finds the first path part that is an array
-        e.g.
-
-        obj = [
-            {
-                &quot;events&quot;: {
-                    &quot;event&quot;: [
-                        {
-                            &quot;artists&quot;: [],
-                            &quot;artists&quot;: [],
-                            &quot;artists&quot;: [],
-                        }
-                    ]
-                }
-            }
-        ];
-
-        path = &quot;events.event.artists&quot;;
-
-        returned result would be events.event, since event is an array
-    *&#x2F;
-    var findArrayPath = function(obj, path, index) {
-        logger.trace(&quot;findArrayPath(obj,&quot;,path,&quot;,&quot;,index,&quot;)&quot;);
-        var lastPath, objPart;
-        index = index == undefined ? 0 : index;
-
-        var pathArray = path.split(&#x27;.&#x27;);
-        var pathPart = pathArray[index];  
-
-        if(obj) {
-            if(obj[pathPart] instanceof Array) {
-                pathArray.splice(index+1,pathArray.length);
-                return pathArray.join(&#x27;.&#x27;);
-            } else {                
-                return findArrayPath(obj[pathPart], path, ++index);
-            }
-        }
-        
-        return null;
-    }
-
-    var removeUnusedResult = function(connectorResult, inSource, indexToRemove) {
-        &#x2F;&#x2F; Locate which path (from the end) in the in source that points to an array
+    var removeUnusedResult = function(connectorResult, pathToArray, indexToRemove) {
+        &#x2F;&#x2F; Locate which path in the in source that points to an array
         &#x2F;&#x2F; When found we want to remove that data using the indexToRemove argument
-        var pathToArray = findArrayPath(connectorResult, inSource);
-        logger.trace(&quot;pathToArray: &quot;, pathToArray);
-        
+
         if(pathToArray) {
             &#x2F;&#x2F; Remove the part that is an array
             var insourceArray = pathToArray.split(&#x27;.&#x27;);
@@ -271,7 +183,6 @@ function ResultFormatter(result, config) {
             var path = insourceArray.join(&#x27;.&#x27;);
 
             if(insourceArray.length) {
-                logger.trace(&quot;The key&quot;,keyHoldingArray,path);
                 var resultHoldingArray = jpath.filter(connectorResult, path);
                 if(resultHoldingArray instanceof Array) {
                     for(var i in resultHoldingArray) {
@@ -284,183 +195,310 @@ function ResultFormatter(result, config) {
             else {
                 connectorResult[keyHoldingArray].splice(indexToRemove,1);
             }
-        } else {
+        } else if(connectorResult instanceof Array){
             connectorResult.splice(indexToRemove,1);
         }
     }
 
-    &#x2F;&#x2F; Public function to retrieve the cloned raw data
+    &#x2F;**
+        Returns a cloned version of the raw result.
+
+        @method raw
+        @public        
+        @return {Array} Cloned version of the raw result
+    *&#x2F;
     this.raw = function() {
         return $.extend(true, [], raw);
     };
 
-    this.config = function(mergeMethod) {
-        return mergeMethod in config ? config[mergeMethod] : undefined;
+    &#x2F;**
+        Returns a configuration value for a given configuration if found        
+
+        @method config
+        @public
+        @param {String} key String Name of the configuration
+        @return {String} The value of a specified configuration or undefined if not found
+    *&#x2F;
+    this.config = function(key) {
+        return key in config ? config[key] : undefined;
     };
 
-    this.setConfig = function(mergeMethod, value) {
-        config[mergeMethod] = value;
+    &#x2F;**
+        Sets config file which is used by the ResultFormatter when mergin the result,
+        e.g. merge method
+
+        @method setConfig
+        @public
+        @param {String} key String Name of the configuration
+        @param {String} value Value of the configuration
+    *&#x2F;
+    this.setConfig = function(key, value) {
+        config[key] = value;
     };
 
-    &#x2F;&#x2F; Public function to set the raw result. Always cloned
+    &#x2F;**
+        Sets the raw value that is used when all results is merged.
+        Always cloned to make sure that it can&#x27;t be changed after it is set
+
+        @method setRaw
+        @public
+        @param {Array} rawResult The result generated by all connectors involved in a routine        
+    *&#x2F;    
     this.setRaw = function(rawResult) {
         raw = $.extend(true, [], rawResult);
     };
 
-    &#x2F;&#x2F; Finds a result from a connector and merges the result from the following connector (if found)
-    this.findConnectorResult = function(connectorIndex, callIndex, index, returnOnlyResult) {
-        
-        logger.trace(&quot;this.findConnectorResult(&quot;,connectorIndex,&quot;,&quot;,callIndex,&quot;,&quot;,index,&quot;)&quot;);
-        
-        var rawResults = this.raw();
-        if(!rawResults[connectorIndex]) {
-            logger.trace(&quot;No rawResults found for index &quot;+connectorIndex);
-            return undefined;
+    &#x2F;**
+        Helper function to retrieve all results generated by a connector given the connector index.
+
+        @method findConnectorResults
+        @protected
+        @param {int} connectorIndex The order index of the connector that should be retrieved. connectorIndex = 0 is the first connector used to retrieve the data        
+        @param {Array} Returns all results generated by a connector
+    *&#x2F;
+    var findConnectorResults = function(connectorIndex) {        
+        if(!raw[connectorIndex]) {            
+            return null;
         }
 
+        &#x2F;&#x2F; Since raw is always cloned we store the connector results in an array
+        &#x2F;&#x2F; so that the result can be modified but keeps the raw result intact
+        if(!(connectorIndex in connectorResults)) {
+            connectorResults[connectorIndex] = self.raw()[connectorIndex];
+        }
         &#x2F;&#x2F; Holds all calls and their results for a given connector
-        var connectorResults = rawResults[connectorIndex];
-        
-        &#x2F;&#x2F; Hold the connector result for the given input params, i.e. callIndex and index
-        var connectorResult = null;
+        return connectorResults[connectorIndex];
+    };
 
-        &#x2F;&#x2F; Go through all calls and find the one we want, i.e. where callIndex and index matches
-        &#x2F;&#x2F; When found check if the following connector&#x27;s results exists and add it to the current result
+    &#x2F;**
+        Helper function to retrieve a ConnectorReponse
 
-        &#x2F;&#x2F; @todo Fundera på om det går att använda jpath för att hämta rätt resultat istället för att loopa
+        @method findConnectorResponse
+        @protected
+        @param {int} connectorIndex The order index of the connector that should be retrieved. connectorIndex = 0 is the first connector used to retrieve the data
+        @param {int} index Used to retrieve a connector response matching this index
+        @param {ConnectorResponse} Returns a ConnectorResponse object
+    *&#x2F;
+    var findConnectorResponse = function(connectorIndex, index) {               
+       var connectorResults = findConnectorResults(connectorIndex);
+
         for(var i in connectorResults.calls) {
-            var connectorCall = connectorResults.calls[i];
+            var connectorResponse = connectorResults.calls[i];
 
-            &#x2F;&#x2F; Make sure we are using the results from the right call
-            if(!(connectorCall.meta.callIndex == callIndex &amp;&amp; connectorCall.meta.index == index)) {            
+            if(connectorResponse.meta.index == index) {
+                return connectorResponse;
+            }                        
+        }
+
+        return null;
+    };
+
+
+    &#x2F;**
+        Used to sort an array with ConnectorResponse object by call index and then index
+
+        @method sortByIndexAndCallIndex
+        @protected
+        @param {Object} a ConnectorResponse object to be compared with b
+        @param {Object} b ConnectorResponse object to be compared with a
+    *&#x2F;
+    var sortByIndexAndCallIndex = function(a, b) {
+        if(a.meta.callIndex &lt; b.meta.callIndex) return -1;
+        if(a.meta.callIndex &gt; b.meta.callIndex) return 1;
+        if(a.meta.index &lt; b.meta.index) return -1;
+        if(a.meta.index &gt; b.meta.index) return 1;
+        return 0;
+    };
+
+    &#x2F;**
+        Helper function to retrieve the index of the first array found in the given path
+
+        @method indexOfFirstArrayInPath
+        @protected
+        @param {String} valueSourcePath String containing a dot notated path used to traverse an object. Every dot indicates a new level in the object.        
+        @return {int} The index of the first array found in the given path. If no array is found, undefined is returned
+    *&#x2F;
+    var indexOfFirstArrayInPath = function(valueSourcePath) {
+        var parts = valueSourcePath.split(&#x27;.&#x27;);        
+        for(var i in parts) {
+            var part = parts[i]; 
+            if(!isNaN(part)) {
+                return part;
+            }
+        }
+        return undefined;
+    };
+
+    &#x2F;**
+        Helper function to create a path used when adding data to a connector result
+
+        @method createAddPath
+        @protected
+        @param {String} valueSourcePath String containing a dot notated path used to traverse an object. Every dot indicates a new level in the object.
+        @param {String} key A text that is be added to the last part of the path
+        @return {String} A path to be used when adding result from one connector to another
+    *&#x2F;
+    var createAddPath = function(valueSourcePath, key) {
+        &#x2F;&#x2F; Look for the first array in the path used to retrieve current query
+        var pathParts = valueSourcePath.split(&#x27;.&#x27;);
+        
+        while(pathParts.length) {
+            var part = pathParts.pop();
+            if(isNaN(part)) {
+                break;
+            }
+        }
+
+        if(key) {
+            pathParts.push(key);    
+        }
+        
+        return pathParts.join(&#x27;.&#x27;);
+    };
+
+    &#x2F;**
+        Merges all results from a given connector with all other connector result.
+        Depending on merge method unused results may be removed.
+
+        @method mergeConnectorResults
+        @protected
+        @param {int} connectorIndex The index of the connector the merge should use        
+        @return {Array} A merged result from a number of connectors
+    *&#x2F;
+    this.mergeConnectorResults = function(connectorIndex) {
+        var connectorResults = findConnectorResults(connectorIndex);
+        
+        &#x2F;&#x2F; Holds the final merged result
+        &#x2F;&#x2F; Only the last connector returns a mergedResult, i.e. the connector
+        &#x2F;&#x2F; with index == 0 since there is no other connector to merge the result with
+        var mergedResult = [];        
+        
+        &#x2F;&#x2F; Sort all calls by call index and index
+        connectorResults.calls.sort(sortByIndexAndCallIndex);
+
+        var highestArrayIndex = 0;
+        &#x2F;&#x2F; Holds the result to be added to the source connector, i.e. the connector
+        &#x2F;&#x2F; this connector retrieved the query data from        
+        var resultToAdd = {};
+
+        &#x2F;&#x2F; Number of calls this connector made. For every call there is a ConnectoResponse
+        var nrOfCalls = connectorResults.calls.length;
+
+        &#x2F;&#x2F; Holds indices that has been added to the source connector
+        var arrayIndices = {};
+
+        for(var i = 0; i &lt; nrOfCalls; i++) {
+            var connectorResponse = connectorResults.calls[i];
+            
+            if(connectorIndex == 0) {
+                mergedResult.push(connectorResponse.result);
                 continue;
             }
+
+            &#x2F;&#x2F; If true this is the last call (and result) made by this connector
+            var lastCall = i == nrOfCalls-1;
+
+            var meta = connectorResponse.meta;
+            var callIndex = meta.callIndex;   
+
+            &#x2F;&#x2F; Full path to the query data used by this connector
+            &#x2F;&#x2F; E.g. events.event.0.artists.artist.2
+            &#x2F;&#x2F; Numbers is indices in an array
+            var valueSourcePath = meta.valueSourcePath;
             
-            &#x2F;&#x2F; @todo: Flytta meta.apiConfig till samma ställe som api och calls ligger
-            &#x2F;&#x2F; Flytta då in namnet på api i apiConfig. apiConfig kanske ska döpas om oxå
-            &#x2F;&#x2F; @todo? Add limit to meta
+            &#x2F;&#x2F; Index of the first array in the value source path
+            var arrayIndex = indexOfFirstArrayInPath(valueSourcePath);
+            
+            &#x2F;&#x2F; ConnectorResponse from the connector the current connector used as source 
+            &#x2F;&#x2F; to collect query data
+            var sourceResponse = findConnectorResponse(connectorIndex-1, callIndex);            
+            
+            &#x2F;&#x2F; If the query data is retrieved from an array or not
+            var pathParts = valueSourcePath.split(&#x27;.&#x27;);
+            var isArraySource = !isNaN(pathParts[pathParts.length-1]);
 
-            &#x2F;&#x2F; @todo: Results generated deeper down in the chain is not removed correctly
+            &#x2F;&#x2F; Path leading to the first array in the path       
+            var pathToArray = SwitchboardHelper.findFirstArrayFromPath(valueSourcePath);
 
-            connectorResult = connectorCall;
-            &#x2F;&#x2F; Retrieve the next connector&#x27;s results
-            var nextConnectorResults = rawResults[connectorIndex+1] ? rawResults[connectorIndex+1] : null;
-            if(nextConnectorResults) {
-                if(!nextConnectorResults.calls.length) {
-                    logger.trace(&quot;No data found in nextConnectorResuls. Leaving...&quot;);
-                    break;
-                }
-                logger.trace(&quot;nextConnectorResults: &quot;, nextConnectorResults);
-                
-                &#x2F;&#x2F; Flytta så att inte meta.apiConfig ligger i calls utan direkt i &quot;roten&quot;
-                &#x2F;&#x2F; apiAction is used as a key when merging the result
-                var apiAction = nextConnectorResults.calls[0].meta.apiConfig.action;
-                &#x2F;&#x2F; Retrieve the in source
-                var inSourceString = nextConnectorResults.calls[0].meta.apiConfig.in_source;
-                var nrOfResultsInSource = jpath.filter(connectorResult.result, inSourceString).length;
-                &#x2F;&#x2F; Make an array of the in source so that we later can remove the last part of it and store it
-                var inSourceArray = inSourceString.split(&#x27;.&#x27;);
-                &#x2F;&#x2F; Remove the last part of the in source and store it.
-                &#x2F;&#x2F; Is used to detect if the source contains data from an array or not                
-                var queryKey = inSourceArray.pop();
-                &#x2F;&#x2F; Reset the in source so that it doesn&#x27;t have the last portion of the path
-                inSourceString = inSourceArray.join(&#x27;.&#x27;);
-                
-                &#x2F;&#x2F; @TODO
-                &#x2F;&#x2F; Leta efter första arrayen i inSourceString
-                &#x2F;&#x2F; Exempel inSource: response.artists.foreign_ids.foreign_id
-                &#x2F;&#x2F; Leta efter första arrayen i inSource ovan
-                &#x2F;&#x2F; Låt oss säga att den finns vid response.artists
-                &#x2F;&#x2F; var result = jpath.filter(connectorResult.result, response.artists)
-                &#x2F;&#x2F; for(var i in result) 
-                &#x2F;&#x2F; Ta bort response.artists från inSource
-                &#x2F;&#x2F; var tmpResult = jpath.filter(result[i], foreign_ids.foreign_id);
-                &#x2F;&#x2F; Om vi inte får något resultat, ta bort den result.splice(i,1);
-                &#x2F;&#x2F; Om vi får resultat, gör som i loopen nedan
-                
-                &#x2F;&#x2F; Retrieve all results matching the in source
-                var results = jpath.filter(connectorResult.result, inSourceString);
-
-                &#x2F;&#x2F; Array holding all new results since we may want to remove results that
-                &#x2F;&#x2F; wasn&#x27;t used by another connector. If merge method is &quot;inject&quot; result is unchanged.
-                var newResults = [];
-
-                &#x2F;&#x2F; Go through all results and add the result from next connector
-                for(var j = results.length-1; j &gt;= 0; j--) { 
-                &#x2F;&#x2F;for(var j = 0; j &lt; results.length; j++) { 
-                    var nextConnectorResult = this.findConnectorResult(connectorIndex+1, connectorCall.meta.index, j, false);
-                    
-                    if(nextConnectorResult) {
-                        &#x2F;&#x2F;logger.trace(nextConnectorResults.api, nextConnectorResults.calls[0].meta.apiConfig.in_source,&quot;:&quot;,nextConnectorResult.meta.query);
-                        logger.trace(&quot;Result retrieved from the next connector. Result going to be merged in connector &quot;+connectorIndex+&quot;, result at index &quot;+j);
-                        
-                        &#x2F;&#x2F; Check if the query used by the next connector is retrieved from an array source or not
-                        &#x2F;&#x2F; If query was taken from an array we should merge the result in a special way
-                        var arrayInSource = results[j][queryKey] instanceof Array;
-                        &#x2F;&#x2F; Store the result in a temporary variable
-                        var tmpResult = results[j];
-
-                        if(arrayInSource) {
-                            &#x2F;&#x2F; If the query used by next connector was retrieved from an array
-                            &#x2F;&#x2F; (i.e. the in source points to an array) we collect in an inner
-                            &#x2F;&#x2F; loop and adds it to the result.
-                            var tmpResults = [nextConnectorResult];
-                            while(tmpResults.length &lt; nrOfResultsInSource &amp;&amp; j &gt;= 0) {
-                                var conRes = this.findConnectorResult(connectorIndex+1, connectorCall.meta.index, --j, false);                                
-                                if(conRes) {
-                                    tmpResults.push(conRes);
-                                } else {
-                                    break;
-                                }                       
-                            }
-
-                            tmpResult = results[j+1];
-                            tmpResult[apiAction] = {};
-                             &#x2F;&#x2F; Reverse since we are collecting data from the end to start,
-                             &#x2F;&#x2F; But we want the result to be in the right order.
-                            tmpResults.reverse();
-                            for(var tr in tmpResults) {
-                                var res = tmpResults[tr];
-                                tmpResult[apiAction][res.meta.query] = res.result;
-                            }
-                            
-                        } else {
-                            &#x2F;&#x2F; If the result was retrieved using a query taken from a in source that wasn&#x27;t an array it is pushed to the new result
-                            tmpResult[apiAction] = nextConnectorResult.result;
-                        }
-
-                    } else if(this.config(&quot;mergeMethod&quot;) == &quot;extract&quot;) {
-                        logger.debug(&quot;No result found in connector&quot;,connectorIndex+1,&quot;at index&quot;, j,&quot;using callindex&quot;,connectorCall.meta.index,&quot;. Remove! (extract merge)!&quot;);
-                        
-                        removeUnusedResult(connectorResult.result, inSourceString, j);
-                    }
+            &#x2F;&#x2F; If query data is retrieved from an array we add the result differently
+            if(isArraySource) {
+                resultToAdd[meta.query] = connectorResponse.result;
+                arrayIndices[arrayIndex] = arrayIndex;
+            } else {                
+                resultToAdd = connectorResponse.result;
+                arrayIndices[arrayIndex] = arrayIndex;
+            }
+            
+            &#x2F;&#x2F; If there are no more data in this connector we update the soure connector
+            &#x2F;&#x2F; If next result in this connector has data from another array we also add data
+            if(resultToAdd != {}) {
+                var nextArrayIndex = lastCall ? null : connectorResults.calls[i+1].meta.arrayIndex;            
+                if(lastCall || nextArrayIndex != arrayIndex) {
+                    var addPath = createAddPath(valueSourcePath, meta.apiConfig.action);                                
+                    SwitchboardHelper.setObjectData(sourceResponse.result, addPath.split(&#x27;.&#x27;), resultToAdd);
+                    resultToAdd = {};
                 }
             }
             
-            &#x2F;&#x2F; We have found what we want so we can stop searching
-            break;
+            if(this.config(&quot;mergeMethod&quot;) != &quot;extract&quot;) {
+                continue;
+            }
+
+            &#x2F;&#x2F; Remove results from the previous connector that wasn&#x27;t used by this connector
+            &#x2F;&#x2F; Do that if this is the last call or if next call has another call index 
+            &#x2F;&#x2F; since we have to remove results for every call index
+            var nextCallIndex = lastCall ? null : connectorResults.calls[i+1].meta.callIndex;
+            if(lastCall || nextCallIndex != callIndex) {
+                var arrayResult = jpath.filter(sourceResponse.result, pathToArray);
+                &#x2F;&#x2F; Remove results that current connector never used
+                for(var indexToRemove = arrayResult.length; indexToRemove &gt; -1; indexToRemove--) {
+                    if(indexToRemove.toString() in arrayIndices) continue;                    
+                    removeUnusedResult(sourceResponse.result, pathToArray, indexToRemove, false);  
+                }
+                arrayIndices = {};
+            }
         }
 
-        &#x2F;&#x2F; If returnOnlyResult == true we return only the generated result from the connector resul, i.e. not meta and raw data
-        if(returnOnlyResult) {
-            return connectorResult &amp;&amp; &quot;result&quot; in connectorResult ? connectorResult.result : null;
-        }
-        &#x2F;&#x2F; Return the whole result, i.e. with meta and raw data
-        return connectorResult;
-    };
+        &#x2F;&#x2F; Continue merge if there are a connector preceding the current connector
+        &#x2F;&#x2F; otherwise return the merged result
+        return connectorIndex &gt; 0 ? this.mergeConnectorResults(connectorIndex-1) : mergedResult;
+    }
 
 }
 
+&#x2F;**
+    Merges the result using the merge method found in config
+
+    @method mergeResult
+    @public    
+    @return {Array} A merged result from all connectors
+*&#x2F;
 ResultFormatter.prototype.mergeResult = function(){
-    return this.findConnectorResult(0, null, 0, true);
+    return this.mergeConnectorResults(this.raw().length-1);    
 };
 
+&#x2F;**
+    Merges the result using the &quot;inject&quot; merge method. 
+    The &quot;inject&quot; method does not remove any result
+
+    @method injectMerge
+    @public    
+    @return {Array} A merged result from all connectors. No result removed
+*&#x2F;
 ResultFormatter.prototype.injectMerge = function(){
     this.setConfig(&quot;mergeMethod&quot;, &quot;inject&quot;);
     logger.debug(&quot;Using injectMerge&quot;);
     return this.mergeResult();
 };
 
+&#x2F;**
+    Merges the result using the &quot;extract&quot; merge method. 
+    The &quot;extract&quot; method removes results that wasn&#x27;t used by another connector
+
+    @method extractMerge
+    @public    
+    @return {Array} A merged result from all connectors. Unused result is removed
+*&#x2F;
 ResultFormatter.prototype.extractMerge = function(){
     this.setConfig(&quot;mergeMethod&quot;, &quot;extract&quot;);
     logger.debug(&quot;Using extractMerge&quot;);
