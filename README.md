@@ -30,6 +30,8 @@ At the moment supported APIs include
 
 although not 100% of all API-methods are supported.
 
+If you would like to use any other API, it is definitely possible to create your own connector and use it via Switchboard.
+
 Setting it up as a service
 -------------
 
