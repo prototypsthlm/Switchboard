@@ -17,7 +17,7 @@
         "api": "Echonest",
         "action": "artistBiographies",
         "in_param_name": "name",
-        "value_source": "events.event.artists.artist",
-        "limit": "7"
+        "value_source": "events.event.artists.headliner",
+        "limit": "3"
     }
 ]
