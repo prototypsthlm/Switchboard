@@ -7,12 +7,7 @@
                     "query": "Foo",
                     "index": 0,
                     "callIndex": null,
-                    "sourceInfo": {
-                        "query": "Foo",
-                        "pathToArray": null,
-                        "arrayIndex": null,
-                        "queryIndex": 0
-                    },
+                    "valueSourcePath": "",
                     "apiConfig": {
                         "action": "artistSearch",
                         "in_param_name": "q",
@@ -336,13 +331,7 @@
                     "query": "spotify:artist:7jy3rLJdDQY21OgRLCZ9sD",
                     "index": 0,
                     "callIndex": 0,
-                    "sourceInfo": {
-                        "query": "spotify:artist:7jy3rLJdDQY21OgRLCZ9sD",
-                        "pathToArray": "artists",
-                        "detailedInSource": "artists.0.href",
-                        "arrayIndex": 0,
-                        "queryIndex": 0
-                    },
+                    "valueSourcePath": "artists.0.href",
                     "apiConfig": {
                         "action": "artistURLs",
                         "in_param_name": "id",
@@ -364,7 +353,6 @@
                         },
                         "urls": {
                             "lastfm_url": "http://www.last.fm/music/Foo+Fighters",
-                            "aolmusic_url": "http://music.aol.com/artist/foo-fighters",
                             "myspace_url": "http://www.myspace.com/foofighters",
                             "amazon_url": "http://www.amazon.com/gp/search?ie=UTF8&keywords=Foo Fighters&tag=httpechonecom-20&index=music",
                             "wikipedia_url": "http://en.wikipedia.org/wiki/Foo_Fighters",
@@ -382,7 +370,6 @@
                         },
                         "urls": {
                             "lastfm_url": "http://www.last.fm/music/Foo+Fighters",
-                            "aolmusic_url": "http://music.aol.com/artist/foo-fighters",
                             "myspace_url": "http://www.myspace.com/foofighters",
                             "amazon_url": "http://www.amazon.com/gp/search?ie=UTF8&keywords=Foo Fighters&tag=httpechonecom-20&index=music",
                             "wikipedia_url": "http://en.wikipedia.org/wiki/Foo_Fighters",

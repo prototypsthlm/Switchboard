@@ -7,12 +7,7 @@
                     "query": "Bilbo",
                     "index": 0,
                     "callIndex": null,
-                    "sourceInfo": {
-                        "query": "Bilbo",
-                        "pathToArray": null,
-                        "arrayIndex": null,
-                        "queryIndex": 0
-                    },
+                    "valueSourcePath": "",
                     "apiConfig": {
                         "action": "movieSearch",
                         "in_param_name": "query",
@@ -86,13 +81,7 @@
                     "query": 1362,
                     "index": 0,
                     "callIndex": 0,
-                    "sourceInfo": {
-                        "query": 1362,
-                        "pathToArray": "results",
-                        "detailedInSource": "results.0.id",
-                        "arrayIndex": 0,
-                        "queryIndex": 0
-                    },
+                    "valueSourcePath": "results.0.id",
                     "apiConfig": {
                         "action": "movieCast",
                         "in_param_name": "id",
@@ -426,13 +415,7 @@
                     "query": "Thorin",
                     "index": 2,
                     "callIndex": 0,
-                    "sourceInfo": {
-                        "query": "Thorin",
-                        "pathToArray": "cast",
-                        "detailedInSource": "cast.2.character",
-                        "arrayIndex": 2,
-                        "queryIndex": 0
-                    },
+                    "valueSourcePath": "cast.2.character",
                     "apiConfig": {
                         "action": "artistSearch",
                         "in_param_name": "q",
@@ -498,16 +481,10 @@
             },
             {
                 "meta": {
-                    "query": "Elvenking",
-                    "index": 4,
+                    "query": "Bilbo Baggins",
+                    "index": 0,
                     "callIndex": 0,
-                    "sourceInfo": {
-                        "query": "Elvenking",
-                        "pathToArray": "cast",
-                        "detailedInSource": "cast.4.character",
-                        "arrayIndex": 4,
-                        "queryIndex": 0
-                    },
+                    "valueSourcePath": "cast.0.character",
                     "apiConfig": {
                         "action": "artistSearch",
                         "in_param_name": "q",
@@ -515,30 +492,18 @@
                     }
                 },
                 "result": {
-                    "artists": [
-                        {
-                            "href": "spotify:artist:09b5OcuIELTdD7FfzQzcdB",
-                            "name": "Elvenking",
-                            "popularity": "0.07276"
-                        }
-                    ]
+                    "artists": []
                 },
                 "raw": {
                     "info": {
-                        "num_results": 1,
+                        "num_results": 0,
                         "limit": 100,
                         "offset": 0,
-                        "query": "Elvenking",
+                        "query": "Bilbo Baggins",
                         "type": "artist",
                         "page": 1
                     },
-                    "artists": [
-                        {
-                            "href": "spotify:artist:09b5OcuIELTdD7FfzQzcdB",
-                            "name": "Elvenking",
-                            "popularity": "0.07276"
-                        }
-                    ]
+                    "artists": []
                 }
             },
             {
@@ -546,13 +511,7 @@
                     "query": "Smaug",
                     "index": 1,
                     "callIndex": 0,
-                    "sourceInfo": {
-                        "query": "Smaug",
-                        "pathToArray": "cast",
-                        "detailedInSource": "cast.1.character",
-                        "arrayIndex": 1,
-                        "queryIndex": 0
-                    },
+                    "valueSourcePath": "cast.1.character",
                     "apiConfig": {
                         "action": "artistSearch",
                         "in_param_name": "q",
@@ -588,16 +547,10 @@
             },
             {
                 "meta": {
-                    "query": "Bilbo Baggins",
-                    "index": 0,
+                    "query": "Gandalf the Grey",
+                    "index": 3,
                     "callIndex": 0,
-                    "sourceInfo": {
-                        "query": "Bilbo Baggins",
-                        "pathToArray": "cast",
-                        "detailedInSource": "cast.0.character",
-                        "arrayIndex": 0,
-                        "queryIndex": 0
-                    },
+                    "valueSourcePath": "cast.3.character",
                     "apiConfig": {
                         "action": "artistSearch",
                         "in_param_name": "q",
@@ -612,7 +565,7 @@
                         "num_results": 0,
                         "limit": 100,
                         "offset": 0,
-                        "query": "Bilbo Baggins",
+                        "query": "Gandalf the Grey",
                         "type": "artist",
                         "page": 1
                     },
@@ -621,16 +574,10 @@
             },
             {
                 "meta": {
-                    "query": "Gandalf the Grey",
-                    "index": 3,
+                    "query": "Elvenking",
+                    "index": 4,
                     "callIndex": 0,
-                    "sourceInfo": {
-                        "query": "Gandalf the Grey",
-                        "pathToArray": "cast",
-                        "detailedInSource": "cast.3.character",
-                        "arrayIndex": 3,
-                        "queryIndex": 0
-                    },
+                    "valueSourcePath": "cast.4.character",
                     "apiConfig": {
                         "action": "artistSearch",
                         "in_param_name": "q",
@@ -638,18 +585,30 @@
                     }
                 },
                 "result": {
-                    "artists": []
+                    "artists": [
+                        {
+                            "href": "spotify:artist:09b5OcuIELTdD7FfzQzcdB",
+                            "name": "Elvenking",
+                            "popularity": "0.07276"
+                        }
+                    ]
                 },
                 "raw": {
                     "info": {
-                        "num_results": 0,
+                        "num_results": 1,
                         "limit": 100,
                         "offset": 0,
-                        "query": "Gandalf the Grey",
+                        "query": "Elvenking",
                         "type": "artist",
                         "page": 1
                     },
-                    "artists": []
+                    "artists": [
+                        {
+                            "href": "spotify:artist:09b5OcuIELTdD7FfzQzcdB",
+                            "name": "Elvenking",
+                            "popularity": "0.07276"
+                        }
+                    ]
                 }
             }
         ]

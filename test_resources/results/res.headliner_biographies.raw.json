@@ -7,12 +7,7 @@
                     "query": "Moa Lignell",
                     "index": 0,
                     "callIndex": null,
-                    "sourceInfo": {
-                        "query": "Moa Lignell",
-                        "pathToArray": null,
-                        "arrayIndex": null,
-                        "queryIndex": 0
-                    },
+                    "valueSourcePath": "",
                     "apiConfig": {
                         "action": "artistSearch",
                         "in_param_name": "q",
@@ -56,13 +51,7 @@
                     "query": "Moa Lignell",
                     "index": 0,
                     "callIndex": 0,
-                    "sourceInfo": {
-                        "query": "Moa Lignell",
-                        "pathToArray": "artists",
-                        "detailedInSource": "artists.0.name",
-                        "arrayIndex": 0,
-                        "queryIndex": 0
-                    },
+                    "valueSourcePath": "artists.0.name",
                     "apiConfig": {
                         "action": "artistGetEvents",
                         "in_param_name": "artist",
