@@ -14,5 +14,4 @@ lib/connectors/keys.json
 wrkshp
 node_modules
 npm-debug.log
-the_operator/routine.json
 app_templates/node_express/node_modules
