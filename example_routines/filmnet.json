@@ -1,0 +1,15 @@
+[
+    {
+        "api": "Filmnet",
+        "action": "mediaSearch",
+        "in_param_name": "text",
+        "optionals": [
+            {
+                "paramName": "commit",
+                "paramValue": "Submit"
+            }
+        ],
+        "value_source": "entry query",
+        "limit": "1"
+    }
+]

@@ -1,0 +1,10 @@
+[
+    {
+        "api": "Viaplay",
+        "action": "mediaSearch",
+        "in_param_name": "query",
+        "optionals": [],
+        "value_source": "entry query",
+        "limit": "1"
+    }
+]
