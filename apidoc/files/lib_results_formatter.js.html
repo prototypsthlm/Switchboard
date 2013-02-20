@@ -404,7 +404,7 @@ function ResultFormatter(result, config) {
             &#x2F;&#x2F; Full path to the query data used by this connector
             &#x2F;&#x2F; E.g. events.event.0.artists.artist.2
             &#x2F;&#x2F; Numbers is indices in an array
-            var valueSourcePath = meta.valueSourcePath;
+            var valueSourcePath = meta.valueSourcePath != &quot;&quot; ? meta.valueSourcePath : &quot;&quot;;
             
             &#x2F;&#x2F; Index of the first array in the value source path
             var arrayIndex = indexOfFirstArrayInPath(valueSourcePath);
