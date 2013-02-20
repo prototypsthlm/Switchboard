@@ -18,7 +18,7 @@ var testData = require("../test_resources/test_config.json");
 var userRoutine = require('../test_resources/test_user_routine.json');
 
 // Disable console.log, too much output in app
-console.log = function () {};
+//console.log = function () {};
 
 var validateResponse = function(routineName, mergeMethod) {
 
@@ -51,6 +51,7 @@ var validateResponse = function(routineName, mergeMethod) {
 		logger.debug("exp", expResObj);
 
 		// Comparing the objects with our own method.
+		
 		var isEqual = TestHelper.compareObjects(rawResObj, expResObj, false);
 
 		assert.isTrue(isEqual);

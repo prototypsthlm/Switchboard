@@ -35,7 +35,8 @@
         "request": "2.9.x",
         "node-jpath": "2.0.0",
 		"tracer": "0.5.x",
-		"jsdom": "0.3.x"
+		"jsdom": "0.3.x",
+		"nodeflix": "0.0.3"
     },
     "analyze": true,
     "devDependencies": {
